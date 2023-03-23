@@ -6,14 +6,17 @@ import {
   Button,
   Grid,
   Box,
+  EditIcon,
 } from "@mui/material";
 import CV1 from "./CV1";
 import CV2 from "./CV2";
 import CV3 from "./CV3";
 import { styled } from "@mui/material/styles";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { PopCV } from "../components/PopCV";
 import defaultCvData from "../asset/defaultCvData.json";
+import { useNavigate } from "react-router-dom";
+
 const StyledCard = styled(Card)({
   maxWidth: 500,
 });
@@ -41,10 +44,16 @@ const StyledButton = styled(Button)({
     transform: "translateX(-50%) translateY(-20px)", // dịch chuyển button lên trên
   },
 });
-export const CVCard1 = ({ data, image }) => {
+export const CVCard1 = ({ data, image, selectedItem, template }) => {
   const [hovered, setHovered] = useState(false);
   const [showPopCV, setShowPopCV] = useState(false);
 
+  const [avatar, setAvatar] = useState(defaultCvData.avatar);
+  const imageRef = useRef();
+  let navigate = useNavigate();
+  const handleEditAvatar = () => {
+    imageRef.current.click();
+  };
   const handleMouseEnter = () => {
     setHovered(true);
   };
@@ -52,7 +61,10 @@ export const CVCard1 = ({ data, image }) => {
   const handleMouseLeave = () => {
     setHovered(false);
   };
-
+  const onClick = () => {
+    selectedItem(template);
+    navigate(`/use${template}`);
+  };
   return (
     <>
       <StyledCard
@@ -75,6 +87,7 @@ export const CVCard1 = ({ data, image }) => {
                 variant="contained"
                 color="success"
                 sx={{ borderRadius: "20px" }}
+                onClick={onClick}
               >
                 Dùng Mẫu Này
               </Button>
@@ -100,35 +113,14 @@ export const CVCard1 = ({ data, image }) => {
           </Typography>
         </CardContent>
       </StyledCard>
-      <PopCV show={showPopCV} setShow={setShowPopCV} />
+      <PopCV
+        show={showPopCV}
+        setShow={setShowPopCV}
+        template={template}
+        avatar={avatar}
+        image={image}
+        setAvatar={setAvatar}
+      />
     </>
   );
 };
-//   const PopCV = ({ data }) => {
-//     return (
-//       <div>
-//         <p>Name: {data.name}</p>
-//         <p>Description: {data.description}</p>
-//       </div>
-//     );
-//   };
-// };
-// const ChooseCV = () => {
-//   const cardsData = [
-//     { name: "CV 1", description: "This is CV 1." },
-//     { name: "CV 2", description: "This is CV 2." },
-//     { name: "CV 3", description: "This is CV 3." },
-//   ];
-
-//   return (
-//     <div>
-//       {cardsData.map((cardData, index) => (
-//         <CVCard1 key={index} data={cardData} />
-//       ))}
-//     </div>
-//   );
-// };
-
-// tôi có 3 component component ChooseCV là trang chủ hiển thị, tôi dùng component CVCard1 để tạo các nút khi rê chuột vào Card sẽ hover button,
-// làm thế nào để khi click vào button của từng card thì sẽ hiển thị đúng dữ liệu tương ứng từng card và popup của card được tạo
-// thành từ componet PopCV

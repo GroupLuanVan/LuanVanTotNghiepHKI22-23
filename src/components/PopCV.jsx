@@ -13,13 +13,15 @@ import {
 } from "@mui/material";
 import { useRef, useState } from "react";
 import logoImage from "../CV/cv1image.png";
+import test from "../CV/cv2image.png";
 import EditIcon from "@mui/icons-material/Edit";
 import Image from "mui-image";
 import { Box } from "@mui/system";
 
-export const PopCV = ({ show, setShow, data, setData }) => {
+export const PopCV = ({ show, setShow, data, setData, template, image }) => {
   const [tempData, setTempData] = useState();
   const [avatar, setAvatar] = useState(logoImage);
+
   const imageRef = useRef();
   function updateData() {
     console.log(tempData);
@@ -29,6 +31,8 @@ export const PopCV = ({ show, setShow, data, setData }) => {
     });
     setShow(false);
   }
+
+  console.log({ template, image });
   return (
     <>
       <Box>
@@ -42,7 +46,7 @@ export const PopCV = ({ show, setShow, data, setData }) => {
         >
           <DialogTitle variant="h4">Mẫu CV</DialogTitle>
           <DialogContent>
-            {/* <Grid
+            <Grid
               item
               container
               xs={12}
@@ -51,7 +55,7 @@ export const PopCV = ({ show, setShow, data, setData }) => {
                 width: "100%",
                 gap: 4,
               }}
-             >
+            >
               <Grid
                 item
                 xs={8}
@@ -63,10 +67,9 @@ export const PopCV = ({ show, setShow, data, setData }) => {
                 }}
               >
                 <Image
+                  //src={avatar}
                   src={avatar}
-                  onClick={() => {
-                    imageRef.current.click();
-                  }}
+                  alt="avatar"
                   sx={{
                     border: "1px solid gray",
                   }}
@@ -154,25 +157,10 @@ export const PopCV = ({ show, setShow, data, setData }) => {
                   </Button>
                 </Grid>
               </Grid>
-            </Grid> */}
-            {data && (
-              <Box sx={{ p: 2 }}>
-                <Typography variant="h6" sx={{ mb: 2 }}>
-                  {data.name}
-                </Typography>
-                <Typography>{data.description}</Typography>
-              </Box>
-            )}
+            </Grid>
           </DialogContent>
         </Dialog>
       </Box>
     </>
   );
 };
-
-{
-  /* <Image src={data.avatar} />
-<Typography variant="h5">{data.name}</Typography>
-<Typography variant="subtitle1">{data.jobTitle}</Typography>
-<Chip label={data.location} /> */
-}

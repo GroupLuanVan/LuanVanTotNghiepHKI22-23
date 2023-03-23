@@ -52,49 +52,49 @@ export default function RichText({ editorState, setEditorState }) {
           list: !activeUtils.list,
         });
         break;
-      case "COLOR":
-        setActiveUtils({
-          ...activeUtils,
-          color: !activeUtils.color,
-        });
-        break;
+      // case "COLOR":
+      //   setActiveUtils({
+      //     ...activeUtils,
+      //     color: !activeUtils.color,
+      //   });
+      //   break;
 
       default:
         break;
     }
   }
 
-  // function handleColorChange(color) {
-  //   setCurrentColor(color.hex);
-  //   const newEditorState = RichUtils.toggleInlineStyle(
-  //     editorState,
-  //     "COLOR-" + color.hex
-  //   );
-  //   setEditorState(newEditorState);
-  // }
-
   function handleColorChange(color) {
     setCurrentColor(color.hex);
-    let newEditorState = editorState;
-    const currentStyle = editorState.getCurrentInlineStyle();
-    if (!currentStyle.has("COLOR")) {
-      newEditorState = RichUtils.toggleInlineStyle(
-        editorState,
-        "COLOR-" + color.hex
-      );
-    } else {
-      currentStyle.forEach((style) => {
-        if (style.startsWith("COLOR-")) {
-          newEditorState = RichUtils.toggleInlineStyle(newEditorState, style);
-        }
-      });
-      newEditorState = RichUtils.toggleInlineStyle(
-        newEditorState,
-        "COLOR-" + color.hex
-      );
-    }
+    const newEditorState = RichUtils.toggleInlineStyle(
+      editorState,
+      "COLOR-" + color.hex
+    );
     setEditorState(newEditorState);
   }
+
+  // function handleColorChange(color) {
+  //   setCurrentColor(color.hex);
+  //   let newEditorState = editorState;
+  //   const currentStyle = editorState.getCurrentInlineStyle();
+  //   if (!currentStyle.has("COLOR")) {
+  //     newEditorState = RichUtils.toggleInlineStyle(
+  //       editorState,
+  //       "COLOR-" + color.hex
+  //     );
+  //   } else {
+  //     currentStyle.forEach((style) => {
+  //       if (style.startsWith("COLOR-")) {
+  //         newEditorState = RichUtils.toggleInlineStyle(newEditorState, style);
+  //       }
+  //     });
+  //     newEditorState = RichUtils.toggleInlineStyle(
+  //       newEditorState,
+  //       "COLOR-" + color.hex
+  //     );
+  //   }
+  //   setEditorState(newEditorState);
+  // }
 
   const plugins = [staticToolbarPlugin];
   const editor = React.useRef(null);

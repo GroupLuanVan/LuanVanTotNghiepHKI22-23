@@ -172,7 +172,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
             sx={{
               display: "flex",
               flexDirection: "column",
-              background: "#fff",
+              background: "red",
               p: 2,
               borderRadius: "25px",
               mb: 4,

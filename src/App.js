@@ -32,7 +32,7 @@ function App() {
               }
               />
                <Route
-              path="test"
+              path="/:usetemplate"
               element={
                 <>
                   {/* <CustomAppBar /> */}

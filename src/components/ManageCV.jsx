@@ -3,7 +3,7 @@ import CV1 from "../CV/CV1";
 import CV2 from "../CV/CV2";
 import CV3 from "../CV/CV3";
 import defaultCvData from "../asset/defaultCvData.json";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -16,12 +16,11 @@ import cv3image from "../CV/cv3image.png";
 import cvSchema from "../validate/cvValidate";
 import { useDispatch } from "react-redux";
 import { setActivatedCvId } from "../store/userSlice";
-// import useFetch from "../hooks/useFetch";
-// import Loading from "./Loading";
 
 export default function ManageCV({ user }) {
   // const { data, setData, loading, error } = useFetch(`candidate/${user.user._id}/getuserprofilecvdata`);
 
+  let { usetemplate } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const navigateTo = function (location) {
@@ -30,7 +29,7 @@ export default function ManageCV({ user }) {
   const [print, setPrint] = useState(false);
   // const loggedUserId = user.user._id;
   const [defaultCv, setDefaultCv] = useState(defaultCvData);
-  const [currentCV, setCurrentCV] = useState("CV2");
+  const [currentCV, setCurrentCV] = useState("CV1");
   // useEffect(() => {
   //   if (user.user.role != "candidate") {
   //     navigateTo("/login");
@@ -468,6 +467,7 @@ export default function ManageCV({ user }) {
   //     )}
   //   </>
   // );
+  console.log(usetemplate);
 
   return (
     <Grid
@@ -612,27 +612,7 @@ export default function ManageCV({ user }) {
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <Button
-            sx={{ mr: 2 }}
-            variant="contained"
-            color="success"
-            // onClick={() => {
-            //   cvSchema.validate(defaultCv).then(async (defaultCv) => {
-            //     const res = await axios.post(
-            //       `/candidate/${loggedUserId}/resume`,
-            //       defaultCv
-            //     );
-            //     if (res.data.status && res.data.status != 200) {
-            //       toast.warning("Tạo cv thất bại");
-            //     } else {
-            //       let savedResumeId = res.data.savedResumeId
-            //       const action = setActivatedCvId(savedResumeId, true);
-            //       dispatch(action);
-            //       toast.success("Tạo cv thành công");
-            //     }
-            //   });
-            // }}
-          >
+          <Button sx={{ mr: 2 }} variant="contained" color="success">
             Lưu CV
           </Button>
           <Button

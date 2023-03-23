@@ -11,6 +11,7 @@ import {
   InputAdornment,
   Grid,
 } from "@mui/material";
+
 import cv1image from "./cv1image.png";
 import cv2image from "./cv2image.png";
 import cv3image from "./cv3image.png";
@@ -22,27 +23,18 @@ import Image from "mui-image";
 import banner from "../asset/banner.png";
 import { styled } from "@mui/material/styles";
 import defaultCvData from "../asset/defaultCvData.json";
+import CV1 from "./CV1";
+import CV2 from "./CV2";
+import CV3 from "./CV3";
 const TitleTypography = styled(Typography)({
   fontSize: "40px",
   fontWeight: "bold",
   color: "#ff5722",
 });
 export const ChooseCV = () => {
-  const [showPopCV, setShowPopCV] = useState(false);
-  const [myData, setMyData] = useState({});
-
-  const [selectedCVData, setSelectedCVData] = useState(null);
-
-  const handleCardButtonClick = (cvData) => {
-    setSelectedCVData(cvData);
-    setShowPopCV(true);
-  };
-
-  // const [selectedCV, setSelectedCV] = useState(null);
-  // const handleCardButtonClick = (cvData) => {
-  //   setSelectedCV(cvData); // Lưu trữ dữ liệu của card được click
-  //   setShowPopCV(true); // Hiển thị popup
-  // };
+  const [currentCV, setCurrentCV] = useState("");
+  const [print, setPrint] = useState(false);
+  const [defaultCv, setDefaultCv] = useState(defaultCvData);
 
   return (
     <>
@@ -80,9 +72,6 @@ export const ChooseCV = () => {
           sx={{ paddingTop: "85px", paddingBottom: "50px", maxWidth: "xl" }}
         >
           <Box sx={{ my: 5, mb: 5 }}>
-            {/* <Typography variant="h4" component="div" sx={{ mb: 2 }}>
-              Chọn mẫu CV cho bạn
-            </Typography> */}
             <TitleTypography
               gutterBottom
               variant="h1"
@@ -92,7 +81,7 @@ export const ChooseCV = () => {
                 textAlign: "center",
                 //fontWeight: 600,
                 fontFamily: "Montserrat",
-                //fontSize: "1.5rem",
+                //fontSize: "1.5rem",   // không nhận dc phản hồi của
               }}
             >
               Chọn CV phù hợp cho bạn
@@ -105,36 +94,47 @@ export const ChooseCV = () => {
                 justifyContent: "space-evenly",
               }}
             >
-              {/* {cardsData.map((cardData, index) => (
-                <CVCard1 key={index} data={cardData} />
-              ))} */}
-
-              {/* cvData={cvData} setSelectedCV={setSelectedCV} 
-               setSelectedCV={setSelectedCV}
-  title="Chuyên nghiệp"
-  image={cv1image}
-  onClick={() => handleCardButtonClick(cvData)}*/}
-              {/* <CVCard1
+              <CVCard1
                 title="Chuyên nghiệp"
+                image={cv2image}
+                selectedItem={setCurrentCV}
+                template={"CV1"}
+              />
+
+              <CVCard1
+                title="Thiết kế"
+                image={cv3image}
+                selectedItem={setCurrentCV}
+                template={"CV2"}
+              />
+              <CVCard1
+                title="Kinh doanh"
                 image={cv1image}
-                onClick={() => handleCardButtonClick(cvData)}
-              /> */}
-              <CVCard1 title="Chuyên nghiệp" image={cv2image} />
-              <CVCard1 title="Chuyên nghiệp" image={cv3image} />
-              <CVCard1 title="Chuyên nghiệp" image={cv1image} />
-              <CVCard1 title="Chuyên nghiệp" image={cv2image} />
-              <CVCard1 title="Chuyên nghiệp" image={cv3image} />
+                selectedItem={setCurrentCV}
+                template={"CV3"}
+              />
+              <CVCard1
+                title="Chuyên nghiệp"
+                image={cv2image}
+                selectedItem={setCurrentCV}
+                template={"CV4"}
+              />
+              <CVCard1
+                title="Chuyên nghiệp"
+                image={cv3image}
+                selectedItem={setCurrentCV}
+                template={"CV5"}
+              />
+              <CVCard1
+                title="Chuyên nghiệp"
+                image={cv3image}
+                selectedItem={setCurrentCV}
+                template={"CV6"}
+              />
             </Box>
           </Box>
         </Container>
       </Box>
-      <PopCV
-        show={showPopCV}
-        setShow={setShowPopCV}
-        data={myData}
-        setData={setMyData}
-        data={selectedCVData}
-      />
     </>
   );
 };
