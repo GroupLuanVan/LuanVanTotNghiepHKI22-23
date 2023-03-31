@@ -84,7 +84,7 @@ export const ChooseCV = () => {
                 //fontSize: "1.5rem",   // không nhận dc phản hồi của
               }}
             >
-              Chọn CV phù hợp cho bạn
+              Chọn CV phù hợp cho bạnz``
             </TitleTypography>
 
             <Box
@@ -96,32 +96,32 @@ export const ChooseCV = () => {
             >
               <CVCard1
                 title="Chuyên nghiệp"
-                image={cv2image}
+                image={cv1image}
                 selectedItem={setCurrentCV}
                 template={"CV1"}
               />
 
               <CVCard1
                 title="Thiết kế"
-                image={cv3image}
+                image={cv2image}
                 selectedItem={setCurrentCV}
                 template={"CV2"}
               />
               <CVCard1
                 title="Kinh doanh"
-                image={cv1image}
+                image={cv3image}
                 selectedItem={setCurrentCV}
                 template={"CV3"}
               />
               <CVCard1
                 title="Chuyên nghiệp"
-                image={cv2image}
+                image={cv1image}
                 selectedItem={setCurrentCV}
                 template={"CV4"}
               />
               <CVCard1
                 title="Chuyên nghiệp"
-                image={cv3image}
+                image={cv2image}
                 selectedItem={setCurrentCV}
                 template={"CV5"}
               />

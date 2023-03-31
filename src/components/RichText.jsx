@@ -14,7 +14,7 @@ import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import { SketchPicker } from "react-color";
-
+import ColorPickerButton from "./ColorPicker ";
 export default function RichText({ editorState, setEditorState }) {
   const staticToolbarPlugin = createToolbarPlugin();
   const [activeUtils, setActiveUtils] = useState({
@@ -52,12 +52,6 @@ export default function RichText({ editorState, setEditorState }) {
           list: !activeUtils.list,
         });
         break;
-      // case "COLOR":
-      //   setActiveUtils({
-      //     ...activeUtils,
-      //     color: !activeUtils.color,
-      //   });
-      //   break;
 
       default:
         break;
@@ -72,29 +66,6 @@ export default function RichText({ editorState, setEditorState }) {
     );
     setEditorState(newEditorState);
   }
-
-  // function handleColorChange(color) {
-  //   setCurrentColor(color.hex);
-  //   let newEditorState = editorState;
-  //   const currentStyle = editorState.getCurrentInlineStyle();
-  //   if (!currentStyle.has("COLOR")) {
-  //     newEditorState = RichUtils.toggleInlineStyle(
-  //       editorState,
-  //       "COLOR-" + color.hex
-  //     );
-  //   } else {
-  //     currentStyle.forEach((style) => {
-  //       if (style.startsWith("COLOR-")) {
-  //         newEditorState = RichUtils.toggleInlineStyle(newEditorState, style);
-  //       }
-  //     });
-  //     newEditorState = RichUtils.toggleInlineStyle(
-  //       newEditorState,
-  //       "COLOR-" + color.hex
-  //     );
-  //   }
-  //   setEditorState(newEditorState);
-  // }
 
   const plugins = [staticToolbarPlugin];
   const editor = React.useRef(null);
@@ -179,7 +150,7 @@ export default function RichText({ editorState, setEditorState }) {
               ml: "auto",
             }}
           >
-            <Button
+            {/* <Button
               onClick={() => setColorPickerOpen(!colorPickerOpen)}
               sx={{
                 bgcolor: currentColor,
@@ -187,7 +158,43 @@ export default function RichText({ editorState, setEditorState }) {
                 height: "40px",
                 borderRadius: "50%",
               }}
-            />
+            /> */}
+            <Button
+              onClick={() => setColorPickerOpen(!colorPickerOpen)}
+              sx={{
+                bgcolor: currentColor,
+                width: "40px",
+                height: "40px",
+                borderRadius: "50%",
+                "&:hover": {
+                  bgcolor: currentColor,
+                  opacity: "0.8",
+                },
+              }}
+            >
+              {activeUtils["COLOR-" + currentColor] && (
+                <Box
+                  sx={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%,-50%)",
+                    width: "22px",
+                    height: "22px",
+                    borderRadius: "50%",
+                    bgcolor: "success.main",
+                    color: "white",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    fontSize: "12px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  ✓
+                </Box>
+              )}
+            </Button>
           </Box>
 
           {colorPickerOpen && (
@@ -223,13 +230,30 @@ export const RichTextDisplay = function ({ data }) {
 };
 
 // export const RichTextDisplay = function ({ data }) {
+//   useEffect(()=>{
+//       if(!data) {
+//           data = null;
+//       }
+//   });
 //   const [editorState, setEditorState] = useState(() =>
-//     EditorState.createWithContent(convertFromRaw(data))
+//       EditorState.createWithContent(convertFromRaw(data))
 //   );
+//   return (<Editor
+//       readOnly={true}
+//       editorState={editorState}
+//   />)
+// }
 
-//   useEffect(() => {
-//     setEditorState(EditorState.createWithContent(convertFromRaw(data)));
-//   }, [data]);
-
-//   return <Editor readOnly={true} editorState={editorState} />;
-// };
+// function handleColorChange(color) {
+//   const colorPrefix = "COLOR-" + color.hex;
+//   setCurrentColor(color.hex);
+//   setActiveUtils({
+//     ...activeUtils,
+//     [colorPrefix]: !activeUtils[colorPrefix],
+//   });
+//   const newEditorState = RichUtils.toggleInlineStyle(
+//     editorState,
+//     colorPrefix
+//   );
+//   setEditorState(newEditorState);
+// }

@@ -57,10 +57,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
         return rawdata.blocks.map((item) => item.text).join(" ");
       }
     };
-    const [currentColor, setCurrentColor] = useState("#000000");
-    function handleColorChange(color) {
-      setCurrentColor(color.hex);
-    }
+
     // Dòng lệnh const text = item.slice(0, item.length - 2); có ý nghĩa là lấy chuỗi con từ biến item bắt đầu từ vị trí đầu tiên đến vị trí trước 2 ký tự cuối cùng của chuỗi.
     // Ví dụ, nếu item có giá trị là "example: " thì biến text sẽ lưu giá trị là "example".
     // Lý do để sử dụng slice(0, item.length - 2) là để loại bỏ 2 ký tự cuối cùng của chuỗi item,
@@ -107,9 +104,6 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
           editorState={editorState}
           setEditorState={setEditorState}
           onChange={(editorState) => setEditorState(editorState)}
-          currentColor={currentColor}
-          onColorChange={handleColorChange}
-          style={{ color: currentColor }}
         />
         <Box sx={{ m: 1 }}>
           <Button
@@ -208,7 +202,9 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
       setPrint(false);
     }
   }, [print]);
-  useEffect(() => {}, [data]);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
   useEffect(() => {
     if (editable) setCVDATA({ ...data, cvTemplate });
   }, []);
@@ -526,12 +522,6 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
           ©2022 ViecLamNhanh
         </Typography>
       </Box>
-      <ContactEditPopUp
-        data={data}
-        setData={setCVDATA}
-        show={showPopup}
-        setShow={setShowPopup}
-      />
       <ContactEditPopUp
         data={data}
         setData={setCVDATA}

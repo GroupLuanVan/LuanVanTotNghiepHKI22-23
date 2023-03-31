@@ -8,6 +8,7 @@ export const userSlice = createSlice({
     initialState: {
         user: JSON.parse(sessionStorage.getItem('user')) == null ? "Người dùng" : JSON.parse(sessionStorage.getItem('user')),
         isLogin: sessionStorage.getItem('user') ? true : false
+        
     },
     reducers: {
         setUserLogin: (state, action) => {
@@ -53,3 +54,17 @@ export const userSlice = createSlice({
 
 export const { setUserLogin, setUserLogout, setActivatedCvId, setApplyJobs, setCandidateData } = userSlice.actions
 export default userSlice.reducer;
+
+// createSlice được sử dụng để tạo ra một slice, bao gồm tên slice (name), 
+//initialState ban đầu cho slice, và một object reducers chứa các reducer function được xác định bởi createSlice. 
+//Các reducer function này sẽ được sử dụng để cập nhật state khi action tương ứng được dispatch.
+
+// setUserLogin, setUserLogout, setActivatedCvId, setApplyJobs, setCandidateData là các 
+//reducer function được xác định bởi createSlice. Mỗi reducer function này đại diện cho một action và được sử dụng để cập nhật state của slice khi action tương ứng được dispatch.
+
+// Các reducer function này sử dụng Immer để thực hiện việc cập nhật state một cách dễ dàng và tránh việc thay đổi 
+//state ban đầu trực tiếp.
+
+// sessionStorage được sử dụng để lưu trữ thông tin user và đăng nhập. 
+//Khi user đăng nhập, thông tin user được lưu trữ trong sessionStorage để giữ cho user đã đăng nhập khi reload trang. 
+//Khi user đăng xuất, thông tin user trong sessionStorage được xóa.

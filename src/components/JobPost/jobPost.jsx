@@ -133,7 +133,7 @@ const PostJob = () => {
           </Grid>
         </Box> */}
 
-        <Typography>Mư</Typography>
+        <Typography>Mức Lương</Typography>
         <Box display={"flex"}>
           <TextField
             label="Salary"

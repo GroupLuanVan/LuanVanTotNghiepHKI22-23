@@ -1,6 +1,45 @@
 import React from "react";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import axios from "axios";
+import { useRef, useState } from "react";
+import { toast } from "react-toastify";
+import LockIcon from "@mui/icons-material/Lock";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import EmailIcon from "@mui/icons-material/Email";
+import Image from "mui-image";
+
+import env from "../../asset/env.json";
+import { useNavigate } from "react-router-dom";
+import { Box, Button, TextField, Typography, Alert } from "@mui/material";
 export const RegisterJobSeeker = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
+  };
+  const handleRegister = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:5000/api/auth/register`,
+        user
+      );
+      const { token, userName } = response.data.data;
+      console.log(response.data.data);
+      localStorage.setItem("token", token);
+      toast.success(`Welcome, ${userName}!`);
+      navigate("/");
+    } catch (error) {
+      toast.error(error.response.data.message);
+      console.log(error.response.data.message);
+    }
+  };
+
   return (
     <>
       <Box display="flex" flexDirection="column" minHeight="85vh">
@@ -57,6 +96,9 @@ export const RegisterJobSeeker = () => {
                 margin="normal"
                 type={"text"}
                 placeholder="FullName"
+                name="name"
+                value={user.name}
+                onChange={handleInputChange}
                 sx={{ width: "670px" }}
               />
 
@@ -64,12 +106,28 @@ export const RegisterJobSeeker = () => {
                 margin="normal"
                 type={"email"}
                 placeholder="Email"
+                name="email"
+                value={user.email}
+                onChange={handleInputChange}
                 sx={{ width: "670px" }}
               />
               <TextField
                 margin="normal"
                 type={"password"}
                 placeholder="password"
+                name="password"
+                value={user.password}
+                onChange={handleInputChange}
+                sx={{ width: "670px" }}
+              />
+
+              <TextField
+                margin="normal"
+                type={"password"}
+                placeholder="ConfirmPassword"
+                name="confirmPassword"
+                value={user.confirmPassword}
+                onChange={handleInputChange}
                 sx={{ width: "670px" }}
               />
 
@@ -83,6 +141,7 @@ export const RegisterJobSeeker = () => {
                 }}
                 variant="contained"
                 color="warning"
+                onClick={handleRegister}
               >
                 Register
               </Button>

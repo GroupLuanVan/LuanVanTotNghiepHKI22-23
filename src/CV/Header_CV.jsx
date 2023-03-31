@@ -1,10 +1,5 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import Image from "mui-image";
-import AccountMenu from "../Menu/AccountMenu";
-
 import {
   AppBar,
   Box,
@@ -15,12 +10,8 @@ import {
   Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-
-const CustomAppBar = () => {
+export const Header_CV = () => {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
-  const [open, setOpen] = useState(false);
-
   return (
     <AppBar
       sx={{
@@ -38,11 +29,11 @@ const CustomAppBar = () => {
           aria-label="menu"
           sx={{ mr: 5 }}
         ></IconButton>
-
+        <Box></Box>
         <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
           SmartJobBoard
         </Typography>
-
+        <Box></Box>
         <Typography
           variant="h6"
           sx={{
@@ -86,38 +77,6 @@ const CustomAppBar = () => {
         >
           SearchPricing
         </Typography>
-
-        {/* <>
-          {!user.isLogin && (
-            <>
-              <Button
-                onClick={() => {
-                  navigate("/Dangnhap");
-                }}
-                color="inherit"
-                variant="contained"
-                sx={{
-                  fontWeight: "normal",
-                  mr: 2,
-                }}
-              >
-                Đăng nhập
-              </Button>
-              <Button
-                onClick={() => {
-                  navigate("/Rtype");
-                }}
-                color="warning"
-                variant="contained"
-                sx={{ ml: 2 }}
-              >
-                Đăng ký
-              </Button>
-            </>
-          )}
-          {user.isLogin && <AccountMenu user={user.user} />}
-        </> */}
-
         <Button
           onClick={() => {
             navigate("/Dangnhap");
@@ -125,8 +84,11 @@ const CustomAppBar = () => {
           color="inherit"
           variant="contained"
           sx={{
+            //textTransform: "none",
+            //fontSize: "1.20rem",
             fontWeight: "normal",
             mr: 2,
+            //px: 3,
           }}
         >
           Đăng nhập
@@ -146,5 +108,3 @@ const CustomAppBar = () => {
     </AppBar>
   );
 };
-
-export default CustomAppBar;

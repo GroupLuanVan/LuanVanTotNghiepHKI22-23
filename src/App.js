@@ -14,6 +14,10 @@ import ComboBox from "./components/list";
 import RichText from "./components/RichText";
 import ManageCV from "./components/ManageCV";
 import { ChooseCV } from "./CV/ChooseCV";
+import { Header_CV } from "./CV/Header_CV";
+import VerticalNavbar from "./components/Menu/VerticalNavbar";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
@@ -35,12 +39,11 @@ function App() {
               path="/:usetemplate"
               element={
                 <>
-                  {/* <CustomAppBar /> */}
-                   {/* <FeaturedCompanies/> */}
-                   {/* <RichText/> */}
+                  <Header_CV/>
                   <ManageCV/>
+                  <Footer/>
                  
-                  {/* <Footer/>  */}
+              
                 </>
               }
               />
@@ -94,6 +97,15 @@ function App() {
                 <Footer />
               </>
               }/>
+                  <Route 
+              path="joblist"
+              element={
+                <>
+                <CustomAppBar />
+                <JobList />
+                <Footer />
+              </>
+              }/>
                   <Route
               path="CreateCV"
               element={
@@ -104,11 +116,31 @@ function App() {
                 </>
               }
               />
+                    <Route
+              path="test"
+              element={
+                <>
+                  <VerticalNavbar/>
+                </>
+              }
+              />
     
 
     </Route>
   </Routes>
   </BrowserRouter> 
+  <ToastContainer
+        color="success"
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      ></ToastContainer>
     
     </>
 

@@ -9,10 +9,11 @@ import {
   Grid,
   styled,
   Typography,
+  TextField,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
-import background from "../asset/background.jpg";
+import background from "../asset/BK_CV4.png";
 import RichText, { RichTextDisplay } from "../components/RichText";
 import SchoolIcon from "@mui/icons-material/School";
 import FlagIcon from "@mui/icons-material/Flag";
@@ -29,8 +30,8 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { convertToRaw, EditorState } from "draft-js";
 import ContactEditPopUp from "../components/Home/ContactEditPopUp";
 
-export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
-  const cvTemplate = "CV2";
+export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
+  const cvTemplate = "CV4";
 
   function RichEditor({ item, data, setData, setOpen }) {
     const [editorState, setEditorState] = useState(() =>
@@ -105,14 +106,20 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
   }
   const CustomChip = styled(Chip)(({ theme }) => ({
     "&": {
-      background: theme.palette.primary.dark,
-      color: "white",
+      //background: theme.palette.primary.dark,
+      background: "rgba(0, 0, 0, 0)",
+      border: "3px solid black",
+      borderRadius: 0,
+      color: "black",
       fontSize: "20px",
       fontWeight: "600",
-      padding: "12px",
+      padding: "20px",
       "& .MuiChip-icon": {
-        color: "white",
+        color: "black",
       },
+      // "& .MuiChip-label": {
+      //   opacity: 0.6,
+      // },
     },
   }));
   const RichContent = function ({ show, toggle, item, data, config }) {
@@ -138,6 +145,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
   const [showCertificationsEdit, setShowCertificationsEdit] = useState();
   const [showExperienceEdit, setShowExperienceEdit] = useState();
   const [showObjectiveEdit, setShowObjectiveEdit] = useState();
+  const [showDefault, setShowDefault] = useState();
   // state quan ly popup
   const [showPopup, setShowPopup] = useState(false);
 
@@ -159,6 +167,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
   useEffect(() => {
     if (editable) setCVDATA({ ...data, cvTemplate });
   }, []);
+  const [name, setName] = useState(data.name || "");
   return (
     <>
       <Box
@@ -167,7 +176,8 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
           width: "100%",
           backgroundImage: `url(${background})`,
           minHeight: "1080px",
-          p: 4,
+          //width: "950px",
+          p: 0,
           backgroundRepeat: "repeat",
           backgroundSize: "cover",
         }}
@@ -176,31 +186,41 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
           {/* tt chung */}
           <Grid
             item
-            xs={6}
+            xs={5}
             sx={{
               display: "flex",
               flexDirection: "column",
-              background: "#2B3743",
-              color: "white",
+              //background: "rgba(255, 0, 0, 0.5)",
+              background: "rgba(252, 224, 224, 20)",
+              color: "black",
+              width: "1px",
             }}
           >
             <Box
               sx={{
                 width: "80%",
-                display: "flex",
+                //display: "flex",
+                //justifyContent: "center",
                 flexDirection: "column",
                 p: 4,
                 "&:hover": {
                   border: "1px dashed red",
                 },
                 "p, h5, h6": {
-                  color: "white",
+                  color: "black ",
                 },
               }}
               onClick={() => {
                 editable && setShowPopup(true);
               }}
             >
+              {/* <Typography variant="h4" fontWeight={550}>
+                <TextField
+                  defaultValue={name}
+                  // onClick={() => editable && setShowPopup(true)}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </Typography> */}
               <Image
                 src={data.avatar || camera}
                 width="160px"
@@ -208,7 +228,10 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                 fit="scale-down"
                 duration={0}
                 sx={{
-                  borderRadius: "50%",
+                  //display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "0%",
                   border: "1px dashed blue",
                   background: "#f1f2f7",
                   mb: 4,
@@ -217,6 +240,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
               <Typography variant="h4" fontWeight={550}>
                 {data.name}
               </Typography>
+              {/* <TextField {data.phone} /> */}
               <Typography
                 sx={{ mb: 4 }}
                 variant="h6"
@@ -302,19 +326,20 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                 display: "flex",
                 flexDirection: "column",
                 ml: "30px",
+                mt: "150px",
               }}
             >
               <CustomChip
-                alignSelf="flex-end"
+                //alignSelf="flex-end"
                 icon={<MoreHorizIcon color="success" />}
-                label="Kinh nghiệm"
+                label="Kỹ Năng"
               />
               <Box
                 sx={{
                   mb: 2,
                   px: 2,
                   mt: 1,
-                  minHeight: "20%",
+                  minHeight: "60%",
                   "&:hover": {
                     border: "1px dashed red",
                   },
@@ -342,18 +367,22 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
               p: 3,
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start",
-              minHeight: "1480px",
+              //alignItems: "flex-start",
+              minHeight: "1580px",
             }}
           >
-            <CustomChip icon={<SchoolIcon color="success" />} label="Học vấn" />
+            <CustomChip
+              alignSelf="flex-end"
+              icon={<SchoolIcon color="success" />}
+              label="Học vấn"
+            />
             <Box
               alignSelf="flex-start"
               sx={{
                 mb: 2,
                 px: 2,
                 mt: 1,
-                width: "90%",
+                width: "95%",
                 minHeight: "20%",
                 "&:hover": {
                   border: "1px dashed red",
@@ -375,7 +404,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
 
             <CustomChip
               icon={<CrisisAlertIcon color="success" />}
-              label="Mục tiêu nghề nghiệp"
+              label="Kinh Nghiệm"
             />
             <Box
               alignSelf="flex-start"
@@ -402,7 +431,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
               />
             </Box>
 
-            <CustomChip icon={<FlagIcon />} label="Kỹ năng" />
+            <CustomChip icon={<FlagIcon />} label="Mục Tiêu Nghề Nghiệp" />
             <Box
               alignSelf="flex-start"
               sx={{
@@ -429,7 +458,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
             </Box>
             <CustomChip
               icon={<WorkspacePremiumIcon color="success" />}
-              label="Chứng chỉ"
+              label="Dự Án"
             />
             <Box
               alignSelf="flex-start"
@@ -455,6 +484,9 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                 item="certificationsCv"
               />
             </Box>
+            <Grid container>
+              <Typography>Thái</Typography>
+            </Grid>
           </Grid>
         </Grid>
         <Typography

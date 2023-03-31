@@ -1,46 +1,43 @@
-import React, { useState } from "react";
-import { ChromePicker } from "react-color";
+// import { useState } from "react";
+// import { HexColorPicker } from "react-colorful";
+// import "react-colorful/dist/index.css";
+// import { Button } from "@mui/material";
+// import { ChromePicker } from "react-color";
+// import IconButton from "@mui/material";
+// import { FormatColorFill } from "@mui/icons-material";
+// import Popover from "@mui/material";
+// const ColorPickerButton = ({ onColorChange }) => {
+//   const [anchorEl, setAnchorEl] = useState(null);
+//   const [color, setColor] = useState("#000000"); // Khai báo state color và gán giá trị mặc định
+//   const handleClick = (event) => {
+//     setAnchorEl(event.currentTarget);
+//   };
+//   const handleClose = () => {
+//     setAnchorEl(null);
+//   };
+//   const handleColorChange = (color) => {
+//     setColor(color.hex); // Sửa giá trị của state color khi màu được thay đổi
+//     onColorChange(color.hex);
+//     handleClose();
+//   };
+//   return (
+//     <>
+//       <IconButton onClick={handleClick}>
+//         <FormatColorFill />
+//       </IconButton>
+//       <Popover
+//         open={Boolean(anchorEl)}
+//         anchorEl={anchorEl}
+//         onClose={handleClose}
+//         anchorOrigin={{
+//           vertical: "bottom",
+//           horizontal: "left",
+//         }}
+//       >
+//         <ChromePicker color={color} onChange={handleColorChange} />
+//       </Popover>
+//     </>
+//   );
+// };
 
-export default function ColorPicker({ color, onChange }) {
-  const [displayColorPicker, setDisplayColorPicker] = useState(false);
-
-  const handleColorChange = (color) => {
-    onChange(color.hex);
-  };
-
-  return (
-    <div>
-      <div
-        style={{
-          display: "inline-block",
-          backgroundColor: color,
-          width: "20px",
-          height: "20px",
-          border: "1px solid #ccc",
-          cursor: "pointer",
-        }}
-        onClick={() => setDisplayColorPicker(true)}
-      ></div>
-      {displayColorPicker && (
-        <div
-          style={{
-            position: "absolute",
-            zIndex: "2",
-          }}
-        >
-          <div
-            style={{
-              position: "fixed",
-              top: "0px",
-              right: "0px",
-              bottom: "0px",
-              left: "0px",
-            }}
-            onClick={() => setDisplayColorPicker(false)}
-          ></div>
-          <ChromePicker color={color} onChange={handleColorChange} />
-        </div>
-      )}
-    </div>
-  );
-}
+// export default ColorPickerButton;

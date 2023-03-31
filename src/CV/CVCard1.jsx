@@ -44,16 +44,14 @@ const StyledButton = styled(Button)({
     transform: "translateX(-50%) translateY(-20px)", // dịch chuyển button lên trên
   },
 });
-export const CVCard1 = ({ data, image, selectedItem, template }) => {
+export const CVCard1 = ({ image, selectedItem, template }) => {
   const [hovered, setHovered] = useState(false);
   const [showPopCV, setShowPopCV] = useState(false);
 
   const [avatar, setAvatar] = useState(defaultCvData.avatar);
-  const imageRef = useRef();
+
   let navigate = useNavigate();
-  const handleEditAvatar = () => {
-    imageRef.current.click();
-  };
+
   const handleMouseEnter = () => {
     setHovered(true);
   };
@@ -65,10 +63,11 @@ export const CVCard1 = ({ data, image, selectedItem, template }) => {
     selectedItem(template);
     navigate(`/use${template}`);
   };
+  console.log(template);
   return (
     <>
       <StyledCard
-        sx={{ mx: 2, mb: 4 }}
+        sx={{ mx: 4, mb: 4 }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -81,27 +80,25 @@ export const CVCard1 = ({ data, image, selectedItem, template }) => {
             alt="Job"
           />
 
-          {hovered && (
-            <StyledButton>
-              <Button
-                variant="contained"
-                color="success"
-                sx={{ borderRadius: "20px" }}
-                onClick={onClick}
-              >
-                Dùng Mẫu Này
-              </Button>
+          <StyledButton>
+            <Button
+              variant="contained"
+              color="success"
+              sx={{ borderRadius: "20px" }}
+              onClick={onClick}
+            >
+              Dùng Mẫu Này
+            </Button>
 
-              <Button
-                variant="outlined"
-                color="info"
-                sx={{ borderRadius: "20px" }}
-                onClick={() => setShowPopCV(true)}
-              >
-                Xem trước Mẫu Này
-              </Button>
-            </StyledButton>
-          )}
+            <Button
+              variant="outlined"
+              color="info"
+              sx={{ borderRadius: "20px" }}
+              onClick={() => setShowPopCV(true)}
+            >
+              Xem trước Mẫu Này
+            </Button>
+          </StyledButton>
         </ImageWrapper>
 
         <CardContent>
@@ -124,3 +121,5 @@ export const CVCard1 = ({ data, image, selectedItem, template }) => {
     </>
   );
 };
+
+// {hovered && ( )}
