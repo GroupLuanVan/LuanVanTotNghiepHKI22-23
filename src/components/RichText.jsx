@@ -157,15 +157,6 @@ export default function RichText({ editorState, setEditorState }) {
                 width: "40px",
                 height: "40px",
                 borderRadius: "50%",
-              }}
-            /> */}
-            <Button
-              onClick={() => setColorPickerOpen(!colorPickerOpen)}
-              sx={{
-                bgcolor: currentColor,
-                width: "40px",
-                height: "40px",
-                borderRadius: "50%",
                 "&:hover": {
                   bgcolor: currentColor,
                   opacity: "0.8",
@@ -194,7 +185,7 @@ export default function RichText({ editorState, setEditorState }) {
                   ✓
                 </Box>
               )}
-            </Button>
+            </Button> */}
           </Box>
 
           {colorPickerOpen && (

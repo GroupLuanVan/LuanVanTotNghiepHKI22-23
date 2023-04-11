@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
-import background from "../asset/background_blue.webp";
+import background from "../asset/BK_CV3.png";
 import RichText, { RichTextDisplay } from "../components/RichText";
 import SchoolIcon from "@mui/icons-material/School";
 import FlagIcon from "@mui/icons-material/Flag";
@@ -94,12 +94,12 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
   const CustomChip = styled(Chip)(({ theme }) => ({
     "&": {
       background: "rgba(0,0,0,0)",
-      color: "#0a84ff",
+      color: "#037c12",
       fontSize: "20px",
       fontWeight: "600",
       padding: "12px",
       "& .MuiChip-icon": {
-        color: "#0a84ff",
+        color: "#037c12",
       },
     },
   }));
@@ -126,6 +126,8 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
   const [showCertificationsEdit, setShowCertificationsEdit] = useState();
   const [showExperienceEdit, setShowExperienceEdit] = useState();
   const [showObjectiveEdit, setShowObjectiveEdit] = useState();
+  const [showActivate, setShowActivate] = useState();
+  const [showProject, setShowProject] = useState();
   // state quan ly popup
   const [showPopup, setShowPopup] = useState(false);
 
@@ -168,7 +170,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
           <Grid
             item
             container
-            xs={11}
+            xs={11.5}
             sx={{
               display: "flex",
               flexDirection: "column",
@@ -193,7 +195,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
                 mt: 3,
                 ml: 2,
                 " h4, h6": {
-                  color: "#0a84ff",
+                  color: "#037c12",
                 },
               }}
               onClick={() => {
@@ -208,7 +210,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
                 duration={0}
                 sx={{
                   borderRadius: "50%",
-                  border: "1px dashed blue",
+                  border: "1px dashed #037c12",
                   background: "#f1f2f7",
                   mb: 4,
                 }}
@@ -508,20 +510,86 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
                 />
               </Box>
             </Grid>
+            <Grid
+              item
+              xs={11.5}
+              sx={{
+                borderRadius: "25px",
+                background: "#fff",
+                p: 2,
+                boxShadow: "1px 1px 5px 1px #00000014",
+              }}
+            >
+              <CustomChip
+                icon={<WorkspacePremiumIcon color="success" />}
+                label="Dự Án"
+              />
+              <Box
+                alignSelf="flex-start"
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  width: "90%",
+                  minHeight: "150px",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowProject(true);
+                }}
+              >
+                <RichContent
+                  show={showProject}
+                  toggle={setShowProject}
+                  data={data}
+                  config={setCVDATA}
+                  item="activitiesCv"
+                />
+              </Box>
+            </Grid>
+            <Grid
+              item
+              xs={11.5}
+              sx={{
+                borderRadius: "25px",
+                background: "#fff",
+                p: 2,
+                boxShadow: "1px 1px 5px 1px #00000014",
+              }}
+            >
+              <CustomChip
+                icon={<WorkspacePremiumIcon color="success" />}
+                label="Hoạt Động"
+              />
+              <Box
+                alignSelf="flex-start"
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  width: "90%",
+                  minHeight: "100px",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowActivate(true);
+                }}
+              >
+                <RichContent
+                  show={showActivate}
+                  toggle={setShowActivate}
+                  data={data}
+                  config={setCVDATA}
+                  item="aboutMeCV"
+                />
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
-        <Typography
-          variant="body1"
-          color="initial"
-          sx={{
-            position: "relative",
-            top: "100%",
-            left: "70%",
-            mt: "30px",
-          }}
-        >
-          ©2022 ViecLamNhanh
-        </Typography>
       </Box>
       <ContactEditPopUp
         data={data}

@@ -1,19 +1,25 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserLogin, setActivatedCvId } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, TextField, Typography, Alert } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  Alert,
+  Redirect,
+} from "@mui/material";
 import LoginSchema from "../../validate/loginValidate";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import * as yup from "yup";
-
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const username = useRef();
-  const password = useRef();
+  const username = useRef(null);
+  const password = useRef(null);
+  const user = useSelector((state) => state.user);
   const [response, setResponse] = useState({
     showArlert: false,
     message: "",
@@ -21,8 +27,12 @@ export const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!username.current.value || !password.current.value) {
+      toast.error("con mẹ nó mất thời gian");
+      return;
+    }
 
-    // Kiểm tra dữ liệu với schema validation
+    //Kiểm tra dữ liệu với schema validation
     try {
       await LoginSchema.validate({
         email: username.current.value,
@@ -34,16 +44,20 @@ export const Login = () => {
         email: username.current.value,
         password: password.current.value,
       });
+
       const { data } = res.data;
-      console.log(data);
-      dispatch(setUserLogin(data.token));
-      dispatch(setActivatedCvId(null));
+
+      console.log(res.data);
+      console.log(res.data.data.userRole);
+
+      localStorage.setItem("token", data.token);
+
+      dispatch(setUserLogin(data.userName)); //token của user được lưu vào Redux store bằng hàm dispatch(setUserLogin(data.userName))
+      dispatch(setUserLogin(data.userRole));
+      console.log(user.isLogin);
       navigate("/");
     } catch (error) {
-      // Nếu có lỗi xảy ra, hiển thị thông báo lỗi cho người dùng
-      //toast.error(error.errors[0]);
-
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data.message);
     }
   };
 

@@ -160,6 +160,8 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
   const [showCertificationsEdit, setShowCertificationsEdit] = useState();
   const [showExperienceEdit, setShowExperienceEdit] = useState();
   const [showObjectiveEdit, setShowObjectiveEdit] = useState();
+  const [showActivate, setShowActivate] = useState();
+  const [showProject, setShowProject] = useState();
   const [showDefault, setShowDefault] = useState();
   // state quan ly popup
   const [showPopup, setShowPopup] = useState(false);
@@ -217,7 +219,7 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
             >
               <Box
                 sx={{
-                  width: "100%",
+                  width: "70%",
                   //display: "flex",
                   //justifyContent: "center",
                   flexDirection: "column",
@@ -233,13 +235,6 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                   editable && setShowPopup(true);
                 }}
               >
-                {/* <Typography variant="h4" fontWeight={550}>
-                  <TextField
-                    defaultValue={name}
-                    onClick={() => editable && setShowPopup(true)}
-                    onChange={(e) => setName(e.target.value)}
-                  />
-                </Typography> */}
                 <Image
                   src={data.avatar || camera}
                   width="160px"
@@ -338,79 +333,118 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                   </Typography>
                 </Box>
               </Box>
-
-              <CustomChip2
-                sx={{
-                  mt: 23.5,
-                  width: 300,
-                  display: "flex",
-                  justifyContent: "center",
-                  ml: "60px",
-                }}
-                icon={<SchoolIcon color="success" />}
-                label="Học vấn"
-              />
               <Box
-                alignSelf="flex-start"
                 sx={{
-                  mb: 2,
-                  px: 2,
-                  mt: 1,
-                  width: "90%",
-                  minHeight: "20%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  // OpenEditDialog('Học vấn', 'Học vấn',true)
-                  editable && setShowEduEdit(true);
+                  width: "80%",
+                  minHeight: "80%",
+                  mt: 4,
+                  display: "flex",
+                  flexDirection: "column",
+                  ml: "30px",
                 }}
               >
-                <RichContent
-                  show={showEduEdit}
-                  toggle={setShowEduEdit}
-                  data={data}
-                  config={setCVDATA}
-                  item="educationCv"
+                <CustomChip2
+                  sx={{
+                    width: 300,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  icon={<SchoolIcon color="success" />}
+                  label="Kỹ năng"
                 />
-              </Box>
+                <Box
+                  alignSelf="flex-start"
+                  sx={{
+                    mb: 2,
+                    px: 2,
+                    mt: 1,
+                    width: "90%",
+                    minHeight: "20%",
+                    "&:hover": {
+                      border: "1px dashed red",
+                    },
+                  }}
+                  onClick={() => {
+                    editable && setShowSkillsEdit(true);
+                  }}
+                >
+                  <RichContent
+                    show={showSkillsEdit}
+                    toggle={setShowSkillsEdit}
+                    data={data}
+                    config={setCVDATA}
+                    item="skillsCv"
+                  />
+                </Box>
 
-              <CustomChip2
-                sx={{
-                  mt: -1,
-                  width: 300,
-                  display: "flex",
-                  justifyContent: "center",
-                  ml: "60px",
-                }}
-                icon={<SchoolIcon color="success" />}
-                label="Học vấn"
-              />
-              <Box
-                alignSelf="flex-start"
-                sx={{
-                  mb: 2,
-                  px: 2,
-                  mt: 1,
-                  width: "90%",
-                  minHeight: "20%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  // OpenEditDialog('Học vấn', 'Học vấn',true)
-                  editable && setShowEduEdit(true);
-                }}
-              >
-                <RichContent
-                  show={showEduEdit}
-                  toggle={setShowEduEdit}
-                  data={data}
-                  config={setCVDATA}
-                  item="educationCv"
+                <CustomChip2
+                  sx={{
+                    mt: -1,
+                    width: 300,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  icon={<SchoolIcon color="success" />}
+                  label="Chứng Chỉ"
                 />
+                <Box
+                  alignSelf="flex-start"
+                  sx={{
+                    mb: 2,
+                    px: 2,
+                    mt: 1,
+                    width: "90%",
+                    minHeight: "20%",
+                    "&:hover": {
+                      border: "1px dashed red",
+                    },
+                  }}
+                  onClick={() => {
+                    editable && setShowCertificationsEdit(true);
+                  }}
+                >
+                  <RichContent
+                    show={showCertificationsEdit}
+                    toggle={setShowCertificationsEdit}
+                    data={data}
+                    config={setCVDATA}
+                    item="certificationsCv"
+                  />
+                </Box>
+                <CustomChip2
+                  sx={{
+                    mt: -1,
+                    width: 300,
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  icon={<CrisisAlertIcon color="success" />}
+                  label="Mục tiêu nghề nghiệp"
+                />
+                <Box
+                  alignSelf="flex-start"
+                  sx={{
+                    mb: 2,
+                    px: 2,
+                    mt: 1,
+                    width: "90%",
+                    minHeight: "15%",
+                    "&:hover": {
+                      border: "1px dashed red",
+                    },
+                  }}
+                  onClick={() => {
+                    editable && setShowObjectiveEdit(true);
+                  }}
+                >
+                  <RichContent
+                    show={showObjectiveEdit}
+                    toggle={setShowObjectiveEdit}
+                    data={data}
+                    config={setCVDATA}
+                    item="objectiveCv"
+                  />
+                </Box>
               </Box>
             </Grid>
 
@@ -442,7 +476,6 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                   },
                 }}
                 onClick={() => {
-                  // OpenEditDialog('Học vấn', 'Học vấn',true)
                   editable && setShowEduEdit(true);
                 }}
               >
@@ -472,15 +505,15 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                   },
                 }}
                 onClick={() => {
-                  editable && setShowObjectiveEdit(true);
+                  editable && setShowExperienceEdit(true);
                 }}
               >
                 <RichContent
-                  show={showObjectiveEdit}
-                  toggle={setShowObjectiveEdit}
+                  show={showExperienceEdit}
+                  toggle={setShowExperienceEdit}
                   data={data}
                   config={setCVDATA}
-                  item="objectiveCv"
+                  item="experienceCv"
                 />
               </Box>
 
@@ -498,20 +531,20 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                   },
                 }}
                 onClick={() => {
-                  editable && setShowSkillsEdit(true);
+                  editable && setShowProject(true);
                 }}
               >
                 <RichContent
-                  show={showSkillsEdit}
-                  toggle={setShowSkillsEdit}
+                  show={showProject}
+                  toggle={setShowProject}
                   data={data}
                   config={setCVDATA}
-                  item="skillsCv"
+                  item="activitiesCv"
                 />
               </Box>
               <CustomChip
                 icon={<WorkspacePremiumIcon color="success" />}
-                label="Chứng chỉ"
+                label="Hoạt Động"
               />
               <Box
                 alignSelf="flex-start"
@@ -526,159 +559,27 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                   },
                 }}
                 onClick={() => {
-                  editable && setShowCertificationsEdit(true);
+                  editable && setShowActivate(true);
                 }}
               >
                 <RichContent
-                  show={showCertificationsEdit}
-                  toggle={setShowCertificationsEdit}
+                  show={showActivate}
+                  toggle={setShowActivate}
                   data={data}
                   config={setCVDATA}
-                  item="certificationsCv"
+                  item="aboutMeCV"
                 />
               </Box>
             </Grid>
           </Grid>
-          {/* <Grid
-            container
-            xs={12}
-            sx={{
-              backgroundImage: `url(${background})`,
-              backgroundRepeat: "repeat",
-              backgroundSize: "cover",
-              //minHeight: "100%",
-            }}
-          >
-            <Grid
-              item
-              xs={4}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-
-                color: "black",
-                width: "1px",
-              }}
-            >
-              <CustomChip
-                alignSelf="flex-end"
-                icon={<SchoolIcon color="success" />}
-                label="Học vấn"
-              />
-              <Box
-                alignSelf="flex-start"
-                sx={{
-                  mb: 20,
-                  px: 2,
-                  mt: 1,
-                  width: "95%",
-                  minHeight: "20%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  // OpenEditDialog('Học vấn', 'Học vấn',true)
-                  editable && setShowEduEdit(true);
-                }}
-              >
-                <RichContent
-                  show={showEduEdit}
-                  toggle={setShowEduEdit}
-                  data={data}
-                  config={setCVDATA}
-                  item="educationCv"
-                />
-              </Box>
-            </Grid>
-            <Grid
-              item
-              xs={4}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                //background: "rgba(255, 0, 0, 0.5)",
-                //background: "rgba(252, 224, 224, 20)",
-                color: "black",
-                width: "1px",
-              }}
-            >
-              <CustomChip
-                alignSelf="flex-end"
-                icon={<SchoolIcon color="success" />}
-                label="Mục Tiêu Nghề Nghiệp"
-              />
-              <Box
-                alignSelf="flex-start"
-                sx={{
-                  mb: 20,
-                  px: 2,
-                  mt: 1,
-                  width: "95%",
-                  minHeight: "20%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  // OpenEditDialog('Học vấn', 'Học vấn',true)
-                  editable && setShowEduEdit(true);
-                }}
-              >
-                <RichContent
-                  show={showEduEdit}
-                  toggle={setShowEduEdit}
-                  data={data}
-                  config={setCVDATA}
-                  item="educationCv"
-                />
-              </Box>
-            </Grid>
-            <Grid
-              item
-              xs={4}
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-
-                color: "black",
-                width: "1px",
-              }}
-            >
-              <CustomChip
-                alignSelf="flex-end"
-                icon={<SchoolIcon color="success" />}
-                label="Các Kỹ Năng"
-              />
-              <Box
-                alignSelf="flex-start"
-                sx={{
-                  mb: 20,
-                  px: 2,
-                  mt: 1,
-                  width: "95%",
-                  minHeight: "20%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  // OpenEditDialog('Học vấn', 'Học vấn',true)
-                  editable && setShowEduEdit(true);
-                }}
-              >
-                <RichContent
-                  show={showEduEdit}
-                  toggle={setShowEduEdit}
-                  data={data}
-                  config={setCVDATA}
-                  item="educationCv"
-                />
-              </Box>
-            </Grid>
-          </Grid> */}
         </Grid>
       </Box>
+      <ContactEditPopUp
+        data={data}
+        setData={setCVDATA}
+        show={showPopup}
+        setShow={setShowPopup}
+      />
     </>
   );
 }

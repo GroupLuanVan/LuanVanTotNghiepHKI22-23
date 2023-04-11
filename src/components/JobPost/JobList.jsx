@@ -10,10 +10,35 @@ import {
   CardContent,
   CardActionArea,
   CardActions,
+  CardMedia,
 } from "@mui/material";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import Image from "../../asset/5.jpg";
 import { red } from "@mui/material/colors";
-export const JobList = () => {
+import { getAddressTitleFromId } from "../../other/SelectDataUtils";
+import { styled } from "@mui/material/styles";
+import JobCard from "./JobCard";
+export const JobList = (props) => {
+  const StyledCard = styled(Card)({
+    maxWidth: 345,
+  });
+  const { job } = props;
+
+  function titleCut(title) {
+    if (title.length > 20) {
+      return title.slice(0, 19) + "...";
+    } else return title;
+  }
+  const style1 = {
+    background: "#2E7D32",
+    px: 1,
+    borderRadius: "4px",
+    mr: 2,
+    color: "white",
+    fontSize: "16px",
+  };
+  const navigate = useNavigate();
+
   return (
     <>
       <Box
@@ -133,61 +158,41 @@ export const JobList = () => {
 
       <Box marginLeft={40} marginTop={10} marginBottom={10}>
         <Grid container spacing={5}>
-          <Grid item xs={6} md={3} spacing={4}>
-            <Typography>Danh mục</Typography>
-            <Card>
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  Nguyen Huu Thai
-                </Typography>
-                <Typography variant="body2" component="p">
-                  Mang may tinh va truyen thong
-                </Typography>
-              </CardContent>
-
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-            <Card>
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  Nguyen Huu Thai2
-                </Typography>
-                <Typography variant="body2" component="p">
-                  Mang may tinh va truyen thong2
-                </Typography>
-              </CardContent>
-
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
+          <Grid container item md={3} spacing={4}>
+            <Typography variant="h4" style={{ marginBottom: "1rem" }}>
+              Danh mục công ty
+            </Typography>
+            <Box
+              sx={{
+                boxShadow: "-1px 1px 4px rgb(0 0 0 / 20%)",
+                width: "100%",
+              }}
+            >
+              <JobCard />
+              <JobCard />
+              <JobCard />
+              <JobCard />
+              <JobCard />
+              <JobCard />
+            </Box>
           </Grid>
 
-          <Grid item xs={6} md={6} spacing={0}>
-            <Typography>Công Việc Tìm Được</Typography>
+          <Grid sx={{ mt: -4 }} container item xs={6} md={6} spacing={0}>
+            <Typography variant="h4" style={{ marginBottom: "1rem" }}>
+              Danh Sách Công Việc
+            </Typography>
 
             <Grid item xs={12} md={12}>
-              <Box
-                // display={"flex"}
-                // justifyContent={"center"}
-                marginTop={-12}
-                marginBottom={5}
-              >
+              <Box marginTop={-12} marginBottom={5}>
                 <Box
                   display="flex"
-                  //flexDirection={"column"}
-                  // alignItems="center"
-                  // justifyContent={"center"}
-                  // margin="auto"
                   padding={3}
                   borderRadius={5}
                   boxShadow={"5px 10px 20px #ccc"}
                   backgroundColor="white"
                   zIndex={999}
                   sx={{
-                    mt: "7rem",
+                    mt: "5rem",
                     flexDirection: "column",
 
                     ":hover": {
@@ -195,89 +200,41 @@ export const JobList = () => {
                     },
                   }}
                 >
-                  {/* <Typography variant="h6" fontWeight="5500" gutterBottom>
-                  Tìm kiếm công việc phù hợp với bạn
-                </Typography> */}
                   <Box
                     sx={{
                       display: "flex",
-                      //flexWrap: "wrap",
                     }}
                   >
-                    <Typography variant="h6" fontWeight="550" gutterBottom>
-                      Email me jobs like this
+                    <Typography variant="h6" fontWeight="500" gutterBottom>
+                      Tìm kiếm Công Việc
                     </Typography>
-                    <TextField
-                      size="small"
-                      sx={{
-                        width: "100%",
-                        zIndex: 1,
-                        backgroundColor: "white",
-                      }}
-                      id="outlined-start-adornment"
-                      color="success"
-                      label="Từ Khóa"
-                    />
-
-                    <Button
-                      //size="small"
-                      sx={{
-                        ml: 2,
-                        width: "250px",
-                        height: "40px",
-                      }}
-                      variant="contained"
-                      color="success"
-                    >
-                      Tìm việc ngay
-                    </Button>
                   </Box>
                 </Box>
               </Box>
             </Grid>
-            <Card>
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  Nguyen Huu Thai3
-                </Typography>
-                <Typography variant="body2" component="p">
-                  Mang may tinh va truyen thong3
-                </Typography>
-              </CardContent>
-
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-
-            <Card>
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  Nguyen Huu Thai4
-                </Typography>
-                <Typography variant="body2" component="p">
-                  Mang may tinh va truyen thong4
-                </Typography>
-              </CardContent>
-
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-            <Card>
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  Nguyen Huu Thai5
-                </Typography>
-                <Typography variant="body2" component="p">
-                  Mang may tinh va truyen thong5
-                </Typography>
-              </CardContent>
-
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
+            <Grid container mb={15} item xs={12}>
+              {/* <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                }}
+              > */}
+              <Card
+                sx={{
+                  boxShadow: "-1px 1px 4px rgb(0 0 0 / 20%)",
+                  width: "100%",
+                }}
+              >
+                {" "}
+                <JobCard />
+                <JobCard />
+                <JobCard />
+                <JobCard />
+                <JobCard />
+              </Card>
+              {/* </Box> */}
+            </Grid>
           </Grid>
         </Grid>
       </Box>

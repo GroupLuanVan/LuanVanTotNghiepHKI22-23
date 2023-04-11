@@ -42,31 +42,18 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  console.log(user.isLogin);
+
   console.log(user);
+
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <IconButton
-          // onClick={handleClick}
-          size="small"
-          sx={{ ml: 4 }}
-          // aria-controls={open ? 'account-menu' : undefined}
-          // aria-haspopup="true"
-          // aria-expanded={open ? 'true' : undefined}
-        >
+        <IconButton size="small" sx={{ ml: 4 }}>
           <NotificationsIcon
             sx={{ width: 32, height: 32, color: "white" }}
           ></NotificationsIcon>
         </IconButton>
-        <IconButton
-          // onClick={handleClick}
-          size="small"
-          sx={{ ml: 4 }}
-          // aria-controls={open ? 'account-menu' : undefined}
-          // aria-haspopup="true"
-          // aria-expanded={open ? 'true' : undefined}
-        >
+        <IconButton size="small" sx={{ ml: 4 }}>
           <ChatBubbleIcon
             sx={{ width: 32, height: 32, color: "white" }}
           ></ChatBubbleIcon>
@@ -81,7 +68,7 @@ export default function AccountMenu() {
             aria-expanded={open ? "true" : undefined}
           >
             <Avatar sx={{ width: 32, height: 32 }}>
-              {user.username[0].toUpperCase()}
+              {user?.split("")?.[0].toUpperCase()}
             </Avatar>
 
             {/* user.username[0] hiển thị chữ cái đầu tiên của tên Đăng nhập */}
@@ -124,9 +111,10 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar fontSize="small" /> {user.username}
+          <Avatar fontSize="small" /> {user?.userName}
         </MenuItem>
-        {user.role == "candidate" && (
+
+        {user?.role === "candidate" && (
           <>
             <MenuItem onClick={() => navigateTo("/myprofile")}>
               <ListItemIcon>
@@ -134,7 +122,7 @@ export default function AccountMenu() {
               </ListItemIcon>
               Hồ sơ của bạn
             </MenuItem>
-            <MenuItem onClick={() => navigateTo(`/cv/${user._id}`)}>
+            <MenuItem onClick={() => navigateTo(`/cv/${user?._id}`)}>
               <ListItemIcon>
                 <ArticleIcon fontSize="small" />
               </ListItemIcon>

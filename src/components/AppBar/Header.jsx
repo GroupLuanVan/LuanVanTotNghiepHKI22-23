@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import Image from "mui-image";
 import AccountMenu from "../Menu/AccountMenu";
+import { selectIsLoggedIn } from "../../store/userSlice";
 
 import {
   AppBar,
@@ -21,6 +22,7 @@ const CustomAppBar = () => {
   const user = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
 
+  console.log(user);
   return (
     <AppBar
       sx={{
@@ -38,12 +40,13 @@ const CustomAppBar = () => {
           aria-label="menu"
           sx={{ mr: 5 }}
         ></IconButton>
-
         <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
           SmartJobBoard
         </Typography>
-
         <Typography
+          onClick={() => {
+            navigate("/joblist");
+          }}
           variant="h6"
           sx={{
             mr: 5,
@@ -86,13 +89,12 @@ const CustomAppBar = () => {
         >
           SearchPricing
         </Typography>
-
-        {/* <>
-          {!user.isLogin && (
+        <>
+          {!user.isLogin ? (
             <>
               <Button
                 onClick={() => {
-                  navigate("/Dangnhap");
+                  navigate("/Login");
                 }}
                 color="inherit"
                 variant="contained"
@@ -114,34 +116,10 @@ const CustomAppBar = () => {
                 Đăng ký
               </Button>
             </>
+          ) : (
+            <AccountMenu user={user.user} />
           )}
-          {user.isLogin && <AccountMenu user={user.user} />}
-        </> */}
-
-        <Button
-          onClick={() => {
-            navigate("/Dangnhap");
-          }}
-          color="inherit"
-          variant="contained"
-          sx={{
-            fontWeight: "normal",
-            mr: 2,
-          }}
-        >
-          Đăng nhập
-        </Button>
-        <Button
-          onClick={() => {
-            navigate("/Rtype");
-          }}
-          color="warning"
-          variant="contained"
-          sx={{ ml: 2 }}
-        >
-          Đăng ký
-        </Button>
-        <Avatar alt="User" src="/assets/images/avatar.jpg" sx={{ ml: 2 }} />
+        </>{" "}
       </Toolbar>
     </AppBar>
   );

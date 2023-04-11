@@ -10,7 +10,7 @@ import {
   Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-export const Header_CV = () => {
+export const HeaderCV = () => {
   const navigate = useNavigate();
   return (
     <AppBar

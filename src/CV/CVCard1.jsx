@@ -38,10 +38,10 @@ const StyledButton = styled(Button)({
   transitionDelay: "0.1s",
   width: "500px",
   height: "80px",
-  marginTop: "-40px", // đặt margin-top bằng giá trị âm
+  marginTop: "-40px",
   "&:hover": {
     opacity: 1,
-    transform: "translateX(-50%) translateY(-20px)", // dịch chuyển button lên trên
+    transform: "translateX(-50%) translateY(-20px)",
   },
 });
 export const CVCard1 = ({ image, selectedItem, template }) => {

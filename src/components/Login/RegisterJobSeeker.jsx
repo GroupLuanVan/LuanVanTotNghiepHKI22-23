@@ -12,33 +12,70 @@ import { useNavigate } from "react-router-dom";
 import { Box, Button, TextField, Typography, Alert } from "@mui/material";
 export const RegisterJobSeeker = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUser({ ...user, [name]: value });
-  };
-  const handleRegister = async () => {
-    try {
-      const response = await axios.post(
-        `http://localhost:5000/api/auth/register`,
-        user
-      );
-      const { token, userName } = response.data.data;
-      console.log(response.data.data);
-      localStorage.setItem("token", token);
-      toast.success(`Welcome, ${userName}!`);
-      navigate("/");
-    } catch (error) {
-      toast.error(error.response.data.message);
-      console.log(error.response.data.message);
+  const [username, setUsernameValue] = useState("");
+  const [email, setEmailValue] = useState("");
+  const [password, setPasswordValue] = useState("");
+  const [confirmPassword, setConfirmPasswordValue] = useState("");
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    console.log(username, email, password, confirmPassword);
+
+    if (!username || !email || !password || !confirmPassword) {
+      toast.error("Vui lòng nhập đủ ô");
+      return;
     }
+
+    if (password !== confirmPassword) {
+      toast.error("mật khẩu không trùng khớp");
+      return;
+    }
+
+    const user = {
+      name: username,
+      email: email,
+      password: password,
+      role: "candidate",
+    };
+
+    axios
+      .post(`http://localhost:5000/api/auth/Register`, user)
+      .then((response) => {
+        toast.success("Đăng Ký Thành Công");
+        navigate("/login");
+      })
+      .catch((error) => {
+        toast.error("Đăng ký không thành công. Vui lòng thử lại.");
+      });
   };
+  // const [user, setUser] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  // });
+
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
+  //   setUser({ ...user, [name]: value });
+  // };
+  // const handleRegister = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       `http://localhost:5000/api/auth/register`,
+  //       user
+  //     );
+  //     const { token, userName } = response.data.data;
+  //     console.log(response.data.data);
+  //     localStorage.setItem("token", token);
+  //     toast.success(`Welcome, ${userName}!`);
+  //     navigate("/");
+  //   } catch (error) {
+  //     toast.error(error.response.data.message);
+  //     console.log(error.response.data.message);
+  //   }
+  // };
 
   return (
     <>
@@ -58,12 +95,7 @@ export const RegisterJobSeeker = () => {
               margin="auto"
               marginTop={-10}
               padding={3}
-              // borderRadius={5}
-              // boxShadow={"5px 10px 20px #ccc"}
               sx={{
-                // ":hover": {
-                //   boxShadow: "10px 10px 20px #ccc ",
-                // },
                 height: "588px",
               }}
             >
@@ -97,8 +129,10 @@ export const RegisterJobSeeker = () => {
                 type={"text"}
                 placeholder="FullName"
                 name="name"
-                value={user.name}
-                onChange={handleInputChange}
+                // value={user.name}
+                // onChange={handleInputChange}
+                value={username}
+                onChange={(e) => setUsernameValue(e.target.value)}
                 sx={{ width: "670px" }}
               />
 
@@ -107,8 +141,10 @@ export const RegisterJobSeeker = () => {
                 type={"email"}
                 placeholder="Email"
                 name="email"
-                value={user.email}
-                onChange={handleInputChange}
+                // value={user.email}
+                // onChange={handleInputChange}
+                value={email}
+                onChange={(e) => setEmailValue(e.target.value)}
                 sx={{ width: "670px" }}
               />
               <TextField
@@ -116,8 +152,10 @@ export const RegisterJobSeeker = () => {
                 type={"password"}
                 placeholder="password"
                 name="password"
-                value={user.password}
-                onChange={handleInputChange}
+                // value={user.password}
+                // onChange={handleInputChange}
+                value={password}
+                onChange={(e) => setPasswordValue(e.target.value)}
                 sx={{ width: "670px" }}
               />
 
@@ -126,8 +164,10 @@ export const RegisterJobSeeker = () => {
                 type={"password"}
                 placeholder="ConfirmPassword"
                 name="confirmPassword"
-                value={user.confirmPassword}
-                onChange={handleInputChange}
+                // value={user.confirmPassword}
+                // onChange={handleInputChange}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPasswordValue(e.target.value)}
                 sx={{ width: "670px" }}
               />
 

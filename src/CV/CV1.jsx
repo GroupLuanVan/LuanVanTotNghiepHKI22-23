@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
-import background from "../asset/FFF8F5.webp";
+import background from "../asset/BK_CV1.png";
 import RichText, { RichTextDisplay } from "../components/RichText";
 import SchoolIcon from "@mui/icons-material/School";
 import FlagIcon from "@mui/icons-material/Flag";
@@ -134,7 +134,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
 
   const CustomChip = styled(Chip)(({ theme }) => ({
     "&": {
-      background: theme.palette.warning.light,
+      background: "#00b4d8",
       color: "white",
       fontSize: "20px",
       fontWeight: "600",
@@ -181,6 +181,9 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
   const [showCertificationsEdit, setShowCertificationsEdit] = useState();
   const [showExperienceEdit, setShowExperienceEdit] = useState();
   const [showObjectiveEdit, setShowObjectiveEdit] = useState();
+  const [showActivate, setShowActivate] = useState();
+  const [showProject, setShowProject] = useState();
+  const [showDefault, setShowDefault] = useState();
   // state quan ly popup
   const [showPopup, setShowPopup] = useState(false);
 
@@ -194,7 +197,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
   const handlePrint = useReactToPrint({
     content: () => ref.current,
     documentTitle: "test",
-    onAfterPrint: () => console.log("QA print"),
+    onAfterPrint: () => console.log(""),
   });
   useEffect(() => {
     if (print) {
@@ -237,122 +240,133 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-end",
-              minHeight: "1480px",
+              minHeight: "1500px",
             }}
           >
-            <CustomChip icon={<SchoolIcon color="success" />} label="Học vấn" />
             <Box
-              alignSelf="flex-start"
               sx={{
-                mb: 2,
-                px: 2,
-                mt: 1,
-                width: "90%",
-                minHeight: "20%",
-                "&:hover": {
-                  border: "1px dashed red",
-                },
-              }}
-              onClick={() => {
-                // OpenEditDialog('Học vấn', 'Học vấn',true)
-                editable && setShowEduEdit(true);
+                width: "80%",
+                minHeight: "114%",
+                display: "flex",
+                flexDirection: "column",
+                ml: "40px",
+                mr: "10px",
               }}
             >
-              <RichContent
-                show={showEduEdit}
-                toggle={setShowEduEdit}
-                data={data}
-                config={setCVDATA}
-                item="educationCv"
+              <CustomChip
+                icon={<SchoolIcon color="success" />}
+                label="Học vấn"
               />
-            </Box>
 
-            <CustomChip
-              icon={<CrisisAlertIcon color="success" />}
-              label="Mục tiêu nghề nghiệp "
-            />
-            <Box
-              alignSelf="flex-start"
-              sx={{
-                mb: 2,
-                px: 2,
-                mt: 1,
-                width: "90%",
-                minHeight: "20%",
-                "&:hover": {
-                  border: "1px dashed red",
-                },
-              }}
-              onClick={() => {
-                editable && setShowObjectiveEdit(true);
-              }}
-            >
-              <RichContent
-                show={showObjectiveEdit}
-                toggle={setShowObjectiveEdit}
-                data={data}
-                config={setCVDATA}
-                item="objectiveCv"
+              <Box
+                alignSelf="flex-start"
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  width: "90%",
+                  minHeight: "20%",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  // OpenEditDialog('Học vấn', 'Học vấn',true)
+                  editable && setShowEduEdit(true);
+                }}
+              >
+                <RichContent
+                  show={showEduEdit}
+                  toggle={setShowEduEdit}
+                  data={data}
+                  config={setCVDATA}
+                  item="educationCv"
+                />
+              </Box>
+              <CustomChip
+                icon={<CrisisAlertIcon color="success" />}
+                label="Mục tiêu nghề nghiệp "
               />
-            </Box>
-
-            <CustomChip icon={<FlagIcon />} label="Kỹ năng" />
-            <Box
-              alignSelf="flex-start"
-              sx={{
-                mb: 2,
-                px: 2,
-                mt: 1,
-                width: "90%",
-                minHeight: "20%",
-                "&:hover": {
-                  border: "1px dashed red",
-                },
-              }}
-              onClick={() => {
-                editable && setShowSkillsEdit(true);
-              }}
-            >
-              <RichContent
-                show={showSkillsEdit}
-                toggle={setShowSkillsEdit}
-                data={data}
-                config={setCVDATA}
-                item="skillsCv"
-              />
-            </Box>
-            <CustomChip
-              icon={<WorkspacePremiumIcon color="success" />}
-              label="Chứng chỉ"
-            />
-            <Box
-              alignSelf="flex-start"
-              sx={{
-                mb: 2,
-                px: 2,
-                mt: 1,
-                width: "90%",
-                minHeight: "20%",
-                "&:hover": {
-                  border: "1px dashed red",
-                },
-              }}
-              onClick={() => {
-                editable && setShowCertificationsEdit(true);
-              }}
-            >
-              <RichContent
-                show={showCertificationsEdit}
-                toggle={setShowCertificationsEdit}
-                data={data}
-                config={setCVDATA}
-                item="certificationsCv"
-              />
+              <Box
+                alignSelf="flex-start"
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  width: "90%",
+                  minHeight: "20%",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowObjectiveEdit(true);
+                }}
+              >
+                <RichContent
+                  show={showObjectiveEdit}
+                  toggle={setShowObjectiveEdit}
+                  data={data}
+                  config={setCVDATA}
+                  item="objectiveCv"
+                />
+              </Box>
+              <CustomChip icon={<FlagIcon />} label="Kỹ năng" />
+              <Box
+                alignSelf="flex-start"
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  width: "90%",
+                  minHeight: "19.3%",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowSkillsEdit(true);
+                }}
+              >
+                <RichContent
+                  show={showSkillsEdit}
+                  toggle={setShowSkillsEdit}
+                  data={data}
+                  config={setCVDATA}
+                  item="skillsCv"
+                />
+              </Box>
+              <CustomChip icon={<FlagIcon />} label="Dự án" />
+              <Box
+                alignSelf="flex-start"
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  width: "90%",
+                  minHeight: "15%",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowProject(true);
+                }}
+              >
+                <RichContent
+                  show={showProject}
+                  toggle={setShowProject}
+                  data={data}
+                  config={setCVDATA}
+                  item="activitiesCv"
+                />
+              </Box>
             </Box>
           </Grid>
           {/* left */}
           <Grid
             item
+            container
             xs={6}
             sx={{
               display: "flex",
@@ -362,6 +376,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
             <Box
               sx={{
                 width: "80%",
+                height: "32.5%",
                 display: "flex",
                 flexDirection: "column",
                 "&:hover": {
@@ -370,8 +385,8 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
                 " p": {
                   color: "rgba(0,0,0,0.7)",
                 },
-                ml: "30px",
-                mt: 3,
+                ml: "70px",
+                mt: 0,
               }}
               onClick={() => {
                 editable && setShowPopup(true);
@@ -474,10 +489,11 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
             <Box
               sx={{
                 width: "80%",
-                mt: 4,
+                minHeight: "60%",
+                mt: 5,
                 display: "flex",
                 flexDirection: "column",
-                ml: "30px",
+                ml: "40px",
               }}
             >
               <CustomChip
@@ -490,7 +506,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
                   mb: 2,
                   px: 2,
                   mt: 1,
-                  minHeight: "20%",
+                  minHeight: "30%",
                   "&:hover": {
                     border: "1px dashed red",
                   },
@@ -507,20 +523,67 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
                   item="experienceCv"
                 />
               </Box>
+
+              <CustomChip
+                icon={<WorkspacePremiumIcon color="success" />}
+                label="Hoạt Động"
+              />
+              <Box
+                alignSelf="flex-start"
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  width: "90%",
+                  minHeight: "30%",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowActivate(true);
+                }}
+              >
+                <RichContent
+                  show={showActivate}
+                  toggle={setShowActivate}
+                  data={data}
+                  config={setCVDATA}
+                  item="activitiesCv"
+                />
+              </Box>
+
+              <CustomChip
+                icon={<WorkspacePremiumIcon color="success" />}
+                label="Chứng chỉ"
+              />
+              <Box
+                alignSelf="flex-start"
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  width: "90%",
+                  minHeight: "30%",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowCertificationsEdit(true);
+                }}
+              >
+                <RichContent
+                  show={showCertificationsEdit}
+                  toggle={setShowCertificationsEdit}
+                  data={data}
+                  config={setCVDATA}
+                  item="certificationsCv"
+                />
+              </Box>
             </Box>
           </Grid>
         </Grid>
-        <Typography
-          variant="body1"
-          color="initial"
-          sx={{
-            position: "relative",
-            top: "100%",
-            left: "70%",
-          }}
-        >
-          ©2022 ViecLamNhanh
-        </Typography>
       </Box>
       <ContactEditPopUp
         data={data}

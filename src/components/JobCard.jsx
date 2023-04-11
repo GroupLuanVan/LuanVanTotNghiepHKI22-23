@@ -8,23 +8,29 @@ const StyledCard = styled(Card)({
 
 const JobCard = () => {
   return (
-    <StyledCard sx={{ mx: 2, mb: 4 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        image="https://source.unsplash.com/random/345x140"
-        alt="Job"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Job Title
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-          sollicitudin eros augue, at tristique quam ultricies sit amet.
-        </Typography>
-      </CardContent>
-    </StyledCard>
+    <>
+      <StyledCard
+        sx={{
+          mx: 2,
+          mb: 4,
+        }}
+      >
+        <CardMedia
+          component="img"
+          height="140"
+          image="https://source.unsplash.com/random/345x140"
+          alt="Job"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Job Title
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Đây là dòng mô tả
+          </Typography>
+        </CardContent>
+      </StyledCard>
+    </>
   );
 };
 

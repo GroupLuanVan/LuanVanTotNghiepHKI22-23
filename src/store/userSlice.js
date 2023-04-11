@@ -6,20 +6,22 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        user: JSON.parse(sessionStorage.getItem('user')) == null ? "Người dùng" : JSON.parse(sessionStorage.getItem('user')),
-        isLogin: sessionStorage.getItem('user') ? true : false
+        user: localStorage.getItem('user') == null ? "Người dùng" : localStorage.getItem('user'),
+        isLogin: localStorage.getItem('user') ? true : false,
+        userRole: localStorage.getItem('user') == null ? "recruiter" : "Candidate",
         
     },
     reducers: {
         setUserLogin: (state, action) => {
             state.user = action.payload
             state.isLogin = true
+            localStorage.setItem("user", action.payload)
         },
 
         setUserLogout: (state, action) => {
             state.user = "Người dùng"
             state.isLogin = false
-            sessionStorage.clear()
+            localStorage.removeItem("user")
         },
 
         //for candidate
@@ -51,7 +53,8 @@ export const userSlice = createSlice({
 
     }
 })
-
+// Thêm selectIsLoggedIn selector vào userSlice
+export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
 export const { setUserLogin, setUserLogout, setActivatedCvId, setApplyJobs, setCandidateData } = userSlice.actions
 export default userSlice.reducer;
 

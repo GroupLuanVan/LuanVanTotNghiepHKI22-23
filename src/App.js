@@ -1,6 +1,7 @@
 import * as React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './components/Home/Home';
+import { LandingPage } from "./components/LandingPage";
 import {Login} from './components/Login/Login';
 import Footer  from './components/AppBar/Footer';
 import CustomAppBar from './components/AppBar/Header';
@@ -14,10 +15,12 @@ import ComboBox from "./components/list";
 import RichText from "./components/RichText";
 import ManageCV from "./components/ManageCV";
 import { ChooseCV } from "./CV/ChooseCV";
-import { Header_CV } from "./CV/Header_CV";
+import HeaderCV from "./components/AppBar/HeaderCV";
 import VerticalNavbar from "./components/Menu/VerticalNavbar";
+import { JobListCompany } from "./components/JobPost/JobListCompany";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import HeaderHR from "./components/JobPost/HeaderHR";
 function App() {
   return (
     <>
@@ -30,6 +33,16 @@ function App() {
               element={
                 <>
                   <CustomAppBar />
+                   <LandingPage /> 
+                  <Footer/> 
+                </>
+              }
+              />
+                <Route
+              path="Home"
+              element={
+                <>
+                  <CustomAppBar />
                    <Home /> 
                   <Footer/> 
                 </>
@@ -39,16 +52,14 @@ function App() {
               path="/:usetemplate"
               element={
                 <>
-                  <Header_CV/>
+                  <HeaderCV/>
                   <ManageCV/>
                   <Footer/>
-                 
-              
                 </>
               }
               />
               <Route
-              path="Dangnhap"
+              path="Login"
               element={
                 <>
                   <CustomAppBar />
@@ -63,8 +74,7 @@ function App() {
                 <>
                 <CustomAppBar />
                 <RegisterOption />
-                {/* <RegisterAccount/> */}
-                {/* <ChooseAccountTypeForm/> */}
+               
                 <Footer />
               </>
               }/>
@@ -92,7 +102,7 @@ function App() {
               path="jobpost"
               element={
                 <>
-                <CustomAppBar />
+                <HeaderHR />
                 <PostJob />
                 <Footer />
               </>
@@ -120,7 +130,7 @@ function App() {
               path="test"
               element={
                 <>
-                  <VerticalNavbar/>
+                  <testPop/>
                 </>
               }
               />
