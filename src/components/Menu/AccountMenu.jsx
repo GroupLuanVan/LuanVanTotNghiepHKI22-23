@@ -25,12 +25,16 @@ export default function AccountMenu() {
     navigate(location);
   }
   const user = useSelector((state) => state.user.user);
+  const role = useSelector((state) => state.user.role);
+  //const role = localStorage.getItem("role");
+
   const dispatch = useDispatch();
   const logOut = function () {
+    localStorage.removeItem("token");
     dispatch(setUserLogout());
     navigate("/");
-    console.log("logout");
   };
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const successColor = {
     color: "#66bb6a",
@@ -43,7 +47,8 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-  console.log(user);
+  // console.log(user);
+  // console.log(role);
 
   return (
     <React.Fragment>
@@ -111,12 +116,11 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar fontSize="small" /> {user?.userName}
+          <Avatar fontSize="small" /> {user}
         </MenuItem>
-
-        {user?.role === "candidate" && (
+        {role === "candidate" && (
           <>
-            <MenuItem onClick={() => navigateTo("/myprofile")}>
+            <MenuItem onClick={() => navigateTo("/MyProfile")}>
               <ListItemIcon>
                 <NoteAltIcon fontSize="small" />
               </ListItemIcon>
@@ -142,6 +146,35 @@ export default function AccountMenu() {
             </MenuItem>
           </>
         )}
+        {role === "recruiter" && (
+          <>
+            <MenuItem onClick={() => navigateTo("/myprofile")}>
+              <ListItemIcon>
+                <NoteAltIcon fontSize="small" />
+              </ListItemIcon>
+              Cập nhật công ty
+            </MenuItem>
+            <MenuItem onClick={() => navigateTo(`/cv/${user?._id}`)}>
+              <ListItemIcon>
+                <ArticleIcon fontSize="small" />
+              </ListItemIcon>
+              Báo Cáo Tuyển dụng
+            </MenuItem>
+            <MenuItem onClick={() => navigateTo("/appliedjobs")}>
+              <ListItemIcon>
+                <WorkIcon fontSize="small" />
+              </ListItemIcon>
+              Quản Lý Ứng Tuyển
+            </MenuItem>
+            <MenuItem onClick={() => navigateTo("/hrlogin")}>
+              <ListItemIcon>
+                <WorkIcon fontSize="small" />
+              </ListItemIcon>
+              ViecLamNhanh for Business
+            </MenuItem>
+          </>
+        )}
+
         {/* <MenuItem>
                     <ListItemIcon>
                         <Settings fontSize="small" />

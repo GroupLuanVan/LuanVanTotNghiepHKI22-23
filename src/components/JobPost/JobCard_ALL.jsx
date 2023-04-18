@@ -21,8 +21,8 @@ const StyledCard = styled(Card)({
 
 const JobCardALL = (props) => {
   const { job } = props;
-  // console.log(job);
-  // console.log(props);
+  console.log(job);
+  console.log(props);
   function titleCut(title) {
     if (title?.length > 20) {
       return title.slice(0, 19) + "...";
@@ -53,7 +53,7 @@ const JobCardALL = (props) => {
   if (job?.salaryMax === 999999999 && job?.salaryMin > 0) {
     salaryChip = `Từ ${job?.salaryMin / 1000000} Triệu`;
   }
-
+  console.log(job._id);
   return (
     <>
       <StyledCard
@@ -72,7 +72,7 @@ const JobCardALL = (props) => {
           }}
         >
           <Image
-            src={job?.companyId.linkToLogo}
+            // src={job?.companyId.linkToLogo}
             width="250px"
             height="250px"
             duration={0}
@@ -89,7 +89,7 @@ const JobCardALL = (props) => {
               {titleCut(job?.title)}
             </Typography>
             <Typography fontWeight="300" fontSize="20px" variant="h5">
-              {job?.companyId.name}
+              {job?.namecompany}
             </Typography>
           </Box>
           <Box
@@ -99,8 +99,13 @@ const JobCardALL = (props) => {
             <Chip color="info" label={job?.fullAddress} />
           </Box>
         </CardContent>
-        <CardActions>
+        <CardActions sx={{ justifyContent: "center" }}>
           <Button
+            onClick={() => {
+              navigate({
+                pathname: `/jobdetail/${job._id}`,
+              });
+            }}
             sx={{
               fontSize: "17px",
               backgroundColor: "#2F4BA0",

@@ -5,17 +5,31 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
     name: 'user',
+    email: 'email',
+    role:'role',
+    token: 'token',
     initialState: {
         user: localStorage.getItem('user') == null ? "Người dùng" : localStorage.getItem('user'),
+        email: localStorage.getItem('email') == null ? " Email Người dùng" : localStorage.getItem('email'),
         isLogin: localStorage.getItem('user') ? true : false,
-        userRole: localStorage.getItem('user') == null ? "recruiter" : "Candidate",
-        
+        role: localStorage.getItem('role') === "candidate" ? "candidate" : localStorage.getItem('role'),
+        token: localStorage.getItem('token') === '' ?  localStorage.getItem('token') : localStorage.getItem('token') ,
     },
     reducers: {
         setUserLogin: (state, action) => {
             state.user = action.payload
             state.isLogin = true
             localStorage.setItem("user", action.payload)
+            
+        },
+        setToken: (state, action) => {
+            state.token = action.payload
+            localStorage.setItem("token", action.payload)
+        },
+  
+        setRole: (state, action) => {
+            state.role = action.payload
+            localStorage.setItem("role", action.payload)
         },
 
         setUserLogout: (state, action) => {
@@ -55,7 +69,7 @@ export const userSlice = createSlice({
 })
 // Thêm selectIsLoggedIn selector vào userSlice
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
-export const { setUserLogin, setUserLogout, setActivatedCvId, setApplyJobs, setCandidateData } = userSlice.actions
+export const { setUserLogin, setRole, setToken,setUserLogout, setActivatedCvId, setApplyJobs, setCandidateData } = userSlice.actions
 export default userSlice.reducer;
 
 // createSlice được sử dụng để tạo ra một slice, bao gồm tên slice (name), 

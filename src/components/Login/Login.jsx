@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserLogin, setActivatedCvId } from "../../store/userSlice";
+import { setUserLogin, setRole, setToken } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -14,12 +14,14 @@ import LoginSchema from "../../validate/loginValidate";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+
 export const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useRef(null);
   const password = useRef(null);
   const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.user.role);
   const [response, setResponse] = useState({
     showArlert: false,
     message: "",
@@ -28,7 +30,7 @@ export const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!username.current.value || !password.current.value) {
-      toast.error("con mẹ nó mất thời gian");
+      toast.error("Sai tên đăng nhập hoặc mật khẩu");
       return;
     }
 
@@ -40,6 +42,7 @@ export const Login = () => {
       });
 
       // Nếu validation thành công, tiếp tục quá trình đăng nhập
+
       const res = await axios.post("http://localhost:5000/api/auth/login", {
         email: username.current.value,
         password: password.current.value,
@@ -47,15 +50,28 @@ export const Login = () => {
 
       const { data } = res.data;
 
-      console.log(res.data);
-      console.log(res.data.data.userRole);
+      //console.log(res.data);
+      //console.log(res.data.data.userRole);
 
       localStorage.setItem("token", data.token);
+      const token = localStorage.getItem("token");
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-      dispatch(setUserLogin(data.userName)); //token của user được lưu vào Redux store bằng hàm dispatch(setUserLogin(data.userName))
-      dispatch(setUserLogin(data.userRole));
-      console.log(user.isLogin);
+      dispatch(setUserLogin(data.user.username)); //token của user được lưu vào Redux store bằng hàm dispatch(setUserLogin(data.userName))
+
+      dispatch(setRole(data.user.role));
+
+      dispatch(setToken(data.token));
       navigate("/");
+      try {
+        if (data.user.role === "recruiter") {
+          navigate("/HR");
+        } else if (data.user.role === "admin") {
+          navigate("/admin");
+        }
+      } catch (error) {
+        toast.error(error?.response?.data.message);
+      }
     } catch (error) {
       toast.error(error?.response?.data.message);
     }

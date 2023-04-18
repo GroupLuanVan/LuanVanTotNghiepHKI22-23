@@ -6,6 +6,9 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import AttachEmailIcon from "@mui/icons-material/AttachEmail";
 import KeyIcon from "@mui/icons-material/Key";
 import LockIcon from "@mui/icons-material/Lock";
+import BusinessIcon from "@mui/icons-material/Business";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import Image from "mui-image";
 import env from "../../asset/env.json";
 import { useNavigate } from "react-router-dom";
@@ -21,6 +24,9 @@ import {
 export const RegisterEmployer = () => {
   const [usernameValue, setUsernameValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
+  const [companyValue, setCompanyValue] = useState("");
+  const [locationValue, setLocationValue] = useState("");
+  const [phoneValue, setPhoneValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
 
@@ -28,11 +34,22 @@ export const RegisterEmployer = () => {
 
   const handleRegister = (event) => {
     event.preventDefault();
-    console.log(usernameValue, emailValue, passwordValue, confirmPasswordValue);
+    console.log(
+      usernameValue,
+      emailValue,
+      companyValue,
+      locationValue,
+      phoneValue,
+      passwordValue,
+      confirmPasswordValue
+    );
 
     if (
       !usernameValue ||
       !emailValue ||
+      !companyValue ||
+      !locationValue ||
+      !phoneValue ||
       !passwordValue ||
       !confirmPasswordValue
     ) {
@@ -46,8 +63,11 @@ export const RegisterEmployer = () => {
     }
 
     const user = {
-      name: usernameValue,
+      username: usernameValue,
       email: emailValue,
+      nameCompany: companyValue,
+      location: locationValue,
+      phone: phoneValue,
       password: passwordValue,
       role: "recruiter",
     };
@@ -121,6 +141,57 @@ export const RegisterEmployer = () => {
                     <InputAdornment position="start">
                       <IconButton>
                         <AttachEmailIcon color="warning" />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                value={companyValue}
+                onChange={(e) => setCompanyValue(e.target.value)}
+                margin="normal"
+                type={"text"}
+                placeholder="CompanyName"
+                sx={{ width: "670px" }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton>
+                        <BusinessIcon color="warning" />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                value={locationValue}
+                onChange={(e) => setLocationValue(e.target.value)}
+                margin="normal"
+                type={"text"}
+                placeholder="Location"
+                sx={{ width: "670px" }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton>
+                        <LocationOnIcon color="warning" />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                value={phoneValue}
+                onChange={(e) => setPhoneValue(e.target.value)}
+                margin="normal"
+                type={"text"}
+                placeholder="Phone"
+                sx={{ width: "670px" }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <IconButton>
+                        <LocalPhoneIcon color="warning" />
                       </IconButton>
                     </InputAdornment>
                   ),

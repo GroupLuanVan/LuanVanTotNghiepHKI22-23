@@ -1,7 +1,7 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "mui-image";
 import AccountMenu from "../Menu/AccountMenu";
 import { selectIsLoggedIn } from "../../store/userSlice";
@@ -15,12 +15,34 @@ import {
   Typography,
   Avatar,
 } from "@mui/material";
+import { styled, alpha, createTheme } from "@mui/material/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 
 const HeaderHR = () => {
+  const theme = createTheme();
+  const location = useLocation();
   const navigate = useNavigate();
+  const [activeItem, setActiveItem] = useState(0);
+  function navigateTo(location) {
+    navigate(location);
+  }
+  useEffect(() => {
+    switch (location.pathname) {
+      case "/HR/":
+        setActiveItem(0);
+        break;
+      case "/HR/editcompany":
+        setActiveItem(1);
+        break;
+      case "/HR/charts":
+        setActiveItem(2);
+        break;
+      default:
+        break;
+    }
+  });
+
   const user = useSelector((state) => state.user);
-  const [open, setOpen] = useState(false);
 
   console.log(user);
   return (
@@ -52,7 +74,7 @@ const HeaderHR = () => {
         </Typography>
         <Typography
           onClick={() => {
-            navigate("/joblist");
+            navigateTo("./company");
           }}
           variant="h6"
           sx={{
@@ -62,6 +84,9 @@ const HeaderHR = () => {
           Cập Nhật Công Ty
         </Typography>
         <Typography
+          onClick={() => {
+            navigateTo("./charts");
+          }}
           variant="h6"
           sx={{
             mr: 5,
@@ -71,7 +96,7 @@ const HeaderHR = () => {
         </Typography>
         <Typography
           onClick={() => {
-            navigate("/CreateCV");
+            navigate("./contacts");
           }}
           variant="h6"
           sx={{

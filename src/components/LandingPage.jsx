@@ -342,6 +342,14 @@ export const LandingPage = () => {
           </Grid>
         </Box>
       </Box>
+      <Typography
+        variant="h4"
+        fontWeight="600"
+        gutterBottom
+        sx={{ display: "flex", justifyContent: "center", ml: 3, mt: 4 }}
+      >
+        Tin tuyển dụng, việc làm mới nhất
+      </Typography>
       {loading ? <Loading /> : <JobListCompany jobsPage={data} />}
     </>
   );

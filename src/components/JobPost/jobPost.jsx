@@ -11,6 +11,7 @@ import {
   Input,
   OutlinedInput,
   InputAdornment,
+  TextareaAutosize,
 } from "@mui/material";
 import {
   useNavigate,
@@ -19,6 +20,29 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
+
+import env from "../../asset/env.json";
+
+import {
+  getCatIdFromName,
+  getCatNameList,
+  getSalaryTypeTitleList,
+  getSalaryTypeIdFromTitle,
+  getRankTitleList,
+  getRankIdFromTitle,
+  getWorkTypeTitleList,
+  getWorkTypeIdFromTitle,
+  getWorkExpTitleList,
+  getWorkExpIdFromTitle,
+  getAddressTitleList,
+  getAddressIdFromTitle,
+  getCatNameFromId,
+  getAddressTitleFromId,
+  getWorkTypeTitleFromId,
+  getWorkExpTitleFromId,
+  getSalaryTypeTitleFromId,
+  getRankTitleFromId,
+} from "../../other/SelectDataUtils";
 import { Editor, EditorState, convertToRaw } from "draft-js";
 import { useSelector } from "react-redux";
 import { styled, alpha, createTheme } from "@mui/material/styles";
@@ -29,41 +53,107 @@ import EditIcon from "@mui/icons-material/Edit";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import Calendar from "react-calendar";
 import RichText from "../RichText";
+import Company from "../Company/Company";
+import Charts from "../Company/Charts";
+import JobDetail from "../Job/JobDetail";
+import Contact from "../Company/Contact";
+import SearchCandidate from "../Company/SearchCandidate";
 import "../../App.css";
-import { Margin } from "@mui/icons-material";
 
-const PostJob = () => {
-  const kieuluong = ["Trong Khoảng", "Cố Định", "Thỏa Thuận"];
-  const currency = ["USD", "VND", "EURO"];
+import axios from "axios";
+import { toast } from "react-toastify";
+const JobPost = () => {
+  const role = useSelector((state) => state.user.role);
+  const user = useSelector((state) => state.user.user);
 
-  const [kieuLuong, setKieuLuong] = useState("");
-  const [Currency, setCurrency] = useState("");
-  const [soLuong, setSoLuong] = useState("");
+  const [jobcategories, setJobcategories] = useState([]);
+  const [positions, setPositions] = useState([]);
+  const [addresses, setAddresses] = useState([]);
 
-  const handleKieuLuongChange = (event, newValue) => {
-    setKieuLuong(newValue);
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/jobcategory/")
+      .then((res) => {
+        setJobcategories(res.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const handleCategoryChange = (event, value) => {
+    setData({
+      ...data,
+      categoryId: value ? value._id : "",
+    });
   };
-  const handleCurrencyChange = (event, newValue) => {
-    setCurrency(newValue);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/position")
+      .then((res) => {
+        setPositions(res.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const handlePositionChange = (event, value) => {
+    setData({
+      ...data,
+      rankId: value ? value._id : "",
+    });
   };
-  const handleSoLuongChange = (event) => {
-    setSoLuong(event.target.value);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/address")
+      .then((res) => {
+        setAddresses(res.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const handleAddressesChange = (event, value) => {
+    setData({
+      ...data,
+      rankId: value ? value._id : "",
+    });
   };
 
   const navigate = useNavigate();
-  const [description, setDescription] = useState(() =>
-    EditorState.createEmpty()
-  );
-  const [candidateRequired, setCandidateRequired] = useState(() =>
-    EditorState.createEmpty()
-  );
-  const [benefit, setBenefit] = useState(() => EditorState.createEmpty());
+  const [description, setDescription] = useState("");
+  const [candidateRequired, setCandidateRequired] = useState();
 
-  const getTextArrayFromRich = function (rawdata) {
-    if (rawdata.blocks.length > 0) {
-      return rawdata.blocks.map((item) => item.text);
-    }
-  };
+  const [benefit, setBenefit] = useState();
+  const [data, setData] = useState({
+    title: "",
+    categoryId: "",
+    locationId: "",
+    amount: 0,
+    workTypeId: "",
+    endDate: "",
+    gender: "",
+    rankId: "",
+    workExpId: "",
+    currency: "",
+    salaryTypeId: "",
+
+    salaryMax: 0,
+    salaryMin: 0,
+    fullAddress: "",
+    description: "",
+    candidateRequired: "",
+    benefit: "",
+  });
+  useEffect(() => {
+    setData({
+      ...data,
+      description: description,
+      candidateRequired: candidateRequired,
+      benefit: benefit,
+    });
+  }, [description, candidateRequired, benefit]);
+
+  const [salaryType, setSalaryType] = useState(false);
+  const [currency, setCurrency] = useState();
 
   return (
     <Box
@@ -110,11 +200,18 @@ const PostJob = () => {
               Tiêu đề công việc
             </Typography>
             <TextField
+              // value={data.title}
               variant="outlined"
               fullWidth
               margin="normal"
               sx={{ marginBottom: "1px", mt: 1 }}
               placeholder="Fresher JAVA và .NET"
+              onBlur={(e) => {
+                setData({
+                  ...data,
+                  title: e.target.value,
+                });
+              }}
             />
 
             <Box marginTop={3}>
@@ -127,63 +224,85 @@ const PostJob = () => {
                   </Box>
 
                   <Autocomplete
+                    // value={data.workTypeId}
                     disablePortal
                     id="combo-box-demo"
-                    options={Loaihinh}
                     sx={{ width: 300 }}
+                    options={getWorkTypeTitleList()}
                     renderInput={(params) => (
                       <TextField
-                        sx={{ mt: 2 }}
                         {...params}
-                        label="Chọn thể loại công việc"
+                        placeholder="-- Chọn hình thức làm việc --"
                       />
                     )}
+                    onInputChange={(e, value) => {
+                      setData({
+                        ...data,
+                        workTypeId: getWorkTypeIdFromTitle(value),
+                      });
+                    }}
+                    onBlur={(e) => {
+                      setData({
+                        ...data,
+                        workTypeId: getWorkTypeIdFromTitle(e.target.value),
+                      });
+                    }}
                   />
                 </Grid>
+
                 <Grid item xs={4} md={4}>
                   <Typography variant="p" fontWeight={500} fontSize={20}>
-                    Mảng công việc
+                    Vị Trí Làm Việc
                   </Typography>
                   <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={nganhnghe}
-                    sx={{ width: 300 }}
+                    freeSolo
+                    sx={{ mt: 0 }}
+                    options={positions}
+                    getOptionLabel={(position) => position.title}
+                    onChange={handlePositionChange}
                     renderInput={(params) => (
                       <TextField
-                        sx={{ mt: 2 }}
                         {...params}
-                        label="Chọn mảng "
+                        placeholder="Chọn vị trí công việc cần tuyển"
                       />
                     )}
                   />
                 </Grid>
+
                 <Grid item xs={4} md={4}>
                   <Typography variant="p" fontWeight={500} fontSize={20}>
-                    Chọn địa điểm làm việc
+                    Địa điểm làm việc
                   </Typography>
                   <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={diadiem}
-                    sx={{ width: 300 }}
+                    freeSolo
+                    sx={{ mt: 0 }}
+                    options={addresses}
+                    getOptionLabel={(address) => address.title}
+                    onChange={handleAddressesChange}
                     renderInput={(params) => (
                       <TextField
-                        sx={{ mt: 2 }}
                         {...params}
-                        label="Chọn địa điểm"
+                        placeholder="Chọn địa điểm làm việc"
                       />
                     )}
                   />
                 </Grid>
+
                 <Grid item xs={4} md={4}>
                   <Typography variant="p" fontWeight={500} fontSize={20}>
                     Số Lượng Cần Tuyển
                   </Typography>
                   <TextField
+                    // value={data.amount}
                     type="number"
-                    sx={{ mt: 2, width: 300 }}
+                    sx={{ mt: 0, width: 300 }}
                     label="Số Lượng"
+                    onChange={(e) => {
+                      setData({
+                        ...data,
+                        amount: e.target.value,
+                      });
+                    }}
                   />
                 </Grid>
                 <Grid item xs={4} md={4}>
@@ -191,33 +310,45 @@ const PostJob = () => {
                     Kinh Nghiệm Làm Việc
                   </Typography>
                   <Autocomplete
+                    // value={data.workExpId}
                     disablePortal
                     id="combo-box-demo"
-                    options={kinhnghiem}
                     sx={{ width: 300 }}
+                    options={getWorkExpTitleList()}
                     renderInput={(params) => (
                       <TextField
-                        sx={{ mt: 2 }}
                         {...params}
-                        label="Kinh nghiệm"
+                        placeholder="Kinh nghiệm làm việc"
                       />
                     )}
+                    onInputChange={(e, value) => {
+                      setData({
+                        ...data,
+                        workExpId: getWorkExpIdFromTitle(value),
+                      });
+                    }}
+                    onBlur={(e) => {
+                      setData({
+                        ...data,
+                        workExpId: getWorkExpIdFromTitle(e.target.value),
+                      });
+                    }}
                   />
                 </Grid>
                 <Grid item xs={4} md={4}>
                   <Typography variant="p" fontWeight={500} fontSize={20}>
-                    Chọn chức vụ
+                    Loại Công Việc
                   </Typography>
                   <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    options={ChucVu}
-                    sx={{ width: 300 }}
+                    freeSolo
+                    sx={{ mt: 0 }}
+                    options={jobcategories}
+                    getOptionLabel={(jobcategory) => jobcategory.title}
+                    onChange={handleCategoryChange}
                     renderInput={(params) => (
                       <TextField
-                        sx={{ mt: 2 }}
                         {...params}
-                        label="Chọn chức vụ"
+                        placeholder="Chọn vị trí công việc cần tuyển"
                       />
                     )}
                   />
@@ -227,13 +358,23 @@ const PostJob = () => {
                     Giới Tính
                   </Typography>
                   <Autocomplete
+                    // value={data.gender}
                     disablePortal
                     id="combo-box-demo"
-                    options={gender}
                     sx={{ width: 300, mt: 1 }}
+                    options={env.REACT_APP_SEXS.split(", ")}
                     renderInput={(params) => (
-                      <TextField {...params} label="Chọn giới tính" />
+                      <TextField
+                        {...params}
+                        placeholder="-- Chọn giới tính --"
+                      />
                     )}
+                    onInputChange={(e, value) => {
+                      setData({
+                        ...data,
+                        gender: value,
+                      });
+                    }}
                   />
                 </Grid>
                 <Grid item xs={4} md={4}>
@@ -241,14 +382,23 @@ const PostJob = () => {
                     Chọn loại tiền lương
                   </Typography>
                   <Autocomplete
+                    // value={data.currency}
                     disablePortal
                     id="combo-box-demo"
-                    options={currency}
-                    value={Currency}
-                    onChange={handleCurrencyChange}
-                    sx={{ width: 300, mt: 1 }}
+                    sx={{ width: 300, mt: 1.1 }}
+                    options={env.REACT_APP_CURRENCY.split(", ")}
+                    onInputChange={(e, value) => {
+                      setCurrency(value);
+                      setData({
+                        ...data,
+                        currency: value,
+                      });
+                    }}
                     renderInput={(params) => (
-                      <TextField {...params} label="Chọn loại tiền lương" />
+                      <TextField
+                        {...params}
+                        placeholder="-- Chọn loại tiền lương --"
+                      />
                     )}
                   />
                 </Grid>
@@ -257,79 +407,91 @@ const PostJob = () => {
                     Kiểu Lương
                   </Typography>
                   <Autocomplete
+                    // value={getSalaryTypeTitleFromId(data.salaryTypeId)}
                     disablePortal
                     id="combo-box-demo"
-                    options={kieuluong}
                     sx={{ width: 300, mt: 1 }}
-                    value={kieuLuong}
-                    onChange={handleKieuLuongChange}
+                    options={getSalaryTypeTitleList()}
+                    onInputChange={(e, value) => {
+                      setSalaryType(value);
+                      setData({
+                        ...data,
+                        salaryTypeId: getSalaryTypeIdFromTitle(value),
+                      });
+                    }}
                     renderInput={(params) => (
-                      <TextField {...params} label="Chọn Kiểu Lương" />
+                      <TextField {...params} placeholder="-- Chọn kiểu lương" />
                     )}
                   />
                 </Grid>
-                {kieuLuong === "Trong Khoảng" && (
+                {/* Lương theo khoảng */}
+                {salaryType === "Trong khoảng" && (
                   <>
-                    <Grid item xs={4} md={4}>
-                      <Typography variant="p" fontWeight={500} fontSize={20}>
-                        Từ
-                      </Typography>
-                      <TextField
+                    <Grid item xs={4}>
+                      <Typography variant="p">Từ</Typography>
+                      <OutlinedInput
                         fullWidth
                         sx={{ mt: 1 }}
                         type="number"
-                        value={soLuong}
-                        onChange={handleSoLuongChange}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              {Currency}
-                            </InputAdornment>
-                          ),
+                        endAdornment={
+                          <InputAdornment position="end">
+                            {currency}
+                          </InputAdornment>
+                        }
+                        onBlur={(e) => {
+                          setData({
+                            ...data,
+                            salaryMin: e.target.value,
+                          });
                         }}
                       />
                     </Grid>
-                    <Grid item xs={4} md={4}>
-                      <Typography variant="p" fontWeight={500} fontSize={20}>
-                        Đến
-                      </Typography>
-                      <TextField
+                    <Grid item xs={4}>
+                      <Typography variant="p">Đến</Typography>
+                      <OutlinedInput
                         fullWidth
                         sx={{ mt: 1 }}
                         type="number"
-                        value={soLuong}
-                        onChange={handleSoLuongChange}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              {Currency}
-                            </InputAdornment>
-                          ),
+                        endAdornment={
+                          <InputAdornment position="end">
+                            {currency}
+                          </InputAdornment>
+                        }
+                        onBlur={(e) => {
+                          setData({
+                            ...data,
+                            salaryMax: e.target.value,
+                          });
                         }}
                       />
                     </Grid>
                   </>
                 )}
-                {kieuLuong === "Cố Định" && (
-                  <Grid item xs={4} md={4}>
-                    <Typography variant="p" fontWeight={500} fontSize={20}>
-                      Lương
-                    </Typography>
-                    <TextField
-                      fullWidth
-                      sx={{ mt: 1 }}
-                      type="number"
-                      value={soLuong}
-                      onChange={handleSoLuongChange}
-                      InputProps={{
-                        endAdornment: (
+                {/* Lương cố định */}
+                {salaryType === "Cố định" && (
+                  <>
+                    <Grid item xs={3}>
+                      <Typography variant="p">Lương</Typography>
+                      <OutlinedInput
+                        fullWidth
+                        size="small"
+                        sx={{ mt: 1 }}
+                        type="number"
+                        endAdornment={
                           <InputAdornment position="end">
-                            {Currency}
+                            {currency}
                           </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
+                        }
+                        onBlur={(e) => {
+                          setData({
+                            ...data,
+                            salaryMax: e.target.value,
+                            salaryMin: e.target.value,
+                          });
+                        }}
+                      />
+                    </Grid>
+                  </>
                 )}
                 <Grid item xs={12}>
                   <Typography variant="p" fontWeight={500} fontSize={20}>
@@ -353,35 +515,25 @@ const PostJob = () => {
                   Ngày hết hạn
                 </Typography>
                 <Box>
-                  {" "}
-                  <input
-                    style={{
-                      width: "250px",
-                      height: "40px",
-                      fontSize: "16px",
-                      borderRadius: "10px",
+                  <OutlinedInput
+                    // value={data.endDate}
+                    fullWidth
+                    size="small"
+                    sx={{ mt: 1 }}
+                    type="date"
+                    placeholder=""
+                    onChange={(e) => {
+                      setData({
+                        ...data,
+                        endDate: e.target.value,
+                      });
                     }}
-                    type={"date"}
                   />
                 </Box>
               </Box>
             </Box>
           </Box>
         </Grid>
-        {/* <Box
-          sx={{
-            p: 2,
-            borderBottom: "1px solid rgba(0,0,0,0.1)",
-            display: "flex",
-            alignItems: "center",
-            background: "#fff",
-          }}
-        >
-          <InfoOutlinedIcon fontSize="small" />
-          <Typography variant="p" fontWeight={500} sx={{ ml: 1 }}>
-            Thông tin chi tiết
-          </Typography>
-        </Box> */}
 
         <Grid
           container
@@ -391,46 +543,47 @@ const PostJob = () => {
             <Typography variant="p" fontWeight={500} fontSize={20}>
               Mô tả công việc
             </Typography>
-            <RichText
-              editorState={description}
-              setEditorState={setDescription}
+            <TextField
+              multiline
+              rows={4}
+              variant="outlined"
+              fullWidth
+              placeholder="Nhập mô tả công việc"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </Grid>
+
           <Grid item xs={12}>
             <Typography variant="p" fontWeight={500} fontSize={20}>
               Yêu cầu ứng viên
             </Typography>
-            <RichText
-              editorState={candidateRequired}
-              setEditorState={setCandidateRequired}
+            <TextField
+              multiline
+              rows={4}
+              variant="outlined"
+              fullWidth
+              placeholder="Nhập mô tả công việc"
+              value={candidateRequired}
+              onChange={(e) => setCandidateRequired(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
             <Typography variant="p" fontWeight={500} fontSize={20}>
               Quyền lợi
             </Typography>
-            <RichText editorState={benefit} setEditorState={setBenefit} />
+            <TextField
+              multiline
+              rows={4}
+              variant="outlined"
+              fullWidth
+              placeholder="Nhập mô tả công việc"
+              value={benefit}
+              onChange={(e) => setBenefit(e.target.value)}
+            />
           </Grid>
         </Grid>
 
-        {/* <Typography variant="p">Mô tả công việc</Typography>
-        <JoditEditor
-          sx={{
-            height: "1000px !important ",
-          }}
-        />
-        <Typography variant="p">Yêu Cầu</Typography>
-        <JoditEditor
-          sx={{
-            height: "1000px !important ",
-          }}
-        />
-        <Typography variant="p">Quyền Lợi</Typography>
-        <JoditEditor
-          sx={{
-            height: "1000px !important ",
-          }}
-        /> */}
         <FormGroup sx={{ marginBottom: "16px" }}>
           <FormControlLabel
             control={<Checkbox />}
@@ -439,6 +592,7 @@ const PostJob = () => {
         </FormGroup>
 
         <Button
+          //onClick={sendPostData}
           variant="contained"
           fullWidth
           sx={{ backgroundColor: "#4caf50", color: "#fff" }}
@@ -483,60 +637,44 @@ function EditJobPost() {
   );
 }
 
-const Loaihinh = [
-  { label: "FullTime" },
-  { label: "PartTime" },
+//export default PostJob;
 
-  { label: "Training" },
-  { label: "Remote" },
-  { label: "Consultant" },
-];
+export default function PostJob() {
+  const navigate = useNavigate();
+  function navigateTo(location) {
+    navigate(location);
+  }
+  const user = useSelector((state) => state.user);
 
-const ChucVu = [
-  { label: "Giám Đốc" },
-  { label: "Trưởng Phòng" },
-  { label: "Nhân Viên" },
-  { label: "Quản Lý" },
-  { label: "Thực Tập" },
-];
+  return (
+    <>
+      <Grid container sx={{ background: "#f1f2f6" }}>
+        <Grid item xs={2}></Grid>
+        <Grid item xs={8}>
+          <Routes>
+            <Route path="/" element={<JobPost user={user} />}></Route>
+            <Route
+              path="/editjobpost/:id"
+              element={<EditJobPost user={user} />}
+            ></Route>
+            <Route path="/company" element={<Company />} />
+            <Route path="/charts" element={<Charts user={user} />} />
+            <Route path="/jobdetail" element={<JobDetail />} />
+            <Route
+              path="/searchcandidate/:id"
+              element={<SearchCandidate user={user} />}
+            />
+            <Route path="/contacts" element={<Contact user={user} />}></Route>
+          </Routes>
+        </Grid>
+        <Grid item xs={2}></Grid>
+      </Grid>
+    </>
+  );
+}
 
-const nganhnghe = [
-  { label: "Back-End" },
-  { label: "Front-End" },
-  { label: "Full Stack" },
-  { label: "DevOps" },
-  { label: "Cyber security specialist" },
-  { label: "QA/QC Engineer" },
-  { label: "Data scientist" },
-  { label: "App developer" },
-  { label: "Tester" },
-];
+/// Cấp bậc thay thế bằng vị trí làm việc, nhập tay thẳng "rank thành póition" ( ví dụ: fresher, Intern, junior, senior,  )
+/// Lấy từ csdl từ giao diện
+/// jobCate: back-end, front-end,.... lấy từ database
 
-const diadiem = [
-  { label: "TP HCM" },
-  { label: "Cần Thơ" },
-  { label: "Bạc Liêu" },
-  { label: "Quận Tân Bình" },
-  { label: "Quận 1" },
-  { label: "Quận 7" },
-  { label: "Quận 3" },
-  { label: "Quận Tân Phú" },
-  { label: "Quận 12" },
-  { label: "Quận 9" },
-];
-const kinhnghiem = [
-  { label: "Không Yêu Cầu" },
-  { label: "1 Năm" },
-  { label: "Trên 1 năm" },
-  { label: " 2 năm" },
-  { label: "Trên 2 năm" },
-  { label: "3 năm" },
-  { label: "Trên 3 Năm" },
-  { label: "4 năm" },
-  { label: "Trên 4 năm" },
-  { label: "5 năm" },
-];
-const gender = [{ label: "Nam" }, { label: "Nữ" }, { label: "Không Yêu Cầu" }];
-const salaryType = [{ label: "USD" }, { label: "EURO" }, { label: "VND" }];
-
-export default PostJob;
+/// so sánh loại công việc vị trí và tiêu đề

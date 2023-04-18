@@ -43,7 +43,7 @@ export const getWorkTypeTitleList = () => {
 }
 export const getWorkTypeIdFromTitle = (title) => {
 
-    let workType = workTypes.filter((item) => item.title == title)[0];
+    let workType = workTypes.filter((item) => item.title === title)[0];
 
     return workType._id;
 }

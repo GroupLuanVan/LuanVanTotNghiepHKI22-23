@@ -26,7 +26,7 @@ const CustomAppBar = () => {
   return (
     <AppBar
       sx={{
-        background: "#FFF",
+        background: "#b8b2ab",
         color: "red",
         height: "80px",
       }}
@@ -52,7 +52,7 @@ const CustomAppBar = () => {
             mr: 5,
           }}
         >
-          Jobs
+          Công Việc
         </Typography>
         <Typography
           variant="h6"
@@ -60,15 +60,18 @@ const CustomAppBar = () => {
             mr: 5,
           }}
         >
-          Companies
+          Các Công Ty
         </Typography>
         <Typography
+          onClick={() => {
+            navigate("/updateProfile");
+          }}
           variant="h6"
           sx={{
             mr: 5,
           }}
         >
-          Post a Job
+          Chỉnh sửa hồ sơ
         </Typography>
         <Typography
           onClick={() => {
@@ -79,15 +82,7 @@ const CustomAppBar = () => {
             mr: 5,
           }}
         >
-          Resume
-        </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            mr: 5,
-          }}
-        >
-          SearchPricing
+          Tạo CV
         </Typography>
         <>
           {!user.isLogin ? (

@@ -19,9 +19,21 @@ import HeaderCV from "./components/AppBar/HeaderCV";
 import VerticalNavbar from "./components/Menu/VerticalNavbar";
 import { JobListCompany } from "./components/JobPost/JobListCompany";
 import { ToastContainer } from "react-toastify";
+import { JobS } from "./components/Job/JobS";
+import JobDetail from "./components/Job/JobDetail";
+import Company from "./components/Company/Company";
+import UpdateProfile from "./components/Profile/UpdateProfile";
 import 'react-toastify/dist/ReactToastify.css';
 import HeaderHR from "./components/JobPost/HeaderHR";
+import Dashboard from "./components/Admin/Admin";
+import MyCV from "./components/MyCV";
+import MyProfile from "./components/Profile/MyProfile";
+import AppliedJobs from "./components/Profile/AppliedJobs";
+import { useSelector } from "react-redux";
+
+
 function App() {
+  const user = useSelector((state) => state.user);
   return (
     <>
                 
@@ -107,6 +119,15 @@ function App() {
                 <Footer />
               </>
               }/>
+                   <Route 
+              path="HR/*"
+              element={
+                <>
+                <HeaderHR />
+                <PostJob />
+                <Footer />
+              </>
+              }/>
                   <Route 
               path="joblist"
               element={
@@ -116,6 +137,16 @@ function App() {
                 <Footer />
               </>
               }/>
+                  <Route
+              path="updateProfile"
+              element={
+                <>
+                  <CustomAppBar />
+                  <UpdateProfile/>
+                  <Footer/> 
+                </>
+              }
+              />
                   <Route
               path="CreateCV"
               element={
@@ -127,13 +158,77 @@ function App() {
               }
               />
                     <Route
-              path="test"
+              path="ListJob"
               element={
                 <>
-                  <testPop/>
+                  <CustomAppBar/>
+                  <JobS/>
+                  <Footer/>
                 </>
               }
               />
+                     <Route
+              path="JobDetail/:id"
+              element={
+                <>
+                  <CustomAppBar/>
+                  <JobDetail user={user}/>
+                  <Footer/>
+                </>
+              }
+              />
+                       <Route
+              path="company"
+              element={
+                <>
+                  <CustomAppBar/>
+                  <Company/>
+                  <Footer/>
+                </>
+              }
+              />
+                        <Route
+              path="admin/*"
+              element={
+                <>
+                  <CustomAppBar/>
+                  <Dashboard/>
+                  <Footer/>
+                </>
+              }
+              />
+                           <Route
+              path="/MyCV"
+              element={
+                <>
+                  <CustomAppBar/>
+                  <MyCV/>
+                  <Footer/>
+                </>
+              }
+              />
+                               <Route
+              path="/MyProfile"
+              element={
+                <>
+                  <CustomAppBar/>
+                  <MyProfile/>
+                  <Footer/>
+                </>
+              }
+              />
+
+<Route
+              path="appliedjobs"
+              element={
+                <>
+                  <CustomAppBar />
+                  <AppliedJobs  />
+                  <Footer />
+                </>
+              }
+            />v
+         
     
 
     </Route>

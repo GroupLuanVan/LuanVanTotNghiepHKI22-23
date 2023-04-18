@@ -11,16 +11,7 @@ export const JobListCompany = (jobsPage) => {
     <>
       <>
         <Container maxWidth>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-            <Typography
-              variant="h5"
-              fontWeight="600"
-              gutterBottom
-              sx={{ ml: 3, mt: 4 }}
-            >
-              Tin tuyển dụng, việc làm mới nhất
-            </Typography>
-          </Box>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}></Box>
           <Grid container sx={{ width: "100%", mt: 1 }} rowGap={2}>
             {jobsPage.jobsPage.jobsPage.length > 0 &&
               jobsPage.jobsPage.jobsPage.map((item) => {
