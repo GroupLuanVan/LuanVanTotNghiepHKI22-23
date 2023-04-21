@@ -49,6 +49,7 @@ import {
 import { setActivedCvId, setApplyJobs } from "../../store/userSlice";
 import Loading from "../Loading";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 export default function JobDetail({ user }) {
   console.log(user);
   const dispatch = useDispatch();
@@ -60,6 +61,9 @@ export default function JobDetail({ user }) {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const role = useSelector((state) => state.user.token);
+  const token = localStorage.getItem("token");
 
   let salaryChip = "";
   if (data.salaryMin == 0 && data.salaryMax == 0) salaryChip = "Thỏa thuận";
@@ -101,6 +105,77 @@ export default function JobDetail({ user }) {
   //console.log(data.companyId.nameCompany);
 
   const theme = createTheme();
+  console.log(id);
+
+  const applyJob = async () => {
+    let sendApply = 0;
+    let userAgrees = false; // Khởi tạo biến userAgrees với giá trị ban đầu là false
+    // Hiển thị một thông báo cho người dùng, ví dụ:
+    const message = `Bạn có muốn ứng tuyển công việc này không?`;
+    if (window.confirm(message)) {
+      userAgrees = true; // Nếu người dùng đồng ý, cập nhật biến userAgrees thành true
+    }
+
+    if (userAgrees) {
+      // Nếu người dùng đã đồng ý
+      sendApply = 1;
+      const contact = {
+        jobId: id,
+      };
+
+      const res = await axios.post(
+        `http://localhost:5000/api/candidate/applyjob/${id}`,
+        contact,
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.data.status && res.data.status !== 200) {
+        toast.warning("Ứng tuyển thất bại");
+      } else {
+        const action = setApplyJobs(res.data.applyJobs);
+        dispatch(action);
+        setIsApplied(true);
+        toast.success("Ứng tuyển thành công");
+      }
+    }
+  };
+
+  const cancelApplyJob = async () => {
+    let sendApply = 0;
+    let userAgrees = false; // Khởi tạo biến userAgrees với giá trị ban đầu là false
+    // Hiển thị một thông báo cho người dùng, ví dụ:
+    const message = `Bạn có muốn hủy ứng tuyển công việc này không?`;
+    if (window.confirm(message)) {
+      userAgrees = true; // Nếu người dùng đồng ý, cập nhật biến userAgrees thành true
+    }
+
+    if (userAgrees) {
+      // Nếu người dùng đã đồng ý
+      sendApply = 1;
+      const contact = {
+        jobId: id,
+      };
+
+      const res = await axios.post(
+        `http://localhost:5000/api/candidate/cancelapplyjob/${id}`,
+        contact
+      );
+      if (res.data.status && res.data.status !== 200) {
+        console.log(res);
+        toast.warning("Hủy Ứng tuyển thất bại");
+      } else {
+        const action = setApplyJobs(res.data.applyJobs);
+        dispatch(action);
+        setIsApplied(false);
+        toast.success("Hủy ứng tuyển thành công");
+      }
+    }
+  };
+  console.log(isApplied);
 
   return (
     <>
@@ -199,7 +274,37 @@ export default function JobDetail({ user }) {
                   </Typography>
                 </Stack>
               </Box>
-              <Box></Box>
+              <Box>
+                {user.role === "candidate" &&
+                  (!isApplied ? (
+                    <Button
+                      onClick={() => applyJob()}
+                      startIcon={<SendIcon />}
+                      variant="contained"
+                      color="success"
+                    >
+                      Ứng tuyển ngay
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={() => cancelApplyJob()}
+                      startIcon={<CancelIcon />}
+                      variant="contained"
+                      color="warning"
+                    >
+                      Hủy ứng tuyển
+                    </Button>
+                  ))}
+                {user.role === "recruiter" && (
+                  <Button
+                    startIcon={<EditIcon />}
+                    variant="contained"
+                    color="success"
+                  >
+                    Chỉnh sửa tin tuyển dụng
+                  </Button>
+                )}
+              </Box>
             </Stack>
             <Grid
               container
