@@ -89,7 +89,7 @@ const CustomAppBar = () => {
             <>
               <Button
                 onClick={() => {
-                  navigate("/Login");
+                  navigate("/LoginType");
                 }}
                 color="inherit"
                 variant="contained"

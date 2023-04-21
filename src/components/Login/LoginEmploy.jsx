@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
-export const Login = () => {
+export const LoginEmployer = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useRef(null);
@@ -48,31 +48,26 @@ export const Login = () => {
       });
 
       // Nếu validation thành công, tiếp tục quá trình đăng nhập
-
       const res = await axios.post("http://localhost:5000/api/auth/login", {
         email: username.current.value,
         password: password.current.value,
       });
 
       const { data } = res.data;
+
       localStorage.setItem("token", data.token);
       const token = localStorage.getItem("token");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
       dispatch(setUserLogin(data.user.username));
-
       dispatch(setRole(data.user.role));
       dispatch(setToken(data.token));
-      dispatch(setidCompany(data.user.idcompany));
-      navigate("/");
-      try {
-        if (data.user.role === "recruiter") {
-          navigate("/HR");
-        } else if (data.user.role === "admin") {
-          navigate("/admin");
-        }
-      } catch (error) {
-        toast.error(error?.response?.data.message);
+      dispatch(setidCompany(data.company._id));
+
+      // Kiểm tra nếu role là admin, chuyển hướng đến trang admin
+      if (data.user.role === "recruiter") {
+        navigate("/HR");
+        return;
       }
     } catch (error) {
       toast.error(error?.response?.data.message);
@@ -112,7 +107,7 @@ export const Login = () => {
               }}
             >
               <Typography variant="h2" padding={3} textAlign="center">
-                Sign in
+                Đăng nhập nhà tuyển dụng
               </Typography>
               <TextField
                 inputRef={username}

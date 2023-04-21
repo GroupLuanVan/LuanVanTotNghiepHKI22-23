@@ -30,6 +30,10 @@ import MyCV from "./components/MyCV";
 import MyProfile from "./components/Profile/MyProfile";
 import AppliedJobs from "./components/Profile/AppliedJobs";
 import { useSelector } from "react-redux";
+import LoginType from "./components/Login/LoginType";
+import { LoginSeeker } from "./components/Login/LoginSeeker";
+import { LoginEmployer } from "./components/Login/LoginEmploy";
+import { LoginAdmin } from "./components/Login/LoginAdmin";
 
 
 function App() {
@@ -71,11 +75,41 @@ function App() {
               }
               />
               <Route
-              path="Login"
+              path="LoginType"
               element={
                 <>
                   <CustomAppBar />
-                   <Login /> 
+                   <LoginType /> 
+                  <Footer/> 
+                </>
+              }
+              />
+                       <Route
+              path="LoginSeeker"
+              element={
+                <>
+                  <CustomAppBar />
+                   <LoginSeeker /> 
+                  <Footer/> 
+                </>
+              }
+              />
+                       <Route
+              path="LoginEmployer"
+              element={
+                <>
+                  <CustomAppBar />
+                   <LoginEmployer /> 
+                  <Footer/> 
+                </>
+              }
+              />
+                          <Route
+              path="LoginAdmin"
+              element={
+                <>
+                  <CustomAppBar />
+                   <LoginAdmin /> 
                   <Footer/> 
                 </>
               }

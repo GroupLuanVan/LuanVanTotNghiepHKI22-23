@@ -1,11 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setUserLogin,
-  setRole,
-  setToken,
-  setidCompany,
-} from "../../store/userSlice";
+import { setUserLogin, setRole, setToken } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -20,14 +15,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
-export const Login = () => {
+export const LoginSeeker = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useRef(null);
   const password = useRef(null);
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.user.role);
-  const idcompany = useSelector((state) => state.user.idcompany);
   const [response, setResponse] = useState({
     showArlert: false,
     message: "",
@@ -48,31 +42,25 @@ export const Login = () => {
       });
 
       // Nếu validation thành công, tiếp tục quá trình đăng nhập
-
       const res = await axios.post("http://localhost:5000/api/auth/login", {
         email: username.current.value,
         password: password.current.value,
       });
 
       const { data } = res.data;
+
       localStorage.setItem("token", data.token);
       const token = localStorage.getItem("token");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
       dispatch(setUserLogin(data.user.username));
-
       dispatch(setRole(data.user.role));
       dispatch(setToken(data.token));
-      dispatch(setidCompany(data.user.idcompany));
-      navigate("/");
-      try {
-        if (data.user.role === "recruiter") {
-          navigate("/HR");
-        } else if (data.user.role === "admin") {
-          navigate("/admin");
-        }
-      } catch (error) {
-        toast.error(error?.response?.data.message);
+
+      // Kiểm tra nếu role là admin, chuyển hướng đến trang admin
+      if (data.user.role === "candidate") {
+        navigate("/");
+        return;
       }
     } catch (error) {
       toast.error(error?.response?.data.message);
@@ -112,7 +100,7 @@ export const Login = () => {
               }}
             >
               <Typography variant="h2" padding={3} textAlign="center">
-                Sign in
+                Đăng nhập ứng viên
               </Typography>
               <TextField
                 inputRef={username}

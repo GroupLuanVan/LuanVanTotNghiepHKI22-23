@@ -132,8 +132,6 @@ export default function Charts({ user }) {
                     Đã Đăng
                   </Button>
                 </TableCell>
-                <TableCell>Test1 nè</TableCell>
-                <TableCell>Test2 nè</TableCell>
               </TableRow>
             </Table>
           </TableContainer>

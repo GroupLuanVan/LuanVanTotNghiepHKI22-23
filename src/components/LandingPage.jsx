@@ -34,7 +34,7 @@ export const LandingPage = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const { data, loading, error } = useFetch(
-    "http://localhost:5000/api/jobpost/"
+    "http://localhost:5000/api/jobpost/all"
   );
   const [keyWord, setKeyWord] = useState();
   const SearchBox = styled(Box)({
