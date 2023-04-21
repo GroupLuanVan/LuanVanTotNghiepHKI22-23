@@ -70,6 +70,49 @@ const JobPost = () => {
   const [positions, setPositions] = useState([]);
   const [addresses, setAddresses] = useState([]);
 
+  const getWorkExpList = () => {
+    return [
+      { id: 1, title: "Không yêu cầu" },
+      { id: 2, title: "Dưới 1 năm" },
+      { id: 3, title: "1 năm" },
+      { id: 4, title: "2 năm" },
+      { id: 5, title: "3 năm" },
+      { id: 6, title: "4 năm" },
+      { id: 7, title: "5 năm" },
+      { id: 8, title: "Trên 5 năm" },
+    ];
+  };
+
+  const gender = () => {
+    return [
+      { id: 1, title: "Nam" },
+      { id: 2, title: "Nữ" },
+      { id: 3, title: "Không yêu cầu" },
+    ];
+  };
+
+  const salarytype = () => {
+    return [
+      { id: 1, title: "USD" },
+      { id: 2, title: "VND" },
+    ];
+  };
+
+  const kieuluong = () => {
+    return [
+      { id: 1, title: "Thỏa thuận" },
+      { id: 2, title: "Trong khoảng" },
+    ];
+  };
+
+  const workType = () => {
+    return [
+      { id: 1, title: "Toàn thời gian" },
+      { id: 2, title: "Bán thời gian" },
+      { id: 3, title: "Làm từ xa" },
+    ];
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/jobcategory/")
@@ -98,7 +141,7 @@ const JobPost = () => {
   const handlePositionChange = (event, value) => {
     setData({
       ...data,
-      rankId: value ? value._id : "",
+      positionId: value ? value._id : "",
     });
   };
 
@@ -114,46 +157,76 @@ const JobPost = () => {
   const handleAddressesChange = (event, value) => {
     setData({
       ...data,
-      rankId: value ? value._id : "",
+      addressId: value ? value._id : "",
     });
   };
 
   const navigate = useNavigate();
   const [description, setDescription] = useState("");
-  const [candidateRequired, setCandidateRequired] = useState();
+  const [required, setRequired] = useState();
 
   const [benefit, setBenefit] = useState();
   const [data, setData] = useState({
     title: "",
+    addressId: "",
     categoryId: "",
-    locationId: "",
+
     amount: 0,
-    workTypeId: "",
+    workType: "",
     endDate: "",
     gender: "",
-    rankId: "",
-    workExpId: "",
+    positionId: "",
+    workExp: "",
     currency: "",
-    salaryTypeId: "",
+    salaryType: "",
 
     salaryMax: 0,
     salaryMin: 0,
     fullAddress: "",
     description: "",
-    candidateRequired: "",
+    required: "",
     benefit: "",
+    companyId: "",
+    viewCount: "",
   });
   useEffect(() => {
     setData({
       ...data,
       description: description,
-      candidateRequired: candidateRequired,
+      required: required,
       benefit: benefit,
     });
-  }, [description, candidateRequired, benefit]);
+  }, [description, required, benefit]);
 
   const [salaryType, setSalaryType] = useState(false);
   const [currency, setCurrency] = useState();
+
+  const sendPostData = async function () {
+    const token = localStorage.getItem("token"); // Lấy token từ local storage
+    console.log({ ...data, description, required, benefit });
+    const res = await axios.post(
+      "http://localhost:5000/api/jobpost",
+      {
+        ...data,
+        description,
+        required,
+        benefit,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Thêm token vào header Authorization
+        },
+      }
+    );
+    if (res.data && res.data.status && res.data.status !== 200) {
+      console.log(res);
+      toast.warning("Tạo job post thất bại");
+    } else {
+      toast.success("Tạo job post thành công");
+    }
+  };
+
+  console.log(data);
 
   return (
     <Box
@@ -224,27 +297,21 @@ const JobPost = () => {
                   </Box>
 
                   <Autocomplete
-                    // value={data.workTypeId}
                     disablePortal
                     id="combo-box-demo"
                     sx={{ width: 300 }}
-                    options={getWorkTypeTitleList()}
+                    options={workType()}
+                    getOptionLabel={(option) => option.title}
                     renderInput={(params) => (
                       <TextField
                         {...params}
-                        placeholder="-- Chọn hình thức làm việc --"
+                        placeholder="Kinh nghiệm làm việc"
                       />
                     )}
-                    onInputChange={(e, value) => {
+                    onChange={(event, value) => {
                       setData({
                         ...data,
-                        workTypeId: getWorkTypeIdFromTitle(value),
-                      });
-                    }}
-                    onBlur={(e) => {
-                      setData({
-                        ...data,
-                        workTypeId: getWorkTypeIdFromTitle(e.target.value),
+                        workType: value ? value.title : null,
                       });
                     }}
                   />
@@ -310,31 +377,26 @@ const JobPost = () => {
                     Kinh Nghiệm Làm Việc
                   </Typography>
                   <Autocomplete
-                    // value={data.workExpId}
                     disablePortal
                     id="combo-box-demo"
                     sx={{ width: 300 }}
-                    options={getWorkExpTitleList()}
+                    options={getWorkExpList()}
+                    getOptionLabel={(option) => option.title}
                     renderInput={(params) => (
                       <TextField
                         {...params}
                         placeholder="Kinh nghiệm làm việc"
                       />
                     )}
-                    onInputChange={(e, value) => {
+                    onChange={(event, value) => {
                       setData({
                         ...data,
-                        workExpId: getWorkExpIdFromTitle(value),
-                      });
-                    }}
-                    onBlur={(e) => {
-                      setData({
-                        ...data,
-                        workExpId: getWorkExpIdFromTitle(e.target.value),
+                        workExp: value ? value.title : null,
                       });
                     }}
                   />
                 </Grid>
+
                 <Grid item xs={4} md={4}>
                   <Typography variant="p" fontWeight={500} fontSize={20}>
                     Loại Công Việc
@@ -358,21 +420,18 @@ const JobPost = () => {
                     Giới Tính
                   </Typography>
                   <Autocomplete
-                    // value={data.gender}
                     disablePortal
                     id="combo-box-demo"
-                    sx={{ width: 300, mt: 1 }}
-                    options={env.REACT_APP_SEXS.split(", ")}
+                    sx={{ width: 300 }}
+                    options={gender()}
+                    getOptionLabel={(option) => option.title}
                     renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        placeholder="-- Chọn giới tính --"
-                      />
+                      <TextField {...params} placeholder="Chọn giới tính" />
                     )}
-                    onInputChange={(e, value) => {
+                    onChange={(event, value) => {
                       setData({
                         ...data,
-                        gender: value,
+                        gender: value ? value.title : null,
                       });
                     }}
                   />
@@ -382,24 +441,23 @@ const JobPost = () => {
                     Chọn loại tiền lương
                   </Typography>
                   <Autocomplete
-                    // value={data.currency}
                     disablePortal
                     id="combo-box-demo"
-                    sx={{ width: 300, mt: 1.1 }}
-                    options={env.REACT_APP_CURRENCY.split(", ")}
-                    onInputChange={(e, value) => {
-                      setCurrency(value);
-                      setData({
-                        ...data,
-                        currency: value,
-                      });
-                    }}
+                    sx={{ width: 300 }}
+                    options={salarytype()}
+                    getOptionLabel={(option) => option.title}
                     renderInput={(params) => (
                       <TextField
                         {...params}
-                        placeholder="-- Chọn loại tiền lương --"
+                        placeholder="chọn loại tiền lương"
                       />
                     )}
+                    onChange={(event, value) => {
+                      setData({
+                        ...data,
+                        currency: value ? value.title : null,
+                      });
+                    }}
                   />
                 </Grid>
                 <Grid item xs={4} md={4}>
@@ -407,25 +465,24 @@ const JobPost = () => {
                     Kiểu Lương
                   </Typography>
                   <Autocomplete
-                    // value={getSalaryTypeTitleFromId(data.salaryTypeId)}
                     disablePortal
                     id="combo-box-demo"
-                    sx={{ width: 300, mt: 1 }}
-                    options={getSalaryTypeTitleList()}
-                    onInputChange={(e, value) => {
-                      setSalaryType(value);
+                    sx={{ width: 300 }}
+                    options={kieuluong()}
+                    getOptionLabel={(option) => option.title}
+                    renderInput={(params) => (
+                      <TextField {...params} placeholder="Chọn Kiểu Lương" />
+                    )}
+                    onChange={(event, value) => {
                       setData({
                         ...data,
-                        salaryTypeId: getSalaryTypeIdFromTitle(value),
+                        salaryType: value ? value.title : null,
                       });
                     }}
-                    renderInput={(params) => (
-                      <TextField {...params} placeholder="-- Chọn kiểu lương" />
-                    )}
                   />
                 </Grid>
                 {/* Lương theo khoảng */}
-                {salaryType === "Trong khoảng" && (
+                {data.salaryType === "Trong khoảng" && (
                   <>
                     <Grid item xs={4}>
                       <Typography variant="p">Từ</Typography>
@@ -435,7 +492,7 @@ const JobPost = () => {
                         type="number"
                         endAdornment={
                           <InputAdornment position="end">
-                            {currency}
+                            {data.currency}
                           </InputAdornment>
                         }
                         onBlur={(e) => {
@@ -454,7 +511,7 @@ const JobPost = () => {
                         type="number"
                         endAdornment={
                           <InputAdornment position="end">
-                            {currency}
+                            {data.currency}
                           </InputAdornment>
                         }
                         onBlur={(e) => {
@@ -468,31 +525,7 @@ const JobPost = () => {
                   </>
                 )}
                 {/* Lương cố định */}
-                {salaryType === "Cố định" && (
-                  <>
-                    <Grid item xs={3}>
-                      <Typography variant="p">Lương</Typography>
-                      <OutlinedInput
-                        fullWidth
-                        size="small"
-                        sx={{ mt: 1 }}
-                        type="number"
-                        endAdornment={
-                          <InputAdornment position="end">
-                            {currency}
-                          </InputAdornment>
-                        }
-                        onBlur={(e) => {
-                          setData({
-                            ...data,
-                            salaryMax: e.target.value,
-                            salaryMin: e.target.value,
-                          });
-                        }}
-                      />
-                    </Grid>
-                  </>
-                )}
+
                 <Grid item xs={12}>
                   <Typography variant="p" fontWeight={500} fontSize={20}>
                     Khu vực làm việc{" "}
@@ -507,6 +540,12 @@ const JobPost = () => {
                     fullWidth
                     sx={{ mt: 1 }}
                     placeholder="102/38A, Đường 3/2, Phường An khánh, Ninh Kiều, Cần Thơ"
+                    onChange={(event) =>
+                      setData({
+                        ...data,
+                        fullAddress: event.target.value,
+                      })
+                    }
                   />
                 </Grid>
               </Grid>
@@ -564,8 +603,8 @@ const JobPost = () => {
               variant="outlined"
               fullWidth
               placeholder="Nhập mô tả công việc"
-              value={candidateRequired}
-              onChange={(e) => setCandidateRequired(e.target.value)}
+              value={required}
+              onChange={(e) => setRequired(e.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
@@ -592,7 +631,7 @@ const JobPost = () => {
         </FormGroup>
 
         <Button
-          //onClick={sendPostData}
+          onClick={sendPostData}
           variant="contained"
           fullWidth
           sx={{ backgroundColor: "#4caf50", color: "#fff" }}

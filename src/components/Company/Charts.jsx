@@ -29,13 +29,16 @@ import useFetch from "../../hook/useFetch";
 import Loading from "../Loading";
 import { Modal } from "@mui/material";
 export default function Charts({ user }) {
+  console.log(user);
   const [openCandidatesModal, setOpenCandidatesModal] = useState(false);
   const hdlOpenCandidatesModal = () => setOpenCandidatesModal(true);
   const hdlCloseCandidatesModal = () => setOpenCandidatesModal(false);
 
   const navigate = useNavigate();
 
-  const jobsFetch = useFetch(`/rec/${user.user._id}/jobs`);
+  const jobsFetch = useFetch(
+    `http://localhost:5000/api/jobpost/showallpost/${user.idCompany}`
+  );
 
   function navigateTo(location) {
     navigate(location);
@@ -49,10 +52,37 @@ export default function Charts({ user }) {
     navigateTo(`../editjobpost/${jobPostId}`);
   };
 
-  const hdlGoBaiDang = (jobPostId) => {
-    console.log("gui yeu cau den admin");
+  const axiosInstance = axios.create({
+    baseURL: "http://localhost:5000/api/jobpost",
+  });
+
+  axiosInstance.interceptors.request.use(
+    (config) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm("Bạn có chắc muốn xóa bài đăng này?");
+    if (confirmDelete) {
+      axiosInstance
+        .delete(`/${id}`)
+        .then((response) => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          // handle error
+        });
+    }
   };
-  console.log(jobsFetch);
+  console.log(jobsFetch.data.jobsPage);
   return (
     <>
       <Grid
@@ -100,39 +130,52 @@ export default function Charts({ user }) {
                 <TableCell>TEST2</TableCell>
                 <TableCell>TEST2</TableCell>
               </TableHead>
-              <TableRow>
-                <TableCell>
-                  <Typography>Intern ReactJS </Typography>
-                  <Typography>Intern ReactJS </Typography>
-                  <Typography>Intern ReactJS </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>14/04/2023</Typography>
-                  <Typography>14/04/2023</Typography>
-                  <Typography>14/04/2023</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>14/04/2023</Typography>
-                  <Typography>14/04/2023</Typography>
-                  <Typography>14/04/2023</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>1 lượt xem</Typography>
-                  <Typography>2 lượt xem</Typography>
-                  <Typography>3 lượt xem</Typography>
-                </TableCell>
-
-                <TableCell>
-                  <Typography>2</Typography>
-                  <Typography>2</Typography>
-                  <Typography>2</Typography>
-                </TableCell>
-                <TableCell>
-                  <Button variant="text" color="success">
-                    Đã Đăng
-                  </Button>
-                </TableCell>
-              </TableRow>
+              {jobsFetch &&
+                jobsFetch.data &&
+                jobsFetch.data.jobsPage &&
+                jobsFetch.data.jobsPage.map((item) => {
+                  return (
+                    <TableRow key={item._id}>
+                      <TableCell
+                        onClick={() => {
+                          navigateTo(`/jobdetail/${item._id}`);
+                        }}
+                      >
+                        {item.title}
+                      </TableCell>
+                      <TableCell>{item.createdAt}</TableCell>
+                      <TableCell>{item.endDate}</TableCell>
+                      <TableCell>{item.viewCount} lượt xem</TableCell>
+                      <TableCell>
+                        <Button>{item.contactCnt}</Button>
+                      </TableCell>
+                      <TableCell>
+                        <Button variant="text" color="success">
+                          Đã đăng
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          variant="text"
+                          color="success"
+                          onClick={() => {
+                            navigateTo(`../searchcandidate/${item._id}`);
+                          }}
+                        >
+                          Tìm ứng viên
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Button onClick={() => hdlSuaBaiDang(item._id)}>
+                          Sửa
+                        </Button>
+                        <Button onClick={() => handleDelete(item._id)}>
+                          Gỡ bài đăng
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </Table>
           </TableContainer>
         </Grid>
