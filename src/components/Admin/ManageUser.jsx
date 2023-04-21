@@ -33,32 +33,33 @@ const ManageUser = () => {
   const [selectedRows, setSelectedRows] = useState([]);
 
   useEffect(() => {
-    const getUsers = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/user/", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setUsers(response.data);
+        const [userResponse, companyResponse] = await Promise.all([
+          axios.get("http://localhost:5000/api/user/", {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+          axios.get("http://localhost:5000/api/company", {
+            headers: { Authorization: `Bearer ${token}` },
+          }),
+        ]);
+
+        const usersWithCompany = userResponse.data.map((user) => ({
+          ...user,
+          companyName: user.nameCompany
+            ? companyResponse.data.find(
+                (company) => company._id === user.companyId
+              )?.name
+            : "",
+        }));
+
+        setUsers(usersWithCompany);
       } catch (error) {
         console.log(error);
       }
     };
-    // const getCompanies = async () => {
-    //   try {
-    //     const response = await axios.get(
-    //       "http://localhost:5000/api/user/company/:id",
-    //       {
-    //         headers: { Authorization: `Bearer ${token}` },
-    //       }
-    //     );
-    //     setUsers(response.data);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
 
-    getUsers();
-    // getCompanies();
+    fetchData();
   }, []);
 
   // handle checkbox change
@@ -135,7 +136,7 @@ const ManageUser = () => {
                 <TableRow>
                   <TableCell></TableCell>
                   <TableCell>Tên Người dùng</TableCell>
-                  <TableCell>Tên Người Công Ty</TableCell>
+                  <TableCell>Tên Công Ty</TableCell>
                   <TableCell>Vai Trò</TableCell>
                   <TableCell>Trạng thái</TableCell>
                 </TableRow>
@@ -154,7 +155,7 @@ const ManageUser = () => {
                     </TableCell>
                     <TableCell>
                       <Typography>
-                        {user.nameCompany ? user.company.name : ""}
+                        {user.nameCompany ? user.company.nameCompany : ""}
                       </Typography>
                     </TableCell>
                     <TableCell>

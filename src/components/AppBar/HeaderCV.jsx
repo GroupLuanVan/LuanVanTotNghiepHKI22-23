@@ -22,6 +22,7 @@ const HeaderCV = () => {
   const user = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
 
+  console.log(user.isLogin);
   console.log(user);
   return (
     <AppBar
@@ -52,7 +53,7 @@ const HeaderCV = () => {
         </Typography>
         <Typography
           onClick={() => {
-            navigate("/joblist");
+            navigate("/ListJob");
           }}
           variant="h6"
           sx={{

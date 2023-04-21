@@ -27,6 +27,13 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
     });
     setShow(false);
   }
+
+  const gender = () => {
+    return [
+      { id: 1, title: "Nam" },
+      { id: 2, title: "Nữ" },
+    ];
+  };
   return (
     <>
       <Dialog
@@ -167,7 +174,7 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
                   }}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={6}>
                 <Typography variant="p" fontWeight={500}>
                   Chức danh
                 </Typography>
@@ -181,6 +188,27 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
                     setTempData({
                       ...tempData,
                       title: e.target.value,
+                    });
+                  }}
+                />
+              </Grid>
+              <Grid item xs={5}>
+                <Typography variant="p" fontWeight={500} fontSize={20}>
+                  Giới Tính
+                </Typography>
+                <Autocomplete
+                  disablePortal
+                  id="combo-box-demo"
+                  sx={{ width: 300 }}
+                  options={gender()}
+                  getOptionLabel={(option) => option.title}
+                  renderInput={(params) => (
+                    <TextField {...params} placeholder="Chọn giới tính" />
+                  )}
+                  onChange={(event, value) => {
+                    setData({
+                      ...data,
+                      gender: value ? value.title : null,
                     });
                   }}
                 />
@@ -199,7 +227,7 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
                 onBlur={(e) => {
                   setTempData({
                     ...tempData,
-                    address: e.target.value,
+                    fullAddress: e.target.value,
                   });
                 }}
               />

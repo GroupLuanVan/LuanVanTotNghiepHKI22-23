@@ -47,8 +47,8 @@ export default function AccountMenu() {
     setAnchorEl(null);
   };
 
-  // console.log(user);
-  // console.log(role);
+  console.log(user.isLogin);
+  console.log(user);
 
   return (
     <React.Fragment>
@@ -126,7 +126,7 @@ export default function AccountMenu() {
               </ListItemIcon>
               Hồ sơ của bạn
             </MenuItem>
-            <MenuItem onClick={() => navigateTo(`/cv/${user?._id}`)}>
+            <MenuItem onClick={() => navigateTo(`/MyCV`)}>
               <ListItemIcon>
                 <ArticleIcon fontSize="small" />
               </ListItemIcon>

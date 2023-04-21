@@ -16,6 +16,7 @@ export const userSlice = createSlice({
         role: localStorage.getItem('role') === "candidate" ? "candidate" : localStorage.getItem('role'),
         token: localStorage.getItem('token') === '' ?  localStorage.getItem('token') : localStorage.getItem('token') ,
         idCompany : localStorage.getItem('idcompany') === '' ? "Null" : localStorage.getItem('idcompany')
+        
     },
     reducers: {
         setUserLogin: (state, action) => {

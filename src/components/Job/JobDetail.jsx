@@ -28,6 +28,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import WcIcon from "@mui/icons-material/Wc";
 import StarIcon from "@mui/icons-material/Star";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import { RichTextDisplay } from "../RichText";
 import { useLocation } from "react-router-dom";
 import useFetch from "../../hook/useFetch";
@@ -172,9 +173,29 @@ export default function JobDetail({ user }) {
                   spacing={1}
                   sx={{ color: "rgba(0,0,0,0.7)" }}
                 >
+                  <LocalPhoneIcon fontSize="small" />
+                  <Typography variant="body1">
+                    Số Điện Thoại {data.companyId.phone}
+                  </Typography>
+                </Stack>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{ color: "rgba(0,0,0,0.7)" }}
+                >
                   <AccessTimeIcon fontSize="small" />
                   <Typography variant="body1">
-                    {data.companyId.phone}
+                    Ngày tạo {data.createdAt}
+                  </Typography>
+                </Stack>
+                <Stack
+                  direction="row"
+                  spacing={1}
+                  sx={{ color: "rgba(0,0,0,0.7)" }}
+                >
+                  <AccessTimeIcon fontSize="small" />
+                  <Typography variant="body1">
+                    Hạn nộp hồ sơ: {new Date(data.endDate).toLocaleDateString()}
                   </Typography>
                 </Stack>
               </Box>

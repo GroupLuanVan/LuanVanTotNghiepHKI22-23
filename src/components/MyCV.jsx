@@ -10,9 +10,43 @@ import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 export default function MyCV() {
   const navigate = useNavigate();
-
   const [print, setPrint] = useState(false);
 
+  const role = useSelector((state) => state.user.token);
+  //const token = localStorage.getItem("token");
+
+  const [data, setData] = useState(null);
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    // Lấy token từ local storage hoặc server
+    const token = localStorage.getItem("token");
+    setToken(token);
+  }, []);
+
+  useEffect(() => {
+    // Lấy dữ liệu từ server khi token đã được lưu
+    if (token) {
+      axios
+        .get("http://localhost:5000/api/candidate/resume/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data);
+          setData(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [token]);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+  console.log(data);
   return (
     <>
       <Grid
@@ -25,7 +59,7 @@ export default function MyCV() {
           mt: 20,
         }}
       >
-        {/* <Grid item xs={6}>
+        <Grid item xs={6}>
           {data.cv.cvTemplate === "CV1" && (
             <CV1
               editable={false}
@@ -34,7 +68,7 @@ export default function MyCV() {
               data={data.cv}
             />
           )}
-          {data.cv.cvTemplate == "CV2" && (
+          {data.cv.cvTemplate === "CV2" && (
             <CV2
               editable={false}
               print={print}
@@ -42,7 +76,7 @@ export default function MyCV() {
               data={data.cv}
             />
           )}
-          {data.cv.cvTemplate == "CV3" && (
+          {data.cv.cvTemplate === "CV3" && (
             <CV3
               editable={false}
               print={print}
@@ -50,8 +84,8 @@ export default function MyCV() {
               data={data.cv}
             />
           )}
-        </Grid> */}
-        {/* <Grid
+        </Grid>
+        <Grid
           item
           xs={6}
           sx={{
@@ -78,9 +112,9 @@ export default function MyCV() {
           >
             Xuất CV
           </Button>
-        </Grid> */}
+        </Grid>
       </Grid>
-      "Chua co cv"
+      " thêm hoặc Chua co cv"
     </>
   );
 }

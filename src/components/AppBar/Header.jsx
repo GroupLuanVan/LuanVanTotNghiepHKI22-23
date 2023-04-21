@@ -45,7 +45,7 @@ const CustomAppBar = () => {
         </Typography>
         <Typography
           onClick={() => {
-            navigate("/joblist");
+            navigate("/ListJob");
           }}
           variant="h6"
           sx={{

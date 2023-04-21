@@ -48,7 +48,7 @@ const HeaderHR = () => {
   return (
     <AppBar
       sx={{
-        background: "#00b2a3",
+        background: "#5490cc",
         color: "black",
         height: "70px",
       }}

@@ -13,15 +13,24 @@ import axios from "axios";
 
 import { toast } from "react-toastify";
 import CVCard from "../CV/CVCard";
-import cv1image from "../CV/cv1image.png";
-import cv2image from "../CV/cv2image.png";
-import cv3image from "../CV/cv3image.png";
+
 import cvSchema from "../validate/cvValidate";
 import { useDispatch } from "react-redux";
 import { setActivatedCvId } from "../store/userSlice";
 import { ChooseCV } from "../CV/ChooseCV";
 import { CVCard1 } from "../CV/CVCard1";
-export default function ManageCV({ template }) {
+import useFetch from "../hook/useFetch";
+import { useSelector } from "react-redux";
+export default function ManageCV({ user }) {
+  console.log(user);
+
+  const role = useSelector((state) => state.user.token);
+  const token = localStorage.getItem("token");
+
+  // const { data, setData, loading, error } = useFetch(
+  //   `candidate/${user.user._id}/getuserprofilecvdata`
+  // );
+
   let { usetemplate } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -69,9 +78,35 @@ export default function ManageCV({ template }) {
             }}
           >
             <Grid item xs={6}>
-              <Button sx={{ mr: 2 }} variant="contained" color="success">
+              <Button
+                sx={{ mr: 2 }}
+                variant="contained"
+                color="success"
+                onClick={() => {
+                  cvSchema.validate(defaultCv).then(async (data) => {
+                    const res = await axios.post(
+                      `http://localhost:5000/api/candidate/resume/create`,
+                      data,
+                      {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                      }
+                    );
+
+                    if (res.data.status && res.data.status != 200) {
+                      console.log("that bai r", res);
+                      toast.warning("Lưu CV thất bại");
+                    } else {
+                      console.log(res.data);
+                      toast.success("Lưu CV thành công");
+                    }
+                  });
+                }}
+              >
                 Lưu CV
               </Button>
+
               <Button
                 variant="contained"
                 color="success"

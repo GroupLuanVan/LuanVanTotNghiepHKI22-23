@@ -23,26 +23,6 @@ import {
 
 import env from "../../asset/env.json";
 
-import {
-  getCatIdFromName,
-  getCatNameList,
-  getSalaryTypeTitleList,
-  getSalaryTypeIdFromTitle,
-  getRankTitleList,
-  getRankIdFromTitle,
-  getWorkTypeTitleList,
-  getWorkTypeIdFromTitle,
-  getWorkExpTitleList,
-  getWorkExpIdFromTitle,
-  getAddressTitleList,
-  getAddressIdFromTitle,
-  getCatNameFromId,
-  getAddressTitleFromId,
-  getWorkTypeTitleFromId,
-  getWorkExpTitleFromId,
-  getSalaryTypeTitleFromId,
-  getRankTitleFromId,
-} from "../../other/SelectDataUtils";
 import { Editor, EditorState, convertToRaw } from "draft-js";
 import { useSelector } from "react-redux";
 import { styled, alpha, createTheme } from "@mui/material/styles";

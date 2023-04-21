@@ -2,33 +2,47 @@
 
 
 {
-    "aboutMe": "Tình Nguyện Viên Tại ABC",
-"aboutMe-color":null,
-"aboutMeCV": "{\"blocks\":[{\"key\":\"6716l\",\"text\":\"Tình Nguyện Viên Tại ABC\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-"activities": "Dẫn Đường Flutter  Web Quản Lý CV",
+    "aboutMe": 
+"Tình Nguyện Viên Tại ABC",
+"aboutMe-color": 
+null,
+"aboutMeCV"
+: "{\"blocks\":[{\"key\":\"6716l\",\"text\":\"Tình Nguyện Viên Tại ABC\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+"activities": 
+"Tình nguyện viên chống covid",
 "activities-color": null,
-"activitiesCv": "{\"blocks\":[{\"key\":\"1c6rd\",\"text\":\"Dẫn Đường Flutter \",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}},{\"key\":\"cj58e\",\"text\":\"Web Quản Lý CV\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-"address": "Thành phố Hồ Chí Minh",
+"activitiesCv": "{\"blocks\":[{\"key\":\"541ea\",\"text\":\"Tình nguyện viên chống covid\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+"addressId": 
+"638afe6c7ec61f444c65f4de",
 "certifications": "Toeic 600",
 "certifications-color": null,
 "certificationsCv": "{\"blocks\":[{\"key\":\"3s4fe\",\"text\":\"Toeic 600\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-"cvTemplate": "CV5",
-"dob": "2023-04-01",
-"education": "Đại Học Cần Thơ   2018-now",
+"cvTemplate"
+: "CV1",
+"dob": 
+"2023-04-22",
+"education": 
+"Đại Học Cần Thơ   2018-now",
 "education-color": null,
 "educationCv": "{\"blocks\":[{\"key\":\"66k8p\",\"text\":\"Đại Học Cần Thơ   2018-now\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[{\"offset\":0,\"length\":26,\"style\":\"BOLD\"}],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-"email":"NguyenvanA@gmail.com",
-"experience": "1 Năm Kinh Nghiệm tại TMA",
+"email"
+: "thai@gmail.com",
+"experience": 
+"1 Năm Kinh Nghiệm tại TMA",
 "experience-color": null,
 "experienceCv": "{\"blocks\":[{\"key\":\"b7bi3\",\"text\":\"1 Năm Kinh Nghiệm tại TMA\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-"fullAddress":"ấp Thạnh Điền, Thị Trấn Phú Lộc, Huyện Thạnh Trị, Tỉnh Sóc Trăng",
-"gender": "Nam/Nữ",
-"name": "Nguyễn Văn A",
-"objective": "NHHHHHHHHHH",
-"objectiveCv": "{\"blocks\":[{\"key\":\"4em15\",\"text\":\"NHHHHHHHHHH\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+"fullAddress": "Ấp 3 Thị Trấn Phú Lộc",
+"gender": "Nam",
+"name"
+: "Nguyễn Hữu Thái",
+"objective": 
+"Trở thành Dev giỏi",
+"objectiveCv": "{\"blocks\":[{\"key\":\"1hgoh\",\"text\":\"Trở thành Dev giỏi\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
 "phone": "123456789",
+"project": "Dẫn Đường Flutter",
+"projectCV": "{\"blocks\":[{\"key\":\"75ge9\",\"text\":\"Dẫn Đường Flutter\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
 "skills": "ReactJS, NodeJS,  Java",
-"skills-color":null,
-"skillsCv":"{\"blocks\":[{\"key\":\"95cpl\",\"text\":\"ReactJS, NodeJS,  Java\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
-"title": "NHHHHHHHHHH"
+"skills-color": "null",
+"skillsCv":  "{\"blocks\":[{\"key\":\"95cpl\",\"text\":\"ReactJS, NodeJS,  Java\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}",
+"title": "IT"
 }
