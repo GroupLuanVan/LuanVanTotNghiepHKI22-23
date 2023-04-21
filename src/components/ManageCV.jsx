@@ -152,7 +152,32 @@ export default function ManageCV({ user }) {
             }}
           >
             <Grid item xs={12}>
-              <Button sx={{ mr: 2 }} variant="contained" color="success">
+              <Button
+                sx={{ mr: 2 }}
+                variant="contained"
+                color="success"
+                onClick={() => {
+                  cvSchema.validate(defaultCv).then(async (data) => {
+                    const res = await axios.post(
+                      `http://localhost:5000/api/candidate/resume/create`,
+                      data,
+                      {
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                      }
+                    );
+
+                    if (res.data.status && res.data.status != 200) {
+                      console.log("that bai r", res);
+                      toast.warning("Lưu CV thất bại");
+                    } else {
+                      console.log(res.data);
+                      toast.success("Lưu CV thành công");
+                    }
+                  });
+                }}
+              >
                 Lưu CV
               </Button>
               <Button
@@ -306,6 +331,34 @@ export default function ManageCV({ user }) {
             />
           </Grid>
         </Grid>
+        <Button
+          sx={{ mr: 2 }}
+          variant="contained"
+          color="success"
+          onClick={() => {
+            cvSchema.validate(defaultCv).then(async (data) => {
+              const res = await axios.post(
+                `http://localhost:5000/api/candidate/resume/create`,
+                data,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+
+              if (res.data.status && res.data.status != 200) {
+                console.log("that bai r", res);
+                toast.warning("Lưu CV thất bại");
+              } else {
+                console.log(res.data);
+                toast.success("Lưu CV thành công");
+              }
+            });
+          }}
+        >
+          Lưu CV
+        </Button>
         <Button
           variant="contained"
           color="success"

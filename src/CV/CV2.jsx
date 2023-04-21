@@ -142,6 +142,15 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
     },
   }));
   const RichContent = function ({ show, toggle, item, data, config }) {
+    let parsedData;
+
+    try {
+      parsedData = JSON.parse(data[item]);
+    } catch (error) {
+      console.error("Invalid JSON:", error);
+      return null;
+    }
+
     return (
       <>
         {show ? (
@@ -149,10 +158,10 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
             item={item}
             setOpen={toggle}
             setData={config}
-            data={data}
+            data={parsedData}
           />
         ) : (
-          <RichTextDisplay data={JSON.parse(data[item])} />
+          <RichTextDisplay data={parsedData} />
         )}
       </>
     );
@@ -493,7 +502,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                   item="skillsCv"
                 />
               </Box>
-              <CustomChip2 icon={<FlagIcon />} label="Kỹ năng" />
+              <CustomChip2 icon={<FlagIcon />} label="Hoạt Động" />
               <Box
                 alignSelf="flex-start"
                 sx={{
@@ -507,15 +516,15 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                   },
                 }}
                 onClick={() => {
-                  editable && setShowSkillsEdit(true);
+                  editable && setShowActivate(true);
                 }}
               >
                 <RichContent
-                  show={showSkillsEdit}
-                  toggle={setShowSkillsEdit}
+                  show={showActivate}
+                  toggle={setShowActivate}
                   data={data}
                   config={setCVDATA}
-                  item="skillsCv"
+                  item="activitiesCv"
                 />
               </Box>
             </Grid>
@@ -560,7 +569,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                   toggle={setShowProject}
                   data={data}
                   config={setCVDATA}
-                  item="activitiesCv"
+                  item="projectCV"
                 />
               </Box>
             </Grid>

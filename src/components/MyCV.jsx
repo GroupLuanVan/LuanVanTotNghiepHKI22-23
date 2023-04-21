@@ -2,6 +2,9 @@ import { Divider, Grid, Typography, Button } from "@mui/material";
 import CV1 from "../CV/CV1";
 import CV2 from "../CV/CV2";
 import CV3 from "../CV/CV3";
+import CV4 from "../CV/CV4";
+import CV5 from "../CV/CV5";
+import CV6 from "../CV/CV6";
 import useFetch from "../hook/useFetch";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -78,6 +81,30 @@ export default function MyCV() {
           )}
           {data.cv.cvTemplate === "CV3" && (
             <CV3
+              editable={false}
+              print={print}
+              setPrint={setPrint}
+              data={data.cv}
+            />
+          )}
+          {data.cv.cvTemplate === "CV4" && (
+            <CV4
+              editable={false}
+              print={print}
+              setPrint={setPrint}
+              data={data.cv}
+            />
+          )}
+          {data.cv.cvTemplate === "CV5" && (
+            <CV5
+              editable={false}
+              print={print}
+              setPrint={setPrint}
+              data={data.cv}
+            />
+          )}
+          {data.cv.cvTemplate === "CV5" && (
+            <CV5
               editable={false}
               print={print}
               setPrint={setPrint}
