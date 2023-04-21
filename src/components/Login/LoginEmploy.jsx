@@ -59,14 +59,17 @@ export const LoginEmployer = () => {
       const token = localStorage.getItem("token");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-      dispatch(setUserLogin(data.user.username));
-      dispatch(setRole(data.user.role));
-      dispatch(setToken(data.token));
-      dispatch(setidCompany(data.company._id));
-
-      // Kiểm tra nếu role là admin, chuyển hướng đến trang admin
+      // Kiểm tra role của user
       if (data.user.role === "recruiter") {
+        dispatch(setUserLogin(data.user.username));
+        dispatch(setRole(data.user.role));
+        dispatch(setToken(data.token));
+        dispatch(setidCompany(data.company._id));
         navigate("/HR");
+        return;
+      } else {
+        toast.error("Invalid user role");
+        setUserLogin(false);
         return;
       }
     } catch (error) {

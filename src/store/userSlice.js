@@ -41,7 +41,10 @@ export const userSlice = createSlice({
         setUserLogout: (state, action) => {
             state.user = "Người dùng"
             state.isLogin = false
-            localStorage.removeItem("user")
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            localStorage.removeItem("role");
+            localStorage.removeItem("idcompany");
         },
 
         //for candidate

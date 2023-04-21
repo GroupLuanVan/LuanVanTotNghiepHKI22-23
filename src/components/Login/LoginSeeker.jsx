@@ -53,13 +53,17 @@ export const LoginSeeker = () => {
       const token = localStorage.getItem("token");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
-      dispatch(setUserLogin(data.user.username));
-      dispatch(setRole(data.user.role));
-      dispatch(setToken(data.token));
-
-      // Kiểm tra nếu role là admin, chuyển hướng đến trang admin
+      // Kiểm tra role của user
       if (data.user.role === "candidate") {
+        dispatch(setUserLogin(data.user.username));
+        dispatch(setRole(data.user.role));
+        dispatch(setToken(data.token));
+
         navigate("/");
+        return;
+      } else {
+        toast.error("Invalid user role");
+        setUserLogin(false);
         return;
       }
     } catch (error) {
