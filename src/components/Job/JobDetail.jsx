@@ -57,7 +57,7 @@ export default function JobDetail({ user }) {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   console.log(id);
-  const [isApplied, setIsApplied] = useState("false");
+  const [isApplied, setIsApplied] = useState("");
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

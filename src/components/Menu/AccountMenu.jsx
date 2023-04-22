@@ -24,9 +24,8 @@ export default function AccountMenu() {
   function navigateTo(location) {
     navigate(location);
   }
-  const user = useSelector((state) => state.user.data.user.username);
-  const role = useSelector((state) => state.user.data.user.role);
-  // console.log(user);
+  const user = useSelector((state) => state.user.user);
+  const role = useSelector((state) => state.user.role);
   const dispatch = useDispatch();
   const logOut = function () {
     localStorage.removeItem("token");
@@ -45,9 +44,6 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  console.log("login nha", role);
-  console.log("binh", user);
 
   return (
     <React.Fragment>

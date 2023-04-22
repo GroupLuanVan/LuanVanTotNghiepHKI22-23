@@ -21,14 +21,16 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
 export const LoginSeeker = () => {
+  const [isLogin, setIsLogin] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const username = useRef(null);
   const password = useRef(null);
   const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.user.role);
   console.log(user);
-  // const token = useSelector((state) => state.data.data.token);
-  //const token = useSelector((state) => state.user.role);
+  console.log(token);
+  const idcompany = useSelector((state) => state.user.idcompany);
   const [response, setResponse] = useState({
     showArlert: false,
     message: "",
@@ -54,23 +56,23 @@ export const LoginSeeker = () => {
         password: password.current.value,
       });
 
-      const data = res.data.data;
-      console.log(data);
+      const { data } = res.data;
 
-      sessionStorage.setItem("data", JSON.stringify(data));
-      dispatch(setUserLogin(res, true));
-
-      if (!data.user) {
-        dispatch(setUserLogin(null, false));
-      }
+      localStorage.setItem("token", data.token);
+      const token = localStorage.getItem("token");
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
       // Kiểm tra role của user
-      if (data.data.user.role === "candidate") {
+      if (data.user.role === "candidate") {
+        dispatch(setUserLogin(data.user.username));
+        dispatch(setRole(data.user.role));
+        dispatch(setToken(data.token));
+
         navigate("/");
         return;
       } else {
         toast.error("Invalid user role");
-        setUserLogin(false);
+        setIsLogin(false);
         return;
       }
     } catch (error) {

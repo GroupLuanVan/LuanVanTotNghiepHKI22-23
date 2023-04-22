@@ -53,19 +53,14 @@ export const LoginAdmin = () => {
         password: password.current.value,
       });
 
-      const data = res.data;
-      console.log(data);
+      const { data } = res.data;
 
-      sessionStorage.setItem("data", JSON.stringify(data));
-      dispatch(setData(data));
-      dispatch(setUserLogin(res, true));
-
-      if (!data.user) {
-        dispatch(setUserLogin(null, false));
-      }
+      localStorage.setItem("token", data.token);
+      const token = localStorage.getItem("token");
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
       // Kiểm tra role của user
-      if (data.data.data.user.role === "admin") {
+      if (data.user.role === "admin") {
         dispatch(setUserLogin(data.user.username));
         dispatch(setRole(data.user.role));
         dispatch(setToken(data.token));
@@ -74,14 +69,13 @@ export const LoginAdmin = () => {
         return;
       } else {
         toast.error("Invalid user role");
-        setUserLogin(false);
+        setIsLogin(false);
         return;
       }
     } catch (error) {
       toast.error(error?.response?.data.message);
     }
   };
-
   return (
     <>
       <Box display="flex" flexDirection="column" minHeight="85vh">
