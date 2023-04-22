@@ -21,8 +21,8 @@ const StyledCard = styled(Card)({
 
 const JobCardALL = (props) => {
   const { job } = props;
-  console.log(job);
-  console.log(props);
+  // console.log(job);
+  // console.log(props);
   function titleCut(title) {
     if (title?.length > 20) {
       return title.slice(0, 19) + "...";
@@ -53,7 +53,7 @@ const JobCardALL = (props) => {
   if (job?.salaryMax === 999999999 && job?.salaryMin > 0) {
     salaryChip = `Từ ${job?.salaryMin / 1000000} Triệu`;
   }
-  console.log(job._id);
+  // console.log(job._id);
   return (
     <>
       <StyledCard

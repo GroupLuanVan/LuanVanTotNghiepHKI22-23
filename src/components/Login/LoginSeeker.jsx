@@ -1,6 +1,11 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserLogin, setRole, setToken } from "../../store/userSlice";
+import {
+  setUserLogin,
+  setRole,
+  setToken,
+  setData,
+} from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -21,7 +26,9 @@ export const LoginSeeker = () => {
   const username = useRef(null);
   const password = useRef(null);
   const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.user.role);
+  console.log(user);
+  // const token = useSelector((state) => state.data.data.token);
+  //const token = useSelector((state) => state.user.role);
   const [response, setResponse] = useState({
     showArlert: false,
     message: "",
@@ -47,18 +54,18 @@ export const LoginSeeker = () => {
         password: password.current.value,
       });
 
-      const { data } = res.data;
+      const data = res.data.data;
+      console.log(data);
 
-      localStorage.setItem("token", data.token);
-      const token = localStorage.getItem("token");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      sessionStorage.setItem("data", JSON.stringify(data));
+      dispatch(setUserLogin(res, true));
+
+      if (!data.user) {
+        dispatch(setUserLogin(null, false));
+      }
 
       // Kiểm tra role của user
-      if (data.user.role === "candidate") {
-        dispatch(setUserLogin(data.user.username));
-        dispatch(setRole(data.user.role));
-        dispatch(setToken(data.token));
-
+      if (data.data.user.role === "candidate") {
         navigate("/");
         return;
       } else {

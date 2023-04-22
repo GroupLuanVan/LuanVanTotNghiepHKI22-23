@@ -5,47 +5,50 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({
     name: 'user',
+    data:'data',
     email: 'email',
     role:'role',
     token: 'token',
     idCompany: 'idcompany',
     initialState: {
-        user: localStorage.getItem('user') == null ? "Người dùng" : localStorage.getItem('user'),
-        email: localStorage.getItem('email') == null ? " Email Người dùng" : localStorage.getItem('email'),
-        isLogin: localStorage.getItem('user') ? true : false,
-        role: localStorage.getItem('role') === "candidate" ? "candidate" : localStorage.getItem('role'),
-        token: localStorage.getItem('token') === '' ?  localStorage.getItem('token') : localStorage.getItem('token') ,
-        idCompany : localStorage.getItem('idcompany') === '' ? "Null" : localStorage.getItem('idcompany')
-        
+  
+        data: JSON.parse(sessionStorage.getItem('data')) == null ? "Người dùng" : JSON.parse(sessionStorage.getItem('data')),
+        isLogin: sessionStorage.getItem('data') ? true : false,
     },
     reducers: {
         setUserLogin: (state, action) => {
-            state.user = action.payload
+            state.data = action.payload
             state.isLogin = true
-            localStorage.setItem("user", action.payload)
+            localStorage.setItem('data', JSON.stringify(action.payload))
+        },
+        // setData: (state, action) => {
+        //     state.data = action.payload
+           
+        //     localStorage.setItem('data', JSON.stringify(action.payload))
             
-        },
-        setToken: (state, action) => {
-            state.token = action.payload
-            localStorage.setItem("token", action.payload)
-        },
+        // },
+        // setToken: (state, action) => {
+        //     state.token = action.payload
+        //     localStorage.setItem("token", action.payload)
+        // },
   
-        setRole: (state, action) => {
-            state.role = action.payload
-            localStorage.setItem("role", action.payload)
-        },
-        setidCompany: (state, action) => {
-            state.idCompany = action.payload
-            localStorage.setItem("idcompany", action.payload)
-        },
+        // setRole: (state, action) => {
+        //     state.role = action.payload
+        //     localStorage.setItem("role", action.payload)
+        // },
+        // setidCompany: (state, action) => {
+        //     state.idCompany = action.payload
+        //     localStorage.setItem("idcompany", action.payload)
+        // },
 
         setUserLogout: (state, action) => {
             state.user = "Người dùng"
             state.isLogin = false
-            localStorage.removeItem("user");
-            localStorage.removeItem("token");
-            localStorage.removeItem("role");
-            localStorage.removeItem("idcompany");
+            sessionStorage.clear()
+             localStorage.removeItem("data");
+            // localStorage.removeItem("token");
+            // localStorage.removeItem("role");
+            // localStorage.removeItem("idcompany");
         },
 
         //for candidate
@@ -54,7 +57,7 @@ export const userSlice = createSlice({
             cpState.activatedCvId = action.payload;
             state.user = { ...cpState }
             //
-            sessionStorage.setItem("user", JSON.stringify(state.user));
+          //  sessionStorage.setItem("user", JSON.stringify(state.user));
         },
   
 
@@ -63,13 +66,13 @@ export const userSlice = createSlice({
             cpState.applyJobs = action.payload;
             state.user = { ...cpState }
             //
-            sessionStorage.setItem("user", JSON.stringify(state.user));
+          //  sessionStorage.setItem("user", JSON.stringify(state.user));
         },
         //update profile :
         setCandidateData: (state, action) => {
             state.user = action.payload
             state.isLogin = true
-            sessionStorage.setItem("user", JSON.stringify(state.user));
+          //  sessionStorage.setItem("user", JSON.stringify(state.user));
         },
 
         //for candidate
@@ -79,7 +82,7 @@ export const userSlice = createSlice({
 })
 // Thêm selectIsLoggedIn selector vào userSlice
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
-export const { setUserLogin, setRole, setToken, setidCompany,setUserLogout, setActivatedCvId, setApplyJobs, setCandidateData } = userSlice.actions
+export const { setUserLogin, setRole, setData, setToken, setidCompany,setUserLogout, setActivatedCvId, setApplyJobs, setCandidateData } = userSlice.actions
 export default userSlice.reducer;
 
 // createSlice được sử dụng để tạo ra một slice, bao gồm tên slice (name), 

@@ -1,6 +1,11 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setUserLogin, setRole, setToken } from "../../store/userSlice";
+import {
+  setUserLogin,
+  setRole,
+  setToken,
+  setData,
+} from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -48,14 +53,19 @@ export const LoginAdmin = () => {
         password: password.current.value,
       });
 
-      const { data } = res.data;
+      const data = res.data;
+      console.log(data);
 
-      localStorage.setItem("token", data.token);
-      const token = localStorage.getItem("token");
-      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+      sessionStorage.setItem("data", JSON.stringify(data));
+      dispatch(setData(data));
+      dispatch(setUserLogin(res, true));
+
+      if (!data.user) {
+        dispatch(setUserLogin(null, false));
+      }
 
       // Kiểm tra role của user
-      if (data.user.role === "admin") {
+      if (data.data.data.user.role === "admin") {
         dispatch(setUserLogin(data.user.username));
         dispatch(setRole(data.user.role));
         dispatch(setToken(data.token));

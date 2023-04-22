@@ -54,13 +54,17 @@ export const Login = () => {
         password: password.current.value,
       });
 
+      console.log(res);
       const { data } = res.data;
+      console.log(data);
+      localStorage.setItem("user", JSON.stringify(data));
+
       localStorage.setItem("token", data.token);
       const token = localStorage.getItem("token");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
+      localStorage.setItem("user", JSON.stringify(res));
       dispatch(setUserLogin(data.user.username));
-
       dispatch(setRole(data.user.role));
       dispatch(setToken(data.token));
       dispatch(setidCompany(data.user.idcompany));
