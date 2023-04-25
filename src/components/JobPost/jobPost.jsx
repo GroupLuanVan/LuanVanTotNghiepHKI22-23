@@ -215,6 +215,7 @@ const JobPost = () => {
       margin="0 auto"
       marginTop={10}
       marginBottom={5}
+      //marginRight={20}
       sx={{
         backgroundColor: "#fff",
         borderRadius: "4px",
@@ -669,8 +670,8 @@ export default function PostJob() {
   return (
     <>
       <Grid container sx={{ background: "#f1f2f6" }}>
-        <Grid item xs={2}></Grid>
-        <Grid item xs={8}>
+        {/* <Grid item xs={2}></Grid> */}
+        <Grid item xs={12}>
           <Routes>
             <Route path="/" element={<JobPost user={user} />}></Route>
             <Route
@@ -691,7 +692,7 @@ export default function PostJob() {
             <Route path="/SearchCandi" element={<ShowCV user={user} />}></Route>
           </Routes>
         </Grid>
-        <Grid item xs={2}></Grid>
+        {/* <Grid item xs={2}></Grid> */}
       </Grid>
     </>
   );
