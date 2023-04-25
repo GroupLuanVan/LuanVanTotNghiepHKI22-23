@@ -38,6 +38,7 @@ import Charts from "../Company/Charts";
 import JobDetail from "../Job/JobDetail";
 import Contact from "../Company/Contact";
 import SearchCandidate from "../Company/SearchCandidate";
+import { ShowCV } from "../Company/ShowCV";
 import "../../App.css";
 
 import axios from "axios";
@@ -684,6 +685,7 @@ export default function PostJob() {
               element={<SearchCandidate user={user} />}
             />
             <Route path="/contacts" element={<Contact user={user} />}></Route>
+            <Route path="/SearchCandi" element={<ShowCV user={user} />}></Route>
           </Routes>
         </Grid>
         <Grid item xs={2}></Grid>

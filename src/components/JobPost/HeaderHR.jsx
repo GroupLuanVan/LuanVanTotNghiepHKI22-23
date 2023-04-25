@@ -96,7 +96,7 @@ const HeaderHR = () => {
         </Typography>
         <Typography
           onClick={() => {
-            navigate("./contacts");
+            navigate("./SearchCandi");
           }}
           variant="h6"
           sx={{

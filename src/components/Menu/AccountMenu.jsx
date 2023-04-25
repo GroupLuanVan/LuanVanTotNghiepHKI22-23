@@ -28,7 +28,10 @@ export default function AccountMenu() {
   const role = useSelector((state) => state.user.role);
   const dispatch = useDispatch();
   const logOut = function () {
+    localStorage.removeItem("user");
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    localStorage.removeItem("idcompany");
     dispatch(setUserLogout());
     navigate("/");
   };

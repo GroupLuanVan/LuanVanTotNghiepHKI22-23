@@ -5,7 +5,7 @@ import {
   setRole,
   setToken,
   setidCompany,
-  setData,
+  setidApplyJob,
 } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import {
@@ -67,6 +67,7 @@ export const LoginEmployer = () => {
         dispatch(setRole(data.user.role));
         dispatch(setToken(data.token));
         dispatch(setidCompany(data.company._id));
+        //dispatch(setidApplyJob(data.candidate.applyJobs));
         navigate("/HR");
         return;
       } else {

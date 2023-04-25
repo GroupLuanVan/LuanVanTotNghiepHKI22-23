@@ -82,6 +82,7 @@ export default function Charts({ user }) {
         });
     }
   };
+
   console.log(jobsFetch.data.jobsPage);
   return (
     <>
@@ -125,10 +126,9 @@ export default function Charts({ user }) {
                 <TableCell>Ngày đăng</TableCell>
                 <TableCell>Ngày hết hạn</TableCell>
                 <TableCell>Lượt xem</TableCell>
-                <TableCell>Đã ứng tuyển</TableCell>
+                {/* <TableCell>Đã ứng tuyển</TableCell> */}
                 <TableCell>Trạng thái</TableCell>
-                <TableCell>TEST2</TableCell>
-                <TableCell>TEST2</TableCell>
+                <TableCell>Xem danh sách ứng Viên</TableCell>
               </TableHead>
               {jobsFetch &&
                 jobsFetch.data &&
@@ -146,9 +146,9 @@ export default function Charts({ user }) {
                       <TableCell>{item.createdAt}</TableCell>
                       <TableCell>{item.endDate}</TableCell>
                       <TableCell>{item.viewCount} lượt xem</TableCell>
-                      <TableCell>
+                      {/* <TableCell>
                         <Button>{item.contactCnt}</Button>
-                      </TableCell>
+                      </TableCell> */}
                       <TableCell>
                         <Button variant="text" color="success">
                           Đã đăng
@@ -159,19 +159,32 @@ export default function Charts({ user }) {
                           variant="text"
                           color="success"
                           onClick={() => {
-                            navigateTo(`../searchcandidate/${item._id}`);
+                            // navigateTo(`../searchcandidate/${item._id}`);
+                            navigateTo(`../contacts/`);
                           }}
                         >
-                          Tìm ứng viên
+                          Chi Tiết
                         </Button>
                       </TableCell>
                       <TableCell>
-                        <Button onClick={() => hdlSuaBaiDang(item._id)}>
-                          Sửa
-                        </Button>
-                        <Button onClick={() => handleDelete(item._id)}>
-                          Gỡ bài đăng
-                        </Button>
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            sx={{ mr: 1, height: 30, width: 100 }}
+                            onClick={() => hdlSuaBaiDang(item._id)}
+                          >
+                            Sửa
+                          </Button>
+                          <Button
+                            variant="contained"
+                            color="error"
+                            sx={{ height: 30, width: 100 }}
+                            onClick={() => handleDelete(item._id)}
+                          >
+                            Gỡ bài
+                          </Button>
+                        </div>
                       </TableCell>
                     </TableRow>
                   );

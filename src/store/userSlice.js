@@ -9,20 +9,22 @@ export const userSlice = createSlice({
     role:'role',
     token:'token',
     idCompany:'idcompany',
+    idApplyJob: 'idApply',
     initialState: {
         user: localStorage.getItem('user') == null ? "Người dùng" : localStorage.getItem('user'),
         email: localStorage.getItem('email') == null ? " Email Người dùng" : localStorage.getItem('email'),
         isLogin: localStorage.getItem('user') ? true : false,
         role: localStorage.getItem('role') === "candidate" ? "candidate" : localStorage.getItem('role'),
         token: localStorage.getItem('token') === '' ?  localStorage.getItem('token') : localStorage.getItem('token') ,
-        idCompany : localStorage.getItem('idcompany') === '' ? "Null" : localStorage.getItem('idcompany')
+        idCompany : localStorage.getItem('idcompany') === '' ? "Null" : localStorage.getItem('idcompany'),
+        idApplyJob : localStorage.getItem('idApply') === '' ? "Null" : localStorage.getItem('idApply')
 
     },
     reducers: {
         setUserLogin: (state, action) => {
             state.user = action.payload
             state.isLogin = true
-            localStorage.setItem('user', JSON.stringify(action.payload))
+            localStorage.setItem('user',(action.payload))
         },
    
         setToken: (state, action) => {
@@ -38,6 +40,19 @@ export const userSlice = createSlice({
             state.idCompany = action.payload
             localStorage.setItem("idcompany", action.payload)
         },
+        setidApplyJob: (state, action) => {
+            state.idApplyJob = action.payload
+            localStorage.setItem("idApply", JSON.stringify(action.payload))
+
+
+
+           
+            // let cpState = { ...state.idApplyJob };
+            // cpState.applyJobs = action.payload;
+            // state.idApplyJob = { ...cpState }
+            // //
+            // localStorage.setItem("idApply",(JSON.stringify(state.idApplyJob)));
+        },
 
         setUserLogout: (state, action) => {
             state.user = "Người dùng"
@@ -47,7 +62,7 @@ export const userSlice = createSlice({
             localStorage.removeItem("role");
             localStorage.removeItem("idcompany");
             sessionStorage.clear()
-             localStorage.removeItem("data");
+            localStorage.removeItem("data");
         },
 
         //for candidate
@@ -60,13 +75,7 @@ export const userSlice = createSlice({
         },
   
 
-        setApplyJobs: (state, action) => {
-            let cpState = { ...state.user };
-            cpState.applyJobs = action.payload;
-            state.user = { ...cpState }
-            
-           sessionStorage.setItem("user", JSON.stringify(state.user));
-        },
+   
         //update profile :
         setCandidateData: (state, action) => {
             state.user = action.payload
@@ -81,7 +90,7 @@ export const userSlice = createSlice({
 })
 // Thêm selectIsLoggedIn selector vào userSlice
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
-export const { setUserLogin, setRole, setData, setToken, setidCompany,setUserLogout, setActivatedCvId, setApplyJobs, setCandidateData } = userSlice.actions
+export const { setUserLogin, setRole, setData, setToken, setidCompany,setUserLogout, setActivatedCvId, setidApplyJob, setCandidateData } = userSlice.actions
 export default userSlice.reducer;
 
 // createSlice được sử dụng để tạo ra một slice, bao gồm tên slice (name), 

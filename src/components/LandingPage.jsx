@@ -54,6 +54,7 @@ export const LandingPage = () => {
   const SearchInput = styled(InputBase)({
     color: "black",
   });
+  console.log(data);
   return (
     <>
       <Box

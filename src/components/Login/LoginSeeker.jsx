@@ -4,7 +4,7 @@ import {
   setUserLogin,
   setRole,
   setToken,
-  setData,
+  setidApplyJob,
 } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import {
@@ -67,6 +67,9 @@ export const LoginSeeker = () => {
         dispatch(setUserLogin(data.user.username));
         dispatch(setRole(data.user.role));
         dispatch(setToken(data.token));
+        dispatch(setidApplyJob(data.candidate.applyJobs));
+
+        console.log(data);
 
         navigate("/");
         return;

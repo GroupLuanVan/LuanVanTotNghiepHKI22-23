@@ -15,7 +15,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import WorkIcon from "@mui/icons-material/Work";
-import CancelIcon from "@mui/icons-material/Cancel";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import Image from "mui-image";
 import Image1 from "../../asset/13095.jpg";
 import { useState } from "react";
@@ -38,26 +38,21 @@ import { useEffect } from "react";
 import SimilarJob from "./SimilarJob";
 import axios from "axios";
 import { toast } from "react-toastify";
-import {
-  getAddressTitleFromId,
-  getWorkExpTitleFromId,
-  getWorkTypeTitleFromId,
-  getRankTitleFromId,
-  getSalaryTypeTitleFromId,
-  getJobCategoryTitleFromId,
-} from "../../other/SelectDataUtils";
-import { setActivedCvId, setApplyJobs } from "../../store/userSlice";
+
+import { setidApplyJob } from "../../store/userSlice";
 import Loading from "../Loading";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 export default function JobDetail({ user }) {
-  console.log(user);
+  const idApply = useSelector((state) => state.user.idApplyJob);
+  //const user = useSelector(state => state.user);
+
   const dispatch = useDispatch();
 
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  console.log(id);
-  const [isApplied, setIsApplied] = useState("");
+
+  //const [isApplied, setIsApplied] = useState(false);
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -87,12 +82,26 @@ export default function JobDetail({ user }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(data);
       setLoading(true);
       try {
-        const res = await axios.get(`http://localhost:5000/api/jobpost/${id}`);
-        setData(res.data);
-        console.log(res);
+        if (user.isLogin) {
+          const res = await axios.get(
+            `http://localhost:5000/api/jobpost/detail/${id}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          setData(res.data);
+          console.log(res.data);
+        } else {
+          const res = await axios.get(
+            `http://localhost:5000/api/jobpost/${id}`
+          );
+          setData(res.data);
+          //console.log(res.data);
+        }
       } catch (err) {
         setError(err);
       }
@@ -100,28 +109,33 @@ export default function JobDetail({ user }) {
     };
 
     fetchData();
-  }, [id]);
+  }, [id, user.isLogin]);
 
-  //console.log(data.companyId.nameCompany);
+  const [isApplied, setIsApplied] = useState(
+    localStorage.getItem("isApplied") === "true" ? true : false
+  );
+
+  useEffect(() => {
+    localStorage.setItem("isApplied", isApplied);
+  }, [isApplied]);
 
   const theme = createTheme();
-  console.log(id);
 
   const applyJob = async () => {
     let sendApply = 0;
-    let userAgrees = false; // Khởi tạo biến userAgrees với giá trị ban đầu là false
-    // Hiển thị một thông báo cho người dùng, ví dụ:
+    let userAgrees = false;
+
     const message = `Bạn có muốn ứng tuyển công việc này không?`;
     if (window.confirm(message)) {
-      userAgrees = true; // Nếu người dùng đồng ý, cập nhật biến userAgrees thành true
+      userAgrees = true;
     }
 
     if (userAgrees) {
-      // Nếu người dùng đã đồng ý
       sendApply = 1;
       const contact = {
         jobId: id,
       };
+      console.log(id);
 
       const res = await axios.post(
         `http://localhost:5000/api/candidate/applyjob/${id}`,
@@ -133,48 +147,54 @@ export default function JobDetail({ user }) {
           },
         }
       );
+      console.log(res.data);
+
       if (res.data.status && res.data.status !== 200) {
         toast.warning("Ứng tuyển thất bại");
       } else {
-        const action = setApplyJobs(res.data.applyJobs);
-        dispatch(action);
         setIsApplied(true);
         toast.success("Ứng tuyển thành công");
       }
     }
   };
 
-  const cancelApplyJob = async () => {
-    let sendApply = 0;
-    let userAgrees = false; // Khởi tạo biến userAgrees với giá trị ban đầu là false
-    // Hiển thị một thông báo cho người dùng, ví dụ:
-    const message = `Bạn có muốn hủy ứng tuyển công việc này không?`;
-    if (window.confirm(message)) {
-      userAgrees = true; // Nếu người dùng đồng ý, cập nhật biến userAgrees thành true
-    }
+  // const cancelApplyJob = async () => {
+  //   let sendApply = 0;
+  //   let userAgrees = false;
 
-    if (userAgrees) {
-      // Nếu người dùng đã đồng ý
-      sendApply = 1;
-      const contact = {
-        jobId: id,
-      };
+  //   const message = `Bạn có muốn hủy ứng tuyển công việc này không?`;
+  //   if (window.confirm(message)) {
+  //     userAgrees = true;
+  //   }
 
-      const res = await axios.post(
-        `http://localhost:5000/api/candidate/cancelapplyjob/${id}`,
-        contact
-      );
-      if (res.data.status && res.data.status !== 200) {
-        console.log(res);
-        toast.warning("Hủy Ứng tuyển thất bại");
-      } else {
-        const action = setApplyJobs(res.data.applyJobs);
-        dispatch(action);
-        setIsApplied(false);
-        toast.success("Hủy ứng tuyển thành công");
-      }
-    }
-  };
+  //   if (userAgrees) {
+  //     sendApply = 1;
+  //     const contact = {
+  //       jobId: id,
+  //     };
+
+  //     const res = await axios.post(
+  //       `http://localhost:5000/api/candidate/cancelapplyjob/${id}`,
+  //       contact,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       }
+  //     );
+  //     if (res.data.status && res.data.status !== 200) {
+  //       console.log(res);
+  //       toast.warning("Hủy Ứng tuyển thất bại");
+  //     } else {
+  //       const newIdApply = idApply.filter((item) => item !== id);
+  //       const action = setidApplyJob(newIdApply);
+  //       dispatch(action);
+  //       setIsApplied(false);
+  //       toast.success("Hủy ứng tuyển thành công");
+  //     }
+  //   }
+  // };
+
   console.log(isApplied);
 
   return (
@@ -287,12 +307,12 @@ export default function JobDetail({ user }) {
                     </Button>
                   ) : (
                     <Button
-                      onClick={() => cancelApplyJob()}
-                      startIcon={<CancelIcon />}
+                      // onClick={() => cancelApplyJob()}
+                      startIcon={<CheckCircleIcon />}
                       variant="contained"
-                      color="warning"
+                      color="primary"
                     >
-                      Hủy ứng tuyển
+                      Đã Ứng Tuyển
                     </Button>
                   ))}
                 {user.role === "recruiter" && (
@@ -566,7 +586,7 @@ export default function JobDetail({ user }) {
                   }}
                 >
                   {/* <RichTextDisplay data={JSON.parse(data.candidateRequired)} /> */}
-                  {data.candidateRequired}
+                  {data.required}
                 </Box>
               </Grid>
               <Grid

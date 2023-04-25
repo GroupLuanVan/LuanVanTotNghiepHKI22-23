@@ -34,6 +34,7 @@ import LoginType from "./components/Login/LoginType";
 import { LoginSeeker } from "./components/Login/LoginSeeker";
 import { LoginEmployer } from "./components/Login/LoginEmploy";
 import { LoginAdmin } from "./components/Login/LoginAdmin";
+import { ShowCV } from "./components/Company/ShowCV";
 
 
 function App() {
