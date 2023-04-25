@@ -28,4 +28,99 @@ export const ShowCV = () => {
   const { data, loading, error } = useFetch(
     "http://localhost:5000/api/jobpost/all"
   );
+  return (
+    <>
+      <Box
+        sx={{
+          //background: "linear-gradient(to left, #8cebc84a, transparent)",
+          background:
+            "transparent linear-gradient(6deg,#fff,#c4ffdd 100%,rgba(195,255,221,.702) 0) 0 0 no-repeat",
+          //   mb: 0,
+          p: 15,
+          height: "290px",
+          position: "relative",
+        }}
+      >
+        <Box mt={1}>
+          <Typography variant="h3" sx={{ color: "#00b14f", mb: "37px" }}>
+            Khám phá công việc của công ty nổi bật
+          </Typography>
+          <Typography variant="h6" sx={{ color: "#00b14f" }}>
+            Tra cứu thông tin công ty và tìm kiếm nơi làm việc tốt nhất dành cho
+            bạn
+          </Typography>
+        </Box>
+
+        <Box mb={-10} mr={100} display={"flex"} justifyContent="flex-start">
+          <Box
+            display="flex"
+            flexDirection={"column"}
+            alignItems="center"
+            justifyContent={"center"}
+            margin="auto"
+            padding={3}
+            borderRadius={5}
+            // boxShadow={"5px 10px 20px #ccc"}
+            // backgroundColor="white"
+            // zIndex={999}
+            sx={{
+              mt: "2rem",
+              ml: "-2rem",
+            }}
+          >
+            <Box mr={10}>
+              <Typography variant="h4" fontWeight="550" gutterBottom>
+                Tìm kiếm công việc phù hợp với bạn
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                zIndex: 1,
+              }}
+            >
+              <TextField
+                size="small"
+                sx={{
+                  width: "500px",
+
+                  backgroundColor: "white",
+
+                  borderRadius: "100rem",
+                }}
+                color="success"
+                label="Nhập tên công ty"
+              />
+
+              <Button
+                size="small"
+                sx={{
+                  ml: 2,
+                  width: "150px",
+                  borderRadius: "10rem",
+                }}
+                variant="contained"
+                color="success"
+              >
+                Tìm việc ngay
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+
+      <Container maxWidth>
+        <Box sx={{ my: 6 }}>
+          <Typography
+            variant="h3"
+            fontWeight="600"
+            gutterBottom
+            sx={{ display: "flex", justifyContent: "center", ml: 3, mt: 4 }}
+          >
+            Tin tuyển dụng, việc làm mới nhất
+          </Typography>
+        </Box>
+      </Container>
+    </>
+  );
 };

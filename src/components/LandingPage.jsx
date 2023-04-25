@@ -36,6 +36,7 @@ export const LandingPage = () => {
   const { data, loading, error } = useFetch(
     "http://localhost:5000/api/jobpost/all"
   );
+
   const [keyWord, setKeyWord] = useState();
   const SearchBox = styled(Box)({
     display: "flex",

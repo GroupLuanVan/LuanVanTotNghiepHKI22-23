@@ -684,7 +684,10 @@ export default function PostJob() {
               path="/searchcandidate/:id"
               element={<SearchCandidate user={user} />}
             />
-            <Route path="/contacts" element={<Contact user={user} />}></Route>
+            <Route
+              path="/contacts/:id"
+              element={<Contact user={user} />}
+            ></Route>
             <Route path="/SearchCandi" element={<ShowCV user={user} />}></Route>
           </Routes>
         </Grid>

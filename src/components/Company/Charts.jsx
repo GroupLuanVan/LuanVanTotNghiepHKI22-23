@@ -28,11 +28,14 @@ import env from "../../asset/env.json";
 import useFetch from "../../hook/useFetch";
 import Loading from "../Loading";
 import { Modal } from "@mui/material";
+import Contact from "./Contact";
 export default function Charts({ user }) {
   console.log(user);
   const [openCandidatesModal, setOpenCandidatesModal] = useState(false);
   const hdlOpenCandidatesModal = () => setOpenCandidatesModal(true);
   const hdlCloseCandidatesModal = () => setOpenCandidatesModal(false);
+
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,9 +51,6 @@ export default function Charts({ user }) {
       navigateTo("/hrlogin");
     }
   });
-  const hdlSuaBaiDang = (jobPostId) => {
-    navigateTo(`../editjobpost/${jobPostId}`);
-  };
 
   const axiosInstance = axios.create({
     baseURL: "http://localhost:5000/api/jobpost",
@@ -84,6 +84,7 @@ export default function Charts({ user }) {
   };
 
   console.log(jobsFetch.data.jobsPage);
+
   return (
     <>
       <Grid
@@ -159,8 +160,10 @@ export default function Charts({ user }) {
                           variant="text"
                           color="success"
                           onClick={() => {
-                            // navigateTo(`../searchcandidate/${item._id}`);
-                            navigateTo(`../contacts/`);
+                            navigateTo({
+                              pathname: `../contacts/${item._id}`,
+                              state: { jobsPage: jobsFetch.data.jobsPage },
+                            });
                           }}
                         >
                           Chi Tiết
@@ -172,7 +175,7 @@ export default function Charts({ user }) {
                             variant="contained"
                             color="primary"
                             sx={{ mr: 1, height: 30, width: 100 }}
-                            onClick={() => hdlSuaBaiDang(item._id)}
+                            //onClick={() => hdlSuaBaiDang(item._id)}
                           >
                             Sửa
                           </Button>
@@ -195,7 +198,6 @@ export default function Charts({ user }) {
       </Grid>
 
       {/* MODAL SECTION */}
-
       <Modal
         open={openCandidatesModal}
         onClose={hdlCloseCandidatesModal}

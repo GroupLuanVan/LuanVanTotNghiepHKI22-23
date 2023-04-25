@@ -92,7 +92,7 @@ const HeaderHR = () => {
             mr: 5,
           }}
         >
-          Báo Cáo Tuyển Dụng
+          Công Việc Đã Đăng
         </Typography>
         <Typography
           onClick={() => {
