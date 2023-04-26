@@ -71,6 +71,8 @@ function SearchController({ setSearchCbData }) {
       [item]: e.target.checked,
     });
   }
+  const [isLoading, setIsLoading] = useState(false);
+
   const token = localStorage.getItem("token");
   const getALLRemuse = async () => {
     const res = await axios.get("http://localhost:5000/api/resume/all", {
@@ -81,7 +83,13 @@ function SearchController({ setSearchCbData }) {
     });
     setSearchCbData(res.data);
     console.log(res.data);
+    setIsLoading(false);
   };
+
+  useEffect(() => {
+    getALLRemuse();
+  }, []);
+
   return (
     <>
       <Box
@@ -93,16 +101,15 @@ function SearchController({ setSearchCbData }) {
           p: 15,
           height: "290px",
           position: "relative",
-          mt: 20,
+          mt: 15,
         }}
       >
         <Box mt={1}>
           <Typography variant="h3" sx={{ color: "#00b14f", mb: "37px" }}>
-            Khám phá công việc của công ty nổi bật
+            Khám phá Ứng Viên Tiềm Năng Cho Bạn
           </Typography>
           <Typography variant="h6" sx={{ color: "#00b14f" }}>
-            Tra cứu thông tin công ty và tìm kiếm nơi làm việc tốt nhất dành cho
-            bạn
+            Tra Cứu Thông Tin Ứng Viên
           </Typography>
         </Box>
 
@@ -117,70 +124,90 @@ function SearchController({ setSearchCbData }) {
             borderRadius={5}
             sx={{
               mt: "2rem",
-              ml: "-2rem",
+              ml: "2rem",
             }}
           >
             <Box mr={5}>
               <Typography variant="h4" fontWeight="550" gutterBottom>
-                Tìm kiếm công việc phù hợp với bạn
+                Tìm kiếm Ứng Viên
               </Typography>
             </Box>
             <Box
               sx={{
                 display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
                 zIndex: 1,
-                flex: 1, // Thêm thuộc tính flex để chia đều chiều rộng của 2 button
+                flex: 1,
               }}
             >
-              <Button
-                onClick={() => getALLRemuse()}
-                size="small"
-                sx={{
-                  ml: 2,
-                  width: "150px",
-                  borderRadius: "10rem",
-                }}
-                variant="contained"
-                color="success"
-              >
-                Tất Cả
-              </Button>
-              <Button
-                size="small"
-                sx={{
-                  ml: 2,
-                  width: "150px",
-                  borderRadius: "10rem",
-                }}
-                variant="contained"
-                color="success"
-              >
-                Gợi Ý
-              </Button>
-              <TextField
-                size="small"
-                sx={{
-                  width: "500px",
-                  backgroundColor: "white",
-                  borderRadius: "100rem",
-                  mr: 10,
-                  ml: 10,
-                }}
-                color="success"
-                label="Nhập tên công ty"
-              />
-              <Button
-                size="small"
-                sx={{
-                  ml: 2,
-                  width: "150px",
-                  borderRadius: "10rem",
-                }}
-                variant="contained"
-                color="success"
-              >
-                Tìm Kiếm
-              </Button>
+              <Box sx={{ display: "flex", ml: 7 }}>
+                <TextField
+                  size="small"
+                  sx={{
+                    width: "700px",
+                    backgroundColor: "white",
+                    borderRadius: "100rem",
+                    mr: 2,
+                    border: "1px solid black",
+                  }}
+                  color="success"
+                  label="Nhập tên công ty"
+                />
+
+                <Button
+                  size="small"
+                  sx={{
+                    ml: 2,
+                    borderRadius: "10rem",
+                  }}
+                  variant="contained"
+                  color="success"
+                >
+                  Tìm Kiếm
+                </Button>
+              </Box>
+              <Box sx={{ display: "flex", mt: 2 }}>
+                <Button
+                  onClick={() => getALLRemuse()}
+                  sx={{
+                    mr: 2,
+                    width: "200px",
+                    height: "50px",
+                    fontWeight: "bold",
+                    fontSize: "18px",
+                    borderRadius: "10rem",
+                    backgroundColor: isLoading ? "white" : "#fff",
+                    color: isLoading ? "#0061b1" : "#000",
+                    "&:hover": {
+                      backgroundColor: isLoading ? "#00b14f" : "white",
+                      color: isLoading ? "white" : "#00b14f",
+                    },
+                  }}
+                  variant="contained"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Đang tải..." : "Tất Cả"}
+                </Button>
+
+                <Button
+                  sx={{
+                    backgroundColor: "#282828",
+                    color: "#ffffff",
+                    borderRadius: "10rem",
+                    width: "200px",
+                    fontWeight: "bold",
+                    fontSize: "18px",
+                    "&:hover": {
+                      backgroundColor: "#ffffff",
+                      color: "#282828",
+                    },
+                  }}
+                  variant="contained"
+                >
+                  Gợi Ý
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Box>
@@ -238,45 +265,29 @@ function CandidateCard({ data, type }) {
           {data.name}
         </Typography>
         {/* title */}
-        <Box
-          sx={{
-            ...commonStyle,
-          }}
-        >
-          <WorkOutlineOutlinedIcon fontSize="small" />
+        <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+          <WorkOutlineOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
           <Typography variant="body1" color="initial">
             {data.title}
           </Typography>
         </Box>
         {/* address  */}
-        <Box
-          sx={{
-            ...commonStyle,
-          }}
-        >
-          <PlaceOutlinedIcon fontSize="small" />
+        <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+          <PlaceOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
           <Typography variant="body1" color="initial">
             {data.fulladdress}
           </Typography>
         </Box>
         {/* email */}
-        <Box
-          sx={{
-            ...commonStyle,
-          }}
-        >
-          <EmailOutlinedIcon fontSize="small" />
+        <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+          <EmailOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
           <Typography variant="body1" color="initial">
             {data.email}
           </Typography>
         </Box>
         {/* phone */}
-        <Box
-          sx={{
-            ...commonStyle,
-          }}
-        >
-          <PhoneIphoneOutlinedIcon fontSize="small" />
+        <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+          <PhoneIphoneOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
           <Typography variant="body1" color="initial">
             {data.phone}
           </Typography>
@@ -292,12 +303,13 @@ function CandidateCard({ data, type }) {
             mb: 2,
           }}
         >
-          <Typography variant="h6" color="initial">
+          <Typography variant="h5" color="initial" fontWeight={600}>
             Kinh nghiệm
           </Typography>
           <Box
             sx={{
               width: "100%",
+              mt: 2,
             }}
           >
             <RichTextDisplay data={JSON.parse(data.experienceCv)} />
@@ -311,12 +323,13 @@ function CandidateCard({ data, type }) {
             mb: 2,
           }}
         >
-          <Typography variant="h6" color="initial">
+          <Typography variant="h5" color="initial" fontWeight={600}>
             Hoạt động
           </Typography>
           <Box
             sx={{
               width: "100%",
+              mt: 2,
             }}
           >
             <RichTextDisplay data={JSON.parse(data.activitiesCv)} />
@@ -330,12 +343,13 @@ function CandidateCard({ data, type }) {
             mb: 2,
           }}
         >
-          <Typography variant="h6" color="initial">
+          <Typography variant="h5" color="initial" fontWeight={600}>
             Kỹ năng
           </Typography>
           <Box
             sx={{
               width: "100%",
+              mt: 2,
             }}
           >
             <RichTextDisplay data={JSON.parse(data.skillsCv)} />
@@ -343,39 +357,42 @@ function CandidateCard({ data, type }) {
         </Grid>
         {/* Hoc van */}
         <Grid item xs={6}>
-          <Typography variant="h6" color="initial">
+          <Typography variant="h5" color="initial" fontWeight={600}>
             Học vấn
           </Typography>
           <Box
             sx={{
               width: "100%",
+              mt: 2,
             }}
           >
             <RichTextDisplay data={JSON.parse(data.educationCv)} />
           </Box>
         </Grid>
         <Grid item xs={6}>
-          <Typography variant="h6" color="initial">
+          <Typography variant="h5" color="initial" fontWeight={600}>
             Dự Án
           </Typography>
           <Box
             sx={{
               width: "100%",
+              mt: 2,
             }}
           >
             {data.project}
           </Box>
         </Grid>
         <Grid item xs={6}>
-          <Typography variant="h6" color="initial">
+          <Typography variant="h5" color="initial" fontWeight={600}>
             Chứng Chỉ
           </Typography>
           <Box
             sx={{
               width: "100%",
+              mt: 2,
             }}
           >
-            {data.activities}
+            {data.certifications}
           </Box>
         </Grid>
       </Grid>
@@ -383,7 +400,7 @@ function CandidateCard({ data, type }) {
         <Button
           variant="outlined"
           color="primary"
-          //onClick={() => navigate(`/viewcv/${data._id}`)}
+          onClick={() => navigate(`/viewcv/${data._id}`)}
         >
           Xem CV
         </Button>
@@ -412,7 +429,6 @@ function CandidateCard({ data, type }) {
 }
 
 function Result({ data, type }) {
-  console.log(data);
   return (
     <>
       <Box
@@ -435,8 +451,7 @@ function Result({ data, type }) {
             <Typography variant="h6" fontWeight={550} sx={{ ml: 1 }}>
               Tìm thấy{" "}
               <Typography variant="span" color="success">
-                {/* {data.length} */}
-                100
+                {data.length}
               </Typography>{" "}
               ứng viên phù hợp
             </Typography>
@@ -473,19 +488,19 @@ export const ShowCV = (user, env) => {
   const [jobContacts, setJobContacts] = useState([]);
 
   //cv list
-  // const fetchJobContactsCvData = async () => {
-  //   const jobContactsRes = await axios.get(
-  //     `/rec/${user.user._id}/job/${jobPostId}/jobcontacts`
-  //   );
+  const fetchJobContactsCvData = async () => {
+    const jobContactsRes = await axios.get(
+      `/rec/${user.user._id}/job/${jobPostId}/jobcontacts`
+    );
 
-  //   let contactResumes = jobContactsRes.data.map((item) => {
-  //     let resumeData = item.resumeId;
-  //     let rs = { ...resumeData, contactID: item._id };
-  //     return rs;
-  //   });
+    let contactResumes = jobContactsRes.data.map((item) => {
+      let resumeData = item.resumeId;
+      let rs = { ...resumeData, contactID: item._id };
+      return rs;
+    });
 
-  //   setJobContacts(contactResumes);
-  // };
+    setJobContacts(contactResumes);
+  };
 
   const [tabValue, setTabValue] = useState(0);
   const handleChange = (event, newValue) => {

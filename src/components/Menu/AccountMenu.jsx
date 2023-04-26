@@ -51,16 +51,17 @@ export default function AccountMenu() {
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        <IconButton size="small" sx={{ ml: 4 }}>
+        {/* <IconButton size="small" sx={{ ml: 4 }}>
           <NotificationsIcon
             sx={{ width: 32, height: 32, color: "white" }}
           ></NotificationsIcon>
-        </IconButton>
-        <IconButton size="small" sx={{ ml: 4 }}>
+        </IconButton> */}
+        {/* <IconButton size="small" sx={{ ml: 4 }}>
           <ChatBubbleIcon
             sx={{ width: 32, height: 32, color: "white" }}
           ></ChatBubbleIcon>
-        </IconButton>
+        </IconButton> */}
+
         <Tooltip title="Thông tin tài khoản">
           <IconButton
             onClick={handleClick}

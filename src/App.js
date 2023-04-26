@@ -35,6 +35,7 @@ import { LoginSeeker } from "./components/Login/LoginSeeker";
 import { LoginEmployer } from "./components/Login/LoginEmploy";
 import { LoginAdmin } from "./components/Login/LoginAdmin";
 import { ShowCV } from "./components/Company/ShowCV";
+import ViewCV from "./components/viewCV";
 
 
 function App() {
@@ -242,6 +243,17 @@ function App() {
                 </>
               }
               />
+
+<Route
+              path="viewcv/:id"
+              element={
+                <>
+                  <CustomAppBar />
+                  <ViewCV user={user} />
+                  <Footer />
+                </>
+              }
+            />
                                <Route
               path="/MyProfile"
               element={

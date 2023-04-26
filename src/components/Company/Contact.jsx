@@ -30,10 +30,6 @@ export default function Contact(user) {
   const { id } = useParams();
   console.log(id);
 
-  // const location = useLocation();
-  // const jobsPage = location.state?.jobsPage;
-  // console.log(jobsPage);
-
   const token = localStorage.getItem("token");
 
   // có thể lưu status dạng int là 0, 1, 2, mặc định là 0, xuống đây dựa dô cái mảng cvstatus dưới này mà lấy
@@ -58,6 +54,7 @@ export default function Contact(user) {
     fetchData();
   }, []);
   console.log(data);
+
   return (
     <>
       {!data ? (
