@@ -256,43 +256,51 @@ function CandidateCard({ data, type }) {
         }}
       >
         {/*name  */}
-        <Typography
-          variant="h4"
-          color="initial"
-          fontWeight={500}
-          sx={{ mb: 1 }}
-        >
-          {data.name}
-        </Typography>
-        {/* title */}
-        <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-          <WorkOutlineOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-          <Typography variant="body1" color="initial">
-            {data.title}
+        <Box display={"flex"} justifyContent={"center"}>
+          {" "}
+          <Typography
+            variant="h4"
+            color="initial"
+            fontWeight={500}
+            sx={{ mb: 1 }}
+          >
+            {data.name}
           </Typography>
         </Box>
-        {/* address  */}
-        <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-          <PlaceOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-          <Typography variant="body1" color="initial">
-            {data.fulladdress}
-          </Typography>
-        </Box>
-        {/* email */}
-        <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-          <EmailOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-          <Typography variant="body1" color="initial">
-            {data.email}
-          </Typography>
-        </Box>
-        {/* phone */}
-        <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-          <PhoneIphoneOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
-          <Typography variant="body1" color="initial">
-            {data.phone}
-          </Typography>
+
+        <Box>
+          {" "}
+          {/* title */}
+          <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+            <WorkOutlineOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+            <Typography variant="body1" color="initial">
+              {data.title}
+            </Typography>
+          </Box>
+          {/* address  */}
+          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <PlaceOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+            <Typography variant="body1" color="initial">
+              {data.fulladdress}
+            </Typography>
+          </Box>
+          {/* email */}
+          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <EmailOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+            <Typography variant="body1" color="initial">
+              {data.email}
+            </Typography>
+          </Box>
+          {/* phone */}
+          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <PhoneIphoneOutlinedIcon fontSize="small" sx={{ mr: 1 }} />
+            <Typography variant="body1" color="initial">
+              {data.phone}
+            </Typography>
+          </Box>
         </Box>
       </Grid>
+
       {/* Thong tin Rich text */}
       <Grid item container xs={5}>
         {/* kinh nghiem */}

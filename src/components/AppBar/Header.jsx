@@ -3,8 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import Image from "mui-image";
+import Logo from "../../asset/Logo.png";
 import AccountMenu from "../Menu/AccountMenu";
 import { selectIsLoggedIn } from "../../store/userSlice";
+import App from "../../App.css";
 
 import {
   AppBar,
@@ -23,68 +25,73 @@ const CustomAppBar = () => {
   const [open, setOpen] = useState(false);
 
   console.log(user);
+  const navigateTo = function (location) {
+    navigate(location);
+  };
   return (
     <AppBar
       sx={{
-        background: "#b8b2ab",
-        color: "red",
-        height: "80px",
+        background: "white",
+        color: "black",
+        height: "110px",
       }}
       position="fixed"
     >
-      <Toolbar sx={{ minHeight: "80px", alignItems: "center" }}>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 5 }}
-        ></IconButton>
-        <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
-          SmartJobBoard
-        </Typography>
-        <Typography
-          onClick={() => {
-            navigate("/ListJob");
-          }}
-          variant="h6"
+      <Toolbar sx={{ mt: 2, minHeight: "80px", alignItems: "center" }}>
+        <Box
           sx={{
-            mr: 5,
+            flexGrow: 1,
+            display: "flex",
+            alignItems: "center",
+            marginRight: "auto",
           }}
         >
-          Công Việc
-        </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            mr: 5,
-          }}
-        >
-          Các Công Ty
-        </Typography>
-        <Typography
-          onClick={() => {
-            navigate("/updateProfile");
-          }}
-          variant="h6"
-          sx={{
-            mr: 5,
-          }}
-        >
-          Chỉnh sửa hồ sơ
-        </Typography>
-        <Typography
-          onClick={() => {
-            navigate("/CreateCV");
-          }}
-          variant="h6"
-          sx={{
-            mr: 5,
-          }}
-        >
-          Tạo CV
-        </Typography>
-        <>
+          {/* <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 5 }}
+          ></IconButton> */}
+          <Image
+            onClick={() => {
+              navigateTo("/");
+            }}
+            src={Logo}
+            width="320px"
+            height="94px"
+            fit="cover"
+            duration="0"
+            //sx={{ margin: "0px", padding: "0px" }}
+          />
+
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Typography
+              onClick={() => {
+                navigate("/ListJob");
+              }}
+              variant="h5"
+              sx={{
+                mr: 5,
+                ml: 5,
+              }}
+            >
+              Công Việc
+            </Typography>
+            <Typography
+              onClick={() => {
+                navigate("/CreateCV");
+              }}
+              variant="h5"
+              sx={{
+                mr: 5,
+              }}
+            >
+              Tạo CV
+            </Typography>
+          </Box>
+        </Box>
+        <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
           {!user.isLogin ? (
             <>
               <Button
@@ -96,6 +103,16 @@ const CustomAppBar = () => {
                 sx={{
                   fontWeight: "normal",
                   mr: 2,
+                  padding: "8px 16px",
+                  height: "45px",
+                  width: "180px",
+                  color: "black",
+                  fontWeight: "bold",
+                  fontSize: "15px",
+                  "&:hover": {
+                    backgroundColor: "#00796b",
+                    boxShadow: "none",
+                  },
                 }}
               >
                 Đăng nhập
@@ -104,9 +121,19 @@ const CustomAppBar = () => {
                 onClick={() => {
                   navigate("/Rtype");
                 }}
-                color="warning"
                 variant="contained"
-                sx={{ ml: 2 }}
+                sx={{
+                  ml: 2,
+                  padding: "8px 16px",
+                  height: "45px",
+                  width: "180px",
+                  backgroundColor: "#00a7ac",
+                  fontWeight: "bold",
+                  fontSize: "15px",
+                  "&:hover": {
+                    backgroundColor: "#00695c",
+                  },
+                }}
               >
                 Đăng ký
               </Button>
@@ -114,7 +141,7 @@ const CustomAppBar = () => {
           ) : (
             <AccountMenu user={user.user} />
           )}
-        </>{" "}
+        </Box>
       </Toolbar>
     </AppBar>
   );

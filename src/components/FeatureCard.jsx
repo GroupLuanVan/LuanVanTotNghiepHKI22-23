@@ -40,11 +40,12 @@ function FeatureCard({
             {subTitle}
           </Typography>
           <Button
-            color="success"
+            color="warning"
             variant="contained"
             sx={{
               width: "20rem",
               bgcolor: "#F44336",
+              backgroundColor: "#00A7AC",
             }}
           >
             {buttonTitle}

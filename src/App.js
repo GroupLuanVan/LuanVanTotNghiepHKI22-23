@@ -25,6 +25,7 @@ import Company from "./components/Company/Company";
 import UpdateProfile from "./components/Profile/UpdateProfile";
 import 'react-toastify/dist/ReactToastify.css';
 import HeaderHR from "./components/JobPost/HeaderHR";
+import HeaderCandi from "./components/AppBar/HeaderCandi";
 import Dashboard from "./components/Admin/Admin";
 import MyCV from "./components/MyCV";
 import MyProfile from "./components/Profile/MyProfile";
@@ -60,7 +61,7 @@ function App() {
               path="Home"
               element={
                 <>
-                  <CustomAppBar />
+                  <HeaderCandi />
                    <Home /> 
                   <Footer/> 
                 </>

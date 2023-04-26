@@ -9,11 +9,17 @@ import {
 } from "@mui/material";
 import Image1 from "../asset/BK_LandingPage.jpg";
 import Image2 from "../asset/LJ.png";
-import Silicon from "../asset/Logo_Silicon.jpg";
+import Logo from "../asset/Logo.png";
+import Silicon from "../asset/Silicon.png";
 import Bstar from "../asset/logo_Bstar.webp";
 import FuJinet from "../asset/logo_Fujinnet.jpg";
 import PTN from "../asset/logo_PTN.jpg";
 import FPT from "../asset/logo_FPT.png";
+import UNIT from "../asset/UNIT.png";
+import DXC from "../asset/DXC.png";
+import TMA from "../asset/TMA.png";
+import NFQ from "../asset/NFQ.png";
+import TPS from "../asset/TPS.webp";
 import hrimg from "../asset/hr.png";
 import Cadi from "../asset/86.jpg";
 import Image from "mui-image";
@@ -39,18 +45,28 @@ export const LandingPage = () => {
 
   const [keyWord, setKeyWord] = useState();
   const SearchBox = styled(Box)({
-    display: "flex",
-    alignItems: "center",
-    border: "0.5px solid black",
-    padding: "5px 15px",
-    transition: "all 0.3s ease",
-    width: "340px",
-    position: "relative",
-    "&:hover": {
-      borderColor: "#4CAF50",
-      backgroundColor: "rgba(0, 0, 0, 0.2)",
-      boxShadow: "0px 0px 10px 0px #4CAF50",
-    },
+    // display: "flex",
+    // alignItems: "center",
+    // border: "0.5px solid black",
+    // padding: "5px 15px",
+    // transition: "all 0.3s ease",
+    // width: "440px",
+    // position: "relative",
+    // "&:hover": {
+    //   borderColor: "#4CAF50",
+    //   backgroundColor: "rgba(0, 0, 0, 0.2)",
+    // },
+    height: "22px",
+    background: "#EFF3F2",
+    fontFamily: "var(--font-work-sans)",
+    fontWeight: "400",
+    fontSize: "0.938rem",
+    lineHeight: "18px",
+    color: "var(--title-color1)",
+    padding: "20px 20px 20px 0px",
+    lineHeight: "1",
+    width: "100%",
+    borderRadius: "10px",
   });
   const SearchInput = styled(InputBase)({
     color: "black",
@@ -68,21 +84,36 @@ export const LandingPage = () => {
           justifyContent: "center",
           alignItems: "center",
           padding: "0 20px",
+          backgroundColor: "rgba(0, 0, 0, 0.75)",
         }}
       >
-        <Typography
-          variant="h2"
-          sx={{
-            fontWeight: "bold",
-            textAlign: "center",
-            mb: 4,
-            color: "Black",
-          }}
-        >
-          Xây Dựng Hồ Sơ Cá Nhân Và Đăng Tuyển Ứng Viên Tiềm Năng
-        </Typography>
+        <Box display={"flex"}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: "bold",
+              textAlign: "center",
+              mb: 4,
+              color: "white",
+              mr: 5,
+            }}
+          >
+            Cơ Hội
+          </Typography>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: "bold",
+              textAlign: "center",
+              mb: 4,
+              color: " #00a7ac",
+            }}
+          >
+            Nghề Nghiệp Của Bạn
+          </Typography>
+        </Box>
         <Box
-          boxShadow={"5px 10px 20px #ccc"}
+          // boxShadow={"5px 10px 20px #ccc"}
           sx={{
             position: "relative",
             display: "flex",
@@ -91,6 +122,7 @@ export const LandingPage = () => {
             background: "white",
             height: "294px",
             width: "1410px",
+            borderRadius: "20px",
             //padding: "32px 32px 32px 32px",
           }}
         >
@@ -110,6 +142,9 @@ export const LandingPage = () => {
                 <Box
                   sx={{
                     display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "20px",
                     p: 1,
                   }}
                 >
@@ -123,15 +158,16 @@ export const LandingPage = () => {
                   <SearchBox>
                     <SearchInput
                       placeholder="Location "
-                      sx={{ ml: 1, flex: 1 }}
+                      sx={{ ml: 2, flex: 1 }}
                     />
                   </SearchBox>
+
                   <Button
                     sx={{
-                      backgroundColor: "#2F4BA0",
-                      height: "46px",
-                      width: "160px",
-                      borderRadius: "0px",
+                      backgroundColor: "#00A7AC",
+                      height: "62px",
+                      width: "200px",
+                      borderRadius: "10px",
                     }}
                     variant="contained"
                     size="medium"
@@ -150,11 +186,12 @@ export const LandingPage = () => {
                 right: 0,
                 bottom: 0,
                 width: "30%",
+                borderRadius: "20px",
               }}
               item
               xs={4}
             >
-              <Box mt={4}>
+              <Box mt={3}>
                 <Typography sx={{ lineHeight: 1.75 }} fontWeight="bold">
                   Tìm Kiếm việc làm dễ dàng hơn
                 </Typography>
@@ -164,9 +201,10 @@ export const LandingPage = () => {
                 </Typography>
                 <Button
                   sx={{
-                    backgroundColor: "#2F4BA0",
-                    height: "50px",
-                    width: "195px",
+                    backgroundColor: "#00A7AC",
+                    height: "62px",
+                    width: "200px",
+                    borderRadius: "10px",
                   }}
                   variant="contained"
                 >
@@ -178,10 +216,42 @@ export const LandingPage = () => {
         </Box>
       </Box>
 
-      <Box sx={{ my: 4 }}>
-        <Typography align="center" variant="h4" fontWeight={550}>
-          Các công ty tuyển dụng hàng đầu
-        </Typography>
+      <Box sx={{ my: 4, padding: 10 }}>
+        <Box sx={{ ml: 10 }} display={"flex"}>
+          <Typography
+            sx={{
+              fontSize: "2.5rem",
+              fontWeight: "700",
+              color: "var(--title-color1)",
+              fontFamily: "var(--font-exo2)",
+              lineHeight: "48px",
+              marginBottom: "20px",
+              marginTop: "-10px",
+            }}
+            align="center"
+            variant="h4"
+            fontWeight={550}
+          >
+            Các công ty tuyển dụng
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "2.5rem",
+              fontWeight: "700",
+              color: "#00a7ac",
+              fontFamily: "var(--font-exo2)",
+              lineHeight: "48px",
+              marginBottom: "20px",
+              marginTop: "-10px",
+              ml: 2,
+            }}
+            align="center"
+            variant="h4"
+            fontWeight={550}
+          >
+            hàng đầu
+          </Typography>
+        </Box>
         <Box
           sx={{
             mt: "1rem",
@@ -200,9 +270,10 @@ export const LandingPage = () => {
           />
           <Image
             sx={{
-              maxWidth: "300px",
+              maxWidth: "200px",
               maxHeight: "200px",
               mr: 4,
+              mt: 3,
             }}
             src={Bstar}
             fit="cover"
@@ -210,7 +281,7 @@ export const LandingPage = () => {
           />
           <Image
             sx={{
-              maxWidth: "250px",
+              maxWidth: "200px",
               maxHeight: "200px",
               mr: 4,
             }}
@@ -235,6 +306,66 @@ export const LandingPage = () => {
               mr: 4,
             }}
             src={FPT}
+            fit="cover"
+            duration={duration} // truyền giá trị số vào prop duration
+          />
+        </Box>
+        <Box
+          sx={{
+            mt: "1rem",
+            display: "flex",
+          }}
+        >
+          <Image
+            sx={{
+              maxWidth: "200px",
+              maxHeight: "200px",
+              mr: 4,
+            }}
+            src={UNIT}
+            fit="cover"
+            duration={duration} // truyền giá trị số vào prop duration
+          />
+          <Image
+            sx={{
+              maxWidth: "200px",
+              maxHeight: "200px",
+              mr: 4,
+              mt: 3,
+            }}
+            src={DXC}
+            fit="cover"
+            duration={duration} // truyền giá trị số vào prop duration
+          />
+          <Image
+            sx={{
+              maxWidth: "200px",
+              maxHeight: "200px",
+              mr: 4,
+              mt: 3,
+            }}
+            src={TMA}
+            fit="cover"
+            duration={duration} // truyền giá trị số vào prop duration
+          />
+          <Image
+            sx={{
+              maxWidth: "200px",
+              maxHeight: "200px",
+              mr: 4,
+            }}
+            src={NFQ}
+            fit="cover"
+            duration={duration} // truyền giá trị số vào prop duration
+          />
+          <Image
+            sx={{
+              maxWidth: "200px",
+              maxHeight: "200px",
+              mr: 4,
+              mt: 4,
+            }}
+            src={TPS}
             fit="cover"
             duration={duration} // truyền giá trị số vào prop duration
           />
@@ -284,12 +415,7 @@ export const LandingPage = () => {
           buttonTitle="Ứng Tuyển Ngay"
         />
       </Box>
-      <Box
-      // sx={{
-      //   display: "flex",
-      //   justifyContent: "center",
-      // }}
-      >
+      <Box sx={{ mt: 10 }}>
         <Box
           boxShadow={"5px 10px 20px #ccc"}
           sx={{
