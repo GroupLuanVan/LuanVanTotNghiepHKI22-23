@@ -103,8 +103,8 @@ export default function MyCV() {
               data={data.cv}
             />
           )}
-          {data.cv.cvTemplate === "CV5" && (
-            <CV5
+          {data.cv.cvTemplate === "CV6" && (
+            <CV6
               editable={false}
               print={print}
               setPrint={setPrint}

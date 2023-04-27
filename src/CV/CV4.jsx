@@ -123,6 +123,15 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
     },
   }));
   const RichContent = function ({ show, toggle, item, data, config }) {
+    let parsedData;
+
+    try {
+      parsedData = JSON.parse(data[item]);
+    } catch (error) {
+      console.error("Invalid JSON:", error);
+      return null;
+    }
+
     return (
       <>
         {show ? (
@@ -130,10 +139,10 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
             item={item}
             setOpen={toggle}
             setData={config}
-            data={data}
+            data={parsedData}
           />
         ) : (
-          <RichTextDisplay data={JSON.parse(data[item])} />
+          <RichTextDisplay data={parsedData} />
         )}
       </>
     );
@@ -303,7 +312,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
               >
                 <FacebookIcon fontSize="small" sx={{ mr: 1 }} />
                 <Typography variant="body1" color="initial">
-                  facebook.com/ungvien
+                  {data.gender}
                 </Typography>
               </Box>
               <Box

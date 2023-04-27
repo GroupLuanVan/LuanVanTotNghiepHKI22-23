@@ -211,11 +211,11 @@ const JobPost = () => {
 
   return (
     <Box
-      maxWidth={1000}
-      margin="0 auto"
-      marginTop={10}
-      marginBottom={5}
-      //marginRight={20}
+      maxWidth={1200}
+      margin="auto"
+      marginTop={25}
+      marginBottom={8}
+      marginLeft={41}
       sx={{
         backgroundColor: "#fff",
         borderRadius: "4px",
@@ -270,7 +270,7 @@ const JobPost = () => {
             />
 
             <Box marginTop={3}>
-              <Grid container spacing={2}>
+              <Grid container spacing={7}>
                 <Grid item xs={4} md={4}>
                   <Box>
                     <Typography variant="p" fontWeight={500} fontSize={20}>
@@ -281,7 +281,7 @@ const JobPost = () => {
                   <Autocomplete
                     disablePortal
                     id="combo-box-demo"
-                    sx={{ width: 300 }}
+                    sx={{ mt: 2, width: 350 }}
                     options={workType()}
                     getOptionLabel={(option) => option.title}
                     renderInput={(params) => (
@@ -305,7 +305,7 @@ const JobPost = () => {
                   </Typography>
                   <Autocomplete
                     freeSolo
-                    sx={{ mt: 0 }}
+                    sx={{ mt: 2, width: 350 }}
                     options={positions}
                     getOptionLabel={(position) => position.title}
                     onChange={handlePositionChange}
@@ -324,7 +324,7 @@ const JobPost = () => {
                   </Typography>
                   <Autocomplete
                     freeSolo
-                    sx={{ mt: 0 }}
+                    sx={{ mt: 2, width: 350 }}
                     options={addresses}
                     getOptionLabel={(address) => address.title}
                     onChange={handleAddressesChange}
@@ -338,130 +338,146 @@ const JobPost = () => {
                 </Grid>
 
                 <Grid item xs={4} md={4}>
-                  <Typography variant="p" fontWeight={500} fontSize={20}>
-                    Số Lượng Cần Tuyển
-                  </Typography>
-                  <TextField
-                    // value={data.amount}
-                    type="number"
-                    sx={{ mt: 0, width: 300 }}
-                    label="Số Lượng"
-                    onChange={(e) => {
-                      setData({
-                        ...data,
-                        amount: e.target.value,
-                      });
-                    }}
-                  />
+                  <Box mt={-3}>
+                    {" "}
+                    <Typography variant="p" fontWeight={500} fontSize={20}>
+                      Số Lượng Cần Tuyển
+                    </Typography>
+                    <TextField
+                      // value={data.amount}
+                      type="number"
+                      sx={{ mt: 2, width: 350 }}
+                      label="Số Lượng"
+                      onChange={(e) => {
+                        setData({
+                          ...data,
+                          amount: e.target.value,
+                        });
+                      }}
+                    />
+                  </Box>
                 </Grid>
                 <Grid item xs={4} md={4}>
-                  <Typography variant="p" fontWeight={500} fontSize={20}>
-                    Kinh Nghiệm Làm Việc
-                  </Typography>
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    sx={{ width: 300 }}
-                    options={getWorkExpList()}
-                    getOptionLabel={(option) => option.title}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        placeholder="Kinh nghiệm làm việc"
-                      />
-                    )}
-                    onChange={(event, value) => {
-                      setData({
-                        ...data,
-                        workExp: value ? value.title : null,
-                      });
-                    }}
-                  />
+                  <Box mt={-3}>
+                    <Typography variant="p" fontWeight={500} fontSize={20}>
+                      Kinh Nghiệm Làm Việc
+                    </Typography>
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      sx={{ mt: 2, width: 350 }}
+                      options={getWorkExpList()}
+                      getOptionLabel={(option) => option.title}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          placeholder="Kinh nghiệm làm việc"
+                        />
+                      )}
+                      onChange={(event, value) => {
+                        setData({
+                          ...data,
+                          workExp: value ? value.title : null,
+                        });
+                      }}
+                    />
+                  </Box>
                 </Grid>
 
                 <Grid item xs={4} md={4}>
-                  <Typography variant="p" fontWeight={500} fontSize={20}>
-                    Loại Công Việc
-                  </Typography>
-                  <Autocomplete
-                    freeSolo
-                    sx={{ mt: 0 }}
-                    options={jobcategories}
-                    getOptionLabel={(jobcategory) => jobcategory.title}
-                    onChange={handleCategoryChange}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        placeholder="Chọn vị trí công việc cần tuyển"
-                      />
-                    )}
-                  />
+                  <Box mt={-3}>
+                    <Typography variant="p" fontWeight={500} fontSize={20}>
+                      Loại Công Việc
+                    </Typography>
+                    <Autocomplete
+                      freeSolo
+                      sx={{ mt: 2, width: 350 }}
+                      options={jobcategories}
+                      getOptionLabel={(jobcategory) => jobcategory.title}
+                      onChange={handleCategoryChange}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          placeholder="Chọn vị trí công việc cần tuyển"
+                        />
+                      )}
+                    />
+                  </Box>
                 </Grid>
                 <Grid item xs={4} md={4}>
-                  <Typography variant="p" fontWeight={500} fontSize={20}>
-                    Giới Tính
-                  </Typography>
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    sx={{ width: 300 }}
-                    options={gender()}
-                    getOptionLabel={(option) => option.title}
-                    renderInput={(params) => (
-                      <TextField {...params} placeholder="Chọn giới tính" />
-                    )}
-                    onChange={(event, value) => {
-                      setData({
-                        ...data,
-                        gender: value ? value.title : null,
-                      });
-                    }}
-                  />
+                  <Box mt={-3}>
+                    {" "}
+                    <Typography variant="p" fontWeight={500} fontSize={20}>
+                      Giới Tính
+                    </Typography>
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      sx={{ mt: 2, width: 350 }}
+                      options={gender()}
+                      getOptionLabel={(option) => option.title}
+                      renderInput={(params) => (
+                        <TextField {...params} placeholder="Chọn giới tính" />
+                      )}
+                      onChange={(event, value) => {
+                        setData({
+                          ...data,
+                          gender: value ? value.title : null,
+                        });
+                      }}
+                    />
+                  </Box>
                 </Grid>
                 <Grid item xs={4} md={4}>
-                  <Typography variant="p" fontWeight={500} fontSize={20}>
-                    Chọn loại tiền lương
-                  </Typography>
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    sx={{ width: 300 }}
-                    options={salarytype()}
-                    getOptionLabel={(option) => option.title}
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        placeholder="chọn loại tiền lương"
-                      />
-                    )}
-                    onChange={(event, value) => {
-                      setData({
-                        ...data,
-                        currency: value ? value.title : null,
-                      });
-                    }}
-                  />
+                  <Box mt={-3}>
+                    {" "}
+                    <Typography variant="p" fontWeight={500} fontSize={20}>
+                      Chọn loại tiền lương
+                    </Typography>
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      sx={{ mt: 2, width: 350 }}
+                      options={salarytype()}
+                      getOptionLabel={(option) => option.title}
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          placeholder="chọn loại tiền lương"
+                        />
+                      )}
+                      onChange={(event, value) => {
+                        setData({
+                          ...data,
+                          currency: value ? value.title : null,
+                        });
+                      }}
+                    />
+                  </Box>
                 </Grid>
                 <Grid item xs={4} md={4}>
-                  <Typography variant="p" fontWeight={500} fontSize={20}>
-                    Kiểu Lương
-                  </Typography>
-                  <Autocomplete
-                    disablePortal
-                    id="combo-box-demo"
-                    sx={{ width: 300 }}
-                    options={kieuluong()}
-                    getOptionLabel={(option) => option.title}
-                    renderInput={(params) => (
-                      <TextField {...params} placeholder="Chọn Kiểu Lương" />
-                    )}
-                    onChange={(event, value) => {
-                      setData({
-                        ...data,
-                        salaryType: value ? value.title : null,
-                      });
-                    }}
-                  />
+                  <Box mt={-3}>
+                    {" "}
+                    <Typography variant="p" fontWeight={500} fontSize={20}>
+                      Kiểu Lương
+                    </Typography>
+                    <Autocomplete
+                      disablePortal
+                      id="combo-box-demo"
+                      sx={{ mt: 2, width: 350 }}
+                      options={kieuluong()}
+                      getOptionLabel={(option) => option.title}
+                      renderInput={(params) => (
+                        <TextField {...params} placeholder="Chọn Kiểu Lương" />
+                      )}
+                      onChange={(event, value) => {
+                        setData({
+                          ...data,
+                          salaryType: value ? value.title : null,
+                        });
+                      }}
+                    />
+                  </Box>
                 </Grid>
                 {/* Lương theo khoảng */}
                 {data.salaryType === "Trong khoảng" && (
@@ -509,29 +525,32 @@ const JobPost = () => {
                 {/* Lương cố định */}
 
                 <Grid item xs={12}>
-                  <Typography variant="p" fontWeight={500} fontSize={20}>
-                    Khu vực làm việc{" "}
-                    <Typography
-                      variant="span"
-                      sx={{ color: "rgba(0,0,0,0.6)" }}
-                    >
-                      (Địa chỉ cụ thể)
+                  <Box mt={-3}>
+                    {" "}
+                    <Typography variant="p" fontWeight={500} fontSize={20}>
+                      Khu vực làm việc{" "}
+                      <Typography
+                        variant="span"
+                        sx={{ color: "rgba(0,0,0,0.6)" }}
+                      >
+                        (Địa chỉ cụ thể)
+                      </Typography>
                     </Typography>
-                  </Typography>
-                  <OutlinedInput
-                    fullWidth
-                    sx={{ mt: 1 }}
-                    placeholder="102/38A, Đường 3/2, Phường An khánh, Ninh Kiều, Cần Thơ"
-                    onChange={(event) =>
-                      setData({
-                        ...data,
-                        fullAddress: event.target.value,
-                      })
-                    }
-                  />
+                    <OutlinedInput
+                      fullWidth
+                      sx={{ mt: 1 }}
+                      placeholder="102/38A, Đường 3/2, Phường An khánh, Ninh Kiều, Cần Thơ"
+                      onChange={(event) =>
+                        setData({
+                          ...data,
+                          fullAddress: event.target.value,
+                        })
+                      }
+                    />
+                  </Box>
                 </Grid>
               </Grid>
-              <Box sx={{ mt: 2 }}>
+              <Box sx={{ mt: 3 }}>
                 <Typography variant="p" fontWeight={500} fontSize={20}>
                   Ngày hết hạn
                 </Typography>
@@ -561,62 +580,76 @@ const JobPost = () => {
           sx={{ p: 2, rowGap: 1, columnGap: 2, background: "#fff", mb: 2 }}
         >
           <Grid item xs={12}>
-            <Typography variant="p" fontWeight={500} fontSize={20}>
-              Mô tả công việc
-            </Typography>
-            <TextField
-              multiline
-              rows={4}
-              variant="outlined"
-              fullWidth
-              placeholder="Nhập mô tả công việc"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
+            <Box mt={-3}>
+              {" "}
+              <Typography variant="p" fontWeight={500} fontSize={20}>
+                Mô tả công việc
+              </Typography>
+              <TextField
+                sx={{
+                  mt: 2,
+                }}
+                multiline
+                rows={4}
+                variant="outlined"
+                fullWidth
+                placeholder="Nhập mô tả công việc"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </Box>
           </Grid>
 
           <Grid item xs={12}>
-            <Typography variant="p" fontWeight={500} fontSize={20}>
-              Yêu cầu ứng viên
-            </Typography>
-            <TextField
-              multiline
-              rows={4}
-              variant="outlined"
-              fullWidth
-              placeholder="Nhập mô tả công việc"
-              value={required}
-              onChange={(e) => setRequired(e.target.value)}
-            />
+            <Box mt={2}>
+              <Typography variant="p" fontWeight={500} fontSize={20}>
+                Yêu cầu ứng viên
+              </Typography>
+              <TextField
+                sx={{
+                  mt: 2,
+                }}
+                multiline
+                rows={4}
+                variant="outlined"
+                fullWidth
+                placeholder="Nhập mô tả công việc"
+                value={required}
+                onChange={(e) => setRequired(e.target.value)}
+              />
+            </Box>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="p" fontWeight={500} fontSize={20}>
-              Quyền lợi
-            </Typography>
-            <TextField
-              multiline
-              rows={4}
-              variant="outlined"
-              fullWidth
-              placeholder="Nhập mô tả công việc"
-              value={benefit}
-              onChange={(e) => setBenefit(e.target.value)}
-            />
+            <Box mt={2}>
+              <Typography variant="p" fontWeight={500} fontSize={20}>
+                Quyền lợi
+              </Typography>
+              <TextField
+                sx={{ mt: 2 }}
+                multiline
+                rows={4}
+                variant="outlined"
+                fullWidth
+                placeholder="Nhập mô tả công việc"
+                value={benefit}
+                onChange={(e) => setBenefit(e.target.value)}
+              />
+            </Box>
           </Grid>
         </Grid>
 
-        <FormGroup sx={{ marginBottom: "16px" }}>
+        {/* <FormGroup sx={{ marginBottom: "16px" }}>
           <FormControlLabel
             control={<Checkbox />}
             label="I agree to the terms and conditions"
           />
-        </FormGroup>
+        </FormGroup> */}
 
         <Button
           onClick={sendPostData}
           variant="contained"
           fullWidth
-          sx={{ backgroundColor: "#4caf50", color: "#fff" }}
+          sx={{ backgroundColor: "#00a7ac", color: "#fff" }}
         >
           Post Job
         </Button>

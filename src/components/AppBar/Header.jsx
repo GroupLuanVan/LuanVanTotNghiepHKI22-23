@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import Image from "mui-image";
 import Logo from "../../asset/Logo.png";
+import Logo1 from "../../asset/Logo1.png";
 import AccountMenu from "../Menu/AccountMenu";
 import { selectIsLoggedIn } from "../../store/userSlice";
 import App from "../../App.css";
@@ -33,7 +34,7 @@ const CustomAppBar = () => {
       sx={{
         background: "white",
         color: "black",
-        height: "110px",
+        height: "120px",
       }}
       position="fixed"
     >
@@ -57,12 +58,15 @@ const CustomAppBar = () => {
             onClick={() => {
               navigateTo("/");
             }}
-            src={Logo}
-            width="320px"
-            height="94px"
+            src={Logo1}
+            width="210px"
+            height="100px"
             fit="cover"
             duration="0"
-            //sx={{ margin: "0px", padding: "0px" }}
+            sx={{
+              ml: "60px",
+              mb: "12px",
+            }}
           />
 
           <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -73,7 +77,7 @@ const CustomAppBar = () => {
               variant="h5"
               sx={{
                 mr: 5,
-                ml: 5,
+                ml: 10,
               }}
             >
               Công Việc

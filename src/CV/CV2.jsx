@@ -25,6 +25,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailIcon from "@mui/icons-material/Mail";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import TransgenderIcon from "@mui/icons-material/Transgender";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { convertToRaw, EditorState } from "draft-js";
 import ContactEditPopUp from "../components/Home/ContactEditPopUp";
@@ -320,9 +321,9 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                     mb: 1,
                   }}
                 >
-                  <FacebookIcon fontSize="small" sx={{ mr: 1 }} />
+                  <TransgenderIcon fontSize="small" sx={{ mr: 1 }} />
                   <Typography variant="body1" color="initial">
-                    facebook.com/ungvien
+                    {data.gender}
                   </Typography>
                 </Box>
                 <Box

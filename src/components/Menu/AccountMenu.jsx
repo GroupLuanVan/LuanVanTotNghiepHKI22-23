@@ -2,6 +2,7 @@ import * as React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserLogout } from "../../store/userSlice";
 
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -47,37 +48,59 @@ export default function AccountMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const StyledTypography = styled(Typography)(({ theme }) => ({
+    fontFamily: "Arial, sans-serif",
+    backgroundColor: "#fff",
+    color: "#000",
+    width: "200px",
+    height: "30px",
+    padding: "10px",
+    border: "2px solid #000",
+    borderRadius: "5px",
+    boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
+  }));
+  const StyledBox = styled(Box)({
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  });
 
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        {/* <IconButton size="small" sx={{ ml: 4 }}>
-          <NotificationsIcon
-            sx={{ width: 32, height: 32, color: "white" }}
-          ></NotificationsIcon>
-        </IconButton> */}
-        {/* <IconButton size="small" sx={{ ml: 4 }}>
-          <ChatBubbleIcon
-            sx={{ width: 32, height: 32, color: "white" }}
-          ></ChatBubbleIcon>
-        </IconButton> */}
-
-        <Tooltip title="Thông tin tài khoản">
+        {/* <Tooltip title="Thông tin tài khoản">
           <IconButton
             onClick={handleClick}
-            size="small"
-            sx={{ ml: 4 }}
+            sx={{ ml: 0 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>
+            <Avatar sx={{ width: 50, height: 50, fontSize: 30 }}>
               {user?.split("")?.[0].toUpperCase()}
             </Avatar>
-
-            {/* user.username[0] hiển thị chữ cái đầu tiên của tên Đăng nhập */}
           </IconButton>
         </Tooltip>
+        <StyledTypography variant="h6" sx={{ mr: 2 }}>
+          {user}
+        </StyledTypography> */}
+        <StyledTypography
+          sx={{ display: "flex", alignItems: "center" }}
+          variant="h6"
+        >
+          <IconButton
+            onClick={handleClick}
+            sx={{ mr: 1 }}
+            aria-controls={open ? "account-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+          >
+            <Avatar sx={{ width: 40, height: 40, fontSize: 30 }}>
+              {user?.split("")?.[0].toUpperCase()}
+            </Avatar>
+          </IconButton>
+          {user}
+        </StyledTypography>
       </Box>
       <Menu
         anchorEl={anchorEl}

@@ -10,6 +10,7 @@ import {
 import Image1 from "../asset/BK_LandingPage.jpg";
 import Image2 from "../asset/LJ.png";
 import Logo from "../asset/Logo.png";
+
 import Silicon from "../asset/Silicon.png";
 import Bstar from "../asset/logo_Bstar.webp";
 import FuJinet from "../asset/logo_Fujinnet.jpg";
@@ -89,24 +90,26 @@ export const LandingPage = () => {
       >
         <Box display={"flex"}>
           <Typography
-            variant="h2"
+            variant="h1"
             sx={{
               fontWeight: "bold",
               textAlign: "center",
               mb: 4,
               color: "white",
               mr: 5,
+              fontFamily: "font-exo2",
             }}
           >
             Cơ Hội
           </Typography>
           <Typography
-            variant="h2"
+            variant="h1"
             sx={{
               fontWeight: "bold",
               textAlign: "center",
               mb: 4,
               color: " #00a7ac",
+              fontFamily: "font-exo2",
             }}
           >
             Nghề Nghiệp Của Bạn
@@ -319,7 +322,7 @@ export const LandingPage = () => {
           <Image
             sx={{
               maxWidth: "200px",
-              maxHeight: "200px",
+              maxHeight: "140px",
               mr: 4,
             }}
             src={UNIT}
@@ -470,14 +473,39 @@ export const LandingPage = () => {
           </Grid>
         </Box>
       </Box>
-      <Typography
-        variant="h4"
-        fontWeight="600"
-        gutterBottom
-        sx={{ display: "flex", justifyContent: "center", ml: 3, mt: 4 }}
-      >
-        Tin tuyển dụng, việc làm mới nhất
-      </Typography>
+      <Box padding={5} display={"flex"} justifyContent={"center"}>
+        <Typography
+          variant="h4"
+          fontWeight="600"
+          gutterBottom
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            ml: 3,
+            mt: 4,
+            fontWeight: 700,
+            fontSize: "2.5rem",
+          }}
+        >
+          Tin tuyển dụng
+        </Typography>
+        <Typography
+          variant="h4"
+          fontWeight="600"
+          gutterBottom
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            ml: 1,
+            mt: 4,
+            color: "#00a7ac",
+            fontWeight: 700,
+            fontSize: "2.5rem",
+          }}
+        >
+          việc làm mới nhất
+        </Typography>
+      </Box>
       {loading ? <Loading /> : <JobListCompany jobsPage={data} />}
     </>
   );

@@ -109,7 +109,7 @@ const JobCardALL = (props) => {
             }}
             sx={{
               fontSize: "17px",
-              backgroundColor: "#2F4BA0",
+              backgroundColor: "#00a7ac",
               height: "40px",
               width: "150px",
             }}

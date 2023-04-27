@@ -26,6 +26,7 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PhoneIcon from "@mui/icons-material/Phone";
 import MailIcon from "@mui/icons-material/Mail";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import TransgenderIcon from "@mui/icons-material/Transgender";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { convertToRaw, EditorState } from "draft-js";
 import ContactEditPopUp from "../components/Home/ContactEditPopUp";
@@ -138,6 +139,15 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
     },
   }));
   const RichContent = function ({ show, toggle, item, data, config }) {
+    let parsedData;
+
+    try {
+      parsedData = JSON.parse(data[item]);
+    } catch (error) {
+      console.error("Invalid JSON:", error);
+      return null;
+    }
+
     return (
       <>
         {show ? (
@@ -145,10 +155,10 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
             item={item}
             setOpen={toggle}
             setData={config}
-            data={data}
+            data={parsedData}
           />
         ) : (
-          <RichTextDisplay data={JSON.parse(data[item])} />
+          <RichTextDisplay data={parsedData} />
         )}
       </>
     );
@@ -315,9 +325,9 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                     mb: 1,
                   }}
                 >
-                  <FacebookIcon fontSize="small" sx={{ mr: 1 }} />
+                  <TransgenderIcon fontSize="small" sx={{ mr: 1 }} />
                   <Typography variant="body1" color="initial">
-                    facebook.com/ungvien
+                    {data.gender}
                   </Typography>
                 </Box>
                 <Box

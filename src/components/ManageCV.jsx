@@ -42,7 +42,7 @@ export default function ManageCV({ user }) {
   const [defaultCv, setDefaultCv] = useState(defaultCvData);
 
   console.log(usetemplate);
-  console.log(useParams());
+  // console.log(useParams());
 
   if (usetemplate === "useCV1") {
     return (
@@ -71,53 +71,54 @@ export default function ManageCV({ user }) {
             />
           </Grid>
           <Grid
-            xs={4}
-            item
             sx={{
-              ml: 10,
+              alignSelf: "center",
+              display: "flex",
+              justifyContent: "center",
+              gap: 2,
+              mt: 4,
             }}
+            item
+            xs={6}
           >
-            <Grid item xs={6}>
-              <Button
-                sx={{ mr: 2 }}
-                variant="contained"
-                color="success"
-                onClick={() => {
-                  cvSchema.validate(defaultCv).then(async (data) => {
-                    const res = await axios.post(
-                      `http://localhost:5000/api/candidate/resume/create`,
-                      data,
-                      {
-                        headers: {
-                          Authorization: `Bearer ${token}`,
-                        },
-                      }
-                    );
-
-                    if (res.data.status && res.data.status != 200) {
-                      console.log("that bai r", res);
-                      toast.warning("Lưu CV thất bại");
-                    } else {
-                      console.log(res.data);
-                      toast.success("Lưu CV thành công");
+            <Button
+              sx={{ mr: 2 }}
+              variant="contained"
+              color="success"
+              onClick={() => {
+                cvSchema.validate(defaultCv).then(async (data) => {
+                  const res = await axios.post(
+                    `http://localhost:5000/api/candidate/resume/create`,
+                    data,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
                     }
-                  });
-                }}
-              >
-                Lưu CV
-              </Button>
+                  );
 
-              <Button
-                variant="contained"
-                color="success"
-                onClick={() => {
-                  setPrint(true);
-                  console.log(`12`);
-                }}
-              >
-                IN CV
-              </Button>
-            </Grid>
+                  if (res.data.status && res.data.status != 200) {
+                    console.log("that bai r", res);
+                    toast.warning("Lưu CV thất bại");
+                  } else {
+                    console.log(res.data);
+                    toast.success("Lưu CV thành công");
+                  }
+                });
+              }}
+            >
+              Lưu CV
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => {
+                setPrint(true);
+                console.log(`12`);
+              }}
+            >
+              IN CV
+            </Button>
           </Grid>
         </Grid>
       </>
@@ -132,7 +133,12 @@ export default function ManageCV({ user }) {
             background: "#f1f2f7",
             p: 3,
             columnGap: 4,
-            mt: 20,
+            display: "flex",
+            justifyContent: "center", // căn giữa theo chiều ngang
+            alignItems: "center", // căn giữa theo chiều dọc
+            //height: "100vh", // đặt chiều cao cho container
+            mt: 10,
+            //mb: 5,
           }}
         >
           <Grid item xs={6}>
@@ -145,102 +151,42 @@ export default function ManageCV({ user }) {
             />
           </Grid>
           <Grid
-            xs={4}
-            item
             sx={{
-              ml: 10,
+              alignSelf: "center",
+              display: "flex",
+              justifyContent: "center",
+              gap: 2,
+              mt: 4,
             }}
+            item
+            xs={6}
           >
-            <Grid item xs={12}>
-              <Button
-                sx={{ mr: 2 }}
-                variant="contained"
-                color="success"
-                onClick={() => {
-                  cvSchema.validate(defaultCv).then(async (data) => {
-                    const res = await axios.post(
-                      `http://localhost:5000/api/candidate/resume/create`,
-                      data,
-                      {
-                        headers: {
-                          Authorization: `Bearer ${token}`,
-                        },
-                      }
-                    );
-
-                    if (res.data.status && res.data.status != 200) {
-                      console.log("that bai r", res);
-                      toast.warning("Lưu CV thất bại");
-                    } else {
-                      console.log(res.data);
-                      toast.success("Lưu CV thành công");
+            <Button
+              sx={{ mr: 2 }}
+              variant="contained"
+              color="success"
+              onClick={() => {
+                cvSchema.validate(defaultCv).then(async (data) => {
+                  const res = await axios.post(
+                    `http://localhost:5000/api/candidate/resume/create`,
+                    data,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
                     }
-                  });
-                }}
-              >
-                Lưu CV
-              </Button>
-              <Button
-                variant="contained"
-                color="success"
-                onClick={() => {
-                  setPrint(true);
-                  console.log(`12`);
-                }}
-              >
-                IN CV
-              </Button>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              container
-              sx={{
-                mt: 3,
-                rowGap: 3,
-                columnGap: 2,
+                  );
+
+                  if (res.data.status && res.data.status != 200) {
+                    console.log("that bai r", res);
+                    toast.warning("Lưu CV thất bại");
+                  } else {
+                    console.log(res.data);
+                    toast.success("Lưu CV thành công");
+                  }
+                });
               }}
             >
-              <Grid item xs={12}>
-                <Typography variant="h4" color="initial">
-                  Chọn mẫu CV bạn thích
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </>
-    );
-  }
-  if (usetemplate === "useCV3") {
-    return (
-      <Grid
-        container
-        sx={{
-          background: "#f1f2f7",
-          p: 3,
-          columnGap: 4,
-          mt: 20,
-        }}
-      >
-        <Grid item xs={6}>
-          <CV3
-            editable={true}
-            data={defaultCv}
-            print={print}
-            setPrint={setPrint}
-            setCVDATA={setDefaultCv}
-          />
-        </Grid>
-        <Grid
-          xs={4}
-          item
-          sx={{
-            ml: 10,
-          }}
-        >
-          <Grid item xs={12}>
-            <Button sx={{ mr: 2 }} variant="contained" color="success">
               Lưu CV
             </Button>
             <Button
@@ -254,22 +200,84 @@ export default function ManageCV({ user }) {
               IN CV
             </Button>
           </Grid>
-          <Grid
-            item
-            xs={12}
-            container
-            sx={{
-              mt: 3,
-              rowGap: 3,
-              columnGap: 2,
+        </Grid>
+      </>
+    );
+  }
+  if (usetemplate === "useCV3") {
+    return (
+      <Grid
+        container
+        sx={{
+          background: "#f1f2f7",
+          p: 3,
+          columnGap: 4,
+          display: "flex",
+          justifyContent: "center", // căn giữa theo chiều ngang
+          alignItems: "center", // căn giữa theo chiều dọc
+          //height: "100vh", // đặt chiều cao cho container
+          mt: 10,
+          //mb: 5,
+        }}
+      >
+        <Grid item xs={6}>
+          <CV3
+            editable={true}
+            data={defaultCv}
+            print={print}
+            setPrint={setPrint}
+            setCVDATA={setDefaultCv}
+          />
+        </Grid>
+        <Grid
+          sx={{
+            alignSelf: "center",
+            display: "flex",
+            justifyContent: "center",
+            gap: 2,
+            mt: 4,
+          }}
+          item
+          xs={6}
+        >
+          <Button
+            sx={{ mr: 2 }}
+            variant="contained"
+            color="success"
+            onClick={() => {
+              cvSchema.validate(defaultCv).then(async (data) => {
+                const res = await axios.post(
+                  `http://localhost:5000/api/candidate/resume/create`,
+                  data,
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
+                );
+
+                if (res.data.status && res.data.status != 200) {
+                  console.log("that bai r", res);
+                  toast.warning("Lưu CV thất bại");
+                } else {
+                  console.log(res.data);
+                  toast.success("Lưu CV thành công");
+                }
+              });
             }}
           >
-            <Grid item xs={12}>
-              <Typography variant="h4" color="initial">
-                Chọn mẫu CV bạn thích
-              </Typography>
-            </Grid>
-          </Grid>
+            Lưu CV
+          </Button>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => {
+              setPrint(true);
+              console.log(`12`);
+            }}
+          >
+            IN CV
+          </Button>
         </Grid>
       </Grid>
     );
@@ -284,11 +292,10 @@ export default function ManageCV({ user }) {
             p: 3,
             columnGap: 4,
             display: "flex",
-            justifyContent: "center", // căn giữa theo chiều ngang
-            alignItems: "center", // căn giữa theo chiều dọc
-            height: "100vh", // đặt chiều cao cho container
+            justifyContent: "center",
+            alignItems: "center",
+
             mt: 10,
-            mb: 95,
           }}
         >
           <Grid item xs={6}>
@@ -299,6 +306,56 @@ export default function ManageCV({ user }) {
               setPrint={setPrint}
               setCVDATA={setDefaultCv}
             />
+          </Grid>
+          <Grid
+            sx={{
+              alignSelf: "center",
+              display: "flex",
+              justifyContent: "center",
+              gap: 2,
+              mt: 4,
+            }}
+            item
+            xs={6}
+          >
+            <Button
+              sx={{ mr: 2 }}
+              variant="contained"
+              color="success"
+              onClick={() => {
+                cvSchema.validate(defaultCv).then(async (data) => {
+                  const res = await axios.post(
+                    `http://localhost:5000/api/candidate/resume/create`,
+                    data,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    }
+                  );
+
+                  if (res.data.status && res.data.status != 200) {
+                    console.log("that bai r", res);
+                    toast.warning("Lưu CV thất bại");
+                  } else {
+                    console.log(res.data);
+                    toast.success("Lưu CV thành công");
+                  }
+                });
+              }}
+            >
+              Lưu CV
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => {
+                setPrint(true);
+                console.log(`12`);
+              }}
+            >
+              IN CV
+            </Button>
           </Grid>
         </Grid>
       </>
@@ -318,7 +375,6 @@ export default function ManageCV({ user }) {
             alignItems: "center", // căn giữa theo chiều dọc
             //height: "100vh", // đặt chiều cao cho container
             mt: 10,
-            //mb: 5,
           }}
         >
           <Grid item xs={6}>
@@ -330,45 +386,57 @@ export default function ManageCV({ user }) {
               setCVDATA={setDefaultCv}
             />
           </Grid>
-        </Grid>
-        <Button
-          sx={{ mr: 2 }}
-          variant="contained"
-          color="success"
-          onClick={() => {
-            cvSchema.validate(defaultCv).then(async (data) => {
-              const res = await axios.post(
-                `http://localhost:5000/api/candidate/resume/create`,
-                data,
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                }
-              );
+          <Grid
+            sx={{
+              alignSelf: "center",
+              display: "flex",
+              justifyContent: "center",
+              gap: 2,
+              mt: 4,
+            }}
+            item
+            xs={6}
+          >
+            <Button
+              sx={{ mr: 2 }}
+              variant="contained"
+              color="success"
+              onClick={() => {
+                cvSchema.validate(defaultCv).then(async (data) => {
+                  const res = await axios.post(
+                    `http://localhost:5000/api/candidate/resume/create`,
+                    data,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    }
+                  );
 
-              if (res.data.status && res.data.status != 200) {
-                console.log("that bai r", res);
-                toast.warning("Lưu CV thất bại");
-              } else {
-                console.log(res.data);
-                toast.success("Lưu CV thành công");
-              }
-            });
-          }}
-        >
-          Lưu CV
-        </Button>
-        <Button
-          variant="contained"
-          color="success"
-          onClick={() => {
-            setPrint(true);
-            console.log(`12`);
-          }}
-        >
-          IN CV
-        </Button>
+                  if (res.data.status && res.data.status != 200) {
+                    console.log("that bai r", res);
+                    toast.warning("Lưu CV thất bại");
+                  } else {
+                    console.log(res.data);
+                    toast.success("Lưu CV thành công");
+                  }
+                });
+              }}
+            >
+              Lưu CV
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => {
+                setPrint(true);
+                console.log(`12`);
+              }}
+            >
+              IN CV
+            </Button>
+          </Grid>
+        </Grid>
       </>
     );
   }
@@ -398,17 +466,57 @@ export default function ManageCV({ user }) {
               setCVDATA={setDefaultCv}
             />
           </Grid>
+          <Grid
+            sx={{
+              alignSelf: "center",
+              display: "flex",
+              justifyContent: "center",
+              gap: 2,
+              mt: 4,
+            }}
+            item
+            xs={6}
+          >
+            <Button
+              sx={{ mr: 2 }}
+              variant="contained"
+              color="success"
+              onClick={() => {
+                cvSchema.validate(defaultCv).then(async (data) => {
+                  const res = await axios.post(
+                    `http://localhost:5000/api/candidate/resume/create`,
+                    data,
+                    {
+                      headers: {
+                        Authorization: `Bearer ${token}`,
+                      },
+                    }
+                  );
+
+                  if (res.data.status && res.data.status != 200) {
+                    console.log("that bai r", res);
+                    toast.warning("Lưu CV thất bại");
+                  } else {
+                    console.log(res.data);
+                    toast.success("Lưu CV thành công");
+                  }
+                });
+              }}
+            >
+              Lưu CV
+            </Button>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => {
+                setPrint(true);
+                console.log(`12`);
+              }}
+            >
+              IN CV
+            </Button>
+          </Grid>
         </Grid>
-        <Button
-          variant="contained"
-          color="success"
-          onClick={() => {
-            setPrint(true);
-            console.log(`12`);
-          }}
-        >
-          IN CV
-        </Button>
       </>
     );
   }
