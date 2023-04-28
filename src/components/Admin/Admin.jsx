@@ -45,6 +45,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Editor, EditorState, convertToRaw } from "draft-js";
 import { useSelector } from "react-redux";
 import { styled, alpha, createTheme } from "@mui/material/styles";
+import PlusOneIcon from "@mui/icons-material/PlusOne";
 import "draft-js/dist/Draft.css";
 // import MyCard from "./MyCard";
 import { useEffect, useState } from "react";
@@ -248,6 +249,28 @@ export function SideBar({}) {
           </CustomMenuItem>
           <CustomMenuItem
             style={{
+              color: activeItem === 7 ? theme.palette.success.main : "",
+              fontSize: "1.5rem",
+            }}
+            onClick={() => {
+              navigateTo("./jobCate");
+            }}
+          >
+            <ListItemIcon sx={{ py: 2 }}>
+              <PlusOneIcon
+                fontSize="small"
+                style={{
+                  color: activeItem === 7 ? theme.palette.success.main : "",
+                  fontSize: "1.5rem",
+                }}
+              />
+            </ListItemIcon>
+            <ListItemText>
+              <Typography variant="h6">Thêm Loại Công Việc</Typography>
+            </ListItemText>
+          </CustomMenuItem>
+          <CustomMenuItem
+            style={{
               color: activeItem === 6 ? theme.palette.success.main : "",
               fontSize: "1.5rem",
             }}
@@ -408,6 +431,7 @@ export default function Dashboard() {
             <Route path="/Employer" element={<ManageEmploy />}></Route>
             <Route path="/Seeker" element={<ManageSeeker />}></Route>
             <Route path="/CV" element={<ManageCVRec />}></Route>
+            <Route path="/jobCate" element={<ManageCVRec />}></Route>
           </Routes>
         </Grid>
       </Grid>

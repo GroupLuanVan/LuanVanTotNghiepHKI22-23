@@ -58,7 +58,7 @@ function App() {
                 </>
               }
               />
-                <Route
+                {/* <Route
               path="Home"
               element={
                 <>
@@ -67,12 +67,12 @@ function App() {
                   <Footer/> 
                 </>
               }
-              />
+              /> */}
                <Route
               path="/:usetemplate"
               element={
                 <>
-                  <HeaderCV/>
+                  <CustomAppBar/>
                   <ManageCV/>
                   <Footer/>
                 </>

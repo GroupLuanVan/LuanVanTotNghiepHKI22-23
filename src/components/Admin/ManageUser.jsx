@@ -27,7 +27,7 @@ import axios from "axios";
 const ManageUser = () => {
   const [users, setUsers] = useState([]);
   const token = useSelector((state) => state.user.token);
-  console.log(token);
+
   const [openCandidatesModal, setOpenCandidatesModal] = useState(false);
   const hdlCloseCandidatesModal = () => setOpenCandidatesModal(false);
   const [selectedRows, setSelectedRows] = useState([]);

@@ -14,14 +14,20 @@ import {
   TableRow,
   DialogTitle,
   Popover,
+  TableBody,
 } from "@mui/material";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import { Modal } from "@mui/material";
 import { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const ManageSeeker = () => {
+  const [users, setUsers] = useState([]);
+  const [recruiter, setRecruiters] = useState([]);
+  const token = useSelector((state) => state.user.token);
   const [openCandidatesModal, setOpenCandidatesModal] = useState(false);
   const hdlCloseCandidatesModal = () => setOpenCandidatesModal(false);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -52,6 +58,26 @@ const ManageSeeker = () => {
     // TODO: implement delete logic
     console.log("Delete rows", selectedRows);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/contact/", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(response.data);
+        // Xử lý dữ liệu tại đây
+        setUsers(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  console.log(users);
 
   return (
     <>
@@ -110,65 +136,37 @@ const ManageSeeker = () => {
                   <TableCell></TableCell>
                   <TableCell>Tên tin tuyển dụng</TableCell>
                   <TableCell>Tên Công Ty</TableCell>
-                  <TableCell>Tên Nhà Tuyển Dụng</TableCell>
-
                   <TableCell>Số Lượng Ứng Tuyển</TableCell>
                   <TableCell>Trạng thái</TableCell>
                 </TableRow>
               </TableHead>
-              <TableRow>
-                <TableCell>
-                  <Checkbox
-                    onChange={(e) => handleCheckboxChange(e, rowCount)}
-                    checked={selectedRows.includes(rowCount)}
-                  />
-                </TableCell>
-                <TableCell>
-                  <Typography>Intern ReactJS </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>FPT Sof</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>HR FPT</Typography>
-                </TableCell>
+              <TableBody>
+                {users.map((user) => (
+                  <TableRow key={user._id}>
+                    <TableCell>
+                      <Checkbox
+                        onChange={(e) => handleCheckboxChange(e, user._id)}
+                        checked={selectedRows.includes(user._id)}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Typography>{user.jobpostId} </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>{user.companyId}</Typography>
+                    </TableCell>
 
-                <TableCell>
-                  <Typography>2 người</Typography>
-                </TableCell>
-                <TableCell>
-                  <Button variant="text" color="success">
-                    Đã Ứng Tuyển
-                  </Button>
-                </TableCell>
-              </TableRow>
-
-              <TableRow>
-                <TableCell>
-                  <Checkbox
-                    onChange={(e) => handleCheckboxChange(e, rowCount + 1)}
-                    checked={selectedRows.includes(rowCount + 1)}
-                  />
-                </TableCell>
-                <TableCell>
-                  <Typography>Intern ReactJS </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>FPT Sof</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>HR FPT</Typography>
-                </TableCell>
-
-                <TableCell>
-                  <Typography>2 người</Typography>
-                </TableCell>
-                <TableCell>
-                  <Button variant="text" color="success">
-                    Đã Ứng Tuyển
-                  </Button>
-                </TableCell>
-              </TableRow>
+                    <TableCell>
+                      <Typography>2 người</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Button variant="text" color="success">
+                        Đã Ứng Tuyển
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
             </Table>
           </TableContainer>
         </Grid>

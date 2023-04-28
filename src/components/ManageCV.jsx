@@ -57,7 +57,7 @@ export default function ManageCV({ user }) {
             justifyContent: "center", // căn giữa theo chiều ngang
             alignItems: "center", // căn giữa theo chiều dọc
             //height: "100vh", // đặt chiều cao cho container
-            mt: 10,
+            mt: 20,
             //mb: 5,
           }}
         >
@@ -137,7 +137,7 @@ export default function ManageCV({ user }) {
             justifyContent: "center", // căn giữa theo chiều ngang
             alignItems: "center", // căn giữa theo chiều dọc
             //height: "100vh", // đặt chiều cao cho container
-            mt: 10,
+            mt: 20,
             //mb: 5,
           }}
         >
@@ -216,7 +216,7 @@ export default function ManageCV({ user }) {
           justifyContent: "center", // căn giữa theo chiều ngang
           alignItems: "center", // căn giữa theo chiều dọc
           //height: "100vh", // đặt chiều cao cho container
-          mt: 10,
+          mt: 20,
           //mb: 5,
         }}
       >
@@ -295,7 +295,7 @@ export default function ManageCV({ user }) {
             justifyContent: "center",
             alignItems: "center",
 
-            mt: 10,
+            mt: 20,
           }}
         >
           <Grid item xs={6}>
@@ -374,7 +374,7 @@ export default function ManageCV({ user }) {
             justifyContent: "center", // căn giữa theo chiều ngang
             alignItems: "center", // căn giữa theo chiều dọc
             //height: "100vh", // đặt chiều cao cho container
-            mt: 10,
+            mt: 20,
           }}
         >
           <Grid item xs={6}>
@@ -453,7 +453,7 @@ export default function ManageCV({ user }) {
             justifyContent: "center", // căn giữa theo chiều ngang
             alignItems: "center", // căn giữa theo chiều dọc
             //height: "100vh", // đặt chiều cao cho container
-            mt: 10,
+            mt: 20,
             //mb: 5,
           }}
         >
