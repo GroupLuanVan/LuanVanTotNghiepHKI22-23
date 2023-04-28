@@ -84,7 +84,7 @@ export const ChooseCV = () => {
                 //fontSize: "1.5rem",   // không nhận dc phản hồi của
               }}
             >
-              Chọn CV phù hợp cho bạnz``
+              Chọn CV phù hợp cho bạn
             </TitleTypography>
 
             <Box

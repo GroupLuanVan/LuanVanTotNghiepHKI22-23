@@ -103,11 +103,11 @@ export const CVCard1 = ({ image, selectedItem, template }) => {
 
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            CV Title
+            CV
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          {/* <Typography variant="body2" color="text.secondary">
             Nguyen Huu Thai
-          </Typography>
+          </Typography> */}
         </CardContent>
       </StyledCard>
       <PopCV

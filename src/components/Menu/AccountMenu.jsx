@@ -50,14 +50,13 @@ export default function AccountMenu() {
   };
   const StyledTypography = styled(Typography)(({ theme }) => ({
     fontFamily: "Arial, sans-serif",
-    backgroundColor: "#fff",
+    backgroundColor: "#d5d5d5",
     color: "#000",
     width: "200px",
-    height: "30px",
-    padding: "10px",
-    border: "2px solid #000",
-    borderRadius: "5px",
-    boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
+    height: "20px",
+    padding: "8px",
+
+    borderRadius: "25px",
   }));
   const StyledBox = styled(Box)({
     display: "flex",
@@ -67,40 +66,32 @@ export default function AccountMenu() {
 
   return (
     <React.Fragment>
-      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        {/* <Tooltip title="Thông tin tài khoản">
-          <IconButton
-            onClick={handleClick}
-            sx={{ ml: 0 }}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            <Avatar sx={{ width: 50, height: 50, fontSize: 30 }}>
-              {user?.split("")?.[0].toUpperCase()}
-            </Avatar>
-          </IconButton>
-        </Tooltip>
-        <StyledTypography variant="h6" sx={{ mr: 2 }}>
-          {user}
-        </StyledTypography> */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          textAlign: "center",
+          width: "100%",
+          position: "relative",
+        }}
+      >
         <StyledTypography
-          sx={{ display: "flex", alignItems: "center" }}
+          sx={{ display: "flex", alignItems: "center", position: "relative" }}
           variant="h6"
         >
-          <IconButton
-            onClick={handleClick}
-            sx={{ mr: 1 }}
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
-            <Avatar sx={{ width: 40, height: 40, fontSize: 30 }}>
-              {user?.split("")?.[0].toUpperCase()}
-            </Avatar>
-          </IconButton>
           {user}
         </StyledTypography>
+        <IconButton
+          onClick={handleClick}
+          sx={{ display: "block", position: "absolute", right: 0 }}
+          aria-controls={open ? "account-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+        >
+          <Avatar sx={{ width: 30, height: 30, fontSize: 20 }}>
+            {user?.split("")?.[0].toUpperCase()}
+          </Avatar>
+        </IconButton>
       </Box>
       <Menu
         anchorEl={anchorEl}

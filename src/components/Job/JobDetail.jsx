@@ -239,8 +239,8 @@ export default function JobDetail({ user }) {
                     borderRadius: "100%",
                     border: "1px solid gray",
                   }}
-                  width="100px"
-                  height="100px"
+                  width="200px"
+                  height="200px"
                   duration={0}
                   fit="scale-down"
                 ></Image>
@@ -253,16 +253,28 @@ export default function JobDetail({ user }) {
                 }}
               >
                 <Typography
-                  variant="h5"
+                  variant="h4"
                   color="initial"
                   fontWeight={600}
-                  sx={{ color: theme.palette.success.light }}
+                  sx={{
+                    // color: theme.palette.success.light,
+                    color: "#105aa3",
+                  }}
                 >
                   {data.title}
                 </Typography>
-                <Typography variant="h6" color="initial">
-                  {data.companyId.nameCompany}
+                <Typography
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                  variant="h5"
+                  color="initial"
+                >
+                  Công Ty: {data.companyId.nameCompany}
                 </Typography>
+              </Box>
+              <Box>
                 <Stack
                   direction="row"
                   spacing={1}
@@ -298,22 +310,28 @@ export default function JobDetail({ user }) {
                 {user.role === "candidate" &&
                   (!isApplied ? (
                     <Button
+                      sx={{
+                        backgroundColor: "#7cb1e6",
+                        color: "black",
+                      }}
                       onClick={() => applyJob()}
                       startIcon={<SendIcon />}
-                      variant="contained"
-                      color="success"
                     >
                       Ứng tuyển ngay
                     </Button>
                   ) : (
-                    <Button
+                    <Typography
+                      sx={{
+                        fontWeight: "700",
+                        fontSize: "20px",
+                      }}
                       // onClick={() => cancelApplyJob()}
                       startIcon={<CheckCircleIcon />}
                       variant="contained"
                       color="primary"
                     >
                       Đã Ứng Tuyển
-                    </Button>
+                    </Typography>
                   ))}
                 {user.role === "recruiter" && (
                   <Button
@@ -356,7 +374,9 @@ export default function JobDetail({ user }) {
                 sx={{
                   mx: 3,
                   py: 2,
-                  background: alpha(theme.palette.success.main, 0.08),
+                  //background: alpha(theme.palette.success.main, 0.08),
+                  background: "#7cb1e6",
+                  borderRadius: "10px",
                 }}
               >
                 <Grid item sx={12}>
@@ -498,7 +518,9 @@ export default function JobDetail({ user }) {
                   mx: 3,
                   mt: 2,
                   py: 2,
-                  background: alpha(theme.palette.success.main, 0.08),
+                  //background: alpha(theme.palette.success.main, 0.08),
+                  background: "#7cb1e6",
+                  borderRadius: "10px",
                   display: "flex",
                   flexDirection: "column",
                 }}
@@ -531,7 +553,9 @@ export default function JobDetail({ user }) {
                   mx: 3,
                   mt: 2,
                   py: 2,
-                  background: alpha(theme.palette.success.main, 0.08),
+                  //background: alpha(theme.palette.success.main, 0.08),
+                  background: "#7cb1e6",
+                  borderRadius: "10px",
                   display: "flex",
                   flexDirection: "column",
                 }}
@@ -564,7 +588,9 @@ export default function JobDetail({ user }) {
                   mx: 3,
                   mt: 2,
                   py: 2,
-                  background: alpha(theme.palette.success.main, 0.08),
+                  //background: alpha(theme.palette.success.main, 0.08),
+                  background: "#7cb1e6",
+                  borderRadius: "10px",
                   display: "flex",
                   flexDirection: "column",
                 }}
@@ -597,7 +623,9 @@ export default function JobDetail({ user }) {
                   mx: 3,
                   mt: 2,
                   py: 2,
-                  background: alpha(theme.palette.success.main, 0.08),
+                  //background: alpha(theme.palette.success.main, 0.08),
+                  background: "#7cb1e6",
+                  borderRadius: "10px",
                   display: "flex",
                   flexDirection: "column",
                 }}
