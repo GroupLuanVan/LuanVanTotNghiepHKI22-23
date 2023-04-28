@@ -102,7 +102,7 @@ export function SideBar({}) {
   return (
     <Grid
       sx={{
-        height: "140vh",
+        height: "180vh",
       }}
       item
       container
@@ -160,7 +160,7 @@ export function SideBar({}) {
           </CustomMenuItem>
           <CustomMenuItem
             style={{
-              color: activeItem === 1 ? theme.palette.success.main : "",
+              color: activeItem === 2 ? theme.palette.success.main : "",
               fontSize: "1.5rem",
             }}
             onClick={() => {
@@ -171,7 +171,7 @@ export function SideBar({}) {
               <FaUserTie
                 fontSize="small"
                 style={{
-                  color: activeItem === 1 ? theme.palette.success.main : "",
+                  color: activeItem === 2 ? theme.palette.success.main : "",
                   fontSize: "1.5rem",
                 }}
               />
@@ -182,7 +182,7 @@ export function SideBar({}) {
           </CustomMenuItem>
           <CustomMenuItem
             sx={{
-              color: activeItem === 1 ? theme.palette.success.main : "",
+              color: activeItem === 3 ? theme.palette.success.main : "",
               fontSize: "1.5rem",
             }}
             onClick={() => {
@@ -193,7 +193,7 @@ export function SideBar({}) {
               <SendIcon
                 fontSize="small"
                 sx={{
-                  color: activeItem === 1 ? theme.palette.success.main : "",
+                  color: activeItem === 3 ? theme.palette.success.main : "",
                   fontSize: "1.5rem",
                 }}
               />
@@ -204,7 +204,7 @@ export function SideBar({}) {
           </CustomMenuItem>
           <CustomMenuItem
             sx={{
-              color: activeItem === 2 ? theme.palette.success.main : "",
+              color: activeItem === 4 ? theme.palette.success.main : "",
               fontSize: "1.5rem",
             }}
             onClick={() => {
@@ -215,7 +215,7 @@ export function SideBar({}) {
               <FaBriefcase
                 fontSize="small"
                 style={{
-                  color: activeItem === 2 ? theme.palette.success.main : "",
+                  color: activeItem === 4 ? theme.palette.success.main : "",
                   fontSize: "1.5rem",
                 }}
               />
@@ -226,7 +226,7 @@ export function SideBar({}) {
           </CustomMenuItem>
           <CustomMenuItem
             style={{
-              color: activeItem == 3 ? theme.palette.success.main : "",
+              color: activeItem === 5 ? theme.palette.success.main : "",
               fontSize: "1.5rem",
             }}
             onClick={() => {
@@ -237,7 +237,7 @@ export function SideBar({}) {
               <ImProfile
                 fontSize="small"
                 style={{
-                  color: activeItem == 3 ? theme.palette.success.main : "",
+                  color: activeItem === 5 ? theme.palette.success.main : "",
                   fontSize: "1.5rem",
                 }}
               />
@@ -248,7 +248,7 @@ export function SideBar({}) {
           </CustomMenuItem>
           <CustomMenuItem
             style={{
-              color: activeItem == 3 ? theme.palette.success.main : "",
+              color: activeItem === 6 ? theme.palette.success.main : "",
               fontSize: "1.5rem",
             }}
             onClick={() => {
@@ -259,7 +259,7 @@ export function SideBar({}) {
               <BarChartIcon
                 fontSize="small"
                 style={{
-                  color: activeItem == 3 ? theme.palette.success.main : "",
+                  color: activeItem === 6 ? theme.palette.success.main : "",
                   fontSize: "1.5rem",
                 }}
               />
@@ -322,30 +322,18 @@ function DashboardCard({ title, description, icon }) {
 function Admin() {
   return (
     <>
-      <Grid sx={{ width: "100%", height: "80vh", mt: 15 }} container>
-        <Box
-          sx={{
-            p: 2,
-            borderBottom: "1px solid rgba(0,0,0,0.1)",
-            display: "flex",
-            alignItems: "center",
-            background: "#fff",
-          }}
-        >
-          <EditIcon />
-          <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Dashboard
-          </Typography>
-        </Box>
+      <Grid sx={{ width: "100%", height: "80vh", mt: 20 }} container>
         <Grid
           container
           sx={{
+            display: "flex",
+            justifyContent: "center",
             height: "100%",
             width: "100%",
             p: 2,
             rowGap: 1,
             columnGap: 2,
-            background: "#f7f7f7",
+
             mb: 2,
           }}
         >
@@ -408,11 +396,11 @@ function Admin() {
 export default function Dashboard() {
   return (
     <>
-      <Grid container sx={{ background: "#f1f2f6", height: "140vh" }}>
-        <Grid item xs={2.5}>
+      <Grid container sx={{ background: "#f1f2f6" }}>
+        <Grid item xs={3}>
           <SideBar />
         </Grid>
-        <Grid item xs={9.5}>
+        <Grid item xs={8}>
           <Routes>
             <Route path="/" element={<Admin />}></Route>
             <Route path="/User" element={<ManageUser />}></Route>

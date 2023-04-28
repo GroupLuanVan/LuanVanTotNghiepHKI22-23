@@ -26,6 +26,7 @@ import UpdateProfile from "./components/Profile/UpdateProfile";
 import 'react-toastify/dist/ReactToastify.css';
 import HeaderHR from "./components/JobPost/HeaderHR";
 import HeaderCandi from "./components/AppBar/HeaderCandi";
+import HeaderAdmin from "./components/AppBar/HeaderAdmin";
 import Dashboard from "./components/Admin/Admin";
 import MyCV from "./components/MyCV";
 import MyProfile from "./components/Profile/MyProfile";
@@ -228,9 +229,9 @@ function App() {
               path="admin/*"
               element={
                 <>
-                  <CustomAppBar/>
+                  <HeaderAdmin/>
                   <Dashboard/>
-                  <Footer/>
+                  
                 </>
               }
               />

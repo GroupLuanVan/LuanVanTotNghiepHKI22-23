@@ -128,11 +128,14 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
+        {/* <MenuItem>
           <Avatar fontSize="small" /> {user}
-        </MenuItem>
+        </MenuItem> */}
         {role === "candidate" && (
           <>
+            <MenuItem>
+              <Avatar fontSize="small" /> {user}
+            </MenuItem>
             <MenuItem onClick={() => navigateTo("/MyProfile")}>
               <ListItemIcon>
                 <NoteAltIcon fontSize="small" />
@@ -161,6 +164,9 @@ export default function AccountMenu() {
         )}
         {role === "recruiter" && (
           <>
+            <MenuItem>
+              <Avatar fontSize="small" /> {user}
+            </MenuItem>
             <MenuItem onClick={() => navigateTo("/myprofile")}>
               <ListItemIcon>
                 <NoteAltIcon fontSize="small" />
@@ -187,13 +193,15 @@ export default function AccountMenu() {
             </MenuItem>
           </>
         )}
+        {/* {role === "admin" && (
+          <MenuItem onClick={logOut}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Đăng xuất
+          </MenuItem>
+        )} */}
 
-        {/* <MenuItem>
-                    <ListItemIcon>
-                        <Settings fontSize="small" />
-                    </ListItemIcon>
-                    Settings
-                </MenuItem> */}
         <Divider />
         <MenuItem onClick={logOut}>
           <ListItemIcon>

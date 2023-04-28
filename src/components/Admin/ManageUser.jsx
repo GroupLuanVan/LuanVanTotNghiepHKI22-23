@@ -44,14 +44,16 @@ const ManageUser = () => {
           }),
         ]);
 
-        const usersWithCompany = userResponse.data.map((user) => ({
-          ...user,
-          companyName: user.nameCompany
-            ? companyResponse.data.find(
-                (company) => company._id === user.companyId
-              )?.name
-            : "",
-        }));
+        const usersWithCompany = userResponse.data.map((user) => {
+          const matchedCompany = companyResponse.data.find(
+            (company) => company.userId === user._id
+          );
+          const nameCompany = matchedCompany ? matchedCompany.nameCompany : "";
+          return {
+            ...user,
+            nameCompany,
+          };
+        });
 
         setUsers(usersWithCompany);
       } catch (error) {
@@ -61,6 +63,8 @@ const ManageUser = () => {
 
     fetchData();
   }, []);
+
+  console.log(users);
 
   // handle checkbox change
   let rowCount = 0;
@@ -151,11 +155,13 @@ const ManageUser = () => {
                       />
                     </TableCell>
                     <TableCell>
-                      <Typography>{user.username}</Typography>
+                      <Typography>{user?.username}</Typography>
                     </TableCell>
                     <TableCell>
                       <Typography>
-                        {user.nameCompany ? user.company.nameCompany : ""}
+                        {user?.nameCompany
+                          ? user?.nameCompany
+                          : "Ứng Viên Không có công ty"}
                       </Typography>
                     </TableCell>
                     <TableCell>

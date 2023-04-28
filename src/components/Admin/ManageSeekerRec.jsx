@@ -69,7 +69,7 @@ const ManageSeeker = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Báo cáo tuyển dụng
+            Số Lượng Ứng Viên Ứng Tuyển
           </Typography>
           {selectedRows.length > 0 && (
             <>

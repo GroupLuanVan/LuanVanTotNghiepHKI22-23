@@ -69,7 +69,7 @@ const ManageCVRec = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Quản Lý Tất Cả CV
+            Số CV Được Tạo
           </Typography>
           {selectedRows.length > 0 && (
             <>

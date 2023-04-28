@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const CustomAppBar = () => {
+const HeaderAdmin = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
@@ -47,17 +47,7 @@ const CustomAppBar = () => {
             marginRight: "auto",
           }}
         >
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 5 }}
-          ></IconButton> */}
           <Image
-            onClick={() => {
-              navigateTo("/");
-            }}
             src={Logo1}
             width="210px"
             height="100px"
@@ -68,32 +58,6 @@ const CustomAppBar = () => {
               mb: "12px",
             }}
           />
-
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography
-              onClick={() => {
-                navigate("/ListJob");
-              }}
-              variant="h5"
-              sx={{
-                mr: 5,
-                ml: 10,
-              }}
-            >
-              Công Việc
-            </Typography>
-            <Typography
-              onClick={() => {
-                navigate("/CreateCV");
-              }}
-              variant="h5"
-              sx={{
-                mr: 5,
-              }}
-            >
-              Tạo CV
-            </Typography>
-          </Box>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
           {!user.isLogin ? (
@@ -151,4 +115,4 @@ const CustomAppBar = () => {
   );
 };
 
-export default CustomAppBar;
+export default HeaderAdmin;

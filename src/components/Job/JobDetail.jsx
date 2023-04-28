@@ -359,7 +359,7 @@ export default function JobDetail({ user }) {
                   sx={{
                     px: 2,
                     ml: 3,
-                    borderLeft: `7px solid ${theme.palette.success.light}`,
+                    borderLeft: "7px solid #7cb1e6",
                   }}
                   variant="h5"
                   fontWeight={600}
