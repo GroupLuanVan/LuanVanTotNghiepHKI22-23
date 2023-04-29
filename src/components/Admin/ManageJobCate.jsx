@@ -22,9 +22,10 @@ import { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { useSelector } from "react-redux";
+import AddJobCategoryDialog from "./AddJobCate";
 import axios from "axios";
 
-const ManageEmploy = () => {
+const ManageJobCate = () => {
   const [users, setUsers] = useState([]);
   const [recruiter, setRecruiters] = useState([]);
   const token = useSelector((state) => state.user.token);
@@ -59,36 +60,31 @@ const ManageEmploy = () => {
     console.log("Delete rows", selectedRows);
   };
 
+  const [openAddJobCategoryDialog, setOpenAddJobCategoryDialog] =
+    useState(false);
+
+  const handleOpenAddJobCategoryDialog = () => {
+    setOpenAddJobCategoryDialog(true);
+  };
+
+  const handleCloseAddJobCategoryDialog = () => {
+    setOpenAddJobCategoryDialog(false);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [userResponse, companyResponse] = await Promise.all([
-          axios.get("http://localhost:5000/api/user/", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get("http://localhost:5000/api/company", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-        ]);
-
-        const usersWithCompany = userResponse.data.map((user) => {
-          const matchedCompany = companyResponse.data.find(
-            (company) => company.userId === user._id
-          );
-          const nameCompany = matchedCompany ? matchedCompany.nameCompany : "";
-          const name = user.role === "recruiter" ? user.username : user.name;
-          return {
-            ...user,
-            nameCompany,
-            name,
-          };
-        });
-        const recruiters = usersWithCompany.filter(
-          (user) => user.role === "recruiter"
+        const response = await axios.get(
+          "http://localhost:5000/api/jobcategory",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
-
-        setUsers(usersWithCompany);
-        setRecruiters(recruiters); // set recruiters in state
+        console.log(response.data);
+        // Xử lý dữ liệu tại đây
+        setUsers(response.data);
       } catch (error) {
         console.log(error);
       }
@@ -102,6 +98,7 @@ const ManageEmploy = () => {
     <>
       <Grid sx={{ m: 3 }}>
         {/* Header */}
+
         <Box
           sx={{
             p: 2,
@@ -114,8 +111,9 @@ const ManageEmploy = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Số Nhà Tuyển Dụng
+            Các Loại Công Việc
           </Typography>
+
           {selectedRows.length > 0 && (
             <>
               <Button
@@ -152,28 +150,43 @@ const ManageEmploy = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell></TableCell>
                   <TableCell>
-                    {" "}
-                    <Typography ml={-4} variant="h6">
-                      Tên Nhà Tuyển Dụng
+                    <Button
+                      onClick={handleOpenAddJobCategoryDialog}
+                      sx={{
+                        backgroundColor: "#5490cc",
+                        color: "black",
+                        fontWeight: "700",
+                        width: "100px",
+                      }}
+                    >
+                      Thêm
+                    </Button>
+                    <AddJobCategoryDialog
+                      open={openAddJobCategoryDialog}
+                      onClose={handleCloseAddJobCategoryDialog}
+                    />
+                  </TableCell>
+                  <TableCell align="left">
+                    <Typography ml={-3} variant="h6">
+                      Tên Loại Công Việc
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography ml={7} variant="h6">
+                      Ngày Tạo
                     </Typography>
                   </TableCell>
                   <TableCell>
                     {" "}
-                    <Typography ml={-2} variant="h6">
-                      Tên Công Ty
-                    </Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography ml={0} variant="h6">
+                    <Typography ml={-3} variant="h6">
                       Trạng Thái
                     </Typography>
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {recruiter.map((user) => (
+                {users.map((user) => (
                   <TableRow key={user._id}>
                     <TableCell>
                       <Checkbox
@@ -182,15 +195,15 @@ const ManageEmploy = () => {
                       />
                     </TableCell>
                     <TableCell>
-                      <Typography variant="h6">{user?.name} </Typography>
+                      <Typography>{user?.title} </Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography variant="h6">{user?.nameCompany}</Typography>
+                      <Typography>{user?.createdAt}</Typography>
                     </TableCell>
 
                     <TableCell>
-                      <Typography variant="h6" color="blue">
-                        Đã Đăng Ký
+                      <Typography variant="text" color="success">
+                        Đã Tạo
                       </Typography>
                     </TableCell>
                   </TableRow>
@@ -204,4 +217,4 @@ const ManageEmploy = () => {
   );
 };
 
-export default ManageEmploy;
+export default ManageJobCate;

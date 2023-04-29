@@ -227,7 +227,7 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
                 onBlur={(e) => {
                   setTempData({
                     ...tempData,
-                    fullAddress: e.target.value,
+                    fulladdress: e.target.value,
                   });
                 }}
               />

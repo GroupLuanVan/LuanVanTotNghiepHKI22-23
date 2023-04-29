@@ -375,7 +375,7 @@ export default function JobDetail({ user }) {
                   mx: 3,
                   py: 2,
                   //background: alpha(theme.palette.success.main, 0.08),
-                  background: "#7cb1e6",
+                  background: "#c7e8fc",
                   borderRadius: "10px",
                 }}
               >

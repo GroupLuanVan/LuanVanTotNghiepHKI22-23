@@ -69,7 +69,8 @@ const JobPosting = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Số Bài Đăng Tuyển Dụng
+            Số Bài Đăng Tuyển Dụng (giao diện cảm giác bị dư trường nào thì t bỏ
+            nha)
           </Typography>
           {selectedRows.length > 0 && (
             <>

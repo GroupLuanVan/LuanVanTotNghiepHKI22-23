@@ -194,6 +194,7 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
   useEffect(() => {
     if (editable) setCVDATA({ ...data, cvTemplate });
   }, []);
+
   const [name, setName] = useState(data.name || "");
 
   return (
@@ -339,7 +340,7 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                 >
                   <LocationOnIcon fontSize="small" sx={{ mr: 1 }} />
                   <Typography variant="body1" color="initial">
-                    {data.fullAddress}
+                    {data.fulladdress}
                   </Typography>
                 </Box>
               </Box>

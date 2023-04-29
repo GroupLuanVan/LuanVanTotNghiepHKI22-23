@@ -134,10 +134,24 @@ const ManageSeeker = () => {
               <TableHead>
                 <TableRow>
                   <TableCell></TableCell>
-                  <TableCell>Tên tin tuyển dụng</TableCell>
-                  <TableCell>Tên Công Ty</TableCell>
-                  <TableCell>Số Lượng Ứng Tuyển</TableCell>
-                  <TableCell>Trạng thái</TableCell>
+                  <TableCell>
+                    {" "}
+                    <Typography ml={-3} variant="h6">
+                      Tên Tin Tuyển Dụng
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    {" "}
+                    <Typography ml={0} variant="h6">
+                      Tên Công Ty
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    {" "}
+                    <Typography ml={-3} variant="h6">
+                      Số Lượng Ứng Tuyển
+                    </Typography>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -150,19 +164,14 @@ const ManageSeeker = () => {
                       />
                     </TableCell>
                     <TableCell>
-                      <Typography>{user.jobpostId} </Typography>
+                      <Typography variant="h6">{user.jobpostId} </Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography>{user.companyId}</Typography>
+                      <Typography variant="h6">{user.companyId}</Typography>
                     </TableCell>
 
                     <TableCell>
-                      <Typography>2 người</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Button variant="text" color="success">
-                        Đã Ứng Tuyển
-                      </Button>
+                      <Typography variant="h6">2 người</Typography>
                     </TableCell>
                   </TableRow>
                 ))}

@@ -103,7 +103,7 @@ export default function ViewCV() {
               data={data.cv}
             />
           )}
-          {data.cv.cvTemplate === "CV5" && (
+          {data.cv.cvTemplate === "CV6" && (
             <CV5
               editable={false}
               print={print}

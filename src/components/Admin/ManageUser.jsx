@@ -139,10 +139,30 @@ const ManageUser = () => {
               <TableHead>
                 <TableRow>
                   <TableCell></TableCell>
-                  <TableCell>Tên Người dùng</TableCell>
-                  <TableCell>Tên Công Ty</TableCell>
-                  <TableCell>Vai Trò</TableCell>
-                  <TableCell>Trạng thái</TableCell>
+                  <TableCell>
+                    {" "}
+                    <Typography ml={-3} variant="h6">
+                      Tên Người Dùng
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    {" "}
+                    <Typography ml={-2} variant="h6">
+                      Tên Công Ty
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    {" "}
+                    <Typography ml={0} variant="h6">
+                      Vai Trò
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    {" "}
+                    <Typography ml={0} variant="h6">
+                      Trạng Thái
+                    </Typography>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -155,22 +175,22 @@ const ManageUser = () => {
                       />
                     </TableCell>
                     <TableCell>
-                      <Typography>{user?.username}</Typography>
+                      <Typography variant="h6">{user?.username}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography>
+                      <Typography variant="h6">
                         {user?.nameCompany
                           ? user?.nameCompany
                           : "Ứng Viên Không có công ty"}
                       </Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography>{user.role}</Typography>
+                      <Typography variant="h6">{user.role}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Button variant="text" color="success">
+                      <Typography variant="h6" color="blue">
                         Đã Đăng Ký
-                      </Button>
+                      </Typography>
                     </TableCell>
                   </TableRow>
                 ))}

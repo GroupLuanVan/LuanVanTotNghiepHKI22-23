@@ -54,6 +54,8 @@ import ManageEmploy from "./ManageEmployRec";
 import ManageSeeker from "./ManageSeekerRec";
 import ManageCVRec from "./ManageCVRec";
 import ManageUser from "./ManageUser";
+import ManageJobCate from "./ManageJobCate";
+import AddJobCategoryDialog from "./AddJobCate";
 import axios from "axios";
 
 const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
@@ -66,6 +68,16 @@ const CustomMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 export function SideBar({}) {
+  const [openAddJobCategoryDialog, setOpenAddJobCategoryDialog] =
+    useState(false);
+
+  const handleOpenAddJobCategoryDialog = () => {
+    setOpenAddJobCategoryDialog(true);
+  };
+
+  const handleCloseAddJobCategoryDialog = () => {
+    setOpenAddJobCategoryDialog(false);
+  };
   const theme = createTheme();
   const location = useLocation();
   const navigate = useNavigate();
@@ -269,6 +281,10 @@ export function SideBar({}) {
               <Typography variant="h6">Thêm Loại Công Việc</Typography>
             </ListItemText>
           </CustomMenuItem>
+          {/* <AddJobCategoryDialog
+            open={openAddJobCategoryDialog}
+            onClose={handleCloseAddJobCategoryDialog}
+          /> */}
           <CustomMenuItem
             style={{
               color: activeItem === 6 ? theme.palette.success.main : "",
@@ -431,7 +447,7 @@ export default function Dashboard() {
             <Route path="/Employer" element={<ManageEmploy />}></Route>
             <Route path="/Seeker" element={<ManageSeeker />}></Route>
             <Route path="/CV" element={<ManageCVRec />}></Route>
-            <Route path="/jobCate" element={<ManageCVRec />}></Route>
+            <Route path="/jobCate" element={<ManageJobCate />}></Route>
           </Routes>
         </Grid>
       </Grid>

@@ -69,7 +69,8 @@ const ManageCVRec = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Số CV Được Tạo
+            Số CV Được Tạo ( mỗi người tạo được 1 CV nên chức năng này theo m
+            nghĩ có bị dư không, hay là bỏ nha )
           </Typography>
           {selectedRows.length > 0 && (
             <>

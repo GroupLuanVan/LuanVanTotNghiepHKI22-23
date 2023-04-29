@@ -54,7 +54,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function SearchController({ setSearchCbData }) {
+function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
   const [searchParams, setSearchParams] = useState({
     title: false,
     experience: false,
@@ -64,6 +64,12 @@ function SearchController({ setSearchCbData }) {
     keyword: "",
     address: "",
   });
+
+  const [showSuggestion, setShowSuggestion] = useState(false);
+
+  const handleShowSuggestion = () => {
+    setShowSuggestion(true);
+  };
 
   function handleCheck(e, item) {
     setSearchParams({
@@ -81,7 +87,7 @@ function SearchController({ setSearchCbData }) {
       },
       searchParams,
     });
-    setSearchCbData(res.data);
+    setRemuse(res.data);
     console.log(res.data);
     setIsLoading(false);
   };
@@ -169,7 +175,10 @@ function SearchController({ setSearchCbData }) {
               </Box>
               <Box sx={{ display: "flex", mt: 2 }}>
                 <Button
-                  onClick={() => getALLRemuse()}
+                  onClick={() => {
+                    getALLRemuse();
+                    handleAllClick();
+                  }}
                   sx={{
                     mr: 2,
                     width: "200px",
@@ -191,6 +200,10 @@ function SearchController({ setSearchCbData }) {
                 </Button>
 
                 <Button
+                  onClick={() => {
+                    getALLRemuse();
+                    onSuggestClick();
+                  }}
                   sx={{
                     backgroundColor: "#282828",
                     color: "#ffffff",
@@ -482,6 +495,53 @@ function Result({ data, type }) {
   );
 }
 
+function ResultSuggest({ data, type }) {
+  return (
+    <>
+      <Box
+        sx={{
+          background: "#fff",
+          p: 2,
+        }}
+      >
+        <Box
+          sx={{
+            borderBottom: "1px solid rgba(0,0,0,0.1)",
+            display: "flex",
+            alignItems: "center",
+            pb: 2,
+            mb: 2,
+          }}
+        >
+          <SearchIcon />
+          {type !== "ungtuyen" ? (
+            <Typography variant="h6" fontWeight={550} sx={{ ml: 1 }}>
+              Tìm thấy{" "}
+              <Typography variant="span" color="success">
+                {/* {data.length} */}
+                10
+              </Typography>{" "}
+              ứng viên phù hợp
+            </Typography>
+          ) : (
+            <Typography variant="h6" fontWeight={550} sx={{ ml: 1 }}>
+              <Typography variant="span" color="success">
+                {/* {data.length} */}
+                100
+              </Typography>{" "}
+              Ứng viên ứng tuyển
+            </Typography>
+          )}
+        </Box>
+        {data &&
+          data.map((item) => {
+            return <CandidateCard data={item} type={type} />;
+          })}
+      </Box>
+    </>
+  );
+}
+
 export const ShowCV = (user, env) => {
   const location = useLocation();
   const strArr = location.pathname.split("/");
@@ -492,7 +552,7 @@ export const ShowCV = (user, env) => {
 
   //cv list
   const [recommendData, setRecommendData] = useState([]);
-  const [searchCbData, setSearchCbData] = useState([]);
+  const [Remuse, setRemuse] = useState([]);
   const [jobContacts, setJobContacts] = useState([]);
 
   //cv list
@@ -514,6 +574,21 @@ export const ShowCV = (user, env) => {
   const handleChange = (event, newValue) => {
     setTabValue(newValue);
   };
+
+  const [showSuggestion, setShowSuggestion] = useState(false);
+
+  const handleShowSuggestion = () => {
+    setShowSuggestion(true);
+  };
+
+  const handleSuggestClick = () => {
+    setTabValue(1);
+  };
+
+  const handleAllClick = () => {
+    setTabValue(0); // quay lại tab chính
+  };
+
   return (
     <>
       {/* <Box
@@ -617,7 +692,7 @@ export const ShowCV = (user, env) => {
         </Box>
       </Box> */}
 
-      <Container maxWidth>
+      {/* <Container maxWidth>
         <TabPanel
           value={tabValue}
           index={0}
@@ -625,19 +700,27 @@ export const ShowCV = (user, env) => {
             background: "#f1f2f7",
           }}
         >
-          <SearchController setSearchCbData={setSearchCbData} />
-          <Result data={searchCbData} />
+          <ALLRemuse setRemuse={setRemuse} />
+          <Result data={Remuse} />
         </TabPanel>
-        {/* <TabPanel value={tabValue} index={1}>
-          {jobContacts && jobContacts.length > 0 && (
-            <Result data={jobContacts} type="ungtuyen" />
-          )}
+        <TabPanel value={tabValue} index={1}>
+          <ResultSuggest data={Remuse} />
         </TabPanel>
-        <TabPanel value={tabValue} index={2}>
-          {recommendData && recommendData.length > 0 && (
-            <Result data={recommendData} type="goiy" />
-          )}
-        </TabPanel> */}
+      </Container> */}
+
+      <Container maxWidth>
+        <TabPanel value={tabValue} index={0}>
+          <ALLRemuse
+            setRemuse={setRemuse}
+            onSuggestClick={handleSuggestClick}
+            handleAllClick={handleAllClick}
+          />
+          <Result data={Remuse} />
+        </TabPanel>
+        <TabPanel value={tabValue} index={1}>
+          <ALLRemuse setRemuse={setRemuse} handleAllClick={handleAllClick} />
+          <ResultSuggest data={Remuse} />
+        </TabPanel>
       </Container>
     </>
   );
