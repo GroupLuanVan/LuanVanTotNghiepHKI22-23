@@ -50,19 +50,14 @@ export default function AccountMenu() {
   };
   const StyledTypography = styled(Typography)(({ theme }) => ({
     fontFamily: "Arial, sans-serif",
-    backgroundColor: "#d5d5d5",
+    //backgroundColor: "#d5d5d5",
     color: "#000",
     width: "200px",
-    height: "20px",
+    height: "30px",
     padding: "8px",
-
-    borderRadius: "25px",
+    borderRadius: "8px",
+    border: "2px solid #ccc",
   }));
-  const StyledBox = styled(Box)({
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  });
 
   return (
     <React.Fragment>
@@ -70,29 +65,44 @@ export default function AccountMenu() {
         sx={{
           display: "flex",
           alignItems: "center",
+          justifyContent: "center",
           textAlign: "center",
-          width: "100%",
+          width: "90%",
           position: "relative",
         }}
       >
-        <StyledTypography
-          sx={{ display: "flex", alignItems: "center", position: "relative" }}
-          variant="h6"
-        >
-          {user}
-        </StyledTypography>
         <IconButton
           onClick={handleClick}
-          sx={{ display: "block", position: "absolute", right: 0 }}
+          sx={{
+            display: "block",
+            position: "absolute",
+            left: 0,
+            zIndex: 1,
+          }}
           aria-controls={open ? "account-menu" : undefined}
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
         >
-          <Avatar sx={{ width: 30, height: 30, fontSize: 20 }}>
+          <Avatar sx={{ width: 35, height: 35, fontSize: 20 }}>
             {user?.split("")?.[0].toUpperCase()}
           </Avatar>
         </IconButton>
+        <StyledTypography
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            flex: 1,
+            paddingLeft: "50px",
+            mr: 2,
+            mr: -5,
+            zIndex: 0,
+          }}
+          variant="h6"
+        >
+          {user}
+        </StyledTypography>
       </Box>
+
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -125,8 +135,8 @@ export default function AccountMenu() {
             },
           },
         }}
-        transformOrigin={{ horizontal: "right", vertical: "top" }}
-        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        transformOrigin={{ horizontal: "left", vertical: "top" }}
+        anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
       >
         {/* <MenuItem>
           <Avatar fontSize="small" /> {user}
@@ -154,12 +164,12 @@ export default function AccountMenu() {
               </ListItemIcon>
               Công việc đã ứng tuyển
             </MenuItem>
-            <MenuItem onClick={() => navigateTo("/hrlogin")}>
+            {/* <MenuItem onClick={() => navigateTo("/hrlogin")}>
               <ListItemIcon>
                 <WorkIcon fontSize="small" />
               </ListItemIcon>
               ViecLamNhanh for Business
-            </MenuItem>
+            </MenuItem> */}
           </>
         )}
         {role === "recruiter" && (

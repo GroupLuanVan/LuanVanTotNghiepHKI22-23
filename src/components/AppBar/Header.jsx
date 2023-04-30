@@ -114,7 +114,7 @@ const CustomAppBar = () => {
                   fontWeight: "bold",
                   fontSize: "15px",
                   "&:hover": {
-                    backgroundColor: "#00796b",
+                    backgroundColor: "#5490cc",
                     boxShadow: "none",
                   },
                 }}
@@ -131,11 +131,13 @@ const CustomAppBar = () => {
                   padding: "8px 16px",
                   height: "45px",
                   width: "180px",
-                  backgroundColor: "#00a7ac",
+                  backgroundColor: "#5490cc",
+                  color: "black",
                   fontWeight: "bold",
                   fontSize: "15px",
                   "&:hover": {
-                    backgroundColor: "#00695c",
+                    // backgroundColor: "#00695c",
+                    backgroundColor: "white",
                   },
                 }}
               >

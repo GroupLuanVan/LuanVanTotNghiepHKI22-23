@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import Image1 from "../asset/BK_LandingPage.jpg";
 import Image2 from "../asset/LJ.png";
+import Image3 from "../asset/BK_Page.png";
 import Logo from "../asset/Logo.png";
 
 import Silicon from "../asset/Silicon.png";
@@ -77,6 +78,7 @@ export const LandingPage = () => {
     <>
       <Box
         sx={{
+          position: "relative",
           backgroundImage: `url(${Image1})`,
           backgroundSize: "cover",
           height: "100vh",
@@ -85,7 +87,15 @@ export const LandingPage = () => {
           justifyContent: "center",
           alignItems: "center",
           padding: "0 20px",
-          backgroundColor: "rgba(0, 0, 0, 0.75)",
+          "&::before": {
+            content: "''",
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          },
         }}
       >
         <Box display={"flex"}>
@@ -95,9 +105,11 @@ export const LandingPage = () => {
               fontWeight: "bold",
               textAlign: "center",
               mb: 4,
-              color: "white",
+
+              color: " #00a7ac",
               mr: 5,
               fontFamily: "font-exo2",
+              zIndex: 1,
             }}
           >
             Cơ Hội
@@ -108,15 +120,15 @@ export const LandingPage = () => {
               fontWeight: "bold",
               textAlign: "center",
               mb: 4,
-              color: " #00a7ac",
+              color: "white",
               fontFamily: "font-exo2",
+              zIndex: 1,
             }}
           >
             Nghề Nghiệp Của Bạn
           </Typography>
         </Box>
         <Box
-          // boxShadow={"5px 10px 20px #ccc"}
           sx={{
             position: "relative",
             display: "flex",
@@ -126,7 +138,6 @@ export const LandingPage = () => {
             height: "294px",
             width: "1410px",
             borderRadius: "20px",
-            //padding: "32px 32px 32px 32px",
           }}
         >
           <Grid container spacing={3}>
@@ -167,7 +178,7 @@ export const LandingPage = () => {
 
                   <Button
                     sx={{
-                      backgroundColor: "#00A7AC",
+                      backgroundColor: "#5490cc",
                       height: "62px",
                       width: "200px",
                       borderRadius: "10px",
@@ -204,7 +215,7 @@ export const LandingPage = () => {
                 </Typography>
                 <Button
                   sx={{
-                    backgroundColor: "#00A7AC",
+                    backgroundColor: "#5490cc",
                     height: "62px",
                     width: "200px",
                     borderRadius: "10px",
@@ -436,11 +447,25 @@ export const LandingPage = () => {
             <Grid item xs={9}>
               {" "}
               <Box mt={5} ml={10}>
-                <Typography sx={{ lineHeight: 1.75 }} fontWeight="bold">
+                <Typography
+                  variant="h6"
+                  fontFamily="Arial,Helvetica Neue,Helvetica,sans-serif"
+                  sx={{ lineHeight: 1.75 }}
+                  fontWeight="bold"
+                >
                   Nhà Tuyển Dụng
                 </Typography>
-                <Typography variant="h4">Tìm Kiếm Và Đăng Công Việc</Typography>
-                <Typography sx={{ lineHeight: 3 }}>
+                <Typography
+                  fontFamily="Arial,Helvetica Neue,Helvetica,sans-serif"
+                  variant="h4"
+                >
+                  Tìm Kiếm Và Đăng Công Việc
+                </Typography>
+                <Typography
+                  variant="h5"
+                  fontFamily="Arial,Helvetica Neue,Helvetica,sans-serif"
+                  sx={{ lineHeight: 3 }}
+                >
                   Chúng tôi có các giải pháp đầu cuối có thể theo kịp bạn và các
                   tiêu chuẩn của bạn.
                 </Typography>

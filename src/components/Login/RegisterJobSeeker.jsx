@@ -70,11 +70,11 @@ export const RegisterJobSeeker = () => {
     axios
       .post(`http://localhost:5000/api/auth/register`, user)
       .then((response) => {
-        const { username } = response.data;
+        //const { username } = response.data;
         toast.success(
           `Đăng Ký Thành Công. Tên người dùng của bạn là ${username}`
         );
-        navigate("/login");
+        navigate("/");
       })
       .catch((error) => {
         toast.error("Đăng ký không thành công. Vui lòng thử lại.");

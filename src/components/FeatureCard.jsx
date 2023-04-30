@@ -27,7 +27,7 @@ function FeatureCard({
           <Typography
             variant="h5"
             fontFamily="Arial,Helvetica Neue,Helvetica,sans-serif"
-            sx={{ color: "white", fontWeight: "550", mb: 0.7 }}
+            sx={{ color: "white", fontWeight: "550", mb: 0.7, mt: 2 }}
           >
             {title}
           </Typography>
@@ -35,7 +35,7 @@ function FeatureCard({
             variant="p"
             fontFamily="Arial,Helvetica Neue,Helvetica,sans-serif"
             fontSize="0.9rem"
-            sx={{ color: "white", mb: 1.67 }}
+            sx={{ color: "white", mb: 1.67, mt: 2, fontSize: "18px" }}
           >
             {subTitle}
           </Typography>
