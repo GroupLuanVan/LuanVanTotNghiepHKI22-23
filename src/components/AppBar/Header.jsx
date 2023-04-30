@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "mui-image";
 
 import Logo1 from "../../asset/Logo1.png";
+import Logo from "../../asset/Final_Logo.png";
 import AccountMenu from "../Menu/AccountMenu";
 import { selectIsLoggedIn } from "../../store/userSlice";
 import App from "../../App.css";
@@ -35,6 +36,7 @@ const CustomAppBar = () => {
         background: "white",
         color: "black",
         height: "120px",
+        boxShadow: "0px 1px 3px rgba(0, 0, 0, 0.3)",
       }}
       position="fixed"
     >
@@ -58,7 +60,7 @@ const CustomAppBar = () => {
             onClick={() => {
               navigateTo("/");
             }}
-            src={Logo1}
+            src={Logo}
             width="210px"
             height="100px"
             fit="cover"
@@ -80,7 +82,7 @@ const CustomAppBar = () => {
                 ml: 10,
               }}
             >
-              Công Việc
+              Công việc
             </Typography>
             <Typography
               onClick={() => {
@@ -91,7 +93,7 @@ const CustomAppBar = () => {
                 mr: 5,
               }}
             >
-              Tạo CV
+              Tạo cv
             </Typography>
           </Box>
         </Box>

@@ -100,7 +100,7 @@ const ManageUser = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Báo cáo tuyển dụng
+            Quản lý tất cả người dùng
           </Typography>
           {selectedRows.length > 0 && (
             <>
@@ -138,42 +138,42 @@ const ManageUser = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell></TableCell>
                   <TableCell>
                     {" "}
-                    <Typography ml={-3} variant="h6">
-                      Tên Người Dùng
+                    <Typography ml={-1} variant="h6">
+                      Tên ggười dùng
                     </Typography>
                   </TableCell>
                   <TableCell>
                     {" "}
                     <Typography ml={-2} variant="h6">
-                      Tên Công Ty
+                      Tên công ty
                     </Typography>
                   </TableCell>
                   <TableCell>
                     {" "}
                     <Typography ml={0} variant="h6">
-                      Vai Trò
+                      Vai trò
                     </Typography>
                   </TableCell>
                   <TableCell>
                     {" "}
                     <Typography ml={0} variant="h6">
-                      Trạng Thái
+                      Trạng thái
                     </Typography>
                   </TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {users.map((user) => (
                   <TableRow key={user._id}>
-                    <TableCell>
+                    {/* <TableCell>
                       <Checkbox
                         onChange={(e) => handleCheckboxChange(e, user._id)}
                         checked={selectedRows.includes(user._id)}
                       />
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       <Typography variant="h6">{user?.username}</Typography>
                     </TableCell>
@@ -189,8 +189,19 @@ const ManageUser = () => {
                     </TableCell>
                     <TableCell>
                       <Typography variant="h6" color="blue">
-                        Đã Đăng Ký
+                        Đã đăng ký
                       </Typography>
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      <Button
+                        variant="contained"
+                        color="error"
+                        sx={{ height: 30, width: 100 }}
+                        // onClick={() => handleDelete(item._id)}
+                      >
+                        Xóa
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

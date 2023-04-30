@@ -139,16 +139,17 @@ export const LoginEmployer = () => {
                   margin: "1 10px 15px",
                   height: 40,
                   width: 150,
+                  backgroundColor: "#5490cc",
                 }}
                 variant="contained"
-                color="warning"
+                //color="warning"
               >
                 Login
               </Button>
               <br />
               <a>Quên mật khẩu</a>
               <div className="form-group login-help text-center">
-                <a>Đăng ký tìm việc</a>|<a>Đăng ký tuyển dụng</a>
+                <a>Đăng ký tìm việc</a> | <a>Đăng ký tuyển dụng</a>
               </div>
             </Box>
           </form>

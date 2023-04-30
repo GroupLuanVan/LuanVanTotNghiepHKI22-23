@@ -27,9 +27,9 @@ export const LoginSeeker = () => {
   const username = useRef(null);
   const password = useRef(null);
   const user = useSelector((state) => state.user);
-  const token = useSelector((state) => state.user.role);
+  const role = useSelector((state) => state.user.role);
   console.log(user);
-  console.log(token);
+  console.log(role);
   const idcompany = useSelector((state) => state.user.idcompany);
   const [response, setResponse] = useState({
     showArlert: false,
@@ -57,8 +57,9 @@ export const LoginSeeker = () => {
       });
 
       const { data } = res.data;
-
+      console.log(data);
       localStorage.setItem("token", data.token);
+      //localStorage.setItem("role", data.user.role);
       const token = localStorage.getItem("token");
       const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
@@ -142,16 +143,17 @@ export const LoginSeeker = () => {
                   margin: "1 10px 15px",
                   height: 40,
                   width: 150,
+                  backgroundColor: "#5490cc",
                 }}
                 variant="contained"
-                color="warning"
+                //color="warning"
               >
                 Login
               </Button>
               <br />
               <a>Quên mật khẩu</a>
               <div className="form-group login-help text-center">
-                <a>Đăng ký tìm việc</a>|<a>Đăng ký tuyển dụng</a>
+                <a>Đăng ký tìm việc</a> | <a>Đăng ký tuyển dụng</a>
               </div>
             </Box>
           </form>

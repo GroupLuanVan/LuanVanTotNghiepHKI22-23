@@ -23,6 +23,8 @@ import Image from "mui-image";
 import banner from "../asset/banner.png";
 import { styled } from "@mui/material/styles";
 import defaultCvData from "../asset/defaultCvData.json";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import CV1 from "./CV1";
 import CV2 from "./CV2";
 import CV3 from "./CV3";
@@ -31,10 +33,20 @@ const TitleTypography = styled(Typography)({
   fontWeight: "bold",
   color: "#ff5722",
 });
+
 export const ChooseCV = () => {
+  const user = useSelector((state) => state.user);
+  console.log(user);
+  const navigate = useNavigate();
   const [currentCV, setCurrentCV] = useState("");
   const [print, setPrint] = useState(false);
   const [defaultCv, setDefaultCv] = useState(defaultCvData);
+
+  useEffect(() => {
+    if (user.role != "candidate") {
+      navigate("/LoginSeeker");
+    }
+  });
 
   return (
     <>

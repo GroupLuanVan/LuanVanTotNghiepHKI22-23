@@ -97,43 +97,40 @@ const ManageJobCate = () => {
   return (
     <>
       <Grid sx={{ m: 3 }}>
-        {/* Header */}
-
         <Box
           sx={{
-            p: 2,
-            borderBottom: "1px solid rgba(0,0,0,0.1)",
             display: "flex",
             alignItems: "center",
+            justifyContent: "space-between",
+            p: 2,
+            borderBottom: "1px solid rgba(0,0,0,0.1)",
             background: "#fff",
             mt: 25,
           }}
         >
-          <BarChartIcon />
-          <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Các Loại Công Việc
-          </Typography>
-
-          {selectedRows.length > 0 && (
-            <>
-              <Button
-                variant="contained"
-                color="error"
-                sx={{ ml: "auto", width: 150 }}
-                onClick={handleDeleteClick}
-              >
-                Xóa
-              </Button>
-              <Button
-                variant="contained"
-                sx={{ ml: 4, width: 150 }}
-                onClick={handleDeleteClick}
-              >
-                Xem
-              </Button>
-            </>
-          )}
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <BarChartIcon />
+            <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
+              Các loại công việc
+            </Typography>
+          </Box>
+          <Button
+            onClick={handleOpenAddJobCategoryDialog}
+            sx={{
+              backgroundColor: "#5490cc",
+              color: "black",
+              fontWeight: "700",
+              width: "100px",
+            }}
+          >
+            Thêm
+          </Button>
+          <AddJobCategoryDialog
+            open={openAddJobCategoryDialog}
+            onClose={handleCloseAddJobCategoryDialog}
+          />
         </Box>
+
         {/* head info */}
         <Grid
           container
@@ -150,50 +147,28 @@ const ManageJobCate = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell>
-                    <Button
-                      onClick={handleOpenAddJobCategoryDialog}
-                      sx={{
-                        backgroundColor: "#5490cc",
-                        color: "black",
-                        fontWeight: "700",
-                        width: "100px",
-                      }}
-                    >
-                      Thêm
-                    </Button>
-                    <AddJobCategoryDialog
-                      open={openAddJobCategoryDialog}
-                      onClose={handleCloseAddJobCategoryDialog}
-                    />
-                  </TableCell>
                   <TableCell align="left">
-                    <Typography ml={-3} variant="h6">
-                      Tên Loại Công Việc
+                    <Typography ml={-1} variant="h6">
+                      Tên loại công việc
                     </Typography>
                   </TableCell>
                   <TableCell>
                     <Typography ml={7} variant="h6">
-                      Ngày Tạo
+                      Ngày tạo
                     </Typography>
                   </TableCell>
                   <TableCell>
                     {" "}
                     <Typography ml={-3} variant="h6">
-                      Trạng Thái
+                      Trạng thái
                     </Typography>
                   </TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {users.map((user) => (
                   <TableRow key={user._id}>
-                    <TableCell>
-                      <Checkbox
-                        onChange={(e) => handleCheckboxChange(e, user._id)}
-                        checked={selectedRows.includes(user._id)}
-                      />
-                    </TableCell>
                     <TableCell>
                       <Typography>{user?.title} </Typography>
                     </TableCell>
@@ -205,6 +180,17 @@ const ManageJobCate = () => {
                       <Typography variant="text" color="success">
                         Đã Tạo
                       </Typography>
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      <Button
+                        variant="contained"
+                        color="error"
+                        sx={{ height: 30, width: 100 }}
+                        // onClick={() => handleDelete(item._id)}
+                      >
+                        Xóa
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -218,3 +204,23 @@ const ManageJobCate = () => {
 };
 
 export default ManageJobCate;
+
+// {selectedRows.length > 0 && (
+//   <>
+//     <Button
+//       variant="contained"
+//       color="error"
+//       sx={{ ml: "auto", width: 150 }}
+//       onClick={handleDeleteClick}
+//     >
+//       Xóa
+//     </Button>
+//     <Button
+//       variant="contained"
+//       sx={{ ml: 4, width: 150 }}
+//       onClick={handleDeleteClick}
+//     >
+//       Xem
+//     </Button>
+//   </>
+// )}

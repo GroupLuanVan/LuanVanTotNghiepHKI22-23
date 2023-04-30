@@ -69,7 +69,7 @@ const JobPosting = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Số Bài Đăng Tuyển Dụng (giao diện cảm giác bị dư trường nào thì t bỏ
+            Số bài đăng tuyển dụng (giao diện cảm giác bị dư trường nào thì t bỏ
             nha)
           </Typography>
           {selectedRows.length > 0 && (
@@ -108,22 +108,15 @@ const JobPosting = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell></TableCell>
                   <TableCell>Tên tin tuyển dụng</TableCell>
-                  <TableCell>Tên Công Ty</TableCell>
-                  <TableCell>Tên Nhà Tuyển Dụng</TableCell>
+                  <TableCell>Tên công ty</TableCell>
+                  <TableCell>Tên nhà tuyển dụng</TableCell>
                   <TableCell>Ngày đăng</TableCell>
-
                   <TableCell>Trạng thái</TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               </TableHead>
               <TableRow>
-                <TableCell>
-                  <Checkbox
-                    onChange={(e) => handleCheckboxChange(e, rowCount)}
-                    checked={selectedRows.includes(rowCount)}
-                  />
-                </TableCell>
                 <TableCell>
                   <Typography>Intern ReactJS </Typography>
                 </TableCell>
@@ -142,31 +135,15 @@ const JobPosting = () => {
                     Đã Đăng
                   </Button>
                 </TableCell>
-              </TableRow>
-
-              <TableRow>
                 <TableCell>
-                  <Checkbox
-                    onChange={(e) => handleCheckboxChange(e, rowCount + 1)}
-                    checked={selectedRows.includes(rowCount + 1)}
-                  />
-                </TableCell>
-                <TableCell>
-                  <Typography>Intern ReactJS </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>FPT Sof</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>HR FPT</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>17/04/2022</Typography>
-                </TableCell>
-
-                <TableCell>
-                  <Button variant="text" color="success">
-                    Đã Đăng
+                  {" "}
+                  <Button
+                    variant="contained"
+                    color="error"
+                    sx={{ height: 30, width: 100 }}
+                    // onClick={() => handleDelete(item._id)}
+                  >
+                    Xóa
                   </Button>
                 </TableCell>
               </TableRow>

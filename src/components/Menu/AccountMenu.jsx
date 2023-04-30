@@ -138,9 +138,6 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "left", vertical: "top" }}
         anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
       >
-        {/* <MenuItem>
-          <Avatar fontSize="small" /> {user}
-        </MenuItem> */}
         {role === "candidate" && (
           <>
             <MenuItem>

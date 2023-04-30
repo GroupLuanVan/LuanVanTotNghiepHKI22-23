@@ -105,8 +105,11 @@ export function SideBar({}) {
       case "/admin/CV":
         setActiveItem(5);
         break;
-      case "/admin/statistical":
+      case "/admin/jobCate":
         setActiveItem(6);
+        break;
+      case "/admin/statistical":
+        setActiveItem(7);
         break;
       default:
         break;
@@ -261,7 +264,7 @@ export function SideBar({}) {
           </CustomMenuItem>
           <CustomMenuItem
             style={{
-              color: activeItem === 7 ? theme.palette.success.main : "",
+              color: activeItem === 6 ? theme.palette.success.main : "",
               fontSize: "1.5rem",
             }}
             onClick={() => {
@@ -272,7 +275,7 @@ export function SideBar({}) {
               <PlusOneIcon
                 fontSize="small"
                 style={{
-                  color: activeItem === 7 ? theme.palette.success.main : "",
+                  color: activeItem === 6 ? theme.palette.success.main : "",
                   fontSize: "1.5rem",
                 }}
               />
@@ -281,13 +284,10 @@ export function SideBar({}) {
               <Typography variant="h6">Thêm Loại Công Việc</Typography>
             </ListItemText>
           </CustomMenuItem>
-          {/* <AddJobCategoryDialog
-            open={openAddJobCategoryDialog}
-            onClose={handleCloseAddJobCategoryDialog}
-          /> */}
+
           <CustomMenuItem
             style={{
-              color: activeItem === 6 ? theme.palette.success.main : "",
+              color: activeItem === 7 ? theme.palette.success.main : "",
               fontSize: "1.5rem",
             }}
             onClick={() => {
@@ -298,7 +298,7 @@ export function SideBar({}) {
               <BarChartIcon
                 fontSize="small"
                 style={{
-                  color: activeItem === 6 ? theme.palette.success.main : "",
+                  color: activeItem === 7 ? theme.palette.success.main : "",
                   fontSize: "1.5rem",
                 }}
               />

@@ -66,6 +66,7 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
   });
 
   const [showSuggestion, setShowSuggestion] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   const handleShowSuggestion = () => {
     setShowSuggestion(true);
@@ -112,10 +113,10 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
       >
         <Box mt={1}>
           <Typography variant="h3" sx={{ color: "#00b14f", mb: "37px" }}>
-            Khám phá Ứng Viên Tiềm Năng Cho Bạn
+            Khám phá ứng viên tiềm năng cho bạn
           </Typography>
           <Typography variant="h6" sx={{ color: "#00b14f" }}>
-            Tra Cứu Thông Tin Ứng Viên
+            Tra cứu thông tin ứng viên
           </Typography>
         </Box>
 
@@ -135,7 +136,7 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
           >
             <Box mr={5}>
               <Typography variant="h4" fontWeight="550" gutterBottom>
-                Tìm kiếm Ứng Viên
+                Tìm kiếm
               </Typography>
             </Box>
             <Box
@@ -155,10 +156,18 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
                     backgroundColor: "white",
                     borderRadius: "100rem",
                     mr: 2,
-                    border: "1px solid black",
+                    border: "none",
+                    outline: "none",
+                    "& .MuiOutlinedInput-root": {
+                      "& fieldset": {
+                        border: 0,
+                        borderRadius: "100rem",
+                      },
+                    },
                   }}
                   color="success"
-                  label="Nhập tên công ty"
+                  variant="outlined"
+                  label="Nhập kỹ năng ứng viên"
                 />
 
                 <Button
@@ -225,7 +234,7 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ my: 6 }}>
+      {/* <Box sx={{ my: 6 }}>
         <Typography
           variant="h3"
           fontWeight="600"
@@ -234,7 +243,7 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
         >
           Các Ứng Viên Tiềm Năng
         </Typography>
-      </Box>
+      </Box> */}
     </>
   );
 }

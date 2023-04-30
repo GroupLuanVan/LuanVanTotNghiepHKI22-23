@@ -14,7 +14,8 @@ export const userSlice = createSlice({
         user: localStorage.getItem('user') == null ? "Người dùng" : localStorage.getItem('user'),
         email: localStorage.getItem('email') == null ? " Email Người dùng" : localStorage.getItem('email'),
         isLogin: localStorage.getItem('user') ? true : false,
-        role: localStorage.getItem('role') === "candidate" ? "candidate" : localStorage.getItem('role'),
+        // role: localStorage.getItem('role') === "candidate" ? "candidate" : localStorage.getItem('role'),
+        role: localStorage.getItem('role') ? localStorage.getItem('role') : "default",
         token: localStorage.getItem('token') === '' ?  localStorage.getItem('token') : localStorage.getItem('token') ,
         idCompany : localStorage.getItem('idcompany') === '' ? "Null" : localStorage.getItem('idcompany'),
         idApplyJob : localStorage.getItem('idApply') === '' ? "Null" : localStorage.getItem('idApply')

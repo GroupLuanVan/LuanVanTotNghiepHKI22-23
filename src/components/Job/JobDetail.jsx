@@ -313,6 +313,8 @@ export default function JobDetail({ user }) {
                       sx={{
                         backgroundColor: "#7cb1e6",
                         color: "black",
+                        border: "1px solid #000000",
+                        fontSize: "15px",
                       }}
                       onClick={() => applyJob()}
                       startIcon={<SendIcon />}
@@ -519,7 +521,7 @@ export default function JobDetail({ user }) {
                   mt: 2,
                   py: 2,
                   //background: alpha(theme.palette.success.main, 0.08),
-                  background: "#7cb1e6",
+                  background: "#c7e8fc",
                   borderRadius: "10px",
                   display: "flex",
                   flexDirection: "column",
@@ -554,7 +556,7 @@ export default function JobDetail({ user }) {
                   mt: 2,
                   py: 2,
                   //background: alpha(theme.palette.success.main, 0.08),
-                  background: "#7cb1e6",
+                  background: "#c7e8fc",
                   borderRadius: "10px",
                   display: "flex",
                   flexDirection: "column",
@@ -589,7 +591,7 @@ export default function JobDetail({ user }) {
                   mt: 2,
                   py: 2,
                   //background: alpha(theme.palette.success.main, 0.08),
-                  background: "#7cb1e6",
+                  background: "#c7e8fc",
                   borderRadius: "10px",
                   display: "flex",
                   flexDirection: "column",
@@ -624,7 +626,7 @@ export default function JobDetail({ user }) {
                   mt: 2,
                   py: 2,
                   //background: alpha(theme.palette.success.main, 0.08),
-                  background: "#7cb1e6",
+                  background: "#c7e8fc",
                   borderRadius: "10px",
                   display: "flex",
                   flexDirection: "column",

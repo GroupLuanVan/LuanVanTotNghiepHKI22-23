@@ -95,7 +95,7 @@ const ManageSeeker = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Số Lượng Ứng Viên Ứng Tuyển
+            Số lượng ứng viên ứng tuyển
           </Typography>
           {selectedRows.length > 0 && (
             <>
@@ -133,36 +133,36 @@ const ManageSeeker = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell></TableCell>
                   <TableCell>
                     {" "}
-                    <Typography ml={-3} variant="h6">
-                      Tên Tin Tuyển Dụng
+                    <Typography ml={0} variant="h6">
+                      Tên tin tuyển dụng
                     </Typography>
                   </TableCell>
                   <TableCell>
                     {" "}
                     <Typography ml={0} variant="h6">
-                      Tên Công Ty
+                      Tên công ty
                     </Typography>
                   </TableCell>
                   <TableCell>
                     {" "}
                     <Typography ml={-3} variant="h6">
-                      Số Lượng Ứng Tuyển
+                      Số lượng ứng tuyển
                     </Typography>
                   </TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {users.map((user) => (
                   <TableRow key={user._id}>
-                    <TableCell>
+                    {/* <TableCell>
                       <Checkbox
                         onChange={(e) => handleCheckboxChange(e, user._id)}
                         checked={selectedRows.includes(user._id)}
                       />
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       <Typography variant="h6">{user.jobpostId} </Typography>
                     </TableCell>
@@ -172,6 +172,17 @@ const ManageSeeker = () => {
 
                     <TableCell>
                       <Typography variant="h6">2 người</Typography>
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      <Button
+                        variant="contained"
+                        color="error"
+                        sx={{ height: 30, width: 100 }}
+                        // onClick={() => handleDelete(item._id)}
+                      >
+                        Xóa
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}

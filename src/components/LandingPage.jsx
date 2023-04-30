@@ -112,7 +112,7 @@ export const LandingPage = () => {
               zIndex: 1,
             }}
           >
-            Cơ Hội
+            Cơ hội
           </Typography>
           <Typography
             variant="h1"
@@ -125,7 +125,7 @@ export const LandingPage = () => {
               zIndex: 1,
             }}
           >
-            Nghề Nghiệp Của Bạn
+            nghề nghiệp của bạn
           </Typography>
         </Box>
         <Box
@@ -145,12 +145,12 @@ export const LandingPage = () => {
               <Box ml={10}>
                 <Box>
                   <Typography variant="h4">
-                    Tìm Kiếm Và Gợi Ý Công Việc Phù Hợp Cho Bạn
+                    Tìm kiếm và gợi ý công việc phù hợp cho bạn
                   </Typography>
                 </Box>
                 <Box mb={3}>
                   <Typography variant="h6">
-                    Đăng Tin Tuyển Dụng Ứng Viên
+                    Đăng tin tuyển dụng ứng viên
                   </Typography>
                 </Box>
                 <Box
@@ -207,11 +207,11 @@ export const LandingPage = () => {
             >
               <Box mt={3}>
                 <Typography sx={{ lineHeight: 1.75 }} fontWeight="bold">
-                  Tìm Kiếm việc làm dễ dàng hơn
+                  Tìm kiếm việc làm dễ dàng hơn
                 </Typography>
-                <Typography variant="h4">Tạo Cv cho bản thân bạn</Typography>
+                <Typography variant="h4">Tạo cv cho bản thân bạn</Typography>
                 <Typography sx={{ lineHeight: 3 }}>
-                  Bạn chưa có CV? Tạo ngay chỉ với 3 bước.
+                  Bạn chưa có cv ? Tạo ngay chỉ với 3 bước.
                 </Typography>
                 <Button
                   sx={{
@@ -222,7 +222,7 @@ export const LandingPage = () => {
                   }}
                   variant="contained"
                 >
-                  Tạo CV của bạn
+                  Tạo cv của bạn
                 </Button>
               </Box>
             </Grid>
@@ -398,7 +398,7 @@ export const LandingPage = () => {
           maxHeight="262px"
           maxWidth="40%"
           title="Tạo CV online "
-          subTitle="SmartJobBoard có các mẫu CV đa dạng cho bạn thỏa sức lựa chọn"
+          subTitle="SmartJobBoard có các mẫu cv đa dạng cho bạn lựa chọn"
           imageLink="https://www.topcv.vn/v4/image/welcome/mau_cv.png?v=1.0.0"
           buttonTitle="Tạo CV ngay"
         />
@@ -406,10 +406,10 @@ export const LandingPage = () => {
         <FeatureCard
           maxHeight="262px"
           maxWidth="40%"
-          title="Tìm Việc Làm và Ứng Viên Thông Qua Gợi Ý"
-          subTitle="Gợi Ý Phù Hợp Với Yêu Cầu Và Kỹ Năng"
+          title="Tìm việc làm và ứng viên thông qua gợi ý"
+          subTitle="Gợi ý phù hợp với yêu cầu và kỹ năng"
           imageLink={hrimg}
-          buttonTitle="Tìm ứng viên và Việc Làm Phù Hợp"
+          buttonTitle="Tìm ứng viên và việc làm phù hợp"
         />
       </Box>
       <Box
@@ -423,10 +423,10 @@ export const LandingPage = () => {
         <FeatureCard
           maxHeight="280px"
           maxWidth="50%"
-          title="Ứng Tuyển Công Việc"
+          title="Ứng tuyển công việc"
           subTitle="Ứng tuyển vào vị trí mà bạn mong muốn"
           imageLink={Cadi}
-          buttonTitle="Ứng Tuyển Ngay"
+          buttonTitle="Ứng tuyển ngay"
         />
       </Box>
       <Box sx={{ mt: 10 }}>
@@ -453,13 +453,13 @@ export const LandingPage = () => {
                   sx={{ lineHeight: 1.75 }}
                   fontWeight="bold"
                 >
-                  Nhà Tuyển Dụng
+                  Nhà tuyển dụng
                 </Typography>
                 <Typography
                   fontFamily="Arial,Helvetica Neue,Helvetica,sans-serif"
                   variant="h4"
                 >
-                  Tìm Kiếm Và Đăng Công Việc
+                  Tìm kiếm và đăng công việc
                 </Typography>
                 <Typography
                   variant="h5"
@@ -480,7 +480,7 @@ export const LandingPage = () => {
                   }}
                   variant="Outlined"
                 >
-                  Đăng Tin Tuyển dụng
+                  Đăng tin tuyển dụng
                 </Button>
               </Box>
             </Grid>

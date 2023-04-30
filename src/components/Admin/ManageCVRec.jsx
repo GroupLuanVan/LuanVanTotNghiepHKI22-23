@@ -69,7 +69,7 @@ const ManageCVRec = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Số CV Được Tạo ( mỗi người tạo được 1 CV nên chức năng này theo m
+            Số cv được tạo ( mỗi người tạo được 1 CV nên chức năng này theo m
             nghĩ có bị dư không, hay là bỏ nha )
           </Typography>
           {selectedRows.length > 0 && (
@@ -108,20 +108,14 @@ const ManageCVRec = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell></TableCell>
-                  <TableCell>Tên Ứng Viên</TableCell>
+                  <TableCell>Tên ứng viên</TableCell>
                   <TableCell>CV đã tạo</TableCell>
-                  <TableCell>Tên Tiêu Đề CV</TableCell>
+                  <TableCell>Tên tiêu đề cv</TableCell>
                   <TableCell>Trạng thái</TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               </TableHead>
               <TableRow>
-                <TableCell>
-                  <Checkbox
-                    onChange={(e) => handleCheckboxChange(e, rowCount)}
-                    checked={selectedRows.includes(rowCount)}
-                  />
-                </TableCell>
                 <TableCell>
                   <Typography>Nguyễn Hữu Thai </Typography>
                 </TableCell>
@@ -134,26 +128,16 @@ const ManageCVRec = () => {
                 <TableCell>
                   <Typography>Đã Tạo</Typography>
                 </TableCell>
-              </TableRow>
-
-              <TableRow>
                 <TableCell>
-                  <Checkbox
-                    onChange={(e) => handleCheckboxChange(e, rowCount + 1)}
-                    checked={selectedRows.includes(rowCount + 1)}
-                  />
-                </TableCell>
-                <TableCell>
-                  <Typography>Võ Thụy Phương Uyên </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>1 CV</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>Back-end</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>Đã Tạo</Typography>
+                  {" "}
+                  <Button
+                    variant="contained"
+                    color="error"
+                    sx={{ height: 30, width: 100 }}
+                    // onClick={() => handleDelete(item._id)}
+                  >
+                    Xóa
+                  </Button>
                 </TableCell>
               </TableRow>
             </Table>

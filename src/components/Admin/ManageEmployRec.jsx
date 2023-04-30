@@ -114,7 +114,7 @@ const ManageEmploy = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Số Nhà Tuyển Dụng
+            Số nhà tuyển dụng
           </Typography>
           {selectedRows.length > 0 && (
             <>
@@ -152,35 +152,35 @@ const ManageEmploy = () => {
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell></TableCell>
                   <TableCell>
                     {" "}
-                    <Typography ml={-4} variant="h6">
-                      Tên Nhà Tuyển Dụng
+                    <Typography ml={-1} variant="h6">
+                      Tên nhà tuyển dụng
                     </Typography>
                   </TableCell>
                   <TableCell>
                     {" "}
-                    <Typography ml={-2} variant="h6">
-                      Tên Công Ty
+                    <Typography ml={0} variant="h6">
+                      Tên công ty
                     </Typography>
                   </TableCell>
                   <TableCell>
                     <Typography ml={0} variant="h6">
-                      Trạng Thái
+                      Trạng thái
                     </Typography>
                   </TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {recruiter.map((user) => (
                   <TableRow key={user._id}>
-                    <TableCell>
+                    {/* <TableCell>
                       <Checkbox
                         onChange={(e) => handleCheckboxChange(e, user._id)}
                         checked={selectedRows.includes(user._id)}
                       />
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       <Typography variant="h6">{user?.name} </Typography>
                     </TableCell>
@@ -190,8 +190,19 @@ const ManageEmploy = () => {
 
                     <TableCell>
                       <Typography variant="h6" color="blue">
-                        Đã Đăng Ký
+                        Đã đăng ký
                       </Typography>
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      <Button
+                        variant="contained"
+                        color="error"
+                        sx={{ height: 30, width: 100 }}
+                        // onClick={() => handleDelete(item._id)}
+                      >
+                        Xóa
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))}
