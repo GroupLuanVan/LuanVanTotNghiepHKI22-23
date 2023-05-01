@@ -495,6 +495,18 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
                   {data.fulladdress}
                 </Typography>
               </Box>
+              {/* <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  mb: 1,
+                }}
+              >
+                <LocationOnIcon fontSize="small" sx={{ mr: 1 }} />
+                <Typography variant="body1" color="initial">
+                  {data.fulladdress}
+                </Typography>
+              </Box> */}
             </Box>
             <Box
               sx={{

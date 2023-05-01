@@ -10,13 +10,15 @@ import {
   Autocomplete,
   TextField,
 } from "@mui/material";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import logoImage from "../../asset/camera_icon.png";
 import EditIcon from "@mui/icons-material/Edit";
 import Image from "mui-image";
+import axios from "axios";
 
 export default function ContactEditPopUp({ show, setShow, data, setData }) {
   const [tempData, setTempData] = useState();
+  const [address, setAddress] = useState([]);
   const [avatar, setAvatar] = useState(logoImage);
   const imageRef = useRef();
   function updateData() {
@@ -34,6 +36,23 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
       { id: 2, title: "Nữ" },
     ];
   };
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/address")
+      .then((res) => {
+        setAddress(res.data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const handleAddressesChange = (event, value) => {
+    setData({
+      ...data,
+      addressId: value ? value._id : "",
+    });
+  };
+
   return (
     <>
       <Dialog
@@ -102,7 +121,7 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
                 columnGap: 2,
               }}
             >
-              <Grid item xs={5}>
+              <Grid item xs={6}>
                 <Typography variant="p" fontWeight={500}>
                   Họ và tên
                 </Typography>
@@ -138,7 +157,7 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
                   }}
                 />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item xs={6}>
                 <Typography variant="p" fontWeight={500}>
                   Email
                 </Typography>
@@ -174,24 +193,23 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
                   }}
                 />
               </Grid>
+
               <Grid item xs={6}>
-                <Typography variant="p" fontWeight={500}>
-                  Chức danh
+                <Typography variant="p" fontWeight={500} fontSize={20}>
+                  Địa điểm
                 </Typography>
-                <Input
-                  fullWidth
-                  color="success"
-                  size="small"
-                  sx={{ mt: 1 }}
-                  placeholder="Lập trình viên"
-                  onBlur={(e) => {
-                    setTempData({
-                      ...tempData,
-                      title: e.target.value,
-                    });
-                  }}
+                <Autocomplete
+                  disablePortal
+                  sx={{ width: 280 }}
+                  options={address}
+                  getOptionLabel={(address) => address.title}
+                  onChange={handleAddressesChange}
+                  renderInput={(params) => (
+                    <TextField {...params} placeholder="Chọn địa điểm " />
+                  )}
                 />
               </Grid>
+
               <Grid item xs={5}>
                 <Typography variant="p" fontWeight={500} fontSize={20}>
                   Giới Tính
@@ -199,7 +217,7 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
                 <Autocomplete
                   disablePortal
                   id="combo-box-demo"
-                  sx={{ width: 300 }}
+                  sx={{ width: 250 }}
                   options={gender()}
                   getOptionLabel={(option) => option.title}
                   renderInput={(params) => (
@@ -216,7 +234,25 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
             </Grid>
             <Grid item xs={12}>
               <Typography variant="p" fontWeight={500}>
-                Địa chỉ
+                Chức danh
+              </Typography>
+              <Input
+                fullWidth
+                color="success"
+                size="small"
+                sx={{ mt: 1 }}
+                placeholder="Lập trình viên"
+                onBlur={(e) => {
+                  setTempData({
+                    ...tempData,
+                    title: e.target.value,
+                  });
+                }}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="p" fontWeight={500}>
+                Địa chỉ đầy đủ
               </Typography>
               <Input
                 fullWidth
