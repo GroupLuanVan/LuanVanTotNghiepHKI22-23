@@ -115,11 +115,17 @@ export default function AccountMenu() {
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
+            width: 350,
+            height: 300,
+            lineHeight: "100rem",
+            backgroundColor: "#fff",
+
             "& .MuiAvatar-root": {
-              width: 32,
-              height: 32,
-              ml: -0.5,
+              width: 42,
+              height: 42,
+              ml: 0,
               mr: 1,
+              backgroundColor: "#fff",
             },
             "&:before": {
               content: '""',
@@ -140,79 +146,83 @@ export default function AccountMenu() {
       >
         {role === "candidate" && (
           <>
-            <MenuItem>
-              <Avatar fontSize="small" /> {user}
+            <MenuItem sx={{ fontSize: "1.5rem" }}>
+              <Avatar sx={{ color: "#5490CC", fontSize: "35px" }} /> {user}
             </MenuItem>
-            <MenuItem onClick={() => navigateTo("/MyProfile")}>
+            <MenuItem
+              sx={{ fontSize: "1.5rem" }}
+              onClick={() => navigateTo("/MyProfile")}
+            >
               <ListItemIcon>
-                <NoteAltIcon fontSize="small" />
+                <NoteAltIcon
+                  sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }}
+                />
               </ListItemIcon>
               Hồ sơ của bạn
             </MenuItem>
-            <MenuItem onClick={() => navigateTo(`/MyCV`)}>
+            <MenuItem
+              sx={{ fontSize: "1.5rem" }}
+              onClick={() => navigateTo(`/MyCV`)}
+            >
               <ListItemIcon>
-                <ArticleIcon fontSize="small" />
+                <ArticleIcon
+                  sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }}
+                />
               </ListItemIcon>
               CV của bạn
             </MenuItem>
-            <MenuItem onClick={() => navigateTo("/appliedjobs")}>
+            <MenuItem
+              sx={{ fontSize: "1.5rem" }}
+              onClick={() => navigateTo("/appliedjobs")}
+            >
               <ListItemIcon>
-                <WorkIcon fontSize="small" />
+                <WorkIcon sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }} />
               </ListItemIcon>
               Công việc đã ứng tuyển
             </MenuItem>
-            {/* <MenuItem onClick={() => navigateTo("/hrlogin")}>
-              <ListItemIcon>
-                <WorkIcon fontSize="small" />
-              </ListItemIcon>
-              ViecLamNhanh for Business
-            </MenuItem> */}
           </>
         )}
         {role === "recruiter" && (
           <>
             <MenuItem>
-              <Avatar fontSize="small" /> {user}
+              <Avatar /> {user}
             </MenuItem>
             <MenuItem onClick={() => navigateTo("/myprofile")}>
               <ListItemIcon>
-                <NoteAltIcon fontSize="small" />
+                <NoteAltIcon />
               </ListItemIcon>
               Cập nhật công ty
             </MenuItem>
-            <MenuItem onClick={() => navigateTo(`/cv/${user?._id}`)}>
+            <MenuItem
+              sx={{ "&:hover": { backgroundColor: "grey.100" } }}
+              onClick={() => navigateTo(`/cv/${user?._id}`)}
+            >
               <ListItemIcon>
-                <ArticleIcon fontSize="small" />
+                <ArticleIcon />
               </ListItemIcon>
               Báo Cáo Tuyển dụng
             </MenuItem>
             <MenuItem onClick={() => navigateTo("/appliedjobs")}>
               <ListItemIcon>
-                <WorkIcon fontSize="small" />
+                <WorkIcon />
               </ListItemIcon>
               Quản Lý Ứng Tuyển
             </MenuItem>
             <MenuItem onClick={() => navigateTo("/hrlogin")}>
               <ListItemIcon>
-                <WorkIcon fontSize="small" />
+                <WorkIcon />
               </ListItemIcon>
               ViecLamNhanh for Business
             </MenuItem>
           </>
         )}
-        {/* {role === "admin" && (
-          <MenuItem onClick={logOut}>
-            <ListItemIcon>
-              <Logout fontSize="small" />
-            </ListItemIcon>
-            Đăng xuất
-          </MenuItem>
-        )} */}
 
         <Divider />
-        <MenuItem onClick={logOut}>
+        <MenuItem sx={{ fontSize: "1.5rem", color: "red" }} onClick={logOut}>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout
+              sx={{ color: "#5490CC", fontSize: "35px", mr: 2, ml: 0.5 }}
+            />
           </ListItemIcon>
           Đăng xuất
         </MenuItem>
@@ -220,3 +230,12 @@ export default function AccountMenu() {
     </React.Fragment>
   );
 }
+
+/* {role === "admin" && (
+          <MenuItem onClick={logOut}>
+            <ListItemIcon>
+              <Logout fontSize="small" />
+            </ListItemIcon>
+            Đăng xuất
+          </MenuItem>
+        )} */
