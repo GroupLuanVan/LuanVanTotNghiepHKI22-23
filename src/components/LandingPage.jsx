@@ -45,6 +45,20 @@ export const LandingPage = () => {
     "http://localhost:5000/api/jobpost/all"
   );
 
+  // Tạo một đối tượng Date hiện tại
+  const now = new Date();
+
+  // Tạo một đối tượng Intl.DateTimeFormat cho múi giờ Việt Nam
+  const formatter = new Intl.DateTimeFormat("vi-VN", {
+    dateStyle: "medium",
+    timeStyle: "medium",
+    timeZone: "Asia/Ho_Chi_Minh",
+  });
+
+  // Sử dụng đối tượng formatter để chuyển đổi giá trị Date thành chuỗi ngày giờ theo định dạng của Việt Nam
+  const vietnamTime = formatter.format(now);
+  console.log(vietnamTime); // ví dụ: "3/5/2023, 18:15:30"
+
   const [keyWord, setKeyWord] = useState();
   const SearchBox = styled(Box)({
     // display: "flex",

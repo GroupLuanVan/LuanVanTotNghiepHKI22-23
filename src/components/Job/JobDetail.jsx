@@ -195,7 +195,7 @@ export default function JobDetail({ user }) {
   //   }
   // };
 
-  console.log(isApplied);
+  console.log(data);
 
   return (
     <>
@@ -234,7 +234,7 @@ export default function JobDetail({ user }) {
             >
               <Box>
                 <Image
-                  src={Image1}
+                  src={data?.companyId?.linkToLogo}
                   sx={{
                     borderRadius: "100%",
                     border: "1px solid gray",
@@ -271,7 +271,7 @@ export default function JobDetail({ user }) {
                   variant="h5"
                   color="initial"
                 >
-                  Công Ty: {data.companyId.nameCompany}
+                  Công Ty: {data?.companyId?.nameCompany}
                 </Typography>
               </Box>
               <Box>
@@ -282,7 +282,7 @@ export default function JobDetail({ user }) {
                 >
                   <LocalPhoneIcon fontSize="small" />
                   <Typography variant="body1">
-                    Số Điện Thoại {data.companyId.phone}
+                    Số Điện Thoại {data?.companyId?.phone}
                   </Typography>
                 </Stack>
                 <Stack
@@ -292,7 +292,7 @@ export default function JobDetail({ user }) {
                 >
                   <AccessTimeIcon fontSize="small" />
                   <Typography variant="body1">
-                    Ngày tạo {data.createdAt}
+                    Ngày tạo {data?.createdAt}
                   </Typography>
                 </Stack>
                 <Stack
@@ -302,7 +302,8 @@ export default function JobDetail({ user }) {
                 >
                   <AccessTimeIcon fontSize="small" />
                   <Typography variant="body1">
-                    Hạn nộp hồ sơ: {new Date(data.endDate).toLocaleDateString()}
+                    Hạn nộp hồ sơ:{" "}
+                    {new Date(data?.endDate).toLocaleDateString()}
                   </Typography>
                 </Stack>
               </Box>
@@ -453,7 +454,7 @@ export default function JobDetail({ user }) {
                       </Typography>
                       <br></br>
                       <Typography variant="p">
-                        {data.positionId.title}
+                        {data?.positionId?.title}
                       </Typography>
                     </Box>
                   </Grid>
@@ -471,9 +472,7 @@ export default function JobDetail({ user }) {
                         Hình thức làm việc
                       </Typography>
                       <br></br>
-                      <Typography variant="p">
-                        Toàn thời gian (chưa có dữ liệu)
-                      </Typography>
+                      <Typography variant="p">{data?.workType}</Typography>
                     </Box>
                   </Grid>
                   <Grid
@@ -544,7 +543,7 @@ export default function JobDetail({ user }) {
                     mt: 2,
                   }}
                 >
-                  {data.addressId.title}
+                  {data?.fullAddress}
                 </Typography>
               </Grid>
               <Grid

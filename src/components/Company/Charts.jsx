@@ -135,18 +135,22 @@ export default function Charts({ user }) {
                 jobsFetch.data &&
                 jobsFetch.data.jobsPage &&
                 jobsFetch.data.jobsPage.map((item) => {
+                  console.log(item?._id);
+
                   return (
                     <TableRow key={item._id}>
                       <TableCell
                         onClick={() => {
-                          navigateTo(`/jobdetail/${item._id}`);
+                          navigate({
+                            pathname: `/jobdetail/${item?._id}`,
+                          });
                         }}
                       >
-                        {item.title}
+                        {item?.title}
                       </TableCell>
-                      <TableCell>{item.createdAt}</TableCell>
-                      <TableCell>{item.endDate}</TableCell>
-                      <TableCell>{item.viewCount} lượt xem</TableCell>
+                      <TableCell>{item?.createdAt}</TableCell>
+                      <TableCell>{item?.endDate}</TableCell>
+                      <TableCell>{item?.viewCount} lượt xem</TableCell>
                       {/* <TableCell>
                         <Button>{item.contactCnt}</Button>
                       </TableCell> */}

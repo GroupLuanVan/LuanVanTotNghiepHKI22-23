@@ -30,6 +30,8 @@ export const RegisterEmployer = () => {
   const [passwordValue, setPasswordValue] = useState("");
   const [confirmPasswordValue, setConfirmPasswordValue] = useState("");
 
+  const [addresses, setAddresses] = useState([]);
+
   const navigate = useNavigate();
 
   const handleRegister = (event) => {
@@ -77,7 +79,7 @@ export const RegisterEmployer = () => {
       .then((response) => {
         toast.success("Đăng Ký Thành Công");
         toast.success(`Welcome, ${usernameValue}!`);
-        navigate("/login");
+        navigate("/LoginEmployer");
       })
       .catch((error) => {
         if (error.response.status === 400 || error.response.status === 409) {
@@ -115,7 +117,7 @@ export const RegisterEmployer = () => {
                 value={usernameValue}
                 onChange={(e) => setUsernameValue(e.target.value)}
                 margin="normal"
-                type={"text"}
+                type="text"
                 placeholder="username"
                 sx={{ width: "670px" }}
                 InputProps={{
@@ -180,6 +182,7 @@ export const RegisterEmployer = () => {
                   ),
                 }}
               />
+
               <TextField
                 value={phoneValue}
                 onChange={(e) => setPhoneValue(e.target.value)}

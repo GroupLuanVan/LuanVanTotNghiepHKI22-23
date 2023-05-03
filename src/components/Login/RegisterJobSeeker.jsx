@@ -66,6 +66,7 @@ export const RegisterJobSeeker = () => {
       role: "candidate",
       gender: gender,
     };
+    console.log(user);
 
     axios
       .post(`http://localhost:5000/api/auth/register`, user)

@@ -73,7 +73,7 @@ const JobCardALL = (props) => {
           }}
         >
           <Image
-            // src={job?.companyId.linkToLogo}
+            src={job?.companyId.linkToLogo}
             width="250px"
             height="250px"
             duration={0}
@@ -96,7 +96,7 @@ const JobCardALL = (props) => {
           <Box
             sx={{ display: "flex", padding: "10px", minWidth: "50%", mr: 5 }}
           >
-            <Chip color="info" label={salaryChip} sx={{ mr: 1 }} />
+            <Chip color="info" label={salaryChip} sx={{ mr: 1, ml: -2 }} />
             <Chip color="info" label={job?.fullAddress} />
           </Box>
         </CardContent>
