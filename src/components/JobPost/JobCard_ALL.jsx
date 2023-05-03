@@ -25,8 +25,8 @@ const JobCardALL = (props) => {
   // console.log(job);
   // console.log(props);
   function titleCut(title) {
-    if (title?.length > 20) {
-      return title.slice(0, 19) + "...";
+    if (title?.length > 30) {
+      return title.slice(0, 28) + "...";
     } else return title;
   }
 
@@ -94,10 +94,16 @@ const JobCardALL = (props) => {
             </Typography>
           </Box>
           <Box
-            sx={{ display: "flex", padding: "10px", minWidth: "50%", mr: 5 }}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              padding: "10px",
+              minWidth: "80%",
+              mr: 5,
+            }}
           >
             <Chip color="info" label={salaryChip} sx={{ mr: 1, ml: -2 }} />
-            <Chip color="info" label={job?.fullAddress} />
+            <Chip color="info" label={job?.companyId?.location} />
           </Box>
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>

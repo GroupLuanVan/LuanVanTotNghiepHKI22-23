@@ -72,15 +72,13 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
     function updateData() {
       setClose(true);
       setTimeout(() => {
-        setData({
-          ...data,
+        setData((prevData) => ({
+          ...prevData,
           [item]: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
           [text]: getTextArrayFromRich(
             convertToRaw(editorState.getCurrentContent())
           ),
-          // Thêm màu chữ vào object data
-          [`${text}-color`]: getColor(),
-        });
+        }));
       });
     }
 

@@ -37,7 +37,7 @@ export const RegisterEmployer = () => {
   const handleRegister = (event) => {
     event.preventDefault();
     console.log(
-      usernameValue,
+      // usernameValue,
       emailValue,
       companyValue,
       locationValue,
@@ -47,7 +47,7 @@ export const RegisterEmployer = () => {
     );
 
     if (
-      !usernameValue ||
+      // !usernameValue ||
       !emailValue ||
       !companyValue ||
       !locationValue ||
@@ -65,7 +65,7 @@ export const RegisterEmployer = () => {
     }
 
     const user = {
-      username: usernameValue,
+      // username: usernameValue,
       email: emailValue,
       nameCompany: companyValue,
       location: locationValue,
@@ -78,7 +78,7 @@ export const RegisterEmployer = () => {
       .post(`http://localhost:5000/api/auth/Register`, user)
       .then((response) => {
         toast.success("Đăng Ký Thành Công");
-        toast.success(`Welcome, ${usernameValue}!`);
+        toast.success(`Welcome, ${companyValue}!`);
         navigate("/LoginEmployer");
       })
       .catch((error) => {
@@ -113,7 +113,7 @@ export const RegisterEmployer = () => {
                 Tạo một tài khoản tuyển dụng
               </Typography>
 
-              <TextField
+              {/* <TextField
                 value={usernameValue}
                 onChange={(e) => setUsernameValue(e.target.value)}
                 margin="normal"
@@ -124,12 +124,16 @@ export const RegisterEmployer = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <AccountCircleIcon color="warning" />
+                        <AccountCircleIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
                 }}
-              />
+              /> */}
 
               <TextField
                 value={emailValue}
@@ -142,7 +146,11 @@ export const RegisterEmployer = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <AttachEmailIcon color="warning" />
+                        <AttachEmailIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -159,7 +167,11 @@ export const RegisterEmployer = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <BusinessIcon color="warning" />
+                        <BusinessIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -176,7 +188,11 @@ export const RegisterEmployer = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <LocationOnIcon color="warning" />
+                        <LocationOnIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -194,7 +210,11 @@ export const RegisterEmployer = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <LocalPhoneIcon color="warning" />
+                        <LocalPhoneIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -211,7 +231,11 @@ export const RegisterEmployer = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <KeyIcon color="warning" />
+                        <KeyIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -228,7 +252,11 @@ export const RegisterEmployer = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <LockIcon color="warning" />
+                        <LockIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -243,6 +271,7 @@ export const RegisterEmployer = () => {
                   margin: "1 10px 15px",
                   height: 40,
                   width: 150,
+                  backgroundColor: "#5490CC",
                 }}
                 variant="contained"
                 color="warning"

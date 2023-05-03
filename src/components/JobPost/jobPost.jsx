@@ -143,10 +143,17 @@ const JobPost = () => {
   };
 
   const navigate = useNavigate();
-  const [description, setDescription] = useState("");
-  const [required, setRequired] = useState();
+  // const [description, setDescription] = useState("");
+  // const [required, setRequired] = useState();
 
-  const [benefit, setBenefit] = useState();
+  // const [benefit, setBenefit] = useState();
+
+  const [description, setDescription] = useState(() =>
+    EditorState.createEmpty()
+  );
+  const [required, setRequired] = useState(() => EditorState.createEmpty());
+  const [benefit, setBenefit] = useState(() => EditorState.createEmpty());
+
   const [data, setData] = useState({
     title: "",
     addressId: "",
@@ -164,34 +171,91 @@ const JobPost = () => {
     salaryMax: 0,
     salaryMin: 0,
     fullAddress: "",
-    description: "",
-    required: "",
-    benefit: "",
+    // description: "",
+    // required: "",
+    // benefit: "",
     companyId: "",
     viewCount: "",
+
+    description: JSON.stringify(convertToRaw(description.getCurrentContent())),
+    required: JSON.stringify(convertToRaw(required.getCurrentContent())),
+    benefit: JSON.stringify(convertToRaw(benefit.getCurrentContent())),
   });
+
+  // useEffect(() => {
+  //   setData({
+  //     ...data,
+  //     description: description,
+  //     required: required,
+  //     benefit: benefit,
+  //   });
+  // }, [description, required, benefit]);
+
   useEffect(() => {
     setData({
       ...data,
-      description: description,
-      required: required,
-      benefit: benefit,
+      description: JSON.stringify(
+        convertToRaw(description.getCurrentContent())
+      ),
+      required: JSON.stringify(convertToRaw(required.getCurrentContent())),
+      benefit: JSON.stringify(convertToRaw(benefit.getCurrentContent())),
     });
-  }, [description, required, benefit]);
+  }, [
+    description.getCurrentContent(),
+    required.getCurrentContent(),
+    benefit.getCurrentContent(),
+  ]);
+
+  const getTextArrayFromRich = function (rawdata) {
+    if (rawdata.blocks.length > 0) {
+      return rawdata.blocks.map((item) => item.text);
+    }
+  };
 
   const [salaryType, setSalaryType] = useState(false);
   const [currency, setCurrency] = useState();
 
+  // const sendPostData = async function () {
+  //   const token = localStorage.getItem("token"); // Lấy token từ local storage
+  //   console.log({ ...data, description, required, benefit });
+  //   const res = await axios.post(
+  //     "http://localhost:5000/api/jobpost",
+  //     {
+  //       ...data,
+  //       description,
+  //       required,
+  //       benefit,
+  //     },
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`, // Thêm token vào header Authorization
+  //       },
+  //     }
+  //   );
+  //   if (res.data && res.data.status && res.data.status !== 200) {
+  //     console.log(res);
+  //     toast.warning("Tạo job post thất bại");
+  //   } else {
+  //     toast.success("Tạo job post thành công");
+  //   }
+  // };
+
   const sendPostData = async function () {
-    const token = localStorage.getItem("token"); // Lấy token từ local storage
-    console.log({ ...data, description, required, benefit });
+    const token = localStorage.getItem("token");
+    console.log(JSON.stringify(convertToRaw(benefit.getCurrentContent())));
+    let descriptionText = getTextArrayFromRich(
+      convertToRaw(description.getCurrentContent())
+    ).join(" ");
+    let candidateRequiredText = getTextArrayFromRich(
+      convertToRaw(required.getCurrentContent())
+    ).join(" ");
+    console.log({ ...data, descriptionText, candidateRequiredText });
     const res = await axios.post(
       "http://localhost:5000/api/jobpost",
       {
         ...data,
-        description,
-        required,
-        benefit,
+        descriptionText,
+        candidateRequiredText,
       },
       {
         headers: {
@@ -287,7 +351,7 @@ const JobPost = () => {
                     renderInput={(params) => (
                       <TextField
                         {...params}
-                        placeholder="Kinh nghiệm làm việc"
+                        placeholder="Kiểu thời gian làm việc"
                       />
                     )}
                     onChange={(event, value) => {
@@ -585,7 +649,7 @@ const JobPost = () => {
               <Typography variant="p" fontWeight={500} fontSize={20}>
                 Mô tả công việc
               </Typography>
-              <TextField
+              {/* <TextField
                 sx={{
                   mt: 2,
                 }}
@@ -596,6 +660,10 @@ const JobPost = () => {
                 placeholder="Nhập mô tả công việc"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+              /> */}
+              <RichText
+                editorState={description}
+                setEditorState={setDescription}
               />
             </Box>
           </Grid>
@@ -605,7 +673,7 @@ const JobPost = () => {
               <Typography variant="p" fontWeight={500} fontSize={20}>
                 Yêu cầu ứng viên
               </Typography>
-              <TextField
+              {/* <TextField
                 sx={{
                   mt: 2,
                 }}
@@ -616,7 +684,9 @@ const JobPost = () => {
                 placeholder="Nhập mô tả công việc"
                 value={required}
                 onChange={(e) => setRequired(e.target.value)}
-              />
+              /> */}
+
+              <RichText editorState={required} setEditorState={setRequired} />
             </Box>
           </Grid>
           <Grid item xs={12}>
@@ -624,7 +694,7 @@ const JobPost = () => {
               <Typography variant="p" fontWeight={500} fontSize={20}>
                 Quyền lợi
               </Typography>
-              <TextField
+              {/* <TextField
                 sx={{ mt: 2 }}
                 multiline
                 rows={4}
@@ -633,7 +703,8 @@ const JobPost = () => {
                 placeholder="Nhập mô tả công việc"
                 value={benefit}
                 onChange={(e) => setBenefit(e.target.value)}
-              />
+              /> */}
+              <RichText editorState={benefit} setEditorState={setBenefit} />
             </Box>
           </Grid>
         </Grid>

@@ -68,17 +68,30 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
       setClose(true);
     }
 
+    // function updateData() {
+    //   setClose(true);
+    //   setTimeout(() => {
+    //     setData({
+    //       ...data,
+    //       [item]: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
+    //       [text]: getTextArrayFromRich(
+    //         convertToRaw(editorState.getCurrentContent())
+    //       ),
+    //       // Thêm màu chữ vào object data
+    //     });
+    //   });
+    // }
+
     function updateData() {
       setClose(true);
       setTimeout(() => {
-        setData({
-          ...data,
+        setData((prevData) => ({
+          ...prevData,
           [item]: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
           [text]: getTextArrayFromRich(
             convertToRaw(editorState.getCurrentContent())
           ),
-          // Thêm màu chữ vào object data
-        });
+        }));
       });
     }
 
@@ -335,7 +348,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                 >
                   <LocationOnIcon fontSize="small" sx={{ mr: 1 }} />
                   <Typography variant="body1" color="initial">
-                    {data.fullAddress}
+                    {data.fulladdress}
                   </Typography>
                 </Box>
               </Box>
@@ -570,7 +583,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                   toggle={setShowProject}
                   data={data}
                   config={setCVDATA}
-                  item="projectCV"
+                  item="projectCv"
                 />
               </Box>
             </Grid>

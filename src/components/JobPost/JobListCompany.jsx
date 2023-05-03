@@ -12,7 +12,7 @@ export const JobListCompany = (jobsPage) => {
       <>
         <Container maxWidth>
           <Box sx={{ display: "flex", justifyContent: "space-between" }}></Box>
-          <Grid container sx={{ width: "110%", mt: 1 }} rowGap={2}>
+          <Grid container sx={{ width: "100%", mt: 1 }} rowGap={2}>
             {jobsPage.jobsPage.jobsPage.length > 0 &&
               jobsPage.jobsPage.jobsPage.map((item) => {
                 return (

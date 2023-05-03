@@ -215,6 +215,16 @@ function App() {
                 </>
               }
               />
+                          <Route
+              path="JobDetailHR/:id"
+              element={
+                <>
+                  <HeaderHR/>
+                  <JobDetail user={user}/>
+                  <Footer/>
+                </>
+              }
+              />
                        <Route
               path="company"
               element={

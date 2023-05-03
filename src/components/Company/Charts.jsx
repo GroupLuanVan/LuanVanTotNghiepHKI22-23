@@ -142,7 +142,7 @@ export default function Charts({ user }) {
                       <TableCell
                         onClick={() => {
                           navigate({
-                            pathname: `/jobdetail/${item?._id}`,
+                            pathname: `/JobDetailHR/${item?._id}`,
                           });
                         }}
                       >

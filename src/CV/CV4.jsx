@@ -71,15 +71,13 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
     function updateData() {
       setClose(true);
       setTimeout(() => {
-        setData({
-          ...data,
+        setData((prevData) => ({
+          ...prevData,
           [item]: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
           [text]: getTextArrayFromRich(
             convertToRaw(editorState.getCurrentContent())
           ),
-          // Thêm màu chữ vào object data
-          [`${text}-color`]: getColor(),
-        });
+        }));
       });
     }
 
@@ -154,7 +152,8 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
   const [showCertificationsEdit, setShowCertificationsEdit] = useState();
   const [showExperienceEdit, setShowExperienceEdit] = useState();
   const [showObjectiveEdit, setShowObjectiveEdit] = useState();
-  const [showDefault, setShowDefault] = useState();
+  const [showActivate, setShowActivate] = useState();
+  const [showProject, setShowProject] = useState();
   // state quan ly popup
   const [showPopup, setShowPopup] = useState(false);
 
@@ -354,15 +353,91 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
                   },
                 }}
                 onClick={() => {
-                  editable && setShowExperienceEdit(true);
+                  editable && setShowSkillsEdit(true);
                 }}
               >
                 <RichContent
-                  show={showExperienceEdit}
-                  toggle={setShowExperienceEdit}
+                  show={showSkillsEdit}
+                  toggle={setShowSkillsEdit}
                   data={data}
                   config={setCVDATA}
-                  item="experienceCv"
+                  item="skillsCv"
+                />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                width: "80%",
+                mt: 4,
+                display: "flex",
+                flexDirection: "column",
+                ml: "30px",
+                mt: "150px",
+              }}
+            >
+              <CustomChip
+                //alignSelf="flex-end"
+                icon={<MoreHorizIcon color="success" />}
+                label="Chứng Chỉ"
+              />
+              <Box
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  minHeight: "60%",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowCertificationsEdit(true);
+                }}
+              >
+                <RichContent
+                  show={showCertificationsEdit}
+                  toggle={setShowCertificationsEdit}
+                  data={data}
+                  config={setCVDATA}
+                  item="certificationsCv"
+                />
+              </Box>
+            </Box>
+            <Box
+              sx={{
+                width: "80%",
+                mt: 4,
+                display: "flex",
+                flexDirection: "column",
+                ml: "30px",
+                mt: "150px",
+              }}
+            >
+              <CustomChip
+                //alignSelf="flex-end"
+                icon={<MoreHorizIcon color="success" />}
+                label="Hoạt Động"
+              />
+              <Box
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  minHeight: "60%",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowActivate(true);
+                }}
+              >
+                <RichContent
+                  show={showActivate}
+                  toggle={setShowActivate}
+                  data={data}
+                  config={setCVDATA}
+                  item="activitiesCv"
                 />
               </Box>
             </Box>
@@ -428,15 +503,15 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
                 },
               }}
               onClick={() => {
-                editable && setShowObjectiveEdit(true);
+                editable && setShowExperienceEdit(true);
               }}
             >
               <RichContent
-                show={showObjectiveEdit}
-                toggle={setShowObjectiveEdit}
+                show={showExperienceEdit}
+                toggle={setShowExperienceEdit}
                 data={data}
                 config={setCVDATA}
-                item="objectiveCv"
+                item="experienceCv"
               />
             </Box>
 
@@ -454,15 +529,15 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
                 },
               }}
               onClick={() => {
-                editable && setShowSkillsEdit(true);
+                editable && setShowObjectiveEdit(true);
               }}
             >
               <RichContent
-                show={showSkillsEdit}
-                toggle={setShowSkillsEdit}
+                show={showObjectiveEdit}
+                toggle={setShowObjectiveEdit}
                 data={data}
                 config={setCVDATA}
-                item="skillsCv"
+                item="objectiveCv"
               />
             </Box>
             <CustomChip
@@ -482,20 +557,17 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
                 },
               }}
               onClick={() => {
-                editable && setShowCertificationsEdit(true);
+                editable && setShowProject(true);
               }}
             >
               <RichContent
-                show={showCertificationsEdit}
-                toggle={setShowCertificationsEdit}
+                show={showProject}
+                toggle={setShowProject}
                 data={data}
                 config={setCVDATA}
-                item="certificationsCv"
+                item="projectCv"
               />
             </Box>
-            <Grid container>
-              <Typography>Thái</Typography>
-            </Grid>
           </Grid>
         </Grid>
         <Typography
@@ -507,7 +579,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
             left: "70%",
           }}
         >
-          ©2022 ViecLamNhanh
+          SmartJob
         </Typography>
       </Box>
       <ContactEditPopUp

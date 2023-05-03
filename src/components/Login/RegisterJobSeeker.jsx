@@ -35,7 +35,7 @@ import {
 export const RegisterJobSeeker = () => {
   const navigate = useNavigate();
 
-  const [username, setUsernameValue] = useState("");
+  const [nameCandidate, setNameCandidate] = useState("");
   const [email, setEmailValue] = useState("");
   const [password, setPasswordValue] = useState("");
   const [confirmPassword, setConfirmPasswordValue] = useState("");
@@ -47,9 +47,9 @@ export const RegisterJobSeeker = () => {
 
   const handleRegister = (event) => {
     event.preventDefault();
-    console.log(username, email, gender, password, confirmPassword);
+    console.log(nameCandidate, email, gender, password, confirmPassword);
 
-    if (!username || !gender || !email || !password || !confirmPassword) {
+    if (!nameCandidate || !gender || !email || !password || !confirmPassword) {
       toast.error("Vui lòng nhập đủ ô");
       return;
     }
@@ -60,7 +60,7 @@ export const RegisterJobSeeker = () => {
     }
 
     const user = {
-      username: username,
+      nameCandidate: nameCandidate,
       email: email,
       password: password,
       role: "candidate",
@@ -73,7 +73,7 @@ export const RegisterJobSeeker = () => {
       .then((response) => {
         //const { username } = response.data;
         toast.success(
-          `Đăng Ký Thành Công. Tên người dùng của bạn là ${username}`
+          `Đăng Ký Thành Công. Tên người dùng của bạn là ${nameCandidate}`
         );
         navigate("/");
       })
@@ -150,8 +150,8 @@ export const RegisterJobSeeker = () => {
                 type={"text"}
                 placeholder="FullName"
                 name="name"
-                value={username}
-                onChange={(e) => setUsernameValue(e.target.value)}
+                value={nameCandidate}
+                onChange={(e) => setNameCandidate(e.target.value)}
                 sx={{ width: "670px" }}
                 InputProps={{
                   startAdornment: (

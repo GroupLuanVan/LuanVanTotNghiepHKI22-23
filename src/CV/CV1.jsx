@@ -90,13 +90,13 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
     function updateData() {
       setClose(true);
       setTimeout(() => {
-        setData({
-          ...data,
+        setData((prevData) => ({
+          ...prevData,
           [item]: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
           [text]: getTextArrayFromRich(
             convertToRaw(editorState.getCurrentContent())
           ),
-        });
+        }));
       });
     }
     return (
@@ -184,6 +184,24 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
       </>
     );
   };
+
+  // const RichContent = function ({ show, toggle, item, data, config }) {
+  //   console.log(item);
+  //   return (
+  //     <>
+  //       {show ? (
+  //         <RichEditor
+  //           item={item}
+  //           setOpen={toggle}
+  //           setData={config}
+  //           data={data}
+  //         />
+  //       ) : (
+  //         <RichTextDisplay data={JSON.parse(data[item])} />
+  //       )}
+  //     </>
+  //   );
+  // };
 
   const ref = useRef();
   const [showEduEdit, setShowEduEdit] = useState();
@@ -368,7 +386,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
                   toggle={setShowProject}
                   data={data}
                   config={setCVDATA}
-                  item="projectCV"
+                  item="projectCv"
                 />
               </Box>
             </Box>

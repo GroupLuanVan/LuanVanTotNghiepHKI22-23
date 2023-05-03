@@ -57,13 +57,13 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
     function updateData() {
       setClose(true);
       setTimeout(() => {
-        setData({
-          ...data,
+        setData((prevData) => ({
+          ...prevData,
           [item]: JSON.stringify(convertToRaw(editorState.getCurrentContent())),
           [text]: getTextArrayFromRich(
             convertToRaw(editorState.getCurrentContent())
           ),
-        });
+        }));
       });
     }
 
@@ -315,7 +315,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
                   >
                     <LocationOnIcon fontSize="small" sx={{ mr: 1 }} />
                     <Typography variant="body1" color="initial">
-                      {data.fullAddress}
+                      {data.fulladdress}
                     </Typography>
                   </Box>
                 </Box>
@@ -555,7 +555,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
                   toggle={setShowProject}
                   data={data}
                   config={setCVDATA}
-                  item="activitiesCv"
+                  item="projectCv"
                 />
               </Box>
             </Grid>
@@ -594,7 +594,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
                   toggle={setShowActivate}
                   data={data}
                   config={setCVDATA}
-                  item="aboutMeCV"
+                  item="activitiesCv"
                 />
               </Box>
             </Grid>
