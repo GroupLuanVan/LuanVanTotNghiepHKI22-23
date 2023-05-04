@@ -141,7 +141,6 @@ export default function MyCV() {
           </Button>
         </Grid>
       </Grid>
-      " thêm hoặc Chua co cv"
     </>
   );
 }

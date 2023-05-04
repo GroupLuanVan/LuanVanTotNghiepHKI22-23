@@ -30,6 +30,9 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { convertToRaw, EditorState } from "draft-js";
 import ContactEditPopUp from "../components/Home/ContactEditPopUp";
 
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { MdVolunteerActivism } from "react-icons/md";
+
 export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
   const cvTemplate = "CV2";
 
@@ -217,7 +220,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
         sx={{
           width: "100%",
           backgroundImage: `url(${background})`,
-          minHeight: "1510px",
+          minHeight: "1080px",
           backgroundRepeat: "repeat",
           backgroundSize: "cover",
         }}
@@ -238,7 +241,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                 flexDirection: "column",
                 background: "#a0cfff;",
                 color: "blakck",
-                minHeight: "1580px",
+                minHeight: "1585px",
               }}
             >
               <Box
@@ -400,7 +403,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                     px: 2,
                     mt: 1,
                     width: "90%",
-                    minHeight: "20%",
+                    minHeight: "25%",
                     "&:hover": {
                       border: "1px dashed red",
                     },
@@ -415,6 +418,36 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                     data={data}
                     config={setCVDATA}
                     item="certificationsCv"
+                  />
+                </Box>
+
+                <CustomChip
+                  icon={<AiOutlineFundProjectionScreen color="success" />}
+                  label="Dự án"
+                />
+
+                <Box
+                  alignSelf="flex-start"
+                  sx={{
+                    mb: 2,
+                    px: 2,
+                    mt: 1,
+                    width: "90%",
+                    minHeight: "150px",
+                    "&:hover": {
+                      border: "1px dashed red",
+                    },
+                  }}
+                  onClick={() => {
+                    editable && setShowProject(true);
+                  }}
+                >
+                  <RichContent
+                    show={showProject}
+                    toggle={setShowProject}
+                    data={data}
+                    config={setCVDATA}
+                    item="projectCv"
                   />
                 </Box>
               </Box>
@@ -464,7 +497,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
 
               <CustomChip2
                 icon={<CrisisAlertIcon color="success" />}
-                label="Mục tiêu nghề nghiệp"
+                label="Mục tiêu "
               />
               <Box
                 alignSelf="flex-start"
@@ -516,7 +549,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                   item="skillsCv"
                 />
               </Box>
-              <CustomChip2 icon={<FlagIcon />} label="Hoạt Động" />
+              <CustomChip2 icon={<MdVolunteerActivism />} label="Hoạt Động" />
               <Box
                 alignSelf="flex-start"
                 sx={{
@@ -542,7 +575,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                 />
               </Box>
             </Grid>
-            <Grid
+            {/* <Grid
               item
               xs={12}
               sx={{
@@ -586,9 +619,21 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
                   item="projectCv"
                 />
               </Box>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
+        <Typography
+          variant="body1"
+          color="initial"
+          sx={{
+            position: "relative",
+            top: "100%",
+            left: "90%",
+            mt: -3,
+          }}
+        >
+          SmartJob
+        </Typography>
       </Box>
       <ContactEditPopUp
         data={data}

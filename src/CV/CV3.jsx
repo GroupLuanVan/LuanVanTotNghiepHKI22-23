@@ -31,6 +31,9 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { convertToRaw, EditorState } from "draft-js";
 import ContactEditPopUp from "../components/Home/ContactEditPopUp";
 
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { MdVolunteerActivism } from "react-icons/md";
+
 export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
   const cvTemplate = "CV3";
 
@@ -165,7 +168,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
         sx={{
           width: "100%",
           backgroundImage: `url(${background})`,
-          minHeight: "1510px",
+          // minHeight: "1510px",
           p: 4,
           backgroundRepeat: "repeat",
           backgroundSize: "cover",
@@ -463,7 +466,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
                   px: 2,
                   mt: 1,
                   width: "90%",
-                  minHeight: "250px",
+                  minHeight: "200px",
                   "&:hover": {
                     border: "1px dashed red",
                   },
@@ -531,7 +534,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
               }}
             >
               <CustomChip
-                icon={<WorkspacePremiumIcon color="success" />}
+                icon={<AiOutlineFundProjectionScreen color="success" />}
                 label="Dự Án"
               />
               <Box
@@ -570,7 +573,7 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
               }}
             >
               <CustomChip
-                icon={<WorkspacePremiumIcon color="success" />}
+                icon={<MdVolunteerActivism color="success" />}
                 label="Hoạt Động"
               />
               <Box
@@ -600,6 +603,17 @@ export default function CV3({ editable, data, setPrint, print, setCVDATA }) {
             </Grid>
           </Grid>
         </Grid>
+        <Typography
+          variant="body1"
+          color="initial"
+          sx={{
+            position: "relative",
+            top: "100%",
+            left: "90%",
+          }}
+        >
+          SmartJob
+        </Typography>
       </Box>
       <ContactEditPopUp
         data={data}

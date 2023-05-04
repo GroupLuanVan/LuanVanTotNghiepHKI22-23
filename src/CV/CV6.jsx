@@ -31,6 +31,9 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { convertToRaw, EditorState } from "draft-js";
 import ContactEditPopUp from "../components/Home/ContactEditPopUp";
 
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { MdVolunteerActivism } from "react-icons/md";
+
 export default function CV6({ editable, data, setPrint, print, setCVDATA }) {
   const cvTemplate = "CV6";
 
@@ -136,6 +139,8 @@ export default function CV6({ editable, data, setPrint, print, setCVDATA }) {
   const [showCertificationsEdit, setShowCertificationsEdit] = useState();
   const [showExperienceEdit, setShowExperienceEdit] = useState();
   const [showObjectiveEdit, setShowObjectiveEdit] = useState();
+  const [showActivate, setShowActivate] = useState();
+  const [showProject, setShowProject] = useState();
   // state quan ly popup
   const [showPopup, setShowPopup] = useState(false);
 
@@ -161,9 +166,9 @@ export default function CV6({ editable, data, setPrint, print, setCVDATA }) {
       <Box
         ref={ref}
         sx={{
-          width: "100%",
+          width: "98%",
           backgroundImage: `url(${background})`,
-          minHeight: "1510px",
+          minHeight: "1600px",
           p: 2,
           backgroundRepeat: "repeat",
           backgroundSize: "cover",
@@ -408,7 +413,7 @@ export default function CV6({ editable, data, setPrint, print, setCVDATA }) {
             </Grid>
             <Grid
               item
-              xs={5}
+              xs={5.5}
               sx={{
                 borderRadius: "25px",
                 background: "#fff",
@@ -483,7 +488,7 @@ export default function CV6({ editable, data, setPrint, print, setCVDATA }) {
             </Grid>
             <Grid
               item
-              xs={5}
+              xs={5.5}
               sx={{
                 borderRadius: "25px",
                 background: "#fff",
@@ -520,6 +525,84 @@ export default function CV6({ editable, data, setPrint, print, setCVDATA }) {
                 />
               </Box>
             </Grid>
+            <Grid
+              item
+              xs={6}
+              sx={{
+                borderRadius: "25px",
+                background: "#fff",
+                p: 2,
+                boxShadow: "1px 1px 5px 1px #00000014",
+              }}
+            >
+              <CustomChip
+                icon={<AiOutlineFundProjectionScreen color="success" />}
+                label="Dự án"
+              />
+              <Box
+                alignSelf="flex-start"
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  width: "90%",
+                  minHeight: "250px",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowProject(true);
+                }}
+              >
+                <RichContent
+                  show={showProject}
+                  toggle={setShowProject}
+                  data={data}
+                  config={setCVDATA}
+                  item="projectCv"
+                />
+              </Box>
+            </Grid>
+            <Grid
+              item
+              xs={5.5}
+              sx={{
+                borderRadius: "25px",
+                background: "#fff",
+                p: 2,
+                boxShadow: "1px 1px 5px 1px #00000014",
+              }}
+            >
+              <CustomChip
+                icon={<MdVolunteerActivism color="success" />}
+                label="Hoạt động"
+              />
+              <Box
+                alignSelf="flex-start"
+                sx={{
+                  mb: 2,
+                  px: 2,
+                  mt: 1,
+                  width: "90%",
+                  minHeight: "250px",
+                  "&:hover": {
+                    border: "1px dashed red",
+                  },
+                }}
+                onClick={() => {
+                  editable && setShowActivate(true);
+                }}
+              >
+                <RichContent
+                  show={showActivate}
+                  toggle={setShowActivate}
+                  data={data}
+                  config={setCVDATA}
+                  item="activitiesCv"
+                />
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
         <Typography
@@ -528,11 +611,10 @@ export default function CV6({ editable, data, setPrint, print, setCVDATA }) {
           sx={{
             position: "relative",
             top: "100%",
-            left: "70%",
-            mt: "30px",
+            left: "90%",
           }}
         >
-          ©2022 ViecLamNhanh
+          SmartJob
         </Typography>
       </Box>
       <ContactEditPopUp

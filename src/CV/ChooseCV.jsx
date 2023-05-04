@@ -12,9 +12,13 @@ import {
   Grid,
 } from "@mui/material";
 
-import cv1image from "./cv1image.png";
-import cv2image from "./cv2image.png";
-import cv3image from "./cv3image.png";
+import cv1image from "./t1.png";
+import cv2image from "./t2.png";
+import cv3image from "./t3.png";
+import cv4image from "./t4.png";
+import cv5image from "./t5.png";
+import cv6image from "./t6.png";
+
 import { CVCard1 } from "./CVCard1";
 import { PopCV } from "../components/PopCV";
 import { useState, useEffect } from "react";
@@ -90,6 +94,7 @@ export const ChooseCV = () => {
               component="div"
               sx={{
                 mb: 4,
+                ml: 10,
                 textAlign: "center",
                 //fontWeight: 600,
                 fontFamily: "Montserrat",
@@ -111,6 +116,7 @@ export const ChooseCV = () => {
                 image={cv1image}
                 selectedItem={setCurrentCV}
                 template={"CV1"}
+                cardNumber={1}
               />
 
               <CVCard1
@@ -118,30 +124,35 @@ export const ChooseCV = () => {
                 image={cv2image}
                 selectedItem={setCurrentCV}
                 template={"CV2"}
+                cardNumber={2}
               />
               <CVCard1
                 title="Kinh doanh"
                 image={cv3image}
                 selectedItem={setCurrentCV}
                 template={"CV3"}
+                cardNumber={3}
               />
               <CVCard1
-                title="Chuyên nghiệp"
-                image={cv1image}
+                title="Thời Trang"
+                image={cv4image}
                 selectedItem={setCurrentCV}
                 template={"CV4"}
+                cardNumber={4}
               />
               <CVCard1
-                title="Chuyên nghiệp"
-                image={cv2image}
+                title="Nhẹ Nhàng"
+                image={cv5image}
                 selectedItem={setCurrentCV}
                 template={"CV5"}
+                cardNumber={5}
               />
               <CVCard1
-                title="Chuyên nghiệp"
-                image={cv3image}
+                title="Trầm Tính"
+                image={cv6image}
                 selectedItem={setCurrentCV}
                 template={"CV6"}
+                cardNumber={6}
               />
             </Box>
           </Box>

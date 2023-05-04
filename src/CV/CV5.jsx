@@ -30,6 +30,8 @@ import TransgenderIcon from "@mui/icons-material/Transgender";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { convertToRaw, EditorState } from "draft-js";
 import ContactEditPopUp from "../components/Home/ContactEditPopUp";
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { MdVolunteerActivism } from "react-icons/md";
 
 export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
   const cvTemplate = "CV5";
@@ -202,7 +204,7 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
         sx={{
           width: "100%",
           backgroundImage: `url(${background})`,
-          minHeight: "1080px",
+          minHeight: "1510px",
           //width: "950px",
           p: 0,
           backgroundRepeat: "repeat",
@@ -358,7 +360,7 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                     display: "flex",
                     justifyContent: "center",
                   }}
-                  icon={<SchoolIcon color="success" />}
+                  icon={<FlagIcon color="success" />}
                   label="Kỹ năng"
                 />
                 <Box
@@ -393,7 +395,7 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                     display: "flex",
                     justifyContent: "center",
                   }}
-                  icon={<SchoolIcon color="success" />}
+                  icon={<WorkspacePremiumIcon color="success" />}
                   label="Chứng Chỉ"
                 />
                 <Box
@@ -498,7 +500,7 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
               </Box>
 
               <CustomChip
-                icon={<CrisisAlertIcon color="success" />}
+                icon={<MoreHorizIcon color="success" />}
                 label="Kinh Nghiệm"
               />
               <Box
@@ -526,7 +528,10 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                 />
               </Box>
 
-              <CustomChip icon={<FlagIcon />} label="Dự án" />
+              <CustomChip
+                icon={<AiOutlineFundProjectionScreen />}
+                label="Dự án"
+              />
               <Box
                 alignSelf="flex-start"
                 sx={{
@@ -552,7 +557,7 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                 />
               </Box>
               <CustomChip
-                icon={<WorkspacePremiumIcon color="success" />}
+                icon={<MdVolunteerActivism color="success" />}
                 label="Hoạt Động"
               />
               <Box
@@ -582,7 +587,19 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
             </Grid>
           </Grid>
         </Grid>
+        <Typography
+          variant="body1"
+          color="initial"
+          sx={{
+            position: "relative",
+            top: "100%",
+            left: "90%",
+          }}
+        >
+          SmartJob
+        </Typography>
       </Box>
+
       <ContactEditPopUp
         data={data}
         setData={setCVDATA}

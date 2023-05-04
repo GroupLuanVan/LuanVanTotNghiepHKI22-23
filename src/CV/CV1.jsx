@@ -31,6 +31,9 @@ import { convertToRaw, EditorState } from "draft-js";
 import ContactEditPopUp from "../components/Home/ContactEditPopUp";
 import { PopCV } from "../components/PopCV";
 
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { MdVolunteerActivism } from "react-icons/md";
+
 export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
   const cvTemplate = "CV1";
 
@@ -278,7 +281,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
                 display: "flex",
                 flexDirection: "column",
                 ml: "40px",
-                mr: "10px",
+                mr: "31px",
               }}
             >
               <CustomChip
@@ -347,7 +350,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
                   px: 2,
                   mt: 1,
                   width: "90%",
-                  minHeight: "19.3%",
+                  minHeight: "19.2%",
                   "&:hover": {
                     border: "1px dashed red",
                   },
@@ -364,7 +367,10 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
                   item="skillsCv"
                 />
               </Box>
-              <CustomChip icon={<FlagIcon />} label="Dự án" />
+              <CustomChip
+                icon={<AiOutlineFundProjectionScreen />}
+                label="Dự án"
+              />
               <Box
                 alignSelf="flex-start"
                 sx={{
@@ -565,7 +571,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
               </Box>
 
               <CustomChip
-                icon={<WorkspacePremiumIcon color="success" />}
+                icon={<MdVolunteerActivism color="success" />}
                 label="Hoạt Động"
               />
               <Box
@@ -624,6 +630,18 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
             </Box>
           </Grid>
         </Grid>
+        <Typography
+          variant="body1"
+          color="initial"
+          sx={{
+            position: "relative",
+            top: "100%",
+            left: "90%",
+            mb: -0.5,
+          }}
+        >
+          SmartJob
+        </Typography>
       </Box>
       <ContactEditPopUp
         data={data}

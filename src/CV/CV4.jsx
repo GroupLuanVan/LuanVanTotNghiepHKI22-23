@@ -30,6 +30,9 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { convertToRaw, EditorState } from "draft-js";
 import ContactEditPopUp from "../components/Home/ContactEditPopUp";
 
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { MdVolunteerActivism } from "react-icons/md";
+
 export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
   const cvTemplate = "CV4";
 
@@ -339,7 +342,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
             >
               <CustomChip
                 //alignSelf="flex-end"
-                icon={<MoreHorizIcon color="success" />}
+                icon={<FlagIcon color="success" />}
                 label="Kỹ Năng"
               />
               <Box
@@ -377,7 +380,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
             >
               <CustomChip
                 //alignSelf="flex-end"
-                icon={<MoreHorizIcon color="success" />}
+                icon={<WorkspacePremiumIcon color="success" />}
                 label="Chứng Chỉ"
               />
               <Box
@@ -415,7 +418,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
             >
               <CustomChip
                 //alignSelf="flex-end"
-                icon={<MoreHorizIcon color="success" />}
+                icon={<MdVolunteerActivism color="success" />}
                 label="Hoạt Động"
               />
               <Box
@@ -487,7 +490,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
             </Box>
 
             <CustomChip
-              icon={<CrisisAlertIcon color="success" />}
+              icon={<MoreHorizIcon color="success" />}
               label="Kinh Nghiệm"
             />
             <Box
@@ -515,7 +518,10 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
               />
             </Box>
 
-            <CustomChip icon={<FlagIcon />} label="Mục Tiêu Nghề Nghiệp" />
+            <CustomChip
+              icon={<CrisisAlertIcon />}
+              label="Mục Tiêu Nghề Nghiệp"
+            />
             <Box
               alignSelf="flex-start"
               sx={{
@@ -523,7 +529,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
                 px: 2,
                 mt: 1,
                 width: "90%",
-                minHeight: "20%",
+                minHeight: "21%",
                 "&:hover": {
                   border: "1px dashed red",
                 },
@@ -541,7 +547,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
               />
             </Box>
             <CustomChip
-              icon={<WorkspacePremiumIcon color="success" />}
+              icon={<AiOutlineFundProjectionScreen color="success" />}
               label="Dự Án"
             />
             <Box
@@ -576,7 +582,8 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
           sx={{
             position: "relative",
             top: "100%",
-            left: "70%",
+            left: "90%",
+            mt: -3,
           }}
         >
           SmartJob

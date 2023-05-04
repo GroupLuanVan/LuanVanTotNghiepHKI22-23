@@ -18,7 +18,8 @@ import defaultCvData from "../asset/defaultCvData.json";
 import { useNavigate } from "react-router-dom";
 
 const StyledCard = styled(Card)({
-  maxWidth: 500,
+  width: 500,
+  marginLeft: "200px",
 });
 const ImageWrapper = styled("div")({
   position: "relative",
@@ -44,7 +45,13 @@ const StyledButton = styled(Button)({
     transform: "translateX(-50%) translateY(-20px)",
   },
 });
-export const CVCard1 = ({ image, selectedItem, template }) => {
+export const CVCard1 = ({
+  image,
+  selectedItem,
+  template,
+  cardNumber,
+  title,
+}) => {
   const [hovered, setHovered] = useState(false);
   const [showPopCV, setShowPopCV] = useState(false);
 
@@ -67,15 +74,15 @@ export const CVCard1 = ({ image, selectedItem, template }) => {
   return (
     <>
       <StyledCard
-        sx={{ mx: 4, mb: 4 }}
+        sx={{ mx: 4, mb: 5, mr: -10 }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
         <ImageWrapper>
           <CardMedia
             component="img"
-            height="300"
-            width="1400"
+            height="500"
+            //width="1400"
             image={image}
             alt="Job"
           />
@@ -83,8 +90,11 @@ export const CVCard1 = ({ image, selectedItem, template }) => {
           <StyledButton>
             <Button
               variant="contained"
-              color="success"
-              sx={{ borderRadius: "20px" }}
+              sx={{
+                borderRadius: "20px",
+                backgroundColor: "#5490cc",
+                fontWeight: 700,
+              }}
               onClick={onClick}
             >
               Dùng Mẫu Này
@@ -93,7 +103,7 @@ export const CVCard1 = ({ image, selectedItem, template }) => {
             <Button
               variant="outlined"
               color="info"
-              sx={{ borderRadius: "20px" }}
+              sx={{ borderRadius: "20px", fontWeight: 700 }}
               onClick={() => setShowPopCV(true)}
             >
               Xem trước Mẫu Này
@@ -103,11 +113,11 @@ export const CVCard1 = ({ image, selectedItem, template }) => {
 
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            CV
+            CV {cardNumber}
           </Typography>
-          {/* <Typography variant="body2" color="text.secondary">
-            Nguyen Huu Thai
-          </Typography> */}
+          <Typography variant="h6" color="text.secondary">
+            {title}
+          </Typography>
         </CardContent>
       </StyledCard>
       <PopCV
