@@ -63,7 +63,7 @@ export const LoginEmployer = () => {
 
       // Kiểm tra role của user
       if (data.user.role === "recruiter") {
-        dispatch(setUserLogin(data.user.username));
+        dispatch(setUserLogin(data.company.nameCompany));
         dispatch(setRole(data.user.role));
         dispatch(setToken(data.token));
         dispatch(setidCompany(data.company._id));

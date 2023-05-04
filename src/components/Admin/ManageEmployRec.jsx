@@ -59,44 +59,59 @@ const ManageEmploy = () => {
     console.log("Delete rows", selectedRows);
   };
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const [userResponse, companyResponse] = await Promise.all([
+  //         axios.get("http://localhost:5000/api/user/", {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }),
+  //         axios.get("http://localhost:5000/api/company", {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }),
+  //       ]);
+
+  //       const usersWithCompany = userResponse.data.map((user) => {
+  //         const matchedCompany = companyResponse.data.find(
+  //           (company) => company.userId === user._id
+  //         );
+  //         const nameCompany = matchedCompany ? matchedCompany.nameCompany : "";
+  //         const name = user.role === "recruiter" ? user.username : user.name;
+  //         return {
+  //           ...user,
+  //           nameCompany,
+  //           name,
+  //         };
+  //       });
+  //       const recruiters = usersWithCompany.filter(
+  //         (user) => user.role === "recruiter"
+  //       );
+
+  //       setUsers(usersWithCompany);
+  //       setRecruiters(recruiters); // set recruiters in state
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [userResponse, companyResponse] = await Promise.all([
-          axios.get("http://localhost:5000/api/user/", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get("http://localhost:5000/api/company", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-        ]);
-
-        const usersWithCompany = userResponse.data.map((user) => {
-          const matchedCompany = companyResponse.data.find(
-            (company) => company.userId === user._id
-          );
-          const nameCompany = matchedCompany ? matchedCompany.nameCompany : "";
-          const name = user.role === "recruiter" ? user.username : user.name;
-          return {
-            ...user,
-            nameCompany,
-            name,
-          };
+        const response = await axios.get("http://localhost:5000/api/company", {
+          headers: { Authorization: `Bearer ${token}` },
         });
-        const recruiters = usersWithCompany.filter(
-          (user) => user.role === "recruiter"
-        );
-
-        setUsers(usersWithCompany);
-        setRecruiters(recruiters); // set recruiters in state
+        setRecruiters(response.data);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchData();
-  }, []);
-  console.log(users);
+  }, [token]);
+  console.log(recruiter);
 
   return (
     <>
@@ -155,20 +170,26 @@ const ManageEmploy = () => {
                   <TableCell>
                     {" "}
                     <Typography ml={-1} variant="h6">
-                      Tên nhà tuyển dụng
+                      Tên công ty
                     </Typography>
                   </TableCell>
                   <TableCell>
                     {" "}
                     <Typography ml={0} variant="h6">
-                      Tên công ty
+                      Email
                     </Typography>
                   </TableCell>
                   <TableCell>
+                    {" "}
+                    <Typography ml={0} variant="h6">
+                      Số điện thoại
+                    </Typography>
+                  </TableCell>
+                  {/* <TableCell>
                     <Typography ml={0} variant="h6">
                       Trạng thái
                     </Typography>
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell></TableCell>
                 </TableRow>
               </TableHead>
@@ -182,17 +203,20 @@ const ManageEmploy = () => {
                       />
                     </TableCell> */}
                     <TableCell>
-                      <Typography variant="h6">{user?.name} </Typography>
-                    </TableCell>
-                    <TableCell>
                       <Typography variant="h6">{user?.nameCompany}</Typography>
                     </TableCell>
-
                     <TableCell>
+                      <Typography variant="h6">{user?.email}</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography variant="h6">{user?.phone}</Typography>
+                    </TableCell>
+
+                    {/* <TableCell>
                       <Typography variant="h6" color="blue">
                         Đã đăng ký
                       </Typography>
-                    </TableCell>
+                    </TableCell> */}
                     <TableCell>
                       {" "}
                       <Button

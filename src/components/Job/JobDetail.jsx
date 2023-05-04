@@ -647,8 +647,8 @@ export default function JobDetail({ user }) {
                     py: 1,
                   }}
                 >
-                  {/* <RichTextDisplay data={JSON.parse(data.benefit)} /> */}
-                  {data.benefit}
+                  <RichTextDisplay data={JSON.parse(data.benefit)} />
+                  {/* {data.benefit} */}
                 </Box>
               </Grid>
               <Grid

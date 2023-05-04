@@ -26,36 +26,117 @@ import { setUserLogin, setRole, setToken } from "../../store/userSlice";
 import axios from "axios";
 const ManageUser = () => {
   const [users, setUsers] = useState([]);
+  const [company, setCompanies] = useState([]);
+  const [candidate, setCandidate] = useState([]);
   const token = useSelector((state) => state.user.token);
 
   const [openCandidatesModal, setOpenCandidatesModal] = useState(false);
   const hdlCloseCandidatesModal = () => setOpenCandidatesModal(false);
   const [selectedRows, setSelectedRows] = useState([]);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const [userResponse, companyResponse] = await Promise.all([
+  //         axios.get("http://localhost:5000/api/user/", {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }),
+  //         axios.get("http://localhost:5000/api/company", {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }),
+  //       ]);
+
+  //       const usersWithCompany = userResponse.data.map((user) => {
+  //         const matchedCompany = companyResponse.data.find(
+  //           (company) => company.userId === user._id
+  //         );
+  //         const nameCompany = matchedCompany ? matchedCompany.nameCompany : "";
+  //         return {
+  //           ...user,
+  //           nameCompany,
+  //         };
+  //       });
+
+  //       setUsers(usersWithCompany);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const userResponse = await axios.get(
+  //         "http://localhost:5000/api/user/",
+  //         {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }
+  //       );
+
+  //       const companyResponse = await axios.get(
+  //         "http://localhost:5000/api/company",
+  //         {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }
+  //       );
+  //       const candidateResponse = await axios.get(
+  //         "http://localhost:5000/api/candidate/all",
+  //         {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }
+  //       );
+
+  //       setUsers(userResponse.data);
+  //       setCompanies(companyResponse.data);
+  //       setCandidate(candidateResponse.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [userResponse, companyResponse] = await Promise.all([
-          axios.get("http://localhost:5000/api/user/", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-          axios.get("http://localhost:5000/api/company", {
-            headers: { Authorization: `Bearer ${token}` },
-          }),
-        ]);
+        const [userResponse, companyResponse, candidateResponse] =
+          await Promise.all([
+            axios.get("http://localhost:5000/api/user/", {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            axios.get("http://localhost:5000/api/company", {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+            axios.get("http://localhost:5000/api/candidate/all", {
+              headers: { Authorization: `Bearer ${token}` },
+            }),
+          ]);
 
-        const usersWithCompany = userResponse.data.map((user) => {
+        const usersWithCompanyAndCandidate = userResponse.data.map((user) => {
           const matchedCompany = companyResponse.data.find(
             (company) => company.userId === user._id
           );
           const nameCompany = matchedCompany ? matchedCompany.nameCompany : "";
+
+          const matchedCandidate = candidateResponse.data.find(
+            (candidate) => candidate.userId === user._id
+          );
+          const nameCandidate = matchedCandidate
+            ? matchedCandidate.nameCandidate
+            : "";
+
           return {
             ...user,
             nameCompany,
+            nameCandidate,
           };
         });
 
-        setUsers(usersWithCompany);
+        setUsers(usersWithCompanyAndCandidate);
       } catch (error) {
         console.log(error);
       }
@@ -66,22 +147,20 @@ const ManageUser = () => {
 
   console.log(users);
 
-  // handle checkbox change
-  let rowCount = 0;
-
-  function handleCheckboxChange(e, id) {
-    const checked = e.target.checked;
-    if (checked) {
-      setSelectedRows([...selectedRows, id]);
-    } else {
-      setSelectedRows(selectedRows.filter((row) => row !== id));
+  const handleDelete = async (userId) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/api/user/${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      // Xóa người dùng thành công, cập nhật lại state
+      const updatedUsers = users.filter((user) => user._id !== userId);
+      setUsers(updatedUsers);
+    } catch (error) {
+      console.log(error);
     }
-  }
-
-  // handle delete button click
-  const handleDeleteClick = () => {
-    // TODO: implement delete logic
-    console.log("Delete rows", selectedRows);
   };
 
   return (
@@ -102,7 +181,7 @@ const ManageUser = () => {
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
             Quản lý tất cả người dùng
           </Typography>
-          {selectedRows.length > 0 && (
+          {/* {selectedRows.length > 0 && (
             <>
               <Button
                 variant="contained"
@@ -120,7 +199,7 @@ const ManageUser = () => {
                 Xem
               </Button>
             </>
-          )}
+          )} */}
         </Box>
         {/* head info */}
         <Grid
@@ -141,7 +220,7 @@ const ManageUser = () => {
                   <TableCell>
                     {" "}
                     <Typography ml={-1} variant="h6">
-                      Tên ggười dùng
+                      Tên người dùng
                     </Typography>
                   </TableCell>
                   <TableCell>
@@ -168,15 +247,14 @@ const ManageUser = () => {
               <TableBody>
                 {users.map((user) => (
                   <TableRow key={user._id}>
-                    {/* <TableCell>
-                      <Checkbox
-                        onChange={(e) => handleCheckboxChange(e, user._id)}
-                        checked={selectedRows.includes(user._id)}
-                      />
-                    </TableCell> */}
                     <TableCell>
-                      <Typography variant="h6">{user?.username}</Typography>
+                      <Typography variant="h6">
+                        {user?.nameCompany
+                          ? user.nameCompany
+                          : user.nameCandidate || ""}
+                      </Typography>
                     </TableCell>
+
                     <TableCell>
                       <Typography variant="h6">
                         {user?.nameCompany
@@ -185,7 +263,7 @@ const ManageUser = () => {
                       </Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography variant="h6">{user.role}</Typography>
+                      <Typography variant="h6">{user?.role}</Typography>
                     </TableCell>
                     <TableCell>
                       <Typography variant="h6" color="blue">
@@ -198,7 +276,7 @@ const ManageUser = () => {
                         variant="contained"
                         color="error"
                         sx={{ height: 30, width: 100 }}
-                        // onClick={() => handleDelete(item._id)}
+                        onClick={() => handleDelete(user._id)}
                       >
                         Xóa
                       </Button>

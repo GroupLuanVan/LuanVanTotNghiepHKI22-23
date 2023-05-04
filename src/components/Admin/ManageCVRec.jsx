@@ -20,12 +20,17 @@ import { Modal } from "@mui/material";
 import { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ManageCVRec = () => {
   const [openCandidatesModal, setOpenCandidatesModal] = useState(false);
   const hdlCloseCandidatesModal = () => setOpenCandidatesModal(false);
   const [selectedRows, setSelectedRows] = useState([]);
-
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.user.token);
+  const [Cv, setCV] = useState([]);
   // handle checkbox change
   let rowCount = 0;
 
@@ -53,6 +58,25 @@ const ManageCVRec = () => {
     console.log("Delete rows", selectedRows);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/resume/all",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setCV(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+  console.log(Cv);
+
   return (
     <>
       <Grid sx={{ m: 3 }}>
@@ -69,8 +93,7 @@ const ManageCVRec = () => {
         >
           <BarChartIcon />
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Số cv được tạo ( mỗi người tạo được 1 CV nên chức năng này theo m
-            nghĩ có bị dư không, hay là bỏ nha )
+            Số cv được tạo
           </Typography>
           {selectedRows.length > 0 && (
             <>
@@ -109,37 +132,38 @@ const ManageCVRec = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Tên ứng viên</TableCell>
-                  <TableCell>CV đã tạo</TableCell>
                   <TableCell>Tên tiêu đề cv</TableCell>
-                  <TableCell>Trạng thái</TableCell>
+                  <TableCell>email</TableCell>
+                  <TableCell>Mẫu CV</TableCell>
                   <TableCell></TableCell>
                 </TableRow>
               </TableHead>
-              <TableRow>
-                <TableCell>
-                  <Typography>Nguyễn Hữu Thai </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>1 CV </Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>Intern Front-end</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>Đã Tạo</Typography>
-                </TableCell>
-                <TableCell>
-                  {" "}
-                  <Button
-                    variant="contained"
-                    color="error"
-                    sx={{ height: 30, width: 100 }}
-                    // onClick={() => handleDelete(item._id)}
-                  >
-                    Xóa
-                  </Button>
-                </TableCell>
-              </TableRow>
+              {Cv?.map((cv) => (
+                <TableRow key={cv._id}>
+                  <TableCell>
+                    <Typography>{cv?.name}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography>{cv?.title}</Typography>
+                  </TableCell>
+
+                  <TableCell>
+                    <Typography>{cv?.email}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography>{cv?.cvTemplate}</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => navigate(`/viewcv/${cv?._id}`)}
+                    >
+                      Xem CV
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
             </Table>
           </TableContainer>
         </Grid>

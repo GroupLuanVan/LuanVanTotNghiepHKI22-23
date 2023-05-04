@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
-const HeaderHR = () => {
+const HeaderhomeHR = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
@@ -62,7 +62,7 @@ const HeaderHR = () => {
             }}
           />
 
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          {/* <Box sx={{ display: "flex", alignItems: "center" }}>
             <Typography
               onClick={() => {
                 navigateTo("./company");
@@ -97,7 +97,7 @@ const HeaderHR = () => {
             >
               Quản Lý Ứng Tuyển
             </Typography>
-          </Box>
+          </Box> */}
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>
           {!user.isLogin ? (
@@ -155,4 +155,4 @@ const HeaderHR = () => {
   );
 };
 
-export default HeaderHR;
+export default HeaderhomeHR;

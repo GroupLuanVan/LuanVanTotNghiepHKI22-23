@@ -157,7 +157,12 @@ export const RegisterJobSeeker = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <AccountCircleIcon color="warning" />
+                        <AccountCircleIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                          color="warning"
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -240,7 +245,12 @@ export const RegisterJobSeeker = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <AttachEmailIcon color="warning" />
+                        <AttachEmailIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                          color="warning"
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -267,7 +277,12 @@ export const RegisterJobSeeker = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <KeyIcon color="warning" />
+                        <KeyIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                          color="warning"
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -295,7 +310,12 @@ export const RegisterJobSeeker = () => {
                   startAdornment: (
                     <InputAdornment position="start">
                       <IconButton>
-                        <LockIcon color="warning" />
+                        <LockIcon
+                          sx={{
+                            color: "#5490CC",
+                          }}
+                          color="warning"
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -310,6 +330,7 @@ export const RegisterJobSeeker = () => {
                 margin: "1 10px 15px",
                 height: 40,
                 width: 150,
+                backgroundColor: "#5490CC",
               }}
               variant="contained"
               color="warning"

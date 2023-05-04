@@ -61,7 +61,7 @@ export const LoginAdmin = () => {
 
       // Kiểm tra role của user
       if (data.user.role === "admin") {
-        dispatch(setUserLogin(data.user.username));
+        dispatch(setUserLogin(data.user.role));
         dispatch(setRole(data.user.role));
         dispatch(setToken(data.token));
 

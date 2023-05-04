@@ -40,6 +40,7 @@ import { ImProfile } from "react-icons/im";
 import { FaUserAlt } from "react-icons/fa";
 import { FaBriefcase } from "react-icons/fa";
 import { FaEnvelope } from "react-icons/fa";
+import { BsFilePersonFill } from "react-icons/bs";
 import { TbDashboard } from "react-icons/tb";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import { Editor, EditorState, convertToRaw } from "draft-js";
@@ -115,6 +116,7 @@ export function SideBar({}) {
         break;
     }
   });
+
   return (
     <Grid
       sx={{
@@ -346,19 +348,126 @@ function DashboardCard({ title, description, icon }) {
           {icon}
         </IconButton>
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         <Button startIcon={<Edit />} size="small">
           Edit
         </Button>
         <Button startIcon={<Delete />} size="small">
           Delete
         </Button>
-      </CardActions>
+      </CardActions> */}
     </Card>
   );
 }
 
 function Admin() {
+  const token = useSelector((state) => state.user.token);
+  const [users, setUsers] = useState([]);
+  const [company, setCompanies] = useState([]);
+  const [candidate, setCandidate] = useState([]);
+  const [contact, setContact] = useState([]);
+  const [Cv, setCV] = useState([]);
+  const [adminJob, setAdminJob] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/user/", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setUsers(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/resume/all",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setCV(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/company", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setCompanies(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/api/contact/", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setContact(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/jobpost/all",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setAdminJob(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://localhost:5000/api/candidate/all",
+  //         {
+  //           headers: { Authorization: `Bearer ${token}` },
+  //         }
+  //       );
+  //       setCandidate(response.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [token]);
+
   return (
     <>
       <Grid sx={{ width: "100%", height: "80vh", mt: 20 }} container>
@@ -378,14 +487,14 @@ function Admin() {
         >
           <Grid item xs={12} sm={6} md={5}>
             <DashboardCard
-              title="10"
+              title={Cv?.length}
               description="Số Lượng CV "
               icon={<ImProfile style={{ color: "red", fontSize: "5rem" }} />}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <DashboardCard
-              title="10"
+              title={company?.length}
               description="Số Lượng Nhà Tuyển Dụng"
               icon={
                 <FaUserTie style={{ color: "#ad86df", fontSize: "5rem" }} />
@@ -394,7 +503,7 @@ function Admin() {
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <DashboardCard
-              title="10"
+              title={users?.length}
               description="Số Lượng User"
               icon={
                 <FaUserAlt style={{ color: "#3f51b5", fontSize: "5rem" }} />
@@ -403,14 +512,14 @@ function Admin() {
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <DashboardCard
-              title="8"
+              title={contact?.length}
               description="Số Lượng Ứng Tuyển"
               icon={<SendIcon sx={{ fontSize: "5rem" }} />}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <DashboardCard
-              title="8"
+              title={adminJob?.jobsPage?.length}
               description="Số Lượng Bài Đăng Tuyển Dụng"
               icon={
                 <FaBriefcase style={{ color: "#ad86df", fontSize: "5rem" }} />
@@ -419,10 +528,12 @@ function Admin() {
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <DashboardCard
-              title="8"
-              description="Job Alerts Created"
+              title={candidate?.length}
+              description="Số lượng ứng viên"
               icon={
-                <FaEnvelope style={{ color: "#19a0fb", fontSize: "5rem" }} />
+                <BsFilePersonFill
+                  style={{ color: "#19a0fb", fontSize: "5rem" }}
+                />
               }
             />
           </Grid>

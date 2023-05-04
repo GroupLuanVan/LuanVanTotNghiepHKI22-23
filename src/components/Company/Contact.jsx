@@ -11,6 +11,7 @@ import {
   TableBody,
   Select,
   MenuItem,
+  Button,
 } from "@mui/material";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ArticleIcon from "@mui/icons-material/Article";
@@ -21,6 +22,7 @@ import { getValFromTitle, getTitleFromVal } from "../../other/SelectDataUtils";
 import { contactProcesses } from "../../DataClient/selectData";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -29,7 +31,7 @@ import axios from "axios";
 export default function Contact(user) {
   const { id } = useParams();
   console.log(id);
-
+  const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   // có thể lưu status dạng int là 0, 1, 2, mặc định là 0, xuống đây dựa dô cái mảng cvstatus dưới này mà lấy
@@ -74,8 +76,7 @@ export default function Contact(user) {
             >
               <ArticleIcon />
               <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-                Danh sách ứng viên ứng tuyển theo bài (trả về idJobpost đầy đủ
-                thông tin in tên)
+                {/* Danh sách ứng viên ứng tuyển theo {data.jobpostId.title} */}
               </Typography>
             </Box>
           </Grid>
@@ -84,11 +85,9 @@ export default function Contact(user) {
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Tên ứng viên (idCandidate tạm)</TableCell>
+                    <TableCell>Tên ứng viên </TableCell>
                     <TableCell>Email</TableCell>
-                    <TableCell>
-                      Công việc ứng tuyển (jobpostID lấy tạm)
-                    </TableCell>
+                    <TableCell>Công việc ứng tuyển</TableCell>
                     <TableCell sx={{ width: "20%" }}>CV</TableCell>
                   </TableRow>
                 </TableHead>
@@ -96,10 +95,19 @@ export default function Contact(user) {
                 <TableBody>
                   {data.map((item) => (
                     <TableRow key={item.id}>
-                      <TableCell>{item.candidateId._id}</TableCell>
+                      <TableCell>{item.candidateId.nameCandidate}</TableCell>
                       <TableCell>{item.candidateId.email}</TableCell>
-                      <TableCell>{item.jobpostId}</TableCell>
-                      <TableCell>{item.resumeId}</TableCell>
+                      <TableCell>{item.jobpostId.title}</TableCell>
+                      <TableCell>
+                        {/* {item.resumeId} */}
+                        <Button
+                          variant="outlined"
+                          color="primary"
+                          onClick={() => navigate(`/viewcv/${item.resumeId}`)}
+                        >
+                          Xem CV
+                        </Button>
+                      </TableCell>
                       <TableCell>
                         {/* <Box>
                           <Select

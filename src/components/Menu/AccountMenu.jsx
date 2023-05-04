@@ -52,8 +52,8 @@ export default function AccountMenu() {
     fontFamily: "Arial, sans-serif",
     //backgroundColor: "#d5d5d5",
     color: "#000",
-    width: "200px",
-    height: "30px",
+    width: "220px",
+    height: "38px",
     padding: "8px",
     borderRadius: "8px",
     border: "2px solid #ccc",
@@ -116,7 +116,7 @@ export default function AccountMenu() {
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 1.5,
             width: 350,
-            height: 300,
+            height: 320,
             lineHeight: "100rem",
             backgroundColor: "#fff",
 
@@ -187,32 +187,47 @@ export default function AccountMenu() {
             <MenuItem>
               <Avatar /> {user}
             </MenuItem>
-            <MenuItem onClick={() => navigateTo("/myprofile")}>
+            <MenuItem
+              sx={{ fontSize: "1.5rem" }}
+              onClick={() => navigateTo("/HR/company")}
+            >
               <ListItemIcon>
-                <NoteAltIcon />
+                <NoteAltIcon
+                  sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }}
+                />
               </ListItemIcon>
               Cập nhật công ty
             </MenuItem>
             <MenuItem
-              sx={{ "&:hover": { backgroundColor: "grey.100" } }}
-              onClick={() => navigateTo(`/cv/${user?._id}`)}
+              sx={{ fontSize: "1.5rem" }}
+              onClick={() => navigateTo("/HR")}
             >
               <ListItemIcon>
-                <ArticleIcon />
+                <NoteAltIcon
+                  sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }}
+                />
               </ListItemIcon>
-              Báo Cáo Tuyển dụng
+              Đăng bài
             </MenuItem>
-            <MenuItem onClick={() => navigateTo("/appliedjobs")}>
+            <MenuItem
+              sx={{ fontSize: "1.5rem" }}
+              onClick={() => navigateTo(`./charts`)}
+            >
               <ListItemIcon>
-                <WorkIcon />
+                <ArticleIcon
+                  sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }}
+                />
+              </ListItemIcon>
+              Công việc đã đăng
+            </MenuItem>
+            <MenuItem
+              sx={{ fontSize: "1.5rem" }}
+              onClick={() => navigateTo("./SearchCandi")}
+            >
+              <ListItemIcon>
+                <WorkIcon sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }} />
               </ListItemIcon>
               Quản Lý Ứng Tuyển
-            </MenuItem>
-            <MenuItem onClick={() => navigateTo("/hrlogin")}>
-              <ListItemIcon>
-                <WorkIcon />
-              </ListItemIcon>
-              ViecLamNhanh for Business
             </MenuItem>
           </>
         )}

@@ -97,7 +97,7 @@ const ManageSeeker = () => {
           <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
             Số lượng ứng viên ứng tuyển
           </Typography>
-          {selectedRows.length > 0 && (
+          {/* {selectedRows?.length > 0 && (
             <>
               <Button
                 variant="contained"
@@ -115,7 +115,7 @@ const ManageSeeker = () => {
                 Xem
               </Button>
             </>
-          )}
+          )} */}
         </Box>
         {/* head info */}
         <Grid
@@ -148,7 +148,7 @@ const ManageSeeker = () => {
                   <TableCell>
                     {" "}
                     <Typography ml={-3} variant="h6">
-                      Số lượng ứng tuyển
+                      Tên ứng viên
                     </Typography>
                   </TableCell>
                   <TableCell></TableCell>
@@ -156,24 +156,25 @@ const ManageSeeker = () => {
               </TableHead>
               <TableBody>
                 {users.map((user) => (
-                  <TableRow key={user._id}>
-                    {/* <TableCell>
-                      <Checkbox
-                        onChange={(e) => handleCheckboxChange(e, user._id)}
-                        checked={selectedRows.includes(user._id)}
-                      />
-                    </TableCell> */}
+                  <TableRow key={user?._id}>
                     <TableCell>
-                      <Typography variant="h6">{user.jobpostId} </Typography>
+                      <Typography variant="h6">
+                        {user?.jobpostId?.title}{" "}
+                      </Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography variant="h6">{user.companyId}</Typography>
+                      <Typography variant="h6">
+                        {user?.companyId?.nameCompany}
+                      </Typography>
                     </TableCell>
 
                     <TableCell>
-                      <Typography variant="h6">2 người</Typography>
+                      <Typography variant="h6">
+                        {" "}
+                        {user?.candidateId?.nameCandidate}
+                      </Typography>
                     </TableCell>
-                    <TableCell>
+                    {/* <TableCell>
                       {" "}
                       <Button
                         variant="contained"
@@ -183,7 +184,7 @@ const ManageSeeker = () => {
                       >
                         Xóa
                       </Button>
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>

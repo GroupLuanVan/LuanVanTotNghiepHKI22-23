@@ -25,6 +25,7 @@ import Company from "./components/Company/Company";
 import UpdateProfile from "./components/Profile/UpdateProfile";
 import 'react-toastify/dist/ReactToastify.css';
 import HeaderHR from "./components/JobPost/HeaderHR";
+import HeaderhomeHR from "./components/JobPost/HeaderHomeHR";
 import HeaderCandi from "./components/AppBar/HeaderCandi";
 import HeaderAdmin from "./components/AppBar/HeaderAdmin";
 import Dashboard from "./components/Admin/Admin";
@@ -58,16 +59,16 @@ function App() {
                 </>
               }
               />
-                {/* <Route
-              path="Home"
+                <Route
+              path="HomeHR/*"
               element={
                 <>
-                  <HeaderCandi />
-                   <Home /> 
+                  <HeaderhomeHR />
+                   <LandingPage /> 
                   <Footer/> 
                 </>
               }
-              /> */}
+              />
                <Route
               path="/:usetemplate"
               element={
