@@ -25,6 +25,7 @@ import { useState, useEffect } from "react";
 import JobCard from "../components/JobCard";
 import Image from "mui-image";
 import banner from "../asset/banner.png";
+import banner1 from "../asset/bn1.png";
 import { styled } from "@mui/material/styles";
 import defaultCvData from "../asset/defaultCvData.json";
 import { useSelector } from "react-redux";
@@ -76,7 +77,7 @@ export const ChooseCV = () => {
                 mt: 2,
                 borderRadius: "5px",
               }}
-              src={banner}
+              src={banner1}
               duration={0}
             />
           </Box>{" "}
@@ -87,7 +88,7 @@ export const ChooseCV = () => {
         <Container
           sx={{ paddingTop: "85px", paddingBottom: "50px", maxWidth: "xl" }}
         >
-          <Box sx={{ my: 5, mb: 5 }}>
+          <Box sx={{ my: 2, mb: 5 }}>
             <TitleTypography
               gutterBottom
               variant="h1"
@@ -99,6 +100,7 @@ export const ChooseCV = () => {
                 //fontWeight: 600,
                 fontFamily: "Montserrat",
                 //fontSize: "1.5rem",   // không nhận dc phản hồi của
+                color: "  #105aa3",
               }}
             >
               Chọn CV phù hợp cho bạn

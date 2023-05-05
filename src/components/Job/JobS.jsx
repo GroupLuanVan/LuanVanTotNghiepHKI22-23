@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import Image from "mui-image";
 import { useNavigate, createSearchParams } from "react-router-dom";
-import Image1 from "../../asset/JobS.png";
+import Image1 from "../../asset/JobS1.jpg";
 import { red } from "@mui/material/colors";
 import { getAddressTitleFromId } from "../../other/SelectDataUtils";
 import { styled } from "@mui/material/styles";
@@ -33,9 +33,12 @@ export const JobS = () => {
       <Box
         sx={{
           //background: "linear-gradient(to left, #8cebc84a, transparent)",
+          // background:
+          //   "transparent linear-gradient(6deg,#fff,#c4ffdd 100%,rgba(195,255,221,.702) 0) 0 0 no-repeat",
+
           background:
-            "transparent linear-gradient(6deg,#fff,#c4ffdd 100%,rgba(195,255,221,.702) 0) 0 0 no-repeat",
-          //   mb: 0,
+            "transparent linear-gradient(6deg, #fff, #5490cc 100%, #5490cc 0) 0 0 no-repeat",
+
           p: 15,
           height: "290px",
           position: "relative",
@@ -48,16 +51,17 @@ export const JobS = () => {
             height: "400px",
             position: "absolute",
             top: "calc(50% + 50px)",
-            left: "85%",
-            bottom: "50%",
+            left: "80%",
+            bottom: "100%",
+
             transform: "translate(-50%, -50%)",
           }}
         />
         <Box mt={1}>
-          <Typography variant="h3" sx={{ color: "#00b14f", mb: "37px" }}>
+          <Typography variant="h3" sx={{ color: "#2C8CF4", mb: "37px" }}>
             Khám phá công việc của công ty nổi bật
           </Typography>
-          <Typography variant="h6" sx={{ color: "#00b14f" }}>
+          <Typography variant="h6" sx={{ color: "#2C8CF4" }}>
             Tra cứu thông tin công ty và tìm kiếm nơi làm việc tốt nhất dành cho
             bạn
           </Typography>
@@ -95,10 +99,17 @@ export const JobS = () => {
                 size="small"
                 sx={{
                   width: "500px",
-
                   backgroundColor: "white",
-
                   borderRadius: "100rem",
+                  mr: 2,
+                  border: "none",
+                  outline: "none",
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": {
+                      border: 0,
+                      borderRadius: "100rem",
+                    },
+                  },
                 }}
                 color="success"
                 label="Nhập tên công ty"
@@ -110,6 +121,7 @@ export const JobS = () => {
                   ml: 2,
                   width: "150px",
                   borderRadius: "10rem",
+                  backgroundColor: "#2C8CF4",
                 }}
                 variant="contained"
                 color="success"

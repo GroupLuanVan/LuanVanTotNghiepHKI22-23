@@ -76,7 +76,7 @@ export default function Contact(user) {
             >
               <ArticleIcon />
               <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-                {/* Danh sách ứng viên ứng tuyển theo {data.jobpostId.title} */}
+                Danh sách ứng viên ứng tuyển theo bài {data?.jobpostId?.title}
               </Typography>
             </Box>
           </Grid>

@@ -32,6 +32,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import PropTypes from "prop-types";
 import { date } from "yup";
 
+import TransgenderIcon from "@mui/icons-material/Transgender";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -102,9 +104,10 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
       <Box
         sx={{
           //background: "linear-gradient(to left, #8cebc84a, transparent)",
+          // background:
+          //   "transparent linear-gradient(6deg,#fff,#c4ffdd 100%,rgba(195,255,221,.702) 0) 0 0 no-repeat",
           background:
-            "transparent linear-gradient(6deg,#fff,#c4ffdd 100%,rgba(195,255,221,.702) 0) 0 0 no-repeat",
-          //   mb: 0,
+            "transparent linear-gradient(6deg, #fff, #5490cc 100%, #5490cc 0) 0 0 no-repeat",
           p: 15,
           height: "290px",
           position: "relative",
@@ -112,10 +115,10 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
         }}
       >
         <Box mt={1}>
-          <Typography variant="h3" sx={{ color: "#00b14f", mb: "37px" }}>
+          <Typography variant="h3" sx={{ color: "#2C8CF4", mb: "37px" }}>
             Khám phá ứng viên tiềm năng cho bạn
           </Typography>
-          <Typography variant="h6" sx={{ color: "#00b14f" }}>
+          <Typography variant="h6" sx={{ color: "#2C8CF4" }}>
             Tra cứu thông tin ứng viên
           </Typography>
         </Box>
@@ -175,6 +178,7 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
                   sx={{
                     ml: 2,
                     borderRadius: "10rem",
+                    backgroundColor: "#2C8CF4",
                   }}
                   variant="contained"
                   color="success"
@@ -320,11 +324,17 @@ function CandidateCard({ data, type }) {
               {data.phone}
             </Typography>
           </Box>
+          <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+            <TransgenderIcon fontSize="small" sx={{ mr: 1 }} />
+            <Typography variant="body1" color="initial">
+              {data.gender}
+            </Typography>
+          </Box>
         </Box>
       </Grid>
 
       {/* Thong tin Rich text */}
-      <Grid item container xs={5}>
+      <Grid item container xs={5} spacing={3} justifyContent="space-between">
         {/* kinh nghiem */}
         <Grid
           item
@@ -386,7 +396,13 @@ function CandidateCard({ data, type }) {
           </Box>
         </Grid>
         {/* Hoc van */}
-        <Grid item xs={6}>
+        <Grid
+          item
+          xs={6}
+          sx={{
+            mb: 2,
+          }}
+        >
           <Typography variant="h5" color="initial" fontWeight={600}>
             Học vấn
           </Typography>
@@ -399,7 +415,13 @@ function CandidateCard({ data, type }) {
             <RichTextDisplay data={JSON.parse(data.educationCv)} />
           </Box>
         </Grid>
-        <Grid item xs={6}>
+        <Grid
+          item
+          xs={6}
+          sx={{
+            mb: 2,
+          }}
+        >
           <Typography variant="h5" color="initial" fontWeight={600}>
             Dự Án
           </Typography>
@@ -412,7 +434,13 @@ function CandidateCard({ data, type }) {
             {data.project}
           </Box>
         </Grid>
-        <Grid item xs={6}>
+        <Grid
+          item
+          xs={6}
+          sx={{
+            mb: 2,
+          }}
+        >
           <Typography variant="h5" color="initial" fontWeight={600}>
             Chứng Chỉ
           </Typography>
