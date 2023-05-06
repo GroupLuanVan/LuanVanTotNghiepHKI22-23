@@ -2,27 +2,24 @@ import { Container, Grid, Paper, Typography } from "@mui/material";
 import JobCard from "../.././components/JobPost/JobCardCompany";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 export default function SimilarJob({ jobPostId }) {
   const [jobRecs, setJobRecs] = useState([]);
+  const cvId = useSelector((state) => state.user.cvId);
 
   useEffect(() => {
     async function getData() {
-      const sugListIdFetch = await axios.get(
-        `http://localhost:8000/getSimilarJob/${jobPostId}`
+      const sugListDbData = await axios.get(
+        `http://127.0.0.1:8080/findJobForCv/${cvId}`
       );
-
-      let suglistIdData = sugListIdFetch.data.sugList;
-      suglistIdData = suglistIdData.reverse();
-      const sugListDbData = await axios.post(
-        "http://localhost:8800/api/recommend/getJobByListId",
-        { suglistIdData }
-      );
-
+      console.log(sugListDbData);
       setJobRecs(sugListDbData.data);
     }
     getData();
   }, []);
+  //console.log(jobRecs);
+
   return (
     <>
       <Container

@@ -96,6 +96,7 @@ export default function AccountMenu() {
             mr: 2,
             mr: -5,
             zIndex: 0,
+            cursor: "pointer",
           }}
           variant="h6"
         >

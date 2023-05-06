@@ -71,6 +71,7 @@ const HeaderHR = () => {
               sx={{
                 mr: 5,
                 ml: 10,
+                cursor: "pointer",
               }}
             >
               Cập Nhật Công Ty
@@ -82,6 +83,7 @@ const HeaderHR = () => {
               variant="h6"
               sx={{
                 mr: 5,
+                cursor: "pointer",
               }}
             >
               Công Việc Đã Đăng
@@ -93,6 +95,7 @@ const HeaderHR = () => {
               variant="h6"
               sx={{
                 mr: 5,
+                cursor: "pointer",
               }}
             >
               Quản Lý Ứng Tuyển

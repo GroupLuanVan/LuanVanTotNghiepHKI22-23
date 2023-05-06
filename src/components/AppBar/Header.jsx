@@ -49,13 +49,6 @@ const CustomAppBar = () => {
             marginRight: "auto",
           }}
         >
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 5 }}
-          ></IconButton> */}
           <Image
             onClick={() => {
               navigateTo("/");
@@ -80,6 +73,7 @@ const CustomAppBar = () => {
               sx={{
                 mr: 5,
                 ml: 10,
+                cursor: "pointer",
               }}
             >
               Công việc
@@ -91,6 +85,7 @@ const CustomAppBar = () => {
               variant="h5"
               sx={{
                 mr: 5,
+                cursor: "pointer",
               }}
             >
               Tạo cv

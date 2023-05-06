@@ -5,6 +5,7 @@ import {
   setRole,
   setToken,
   setidApplyJob,
+  setidcv,
 } from "../../store/userSlice";
 import { useNavigate } from "react-router-dom";
 import {
@@ -65,6 +66,7 @@ export const LoginSeeker = () => {
 
       // Kiểm tra role của user
       if (data.user.role === "candidate") {
+        dispatch(setidcv(data.candidate.activatedCvId));
         dispatch(setUserLogin(data.candidate.nameCandidate));
         dispatch(setRole(data.user.role));
         dispatch(setToken(data.token));

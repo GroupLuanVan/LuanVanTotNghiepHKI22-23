@@ -220,7 +220,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
 
   //sử dụng thư viện useReactToPrint để in nội dung của một phần tử HTML được tham chiếu bởi ref.current.
   //Khi biến print được cập nhật thành true, hàm handlePrint được gọi để thực hiện việc in. Sau khi in hoàn tất,
-  //hàm onAfterPrint được gọi để log ra thông báo "QA print". Các useEffect hook được sử dụng để theo dõi các biến print,
+  //hàm onAfterPrint được gọi để log ra thông báo "In thành công". Các useEffect hook được sử dụng để theo dõi các biến print,
   //data và editable để đảm bảo rằng chúng được cập nhật và xử lý theo các trường hợp khác nhau.
   //Trong đó, useEffect đầu tiên được sử dụng để gọi hàm handlePrint khi print được cập nhật thành true.
   //useEffect thứ hai không có logic xử lý bên trong. useEffect cuối cùng được sử dụng để cập nhật CVDATA khi editable được cập nhật thành true.
@@ -228,7 +228,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
   const handlePrint = useReactToPrint({
     content: () => ref.current,
     documentTitle: "test",
-    onAfterPrint: () => console.log(""),
+    onAfterPrint: () => console.log("In thành công"),
   });
   useEffect(() => {
     if (print) {

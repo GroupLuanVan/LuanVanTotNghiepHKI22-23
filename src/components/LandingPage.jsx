@@ -42,7 +42,7 @@ export const LandingPage = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const { data, loading, error } = useFetch(
-    "http://localhost:5000/api/jobpost/all"
+    "http://localhost:5000/api/jobpost/all/home"
   );
 
   // Tạo một đối tượng Date hiện tại

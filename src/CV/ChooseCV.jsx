@@ -96,6 +96,7 @@ export const ChooseCV = () => {
               sx={{
                 mb: 4,
                 ml: 10,
+                cursor: "pointer",
                 textAlign: "center",
                 //fontWeight: 600,
                 fontFamily: "Montserrat",

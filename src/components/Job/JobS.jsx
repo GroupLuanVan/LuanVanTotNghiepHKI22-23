@@ -26,7 +26,7 @@ import useFetch from "../../hook/useFetch";
 
 export const JobS = () => {
   const { data, loading, error } = useFetch(
-    "http://localhost:5000/api/jobpost/all"
+    "http://localhost:5000/api/jobpost/all/home"
   );
   return (
     <>

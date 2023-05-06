@@ -4,12 +4,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 export const userSlice = createSlice({
+    
     name:'user',
     email:'email',
     role:'role',
     token:'token',
     idCompany:'idcompany',
     idApplyJob: 'idApply',
+    cvId: 'cvId',
     initialState: {
         user: localStorage.getItem('user') == null ? "Người dùng" : localStorage.getItem('user'),
         email: localStorage.getItem('email') == null ? " Email Người dùng" : localStorage.getItem('email'),
@@ -18,7 +20,8 @@ export const userSlice = createSlice({
         role: localStorage.getItem('role') ? localStorage.getItem('role') : "default",
         token: localStorage.getItem('token') === '' ?  localStorage.getItem('token') : localStorage.getItem('token') ,
         idCompany : localStorage.getItem('idcompany') === '' ? "Null" : localStorage.getItem('idcompany'),
-        idApplyJob : localStorage.getItem('idApply') === '' ? "Null" : localStorage.getItem('idApply')
+        idApplyJob : localStorage.getItem('idApply') === '' ? "Null" : localStorage.getItem('idApply'),
+        cvId: localStorage.getItem('cvId') === '' ? "Null" : localStorage.getItem('cvId')
 
     },
     reducers: {
@@ -40,6 +43,10 @@ export const userSlice = createSlice({
         setidCompany: (state, action) => {
             state.idCompany = action.payload
             localStorage.setItem("idcompany", action.payload)
+        },
+        setidcv: (state, action) => {
+            state.cvId = action.payload
+            localStorage.setItem("cvId", action.payload)
         },
         setidApplyJob: (state, action) => {
             state.idApplyJob = action.payload
@@ -91,7 +98,7 @@ export const userSlice = createSlice({
 })
 // Thêm selectIsLoggedIn selector vào userSlice
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
-export const { setUserLogin, setRole, setData, setToken, setidCompany,setUserLogout, setActivatedCvId, setidApplyJob, setCandidateData } = userSlice.actions
+export const { setUserLogin, setRole, setData, setToken, setidCompany,setUserLogout, setActivatedCvId, setidApplyJob, setCandidateData, setidcv } = userSlice.actions
 export default userSlice.reducer;
 
 // createSlice được sử dụng để tạo ra một slice, bao gồm tên slice (name), 
