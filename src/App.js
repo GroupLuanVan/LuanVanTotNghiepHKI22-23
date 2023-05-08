@@ -39,7 +39,8 @@ import { LoginEmployer } from "./components/Login/LoginEmploy";
 import { LoginAdmin } from "./components/Login/LoginAdmin";
 import { ShowCV } from "./components/Company/ShowCV";
 import ViewCV from "./components/viewCV";
-
+import { JobForYou } from "./components/JobPost/JobForYou";
+import { CvForYou } from "./components/JobPost/CvForYou";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -206,6 +207,26 @@ function App() {
                 </>
               }
               />
+                            <Route
+              path="JobForYou"
+              element={
+                <>
+                  <CustomAppBar/>
+                  <JobForYou/>
+                  <Footer/>
+                </>
+              }
+              />
+              {/* <Route
+              path="CvForYou"
+              element={
+                <>
+                  <CustomAppBar/>
+                  <CvForYou/>
+                  <Footer/>
+                </>
+              }
+              /> */}
                      <Route
               path="JobDetail/:id"
               element={

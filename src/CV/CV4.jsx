@@ -29,6 +29,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { convertToRaw, EditorState } from "draft-js";
 import ContactEditPopUp from "../components/Home/ContactEditPopUp";
+import TransgenderIcon from "@mui/icons-material/Transgender";
 
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { MdVolunteerActivism } from "react-icons/md";
@@ -258,7 +259,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
                 fontWeight={300}
                 color="initial"
               >
-                {data.title}
+                {data?.title}
               </Typography>
               <Typography
                 variant="h5"
@@ -312,7 +313,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
                   mb: 1,
                 }}
               >
-                <FacebookIcon fontSize="small" sx={{ mr: 1 }} />
+                <TransgenderIcon fontSize="small" sx={{ mr: 1 }} />
                 <Typography variant="body1" color="initial">
                   {data.gender}
                 </Typography>
@@ -326,7 +327,7 @@ export default function CV4({ editable, data, setPrint, print, setCVDATA }) {
               >
                 <LocationOnIcon fontSize="small" sx={{ mr: 1 }} />
                 <Typography variant="body1" color="initial">
-                  {data.fullAddress}
+                  {data.fulladdress}
                 </Typography>
               </Box>
             </Box>

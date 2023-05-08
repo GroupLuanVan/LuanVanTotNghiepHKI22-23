@@ -39,6 +39,7 @@ import JobDetail from "../Job/JobDetail";
 import Contact from "../Company/Contact";
 import SearchCandidate from "../Company/SearchCandidate";
 import { ShowCV } from "../Company/ShowCV";
+import { CvForYou } from "./CvForYou";
 import "../../App.css";
 
 import axios from "axios";
@@ -246,16 +247,16 @@ const JobPost = () => {
     let descriptionText = getTextArrayFromRich(
       convertToRaw(description.getCurrentContent())
     ).join(" ");
-    let candidateRequiredText = getTextArrayFromRich(
+    let requiredText = getTextArrayFromRich(
       convertToRaw(required.getCurrentContent())
     ).join(" ");
-    console.log({ ...data, descriptionText, candidateRequiredText });
+    console.log({ ...data, descriptionText, requiredText });
     const res = await axios.post(
       "http://localhost:5000/api/jobpost",
       {
         ...data,
         descriptionText,
-        candidateRequiredText,
+        requiredText,
       },
       {
         headers: {
@@ -785,15 +786,22 @@ export default function PostJob() {
             <Route path="/company" element={<Company />} />
             <Route path="/charts" element={<Charts user={user} />} />
             <Route path="/jobdetail" element={<JobDetail />} />
-            <Route
+            {/* <Route
               path="/searchcandidate/:id"
               element={<SearchCandidate user={user} />}
-            />
+            /> */}
             <Route
               path="/contacts/:id"
               element={<Contact user={user} />}
             ></Route>
-            <Route path="/SearchCandi" element={<ShowCV user={user} />}></Route>
+            <Route
+              path="/CvForYou/:id"
+              element={<CvForYou user={user} />}
+            ></Route>
+            <Route
+              path="/SearchCandi"
+              element={<ShowCV user={user} env={env} />}
+            ></Route>
           </Routes>
         </Grid>
         {/* <Grid item xs={2}></Grid> */}

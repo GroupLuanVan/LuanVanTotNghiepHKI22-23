@@ -543,6 +543,41 @@ export default function JobDetail({ user }) {
                     mt: 2,
                   }}
                 >
+                  {data?.addressId?.title}
+                </Typography>
+              </Grid>
+              <Grid
+                xs={12}
+                container
+                item
+                sx={{
+                  mx: 3,
+                  mt: 2,
+                  py: 2,
+                  //background: alpha(theme.palette.success.main, 0.08),
+                  background: "#c7e8fc",
+                  borderRadius: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Typography
+                  variant="p"
+                  sx={{
+                    fontWeight: "bold",
+                    textDecoration: "underline",
+                    ml: 3,
+                  }}
+                >
+                  Địa chỉ cụ thể
+                </Typography>
+                <Typography
+                  variant="p"
+                  sx={{
+                    ml: 3,
+                    mt: 2,
+                  }}
+                >
                   {data?.fullAddress}
                 </Typography>
               </Grid>
@@ -651,7 +686,7 @@ export default function JobDetail({ user }) {
                   {/* {data.benefit} */}
                 </Box>
               </Grid>
-              <Grid
+              {/* <Grid
                 item
                 xs={12}
                 sx={{
@@ -659,7 +694,7 @@ export default function JobDetail({ user }) {
                 }}
               >
                 <SimilarJob jobPostId={data._id} />
-              </Grid>
+              </Grid> */}
             </Grid>
           </Container>
         </Container>

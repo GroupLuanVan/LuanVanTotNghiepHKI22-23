@@ -6,7 +6,6 @@ import companylogo from "../../asset/companylogo_sample.png";
 import { useEffect, useState } from "react";
 import JobCardALL from "./JobCard_ALL";
 export const JobListCompany = (jobsPage) => {
-  console.log(jobsPage.jobsPage.jobpost);
   return (
     <>
       <>

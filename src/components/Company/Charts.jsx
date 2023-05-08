@@ -130,12 +130,13 @@ export default function Charts({ user }) {
                 {/* <TableCell>Đã ứng tuyển</TableCell> */}
                 <TableCell>Trạng thái</TableCell>
                 <TableCell>Xem danh sách ứng Viên</TableCell>
+                <TableCell>Xem gợi ý ứng viên phù hợp</TableCell>
               </TableHead>
               {jobsFetch &&
                 jobsFetch.data &&
                 jobsFetch.data.jobsPage &&
                 jobsFetch.data.jobsPage.map((item) => {
-                  console.log(item?._id);
+                  console.log(item);
 
                   return (
                     <TableRow key={item._id}>
@@ -171,6 +172,20 @@ export default function Charts({ user }) {
                           }}
                         >
                           Chi Tiết
+                        </Button>
+                      </TableCell>
+                      <TableCell>
+                        <Button
+                          variant="text"
+                          color="success"
+                          onClick={() => {
+                            navigateTo({
+                              pathname: `../CvForYou/${item._id}`, // update the pathname to the correct URL
+                              state: { job: item }, // pass the item as a prop to the new page
+                            });
+                          }}
+                        >
+                          Xem
                         </Button>
                       </TableCell>
                       <TableCell>

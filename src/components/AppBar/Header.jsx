@@ -90,6 +90,18 @@ const CustomAppBar = () => {
             >
               Tạo cv
             </Typography>
+            <Typography
+              onClick={() => {
+                navigate("/JobForYou");
+              }}
+              variant="h5"
+              sx={{
+                mr: 5,
+                cursor: "pointer",
+              }}
+            >
+              Việc phù hợp với bạn
+            </Typography>
           </Box>
         </Box>
         <Box sx={{ display: "flex", alignItems: "center", mb: 1.5 }}>

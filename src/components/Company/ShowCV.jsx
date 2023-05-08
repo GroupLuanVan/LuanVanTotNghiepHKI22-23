@@ -56,7 +56,20 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
+function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick, user }) {
+  const [resumes, setResumes] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch(
+        `http://localhost:5000/api/resume/showallresume/${user?.idCompany}`
+      );
+      const data = await response.json();
+      setResumes(data);
+    }
+    fetchData();
+  }, [user?.idCompany]);
+  console.log(user);
   const [searchParams, setSearchParams] = useState({
     title: false,
     experience: false,
@@ -215,6 +228,7 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
                 <Button
                   onClick={() => {
                     getALLRemuse();
+
                     onSuggestClick();
                   }}
                   sx={{
@@ -252,9 +266,31 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick }) {
   );
 }
 
-function CandidateCard({ data, type }) {
-  console.log(data);
+// function AllPost({ user }) {
+//   console.log(user?.user?.idCompany);
+//   const [openCandidatesModal, setOpenCandidatesModal] = useState(false);
+//   const hdlOpenCandidatesModal = () => setOpenCandidatesModal(true);
+//   const hdlCloseCandidatesModal = () => setOpenCandidatesModal(false);
 
+//   const [isDataLoaded, setIsDataLoaded] = useState(false);
+//   const [jobs, setJobs] = useState([]);
+
+//   const navigate = useNavigate();
+
+//   useEffect(() => {
+//     async function fetchData() {
+//       const response = await fetch(
+//         `http://localhost:5000/api/jobpost/showallpost/${user?.user?.idCompany}`
+//       );
+//       const data = await response.json();
+//       setJobs(data);
+//       setIsDataLoaded(true);
+//     }
+//     fetchData();
+//   }, [user?.user?.idCompany]);
+// }
+
+function CandidateCard({ data, type }) {
   const commonStyle = {
     display: "flex",
     alignItems: "center",
@@ -580,10 +616,18 @@ function ResultSuggest({ data, type }) {
 }
 
 export const ShowCV = (user, env) => {
+  // const allJob = AllPost(user);
+  // const [currentUser, setCurrentUser] = useState(user);
+
+  console.log(user);
   const location = useLocation();
   const strArr = location.pathname.split("/");
 
   const jobPostId = strArr[strArr.length - 1];
+  const jobsFetch = useFetch(
+    `http://localhost:5000/api/jobpost/showallpost/${user?.user?.idCompany}`
+  );
+  console.log(jobsFetch);
 
   // const { data, setData, loading, error } = useFetch(`/jobpost/${jobPostId}`);
 

@@ -552,7 +552,7 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
                   mb: 2,
                   px: 2,
                   mt: 1,
-                  minHeight: "30%",
+                  minHeight: "50%",
                   "&:hover": {
                     border: "1px dashed red",
                   },

@@ -318,7 +318,7 @@ export default function CV6({ editable, data, setPrint, print, setCVDATA }) {
                   >
                     <LocationOnIcon fontSize="small" sx={{ mr: 1 }} />
                     <Typography variant="body1" color="initial">
-                      {data.fullAddress}
+                      {data.fulladdress}
                     </Typography>
                   </Box>
                 </Box>

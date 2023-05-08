@@ -553,7 +553,7 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                   toggle={setShowProject}
                   data={data}
                   config={setCVDATA}
-                  item="activitiesCv"
+                  item="projectCv"
                 />
               </Box>
               <CustomChip
@@ -581,7 +581,7 @@ export default function CV5({ editable, data, setPrint, print, setCVDATA }) {
                   toggle={setShowActivate}
                   data={data}
                   config={setCVDATA}
-                  item="aboutMeCV"
+                  item="activitiesCv"
                 />
               </Box>
             </Grid>
