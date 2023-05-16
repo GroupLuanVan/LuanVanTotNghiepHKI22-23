@@ -266,30 +266,6 @@ function ALLRemuse({ setRemuse, onSuggestClick, handleAllClick, user }) {
   );
 }
 
-// function AllPost({ user }) {
-//   console.log(user?.user?.idCompany);
-//   const [openCandidatesModal, setOpenCandidatesModal] = useState(false);
-//   const hdlOpenCandidatesModal = () => setOpenCandidatesModal(true);
-//   const hdlCloseCandidatesModal = () => setOpenCandidatesModal(false);
-
-//   const [isDataLoaded, setIsDataLoaded] = useState(false);
-//   const [jobs, setJobs] = useState([]);
-
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     async function fetchData() {
-//       const response = await fetch(
-//         `http://localhost:5000/api/jobpost/showallpost/${user?.user?.idCompany}`
-//       );
-//       const data = await response.json();
-//       setJobs(data);
-//       setIsDataLoaded(true);
-//     }
-//     fetchData();
-//   }, [user?.user?.idCompany]);
-// }
-
 function CandidateCard({ data, type }) {
   const commonStyle = {
     display: "flex",

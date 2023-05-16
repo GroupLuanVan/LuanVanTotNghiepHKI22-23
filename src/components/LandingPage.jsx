@@ -178,19 +178,25 @@ export const LandingPage = () => {
                 >
                   <SearchBox>
                     <SearchInput
-                      placeholder="Search... Job title, keywords, or company "
+                      placeholder="Tên công việc"
                       sx={{ ml: 2, flex: 1 }}
                     />
                   </SearchBox>
 
                   <SearchBox>
                     <SearchInput
-                      placeholder="Location "
+                      placeholder="Địa điểm "
                       sx={{ ml: 2, flex: 1 }}
                     />
                   </SearchBox>
 
                   <Button
+                    onClick={() => {
+                      navigate({
+                        pathname: "/jobs",
+                        search: keyWord ? `?job=${keyWord}` : "",
+                      });
+                    }}
                     sx={{
                       backgroundColor: "#5490cc",
                       height: "62px",
@@ -225,7 +231,7 @@ export const LandingPage = () => {
                 </Typography>
                 <Typography variant="h4">Tạo cv cho bản thân bạn</Typography>
                 <Typography sx={{ lineHeight: 3 }}>
-                  Bạn chưa có cv ? Tạo ngay chỉ với 3 bước.
+                  Bạn chưa có CV ? Tạo ngay chỉ với 3 bước.
                 </Typography>
                 <Button
                   sx={{

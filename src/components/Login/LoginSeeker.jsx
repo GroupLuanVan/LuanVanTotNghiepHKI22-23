@@ -70,7 +70,7 @@ export const LoginSeeker = () => {
         dispatch(setUserLogin(data.candidate.nameCandidate));
         dispatch(setRole(data.user.role));
         dispatch(setToken(data.token));
-        dispatch(setidApplyJob(data.candidate.applyJobs));
+        //dispatch(setidApplyJob(data.candidate.applyJobs));
 
         console.log(data);
 
@@ -150,7 +150,7 @@ export const LoginSeeker = () => {
                 variant="contained"
                 //color="warning"
               >
-                Login
+                Đăng nhập
               </Button>
               <br />
               <a>Quên mật khẩu</a>

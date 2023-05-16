@@ -18,7 +18,7 @@ const LoginType = () => {
       alignItems="center"
       marginTop="270px"
       marginBottom={"280px"}
-      marginLeft={"620px"}
+      marginLeft={"600px"}
       borderRadius={5}
       boxShadow={"5px 10px 20px #ccc"}
       sx={{
@@ -26,11 +26,11 @@ const LoginType = () => {
           boxShadow: "10px 10px 20px #ccc ",
         },
         height: "250px",
-        maxWidth: "600px", // Giảm chiều ngang của box cha bao bọc bên ngoài
+        maxWidth: "700px", // Giảm chiều ngang của box cha bao bọc bên ngoài
       }}
     >
       <Typography marginTop={"45px"} variant="h4" gutterBottom>
-        Choose Account Type
+        Chọn hình thức đăng nhập của bạn
       </Typography>
       <Box
         container
@@ -52,7 +52,7 @@ const LoginType = () => {
             }}
           >
             <Icon component={Person} sx={{ mr: 1 }} />
-            Job Seeker
+            Ứng viên
           </Button>
         </Grid>
 
@@ -73,7 +73,7 @@ const LoginType = () => {
             }}
           >
             <Icon component={Business} sx={{ mr: 1 }} />
-            Employer
+            Nhà tuyển dụng
           </Button>
         </Grid>
 
@@ -92,7 +92,7 @@ const LoginType = () => {
             }}
           >
             <Icon component={AccountCircle} sx={{ mr: 1 }} />
-            Admin
+            Nhà quản trị
           </Button>
         </Grid>
       </Box>

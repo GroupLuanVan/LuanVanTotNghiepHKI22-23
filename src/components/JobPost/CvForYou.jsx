@@ -92,11 +92,10 @@ export const CvForYou = () => {
         />
         <Box mt={1}>
           <Typography variant="h3" sx={{ color: "#2C8CF4", mb: "37px" }}>
-            Khám phá công việc của công ty nổi bật
+            Khám phá ứng viên phù hợp
           </Typography>
           <Typography variant="h6" sx={{ color: "#2C8CF4" }}>
-            Tra cứu thông tin công ty và tìm kiếm nơi làm việc tốt nhất dành cho
-            bạn
+            Tra cứu ứng viên nổi bật dành cho công việc của bạn
           </Typography>
         </Box>
 
@@ -117,12 +116,12 @@ export const CvForYou = () => {
               ml: "-2rem",
             }}
           >
-            <Box mr={10}>
+            {/* <Box mr={10}>
               <Typography variant="h4" fontWeight="550" gutterBottom>
                 Tìm kiếm công việc phù hợp với bạn
               </Typography>
-            </Box>
-            <Box
+            </Box> */}
+            {/* <Box
               sx={{
                 display: "flex",
                 zIndex: 1,
@@ -161,7 +160,7 @@ export const CvForYou = () => {
               >
                 Tìm việc ngay
               </Button>
-            </Box>
+            </Box> */}
           </Box>
         </Box>
       </Box>

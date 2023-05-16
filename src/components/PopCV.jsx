@@ -12,8 +12,8 @@ import {
   TextField,
 } from "@mui/material";
 import { useRef, useState } from "react";
-import logoImage from "../CV/cv1image.png";
-import test from "../CV/cv2image.png";
+// import logoImage from "../CV/cv1image.png";
+// import test from "../CV/cv2image.png";
 import EditIcon from "@mui/icons-material/Edit";
 import Image from "mui-image";
 import { Box } from "@mui/system";

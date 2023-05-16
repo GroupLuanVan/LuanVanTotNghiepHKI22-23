@@ -12,7 +12,8 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
-import background from "../asset/BK_CV1.png";
+import background from "../asset/BK_CV/BK_CV1.png";
+import background1 from "../asset/BK_CV/Cv1bk.png";
 import RichText, { RichTextDisplay } from "../components/RichText";
 import SchoolIcon from "@mui/icons-material/School";
 import FlagIcon from "@mui/icons-material/Flag";
@@ -138,14 +139,14 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
 
   const CustomChip = styled(Chip)(({ theme }) => ({
     "&": {
-      background: "#00b4d8",
-      color: "white",
+      //  background: "#00b4d8",
+      color: "#415726",
       fontSize: "20px",
       fontWeight: "600",
       padding: "12px",
-      "& .MuiChip-icon": {
-        color: "white",
-      },
+      // "& .MuiChip-icon": {
+      //   color: "white",
+      // },
     },
   }));
 
@@ -249,8 +250,8 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
         ref={ref}
         sx={{
           width: "100%",
-          backgroundImage: `url(${background})`,
-          minHeight: "1080px",
+          backgroundImage: `url(${background1})`,
+          minHeight: "1280px",
           p: 4,
           backgroundRepeat: "repeat",
           backgroundSize: "cover",
@@ -262,372 +263,367 @@ export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
             height: "100%",
           }}
         >
-          {/* right path */}
           <Grid
+            sx={{
+              width: "100%",
+              height: "32.5%",
+              //display: "flex",
+              "&:hover": {
+                border: "1px dashed red",
+              },
+              " p": {
+                color: "rgba(0,0,0,0.7)",
+              },
+              ml: "70px",
+              mt: 5,
+            }}
+            onClick={() => {
+              editable && setShowPopup(true);
+            }}
             item
             container
-            xs={6}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-              minHeight: "1500px",
-            }}
+            xs={12}
           >
-            <Box
-              sx={{
-                width: "80%",
-                minHeight: "114%",
-                display: "flex",
-                flexDirection: "column",
-                ml: "40px",
-                mr: "31px",
-              }}
-            >
-              <CustomChip
-                icon={<SchoolIcon color="success" />}
-                label="Học vấn"
-              />
-
-              <Box
-                alignSelf="flex-start"
-                sx={{
-                  mb: 2,
-                  px: 2,
-                  mt: 1,
-                  width: "90%",
-                  minHeight: "20%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  // OpenEditDialog('Học vấn', 'Học vấn',true)
-                  editable && setShowEduEdit(true);
-                }}
-              >
-                <RichContent
-                  show={showEduEdit}
-                  toggle={setShowEduEdit}
-                  data={data}
-                  config={setCVDATA}
-                  item="educationCv"
+            <Grid item xs={6}>
+              <Box>
+                <Image
+                  src={data.avatar || camera}
+                  width="260px"
+                  height="300px"
+                  fit="cover"
+                  duration={0}
+                  sx={{
+                    border: "1px dashed none",
+                    background: "#f1f2f7",
+                    mb: 0,
+                    ml: 2,
+                    objectFit: "cover",
+                    objectPosition: "none",
+                  }}
                 />
               </Box>
-              <CustomChip
-                icon={<CrisisAlertIcon color="success" />}
-                label="Mục tiêu nghề nghiệp "
-              />
-              <Box
-                alignSelf="flex-start"
-                sx={{
-                  mb: 2,
-                  px: 2,
-                  mt: 1,
-                  width: "90%",
-                  minHeight: "20%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  editable && setShowObjectiveEdit(true);
-                }}
-              >
-                <RichContent
-                  show={showObjectiveEdit}
-                  toggle={setShowObjectiveEdit}
-                  data={data}
-                  config={setCVDATA}
-                  item="objectiveCv"
-                />
+            </Grid>
+            <Grid item xs={6}>
+              <Box>
+                <Typography variant="h4" fontWeight={550}>
+                  {data.name}
+                </Typography>
+                <Typography
+                  sx={{ mb: 4 }}
+                  variant="h6"
+                  fontWeight={300}
+                  color="initial"
+                >
+                  {data.title}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  fontSize={20}
+                  fontWeight={500}
+                  color="initial"
+                >
+                  THÔNG TIN
+                </Typography>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    mt: 3,
+                    mb: 1,
+                  }}
+                >
+                  <CalendarMonthIcon fontSize="small" sx={{ mr: 1 }} />
+                  <Typography variant="body1" color="initial">
+                    {new Date(data.dob).toLocaleDateString()}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    mb: 1,
+                  }}
+                >
+                  <PhoneIcon fontSize="small" sx={{ mr: 1 }} />
+                  <Typography variant="body1" color="initial">
+                    {data.phone}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    mb: 1,
+                  }}
+                >
+                  <MailIcon fontSize="small" sx={{ mr: 1 }} />
+                  <Typography variant="body1" color="initial">
+                    {data.email}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    mb: 1,
+                  }}
+                >
+                  <TransgenderIcon fontSize="small" sx={{ mr: 1 }} />
+                  <Typography variant="body1" color="initial">
+                    {data.gender}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    mb: 1,
+                  }}
+                >
+                  <LocationOnIcon fontSize="small" sx={{ mr: 1 }} />
+                  <Typography variant="body1" color="initial">
+                    {data.fulladdress}
+                  </Typography>
+                </Box>
               </Box>
-              <CustomChip icon={<FlagIcon />} label="Kỹ năng" />
-              <Box
-                alignSelf="flex-start"
-                sx={{
-                  mb: 2,
-                  px: 2,
-                  mt: 1,
-                  width: "90%",
-                  minHeight: "19.2%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  editable && setShowSkillsEdit(true);
-                }}
-              >
-                <RichContent
-                  show={showSkillsEdit}
-                  toggle={setShowSkillsEdit}
-                  data={data}
-                  config={setCVDATA}
-                  item="skillsCv"
-                />
-              </Box>
-              <CustomChip
-                icon={<AiOutlineFundProjectionScreen />}
-                label="Dự án"
-              />
-              <Box
-                alignSelf="flex-start"
-                sx={{
-                  mb: 2,
-                  px: 2,
-                  mt: 1,
-                  width: "90%",
-                  minHeight: "15%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  editable && setShowProject(true);
-                }}
-              >
-                <RichContent
-                  show={showProject}
-                  toggle={setShowProject}
-                  data={data}
-                  config={setCVDATA}
-                  item="projectCv"
-                />
-              </Box>
-            </Box>
+            </Grid>
           </Grid>
-          {/* left */}
-          <Grid
-            item
-            container
-            xs={6}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Box
-              sx={{
-                width: "80%",
-                height: "32.5%",
-                display: "flex",
-                flexDirection: "column",
-                "&:hover": {
-                  border: "1px dashed red",
-                },
-                " p": {
-                  color: "rgba(0,0,0,0.7)",
-                },
-                ml: "70px",
-                mt: 0,
-              }}
-              onClick={() => {
-                editable && setShowPopup(true);
-              }}
-            >
-              <Image
-                src={data.avatar || camera}
-                width="160px"
-                height="160px"
-                fit="scale-down"
-                duration={0}
-                sx={{
-                  borderRadius: "50%",
-                  border: "1px dashed blue",
-                  background: "#f1f2f7",
-                  mb: 4,
-                }}
-              />
-              <Typography variant="h4" fontWeight={550}>
-                {data.name}
-              </Typography>
-              <Typography
-                sx={{ mb: 4 }}
-                variant="h6"
-                fontWeight={300}
-                color="initial"
-              >
-                {data.title}
-              </Typography>
-              <Typography
-                variant="h5"
-                fontSize={20}
-                fontWeight={500}
-                color="initial"
-              >
-                THÔNG TIN
-              </Typography>
+          <Grid item container xs={12}>
+            <Grid item xs={6}>
               <Box
                 sx={{
+                  width: "80%",
+                  minHeight: "70%",
                   display: "flex",
-                  alignItems: "center",
-                  mt: 3,
-                  mb: 1,
+                  flexDirection: "column",
+                  ml: "40px",
+                  mr: "31px",
                 }}
               >
-                <CalendarMonthIcon fontSize="small" sx={{ mr: 1 }} />
-                <Typography variant="body1" color="initial">
-                  {new Date(data.dob).toLocaleDateString()}
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  mb: 1,
-                }}
-              >
-                <PhoneIcon fontSize="small" sx={{ mr: 1 }} />
-                <Typography variant="body1" color="initial">
-                  {data.phone}
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  mb: 1,
-                }}
-              >
-                <MailIcon fontSize="small" sx={{ mr: 1 }} />
-                <Typography variant="body1" color="initial">
-                  {data.email}
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  mb: 1,
-                }}
-              >
-                <TransgenderIcon fontSize="small" sx={{ mr: 1 }} />
-                <Typography variant="body1" color="initial">
-                  {data.gender}
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  mb: 1,
-                }}
-              >
-                <LocationOnIcon fontSize="small" sx={{ mr: 1 }} />
-                <Typography variant="body1" color="initial">
-                  {data.fulladdress}
-                </Typography>
-              </Box>
-              {/* <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  mb: 1,
-                }}
-              >
-                <LocationOnIcon fontSize="small" sx={{ mr: 1 }} />
-                <Typography variant="body1" color="initial">
-                  {data.fulladdress}
-                </Typography>
-              </Box> */}
-            </Box>
-            <Box
-              sx={{
-                width: "80%",
-                minHeight: "60%",
-                mt: 5,
-                display: "flex",
-                flexDirection: "column",
-                ml: "40px",
-              }}
-            >
-              <CustomChip
-                alignSelf="flex-end"
-                icon={<MoreHorizIcon color="success" />}
-                label="Kinh nghiệm"
-              />
-              <Box
-                sx={{
-                  mb: 2,
-                  px: 2,
-                  mt: 1,
-                  minHeight: "50%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  editable && setShowExperienceEdit(true);
-                }}
-              >
-                <RichContent
-                  show={showExperienceEdit}
-                  toggle={setShowExperienceEdit}
-                  data={data}
-                  config={setCVDATA}
-                  item="experienceCv"
-                />
-              </Box>
+                {/*--------------------- box học vấn  */}
+                <Box
+                  alignSelf="flex-start"
+                  sx={{
+                    mb: 2,
+                    px: 2,
+                    mt: 10,
+                    width: "90%",
+                    minHeight: "250px",
+                    "&:hover": {
+                      border: "1px dashed red",
+                    },
+                  }}
+                  onClick={() => {
+                    editable && setShowEduEdit(true);
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: " center",
+                    }}
+                  >
+                    {" "}
+                    <CustomChip
+                      icon={<SchoolIcon color="success" />}
+                      label="Học vấn"
+                    />
+                  </Box>
 
-              <CustomChip
-                icon={<MdVolunteerActivism color="success" />}
-                label="Hoạt Động"
-              />
-              <Box
-                alignSelf="flex-start"
-                sx={{
-                  mb: 2,
-                  px: 2,
-                  mt: 1,
-                  width: "90%",
-                  minHeight: "30%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  editable && setShowActivate(true);
-                }}
-              >
-                <RichContent
-                  show={showActivate}
-                  toggle={setShowActivate}
-                  data={data}
-                  config={setCVDATA}
-                  item="activitiesCv"
-                />
-              </Box>
+                  <RichContent
+                    show={showEduEdit}
+                    toggle={setShowEduEdit}
+                    data={data}
+                    config={setCVDATA}
+                    item="educationCv"
+                  />
+                </Box>
 
-              <CustomChip
-                icon={<WorkspacePremiumIcon color="success" />}
-                label="Chứng chỉ"
-              />
+                {/*--------------------- box kỹ năng */}
+                <Box
+                  alignSelf="flex-start"
+                  sx={{
+                    mb: 2,
+                    px: 2,
+                    mt: 1,
+                    width: "90%",
+                    minHeight: "250px",
+                    "&:hover": {
+                      border: "1px dashed red",
+                    },
+                  }}
+                  onClick={() => {
+                    editable && setShowSkillsEdit(true);
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: " center",
+                    }}
+                  >
+                    <CustomChip icon={<FlagIcon />} label="Kỹ năng" />
+                  </Box>
+                  <Box>
+                    <RichContent
+                      show={showSkillsEdit}
+                      toggle={setShowSkillsEdit}
+                      data={data}
+                      config={setCVDATA}
+                      item="skillsCv"
+                    />
+                  </Box>
+                </Box>
+                {/*--------------------- box dự án */}
+                <Box
+                  alignSelf="flex-start"
+                  sx={{
+                    mb: 2,
+                    px: 2,
+                    mt: 1,
+                    width: "90%",
+                    minHeight: "250px",
+                    "&:hover": {
+                      border: "1px dashed red",
+                    },
+                  }}
+                  onClick={() => {
+                    editable && setShowProject(true);
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: " center",
+                    }}
+                  >
+                    {" "}
+                    <CustomChip
+                      icon={<AiOutlineFundProjectionScreen />}
+                      label="Dự án"
+                    />
+                  </Box>
+                  <Box>
+                    <RichContent
+                      show={showProject}
+                      toggle={setShowProject}
+                      data={data}
+                      config={setCVDATA}
+                      item="projectCv"
+                    />
+                  </Box>
+                </Box>
+              </Box>
+            </Grid>
+            <Grid item xs={6}>
               <Box
-                alignSelf="flex-start"
                 sx={{
-                  mb: 2,
-                  px: 2,
-                  mt: 1,
-                  width: "90%",
-                  minHeight: "30%",
-                  "&:hover": {
-                    border: "1px dashed red",
-                  },
-                }}
-                onClick={() => {
-                  editable && setShowCertificationsEdit(true);
+                  width: "80%",
+                  minHeight: "60%",
+
+                  display: "flex",
+                  flexDirection: "column",
+                  ml: "40px",
                 }}
               >
-                <RichContent
-                  show={showCertificationsEdit}
-                  toggle={setShowCertificationsEdit}
-                  data={data}
-                  config={setCVDATA}
-                  item="certificationsCv"
-                />
+                <Box
+                  sx={{
+                    mb: 2,
+                    px: 2,
+                    mt: 10,
+                    minHeight: "250px",
+                    "&:hover": {
+                      border: "1px dashed red",
+                    },
+                  }}
+                  onClick={() => {
+                    editable && setShowExperienceEdit(true);
+                  }}
+                >
+                  <Box display={"flex"} justifyContent={"center"}>
+                    <CustomChip
+                      alignSelf="flex-end"
+                      icon={<MoreHorizIcon color="success" />}
+                      label="Kinh nghiệm"
+                    />
+                  </Box>
+                  <Box>
+                    <RichContent
+                      show={showExperienceEdit}
+                      toggle={setShowExperienceEdit}
+                      data={data}
+                      config={setCVDATA}
+                      item="experienceCv"
+                    />
+                  </Box>
+                </Box>
+
+                <Box
+                  alignSelf="flex-start"
+                  sx={{
+                    mb: 2,
+                    px: 2,
+                    mt: 1,
+                    width: "90%",
+                    minHeight: "250px",
+                    "&:hover": {
+                      border: "1px dashed red",
+                    },
+                  }}
+                  onClick={() => {
+                    editable && setShowActivate(true);
+                  }}
+                >
+                  <Box display={"flex"} justifyContent={"center"}>
+                    <CustomChip
+                      icon={<MdVolunteerActivism color="success" />}
+                      label="Hoạt Động"
+                    />
+                  </Box>
+                  <Box>
+                    <RichContent
+                      show={showActivate}
+                      toggle={setShowActivate}
+                      data={data}
+                      config={setCVDATA}
+                      item="activitiesCv"
+                    />
+                  </Box>
+                </Box>
+                <Box
+                  alignSelf="flex-start"
+                  sx={{
+                    mb: 2,
+                    px: 2,
+                    mt: 1,
+                    width: "90%",
+                    minHeight: "250px",
+                    "&:hover": {
+                      border: "1px dashed red",
+                    },
+                  }}
+                  onClick={() => {
+                    editable && setShowCertificationsEdit(true);
+                  }}
+                >
+                  <Box display={"flex"} justifyContent={"center"}>
+                    <CustomChip
+                      icon={<WorkspacePremiumIcon color="success" />}
+                      label="Chứng chỉ"
+                    />
+                  </Box>
+                  <Box>
+                    <RichContent
+                      show={showCertificationsEdit}
+                      toggle={setShowCertificationsEdit}
+                      data={data}
+                      config={setCVDATA}
+                      item="certificationsCv"
+                    />
+                  </Box>
+                </Box>
               </Box>
-            </Box>
+            </Grid>
           </Grid>
         </Grid>
         <Typography

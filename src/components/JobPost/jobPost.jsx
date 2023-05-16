@@ -40,6 +40,7 @@ import Contact from "../Company/Contact";
 import SearchCandidate from "../Company/SearchCandidate";
 import { ShowCV } from "../Company/ShowCV";
 import { CvForYou } from "./CvForYou";
+import MyCompany from "../Profile/MyCompany";
 import "../../App.css";
 
 import axios from "axios";
@@ -95,21 +96,21 @@ const JobPost = () => {
     ];
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:5000/api/jobcategory/")
-      .then((res) => {
-        setJobcategories(res.data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:5000/api/jobcategory/")
+  //     .then((res) => {
+  //       setJobcategories(res.data);
+  //     })
+  //     .catch((err) => console.error(err));
+  // }, []);
 
-  const handleCategoryChange = (event, value) => {
-    setData({
-      ...data,
-      categoryId: value ? value._id : "",
-    });
-  };
+  // const handleCategoryChange = (event, value) => {
+  //   setData({
+  //     ...data,
+  //     categoryId: value ? value._id : "",
+  //   });
+  // };
 
   useEffect(() => {
     axios
@@ -158,7 +159,7 @@ const JobPost = () => {
   const [data, setData] = useState({
     title: "",
     addressId: "",
-    categoryId: "",
+    //categoryId: "",
 
     amount: 0,
     workType: "",
@@ -251,25 +252,43 @@ const JobPost = () => {
       convertToRaw(required.getCurrentContent())
     ).join(" ");
     console.log({ ...data, descriptionText, requiredText });
-    const res = await axios.post(
-      "http://localhost:5000/api/jobpost",
-      {
-        ...data,
-        descriptionText,
-        requiredText,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`, // Thêm token vào header Authorization
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/jobpost",
+        {
+          ...data,
+          descriptionText,
+          requiredText,
         },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Thêm token vào header Authorization
+          },
+        }
+      );
+      // if (res.data && res.data.status && res.data.status !== 200)
+      if (res && res.status && res.status !== 200) {
+        console.log(res);
+        toast.warning("Tạo job post thất bại");
+      } else {
+        toast.success("Tạo job post thành công");
       }
-    );
-    if (res.data && res.data.status && res.data.status !== 200) {
-      console.log(res);
-      toast.warning("Tạo job post thất bại");
-    } else {
-      toast.success("Tạo job post thành công");
+    } catch (e) {
+      console.log(e);
     }
+    // const res = await axios.post(
+    //   "http://localhost:5000/api/jobpost",
+    //   {
+    //     ...data,
+    //     descriptionText,
+    //     requiredText,
+    //   },
+    //   {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`, // Thêm token vào header Authorization
+    //     },
+    //   }
+    // );
   };
 
   console.log(data);
@@ -449,7 +468,7 @@ const JobPost = () => {
                   </Box>
                 </Grid>
 
-                <Grid item xs={4} md={4}>
+                {/* <Grid item xs={4} md={4}>
                   <Box mt={-3}>
                     <Typography variant="p" fontWeight={500} fontSize={20}>
                       Loại Công Việc
@@ -468,7 +487,7 @@ const JobPost = () => {
                       )}
                     />
                   </Box>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={4} md={4}>
                   <Box mt={-3}>
                     {" "}
@@ -784,6 +803,7 @@ export default function PostJob() {
               element={<EditJobPost user={user} />}
             ></Route>
             <Route path="/company" element={<Company />} />
+            <Route path="/Mycompany" element={<MyCompany />} />
             <Route path="/charts" element={<Charts user={user} />} />
             <Route path="/jobdetail" element={<JobDetail />} />
             {/* <Route

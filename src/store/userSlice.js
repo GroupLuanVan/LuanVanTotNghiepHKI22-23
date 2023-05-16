@@ -45,6 +45,8 @@ export const userSlice = createSlice({
             localStorage.setItem("idcompany", action.payload)
         },
         setidcv: (state, action) => {
+            console.log("--------------here");
+          
             state.cvId = action.payload
             localStorage.setItem("cvId", action.payload)
         },

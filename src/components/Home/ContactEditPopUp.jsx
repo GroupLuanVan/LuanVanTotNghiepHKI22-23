@@ -87,7 +87,7 @@ export default function ContactEditPopUp({ show, setShow, data, setData }) {
                 width="100%"
                 height="100%"
                 duration={0}
-                fit="scale-down"
+                fit="cover"
               ></Image>
               <Input
                 fullWidth

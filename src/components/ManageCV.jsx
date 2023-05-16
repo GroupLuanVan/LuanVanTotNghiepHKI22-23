@@ -21,6 +21,14 @@ import { ChooseCV } from "../CV/ChooseCV";
 import { CVCard1 } from "../CV/CVCard1";
 import useFetch from "../hook/useFetch";
 import { useSelector } from "react-redux";
+import {
+  setUserLogin,
+  setRole,
+  setToken,
+  setidApplyJob,
+  setidcv,
+} from "../store/userSlice";
+
 export default function ManageCV({ user }) {
   console.log(user);
 
@@ -43,6 +51,33 @@ export default function ManageCV({ user }) {
 
   console.log(usetemplate);
   // console.log(useParams());
+
+  const createCV = () => {
+    cvSchema
+      .validate(defaultCv)
+      .then(async (data) => {
+        const res = await axios.post(
+          `http://localhost:5000/api/candidate/resume/create`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log(res);
+        if (res.data.status && res.data.status != 200) {
+          console.log("that bai r", res);
+          toast.warning("Lưu CV thất bại");
+        } else {
+          console.log(res.data);
+          toast.success("Lưu CV thành công");
+          dispatch(setidcv(res.data.savedResumeId));
+        }
+      })
+      .catch((e) => console.log(e));
+  };
 
   if (usetemplate === "useCV1") {
     return (
@@ -85,27 +120,7 @@ export default function ManageCV({ user }) {
               sx={{ mr: 2 }}
               variant="contained"
               color="success"
-              onClick={() => {
-                cvSchema.validate(defaultCv).then(async (data) => {
-                  const res = await axios.post(
-                    `http://localhost:5000/api/candidate/resume/create`,
-                    data,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                      },
-                    }
-                  );
-
-                  if (res.data.status && res.data.status != 200) {
-                    console.log("that bai r", res);
-                    toast.warning("Lưu CV thất bại");
-                  } else {
-                    console.log(res.data);
-                    toast.success("Lưu CV thành công");
-                  }
-                });
-              }}
+              onClick={createCV}
             >
               Lưu CV
             </Button>
@@ -165,27 +180,7 @@ export default function ManageCV({ user }) {
               sx={{ mr: 2 }}
               variant="contained"
               color="success"
-              onClick={() => {
-                cvSchema.validate(defaultCv).then(async (data) => {
-                  const res = await axios.post(
-                    `http://localhost:5000/api/candidate/resume/create`,
-                    data,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                      },
-                    }
-                  );
-
-                  if (res.data.status && res.data.status != 200) {
-                    console.log("that bai r", res);
-                    toast.warning("Lưu CV thất bại");
-                  } else {
-                    console.log(res.data);
-                    toast.success("Lưu CV thành công");
-                  }
-                });
-              }}
+              onClick={createCV}
             >
               Lưu CV
             </Button>
@@ -244,27 +239,7 @@ export default function ManageCV({ user }) {
             sx={{ mr: 2 }}
             variant="contained"
             color="success"
-            onClick={() => {
-              cvSchema.validate(defaultCv).then(async (data) => {
-                const res = await axios.post(
-                  `http://localhost:5000/api/candidate/resume/create`,
-                  data,
-                  {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                    },
-                  }
-                );
-
-                if (res.data.status && res.data.status != 200) {
-                  console.log("that bai r", res);
-                  toast.warning("Lưu CV thất bại");
-                } else {
-                  console.log(res.data);
-                  toast.success("Lưu CV thành công");
-                }
-              });
-            }}
+            onClick={createCV}
           >
             Lưu CV
           </Button>
@@ -322,27 +297,7 @@ export default function ManageCV({ user }) {
               sx={{ mr: 2 }}
               variant="contained"
               color="success"
-              onClick={() => {
-                cvSchema.validate(defaultCv).then(async (data) => {
-                  const res = await axios.post(
-                    `http://localhost:5000/api/candidate/resume/create`,
-                    data,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                      },
-                    }
-                  );
-
-                  if (res.data.status && res.data.status != 200) {
-                    console.log("that bai r", res);
-                    toast.warning("Lưu CV thất bại");
-                  } else {
-                    console.log(res.data);
-                    toast.success("Lưu CV thành công");
-                  }
-                });
-              }}
+              onClick={createCV}
             >
               Lưu CV
             </Button>
@@ -401,27 +356,7 @@ export default function ManageCV({ user }) {
               sx={{ mr: 2 }}
               variant="contained"
               color="success"
-              onClick={() => {
-                cvSchema.validate(defaultCv).then(async (data) => {
-                  const res = await axios.post(
-                    `http://localhost:5000/api/candidate/resume/create`,
-                    data,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                      },
-                    }
-                  );
-
-                  if (res.data.status && res.data.status != 200) {
-                    console.log("that bai r", res);
-                    toast.warning("Lưu CV thất bại");
-                  } else {
-                    console.log(res.data);
-                    toast.success("Lưu CV thành công");
-                  }
-                });
-              }}
+              onClick={createCV}
             >
               Lưu CV
             </Button>
@@ -481,27 +416,7 @@ export default function ManageCV({ user }) {
               sx={{ mr: 2 }}
               variant="contained"
               color="success"
-              onClick={() => {
-                cvSchema.validate(defaultCv).then(async (data) => {
-                  const res = await axios.post(
-                    `http://localhost:5000/api/candidate/resume/create`,
-                    data,
-                    {
-                      headers: {
-                        Authorization: `Bearer ${token}`,
-                      },
-                    }
-                  );
-
-                  if (res.data.status && res.data.status != 200) {
-                    console.log("that bai r", res);
-                    toast.warning("Lưu CV thất bại");
-                  } else {
-                    console.log(res.data);
-                    toast.success("Lưu CV thành công");
-                  }
-                });
-              }}
+              onClick={createCV}
             >
               Lưu CV
             </Button>

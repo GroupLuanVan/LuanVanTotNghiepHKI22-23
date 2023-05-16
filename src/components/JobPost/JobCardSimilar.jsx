@@ -21,8 +21,9 @@ const StyledCard = styled(Card)({
 
 const JobCardSimilar = (props) => {
   const { job } = props;
-  console.log(job?.data?.location);
-  console.log(job?.data?.salaryMin);
+  console.log(job);
+  console.log(job?.workType);
+  console.log(job?.company[0]?.nameCompany);
 
   function titleCut(title) {
     if (title?.length > 30) {
@@ -33,33 +34,31 @@ const JobCardSimilar = (props) => {
   const navigate = useNavigate();
   // console.log(job);
   let salaryChip = "";
-  if (job?.data?.salaryMin === 0 && job?.data?.salaryMax === 0) {
+  if (job?.salaryMin === 0 && job?.salaryMax === 0) {
     salaryChip = "Thỏa thuận";
   }
-  if (
-    job?.data?.salaryMin === job?.data?.salaryMax &&
-    job?.data?.salaryMin > 0
-  ) {
-    salaryChip = `${job?.data?.salaryMin / 1000000} Triệu`;
+  if (job?.salaryMin === job?.salaryMax && job?.salaryMin > 0) {
+    salaryChip = `${job?.salaryMin / 1000000} Triệu`;
   }
 
   if (
-    job?.data?.salaryMin > 0 &&
-    job?.data?.salaryMax < 999999999 &&
-    job?.data?.salaryMin < job?.data?.salaryMax
+    job?.salaryMin > 0 &&
+    job?.salaryMax < 999999999 &&
+    job?.salaryMin < job?.salaryMax
   ) {
-    salaryChip = `${job?.data?.salaryMin / 1000000} Triệu  -  ${
-      job?.data?.salaryMax / 1000000
+    salaryChip = `${job?.salaryMin / 1000000} Triệu  -  ${
+      job?.salaryMax / 1000000
     } Triệu`;
   }
 
-  if (job?.data?.salaryMin === 0 && job?.data?.salaryMax > 0) {
-    salaryChip = `Lên đến ${job?.data?.salaryMax / 1000000} Triệu`;
+  if (job?.salaryMin === 0 && job?.salaryMax > 0) {
+    salaryChip = `Lên đến ${job?.salaryMax / 1000000} Triệu`;
   }
-  if (job?.data?.salaryMax === 999999999 && job?.data?.salaryMin > 0) {
-    salaryChip = `Từ ${job?.data?.salaryMin / 1000000} Triệu`;
+  if (job?.salaryMax === 999999999 && job?.salaryMin > 0) {
+    salaryChip = `Từ ${job?.salaryMin / 1000000} Triệu`;
   }
-  //console.log(job);
+  console.log(job?._id?.$oid);
+
   return (
     <>
       <StyledCard
@@ -78,7 +77,7 @@ const JobCardSimilar = (props) => {
           }}
         >
           <Image
-            src={job?.data?.logo}
+            src={job?.company[0]?.linkToLogo}
             width="250px"
             height="250px"
             duration={0}
@@ -92,10 +91,10 @@ const JobCardSimilar = (props) => {
             }}
           >
             <Typography fontWeight="600" fontSize="18px" variant="h6">
-              {titleCut(job?.data?.title)}
+              {titleCut(job?.title)}
             </Typography>
             <Typography fontWeight="300" fontSize="20px" variant="h5">
-              {job?.data?.companyName}
+              {job?.company[0]?.nameCompany}
             </Typography>
           </Box>
           <Box
@@ -108,14 +107,14 @@ const JobCardSimilar = (props) => {
             }}
           >
             <Chip color="info" label={salaryChip} sx={{ mr: 1, ml: -2 }} />
-            <Chip color="info" label={job?.data?.location} />
+            <Chip color="info" label={job?.company[0]?.location} />
           </Box>
         </CardContent>
         <CardActions sx={{ justifyContent: "center" }}>
           <Button
             onClick={() => {
               navigate({
-                pathname: `/jobdetail/${job._id}`,
+                pathname: `/jobdetail/${job?._id?.$oid}`,
               });
             }}
             sx={{

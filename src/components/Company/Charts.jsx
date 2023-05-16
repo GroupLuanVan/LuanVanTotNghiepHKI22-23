@@ -12,6 +12,9 @@ import {
   Typography,
   TableRow,
   DialogTitle,
+  createTheme,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -30,7 +33,15 @@ import Loading from "../Loading";
 import { Modal } from "@mui/material";
 import Contact from "./Contact";
 export default function Charts({ user }) {
+  const [data, setData] = useState([]);
+  const options = [
+    { value: 1, label: "đang tuyển" },
+    { value: 2, label: "ngừng tuyển" },
+    { value: 3, label: "hết hạn" },
+  ];
+  const theme = createTheme();
   console.log(user);
+  const token = localStorage.getItem("token");
   const [openCandidatesModal, setOpenCandidatesModal] = useState(false);
   const hdlOpenCandidatesModal = () => setOpenCandidatesModal(true);
   const hdlCloseCandidatesModal = () => setOpenCandidatesModal(false);
@@ -51,6 +62,39 @@ export default function Charts({ user }) {
       navigateTo("/hrlogin");
     }
   });
+
+  function handleStatusChange(e, cvID) {
+    const status = e.target.value;
+    console.log(status, cvID);
+    async function contactData() {
+      try {
+        const response = await axios.post(
+          `http://localhost:5000/api/contact/approval/${cvID}`,
+          { process: status }, // pass updated data to the API
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    contactData();
+    const updatedData = data.map((item) => {
+      if (item._id === cvID) {
+        return {
+          ...item,
+          process: status,
+        };
+      }
+      return item;
+    });
+    setData(updatedData);
+  }
 
   const axiosInstance = axios.create({
     baseURL: "http://localhost:5000/api/jobpost",
@@ -104,8 +148,8 @@ export default function Charts({ user }) {
           }}
         >
           <BarChartIcon />
-          <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
-            Báo cáo tuyển dụng
+          <Typography variant="h4" fontWeight={550} sx={{ ml: 1 }}>
+            Công việc đã đăng
           </Typography>
         </Box>
         {/* head info */}
@@ -122,15 +166,76 @@ export default function Charts({ user }) {
         >
           <TableContainer component={Paper}>
             <Table>
-              <TableHead>
-                <TableCell>Tên tin tuyển dụng</TableCell>
-                <TableCell>Ngày đăng</TableCell>
-                <TableCell>Ngày hết hạn</TableCell>
-                <TableCell>Lượt xem</TableCell>
-                {/* <TableCell>Đã ứng tuyển</TableCell> */}
+              <TableHead sx={{ background: " #5490cc" }}>
+                <TableCell>
+                  {" "}
+                  <Typography
+                    variant="body2"
+                    fontWeight={600}
+                    fontSize={20}
+                    sx={{ color: "Black" }}
+                  >
+                    Tên tin tuyển dụng
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  {" "}
+                  <Typography
+                    variant="body2"
+                    fontWeight={600}
+                    fontSize={20}
+                    sx={{ color: "Black" }}
+                  >
+                    Ngày đăng
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  {" "}
+                  <Typography
+                    variant="body2"
+                    fontWeight={600}
+                    fontSize={20}
+                    sx={{ color: "Black" }}
+                  >
+                    Ngày hết hạn
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  {" "}
+                  <Typography
+                    variant="body2"
+                    fontWeight={600}
+                    fontSize={20}
+                    sx={{ color: "Black" }}
+                  >
+                    Lượt xem
+                  </Typography>
+                </TableCell>
+
+                <TableCell>
+                  {" "}
+                  <Typography
+                    variant="body2"
+                    fontWeight={600}
+                    fontSize={20}
+                    sx={{ color: "Black" }}
+                  >
+                    Ứng viên ứng tuyển
+                  </Typography>
+                </TableCell>
+                <TableCell>
+                  {" "}
+                  <Typography
+                    variant="body2"
+                    fontWeight={600}
+                    fontSize={20}
+                    sx={{ color: "Black" }}
+                  >
+                    Gợi ý ứng viên phù hợp
+                  </Typography>
+                </TableCell>
                 <TableCell>Trạng thái</TableCell>
-                <TableCell>Xem danh sách ứng Viên</TableCell>
-                <TableCell>Xem gợi ý ứng viên phù hợp</TableCell>
+                <TableCell></TableCell>
               </TableHead>
               {jobsFetch &&
                 jobsFetch.data &&
@@ -147,21 +252,64 @@ export default function Charts({ user }) {
                           });
                         }}
                       >
-                        {item?.title}
+                        <Typography
+                          style={{
+                            color: "black",
+                            fontSize: 17,
+                          }}
+                        >
+                          {item?.title}
+                        </Typography>
                       </TableCell>
-                      <TableCell>{item?.createdAt}</TableCell>
-                      <TableCell>{item?.endDate}</TableCell>
-                      <TableCell>{item?.viewCount} lượt xem</TableCell>
-                      {/* <TableCell>
-                        <Button>{item.contactCnt}</Button>
-                      </TableCell> */}
                       <TableCell>
-                        <Button variant="text" color="success">
-                          Đã đăng
-                        </Button>
+                        {" "}
+                        <Typography
+                          style={{
+                            color: "black",
+                            fontSize: 17,
+                          }}
+                        >
+                          {item?.createdAt}
+                        </Typography>
                       </TableCell>
+                      <TableCell>
+                        {" "}
+                        <Typography
+                          style={{
+                            color: "black",
+                            fontSize: 17,
+                          }}
+                        >
+                          {item?.updatedAt}
+                        </Typography>{" "}
+                        <Typography
+                          style={{
+                            color: "black",
+                            fontSize: 17,
+                          }}
+                        >
+                          {item?.enDate}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        {" "}
+                        <Typography
+                          style={{
+                            color: "black",
+                            fontSize: 17,
+                          }}
+                        >
+                          {item?.viewCount} lượt xem
+                        </Typography>
+                      </TableCell>
+
                       <TableCell>
                         <Button
+                          sx={{
+                            ml: 7,
+                            backgroundColor: "#00A7AC",
+                            color: "black",
+                          }}
                           variant="text"
                           color="success"
                           onClick={() => {
@@ -176,6 +324,11 @@ export default function Charts({ user }) {
                       </TableCell>
                       <TableCell>
                         <Button
+                          sx={{
+                            ml: 10,
+                            backgroundColor: "#00A7AC",
+                            color: "black",
+                          }}
                           variant="text"
                           color="success"
                           onClick={() => {
@@ -189,15 +342,33 @@ export default function Charts({ user }) {
                         </Button>
                       </TableCell>
                       <TableCell>
+                        <Box>
+                          <Select
+                            sx={{
+                              width: 120,
+                            }}
+                            value={item.process}
+                            size="small"
+                            onChange={(e) => handleStatusChange(e, item._id)}
+                          >
+                            {options.map((option) => (
+                              <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </Box>
+                      </TableCell>
+                      <TableCell>
                         <div style={{ display: "flex", flexDirection: "row" }}>
-                          <Button
+                          {/* <Button
                             variant="contained"
                             color="primary"
                             sx={{ mr: 1, height: 30, width: 100 }}
                             //onClick={() => hdlSuaBaiDang(item._id)}
                           >
                             Sửa
-                          </Button>
+                          </Button> */}
                           <Button
                             variant="contained"
                             color="error"

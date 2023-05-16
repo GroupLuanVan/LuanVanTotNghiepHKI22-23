@@ -58,6 +58,21 @@ const ManageEmploy = () => {
     // TODO: implement delete logic
     console.log("Delete rows", selectedRows);
   };
+  const handleDelete = async (userId) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/api/user/${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      // Xóa người dùng thành công, cập nhật lại state
+      const updatedUsers = users.filter((user) => user._id !== userId);
+      setUsers(updatedUsers);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // useEffect(() => {
   //   const fetchData = async () => {

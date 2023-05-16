@@ -12,7 +12,7 @@ import {
   Grid,
 } from "@mui/material";
 
-import cv1image from "./t1.png";
+import cv1image from "./t1_Bk.png";
 import cv2image from "./t2.png";
 import cv3image from "./t3.png";
 import cv4image from "./t4.png";

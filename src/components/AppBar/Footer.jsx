@@ -15,27 +15,27 @@ const CustomFooter = () => {
       <Grid container spacing={3} height="250px">
         <Grid item xs={12} md={3} sx={{ textAlign: "center", color: "#FFFF" }}>
           <Typography variant="h6" sx={{ mb: 2 }}>
-            Home
+            Trang chủ
           </Typography>
-          <Typography variant="body1">Contact</Typography>
-          <Typography variant="body1">About Us</Typography>
-          <Typography variant="body1">Terms & Conditions</Typography>
+          <Typography variant="body1">Liên hệ</Typography>
+          <Typography variant="body1">Về chúng tôi</Typography>
+          <Typography variant="body1">Điều khoản và điều kiện</Typography>
         </Grid>
         <Grid item xs={12} md={3} sx={{ textAlign: "center", color: "#FFFF" }}>
           <Typography variant="h6" sx={{ mb: 2 }}>
-            EMPLOYER
+            Nhà tuyển dụng
           </Typography>
-          <Typography variant="body1">Post a Job</Typography>
-          <Typography variant="body1">Search Resumes</Typography>
-          <Typography variant="body1">Sign in</Typography>
+          <Typography variant="body1">Đăng bài tuyển dụng</Typography>
+          <Typography variant="body1">Gợi ý CV phù hợp</Typography>
+          <Typography variant="body1">Đăng nhập</Typography>
         </Grid>
         <Grid item xs={12} md={3} sx={{ textAlign: "center", color: "#FFFF" }}>
           <Typography variant="h6" sx={{ mb: 2 }}>
-            JOB SEEKER
+            Ứng viên
           </Typography>
-          <Typography variant="body1">Find Jobs</Typography>
-          <Typography variant="body1">Create Resume</Typography>
-          <Typography variant="body1">Sign in</Typography>
+          <Typography variant="body1">Tìm công việc</Typography>
+          <Typography variant="body1">Tạo CV</Typography>
+          <Typography variant="body1">Đăng nhập</Typography>
         </Grid>
         <Grid item xs={12} md={3} sx={{ textAlign: "center", color: "#FFFF" }}>
           <Typography variant="h6" sx={{ mb: 2 }}>

@@ -264,7 +264,7 @@ export function SideBar({}) {
               <Typography variant="h6">Quản Lý CV Ứng Tuyển</Typography>
             </ListItemText>
           </CustomMenuItem>
-          <CustomMenuItem
+          {/* <CustomMenuItem
             style={{
               color: activeItem === 6 ? theme.palette.success.main : "",
               fontSize: "1.5rem",
@@ -285,9 +285,9 @@ export function SideBar({}) {
             <ListItemText>
               <Typography variant="h6">Thêm Loại Công Việc</Typography>
             </ListItemText>
-          </CustomMenuItem>
+          </CustomMenuItem> */}
 
-          <CustomMenuItem
+          {/* <CustomMenuItem
             style={{
               color: activeItem === 7 ? theme.palette.success.main : "",
               fontSize: "1.5rem",
@@ -308,7 +308,7 @@ export function SideBar({}) {
             <ListItemText>
               <Typography variant="h6">Thống Kê</Typography>
             </ListItemText>
-          </CustomMenuItem>
+          </CustomMenuItem> */}
         </MenuList>
       </Box>
     </Grid>
@@ -431,12 +431,13 @@ function Admin() {
 
     fetchData();
   }, [token]);
+  console.log(contact);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/jobpost/all",
+          "http://localhost:5000/api/jobpost/all/home",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -449,24 +450,26 @@ function Admin() {
 
     fetchData();
   }, [token]);
+  console.log(adminJob);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://localhost:5000/api/candidate/all",
-  //         {
-  //           headers: { Authorization: `Bearer ${token}` },
-  //         }
-  //       );
-  //       setCandidate(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/candidate/all",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setCandidate(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  //   fetchData();
-  // }, [token]);
+    fetchData();
+  }, [token]);
+  console.log(candidate);
 
   return (
     <>
@@ -519,7 +522,7 @@ function Admin() {
           </Grid>
           <Grid item xs={12} sm={6} md={5}>
             <DashboardCard
-              title={adminJob?.jobsPage?.length}
+              title={adminJob?.jobpost?.length}
               description="Số Lượng Bài Đăng Tuyển Dụng"
               icon={
                 <FaBriefcase style={{ color: "#ad86df", fontSize: "5rem" }} />

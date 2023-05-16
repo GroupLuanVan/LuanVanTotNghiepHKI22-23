@@ -201,27 +201,61 @@ export const salaryFilterSelect = [
 
 
 // enum: ["consider", "interview", "accept", "refuse"]
+// export const contactProcesses = [
+
+//   {
+//     val: 1,
+
+//     title: "Xem xét",
+
+//   },
+
+//   {
+//     val: 2,
+
+//     title: "Phỏng vấn",
+
+//   },
+
+//   {
+//     val: 3,
+//     title: "Hợp tác",
+
+//   },
+//   {
+//     val: 0,
+//     title: "Từ chối",
+
+//   }
+
+// ]
+
+
+
+
 export const contactProcesses = [
 
   {
     val: 1,
+
+    title: " ",
+
+  },
+  {
+    val: 2,
 
     title: "Xem xét",
 
   },
 
   {
-    val: 2,
-
-    title: "Phỏng vấn",
-
-  },
-
-  {
     val: 3,
-    title: "Hợp tác",
+
+    title: "Đồng ý",
 
   },
+
+
   {
     val: 0,
     title: "Từ chối",
@@ -229,7 +263,3 @@ export const contactProcesses = [
   }
 
 ]
-
-
-
-

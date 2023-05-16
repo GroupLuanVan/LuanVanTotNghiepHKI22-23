@@ -20,6 +20,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import NoteAltIcon from "@mui/icons-material/NoteAlt";
 import { useNavigate } from "react-router-dom";
+import { EditAttributes } from "@mui/icons-material";
 export default function AccountMenu() {
   const navigate = useNavigate();
   function navigateTo(location) {
@@ -56,7 +57,7 @@ export default function AccountMenu() {
     height: "38px",
     padding: "8px",
     borderRadius: "8px",
-    border: "2px solid #ccc",
+    //border: "2px solid #ccc",
   }));
 
   return (
@@ -163,6 +164,17 @@ export default function AccountMenu() {
             </MenuItem>
             <MenuItem
               sx={{ fontSize: "1.5rem" }}
+              onClick={() => navigateTo("/updateProfile")}
+            >
+              <ListItemIcon>
+                <EditAttributes
+                  sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }}
+                />
+              </ListItemIcon>
+              Chỉnh sửa hồ sơ
+            </MenuItem>
+            <MenuItem
+              sx={{ fontSize: "1.5rem" }}
               onClick={() => navigateTo(`/MyCV`)}
             >
               <ListItemIcon>
@@ -186,18 +198,7 @@ export default function AccountMenu() {
         {role === "recruiter" && (
           <>
             <MenuItem>
-              <Avatar /> {user}
-            </MenuItem>
-            <MenuItem
-              sx={{ fontSize: "1.5rem" }}
-              onClick={() => navigateTo("/HR/company")}
-            >
-              <ListItemIcon>
-                <NoteAltIcon
-                  sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }}
-                />
-              </ListItemIcon>
-              Cập nhật công ty
+              <Avatar sx={{ color: "#5490CC", fontSize: "35px" }} /> {user}
             </MenuItem>
             <MenuItem
               sx={{ fontSize: "1.5rem" }}
@@ -210,6 +211,28 @@ export default function AccountMenu() {
               </ListItemIcon>
               Đăng bài
             </MenuItem>
+            <MenuItem
+              sx={{ fontSize: "1.5rem" }}
+              onClick={() => navigateTo("./Mycompany")}
+            >
+              <ListItemIcon>
+                <NoteAltIcon
+                  sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }}
+                />
+              </ListItemIcon>
+              Chi tiết công ty
+            </MenuItem>
+            {/* <MenuItem
+              sx={{ fontSize: "1.5rem" }}
+              onClick={() => navigateTo("/HR/company")}
+            >
+              <ListItemIcon>
+                <NoteAltIcon
+                  sx={{ color: "#5490CC", fontSize: "35px", mr: 2 }}
+                />
+              </ListItemIcon>
+              Cập nhật công ty
+            </MenuItem> */}
             <MenuItem
               sx={{ fontSize: "1.5rem" }}
               onClick={() => navigateTo(`./charts`)}

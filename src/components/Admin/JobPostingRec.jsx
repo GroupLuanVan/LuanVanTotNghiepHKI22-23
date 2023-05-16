@@ -53,7 +53,7 @@ const JobPosting = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/jobpost/all",
+          "http://localhost:5000/api/jobpost/all/home",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -67,7 +67,7 @@ const JobPosting = () => {
     fetchData();
   }, [token]);
 
-  console.log(adminJob.jobsPage);
+  console.log(adminJob?.jobpost);
 
   const handleDelete = async (id) => {
     try {
@@ -134,7 +134,7 @@ const JobPosting = () => {
                   <TableCell></TableCell>
                 </TableRow>
               </TableHead>
-              {adminJob?.jobsPage?.map((job) => (
+              {adminJob?.jobpost?.map((job) => (
                 <TableRow key={job?._id}>
                   <TableCell>
                     <Typography>{job?.title}</Typography>

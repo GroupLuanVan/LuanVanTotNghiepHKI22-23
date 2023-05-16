@@ -36,6 +36,17 @@ export default function Contact(user) {
 
   // có thể lưu status dạng int là 0, 1, 2, mặc định là 0, xuống đây dựa dô cái mảng cvstatus dưới này mà lấy
   const [data, setData] = useState([]);
+  const options = [
+    { value: 1, label: "Xem xét" },
+    { value: 2, label: "Đồng ý" },
+    { value: 3, label: "Từ chối" },
+  ];
+
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  // function handleStatusChange(e, cvID) {
+  //   console.log(e.target.value, cvID);
+  // }
 
   useEffect(() => {
     async function fetchData() {
@@ -57,6 +68,47 @@ export default function Contact(user) {
   }, []);
   console.log(data);
 
+  function handleStatusChange(e, cvID) {
+    const status = e.target.value;
+    console.log(status, cvID);
+    async function contactData() {
+      try {
+        const response = await axios.post(
+          `http://localhost:5000/api/contact/approval/${cvID}`,
+          { process: status }, // pass updated data to the API
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    contactData();
+    const updatedData = data.map((item) => {
+      if (item._id === cvID) {
+        return {
+          ...item,
+          process: status,
+        };
+      }
+      return item;
+    });
+    setData(updatedData);
+  }
+  console.log(data?.jobpostId?.title);
+
+  const uniqueJobTitles = data.reduce((acc, curr) => {
+    if (!acc.includes(curr.jobpostId.title)) {
+      acc.push(curr.jobpostId.title);
+    }
+    return acc;
+  }, []);
+
   return (
     <>
       {!data ? (
@@ -75,51 +127,104 @@ export default function Contact(user) {
               }}
             >
               <ArticleIcon />
-              <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
+              {/* <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
                 Danh sách ứng viên ứng tuyển theo bài {data?.jobpostId?.title}
+              </Typography> */}
+              <Typography variant="h5" fontWeight={550} sx={{ ml: 1 }}>
+                Danh sách ứng viên ứng tuyển {uniqueJobTitles.join(", ")}
               </Typography>
             </Box>
           </Grid>
           <Grid item xs={12} sx={{ mt: 2 }}>
             <TableContainer component={Paper}>
               <Table>
-                <TableHead>
+                <TableHead sx={{ background: " #5490cc" }}>
                   <TableRow>
-                    <TableCell>Tên ứng viên </TableCell>
-                    <TableCell>Email</TableCell>
-                    <TableCell>Công việc ứng tuyển</TableCell>
-                    <TableCell sx={{ width: "20%" }}>CV</TableCell>
+                    <TableCell>
+                      {" "}
+                      <Typography
+                        variant="body2"
+                        fontWeight={600}
+                        fontSize={20}
+                        sx={{ color: "Black" }}
+                      >
+                        Tên ứng viên
+                      </Typography>{" "}
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      <Typography
+                        variant="body2"
+                        fontWeight={600}
+                        fontSize={20}
+                        sx={{ color: "Black" }}
+                      >
+                        Email
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      {" "}
+                      <Typography
+                        variant="body2"
+                        fontWeight={600}
+                        fontSize={20}
+                        sx={{ color: "Black" }}
+                      >
+                        Công việc ứng tuyển
+                      </Typography>
+                    </TableCell>
+                    <TableCell sx={{ width: "20%" }}>
+                      {" "}
+                      <Typography
+                        variant="body2"
+                        fontWeight={600}
+                        fontSize={20}
+                        sx={{ color: "Black" }}
+                      >
+                        CV
+                      </Typography>
+                    </TableCell>
+                    <TableCell></TableCell>
                   </TableRow>
                 </TableHead>
                 {/* Map CV ra, truyền trạng thái dô default chỗ select cho nó hiện ra, hàm handleStatusChange này truyền vào ID của cv để đổi trạng thái */}
                 <TableBody>
                   {data.map((item) => (
-                    <TableRow key={item.id}>
-                      <TableCell>{item.candidateId.nameCandidate}</TableCell>
-                      <TableCell>{item.candidateId.email}</TableCell>
-                      <TableCell>{item.jobpostId.title}</TableCell>
+                    <TableRow key={item._id}>
+                      <TableCell>{item?.candidateId?.nameCandidate}</TableCell>
+                      <TableCell>{item?.candidateId?.email}</TableCell>
+                      <TableCell>{item?.jobpostId?.title}</TableCell>
                       <TableCell>
                         {/* {item.resumeId} */}
                         <Button
                           variant="outlined"
                           color="primary"
-                          onClick={() => navigate(`/viewcv/${item.resumeId}`)}
+                          onClick={() =>
+                            navigate(
+                              `/viewcv/${item?.candidateId?.activatedCvId}`
+                            )
+                          }
                         >
                           Xem CV
                         </Button>
                       </TableCell>
                       <TableCell>
-                        {/* <Box>
+                        <Box>
                           <Select
-                            defaultValue={item.process}
+                            sx={{
+                              width: 120,
+                            }}
+                            value={item.process}
                             size="small"
-                            onChange={(e) => handleStatusChange(e, item.id)}
+                            onChange={(e) => handleStatusChange(e, item._id)}
                           >
-                            {contactProcesses.map((el) => (
-                              <MenuItem value={el.val}>{el.title}</MenuItem>
+                            {options.map((option) => (
+                              <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                              </MenuItem>
                             ))}
                           </Select>
-                        </Box> */}
+                        </Box>
                       </TableCell>
                     </TableRow>
                   ))}

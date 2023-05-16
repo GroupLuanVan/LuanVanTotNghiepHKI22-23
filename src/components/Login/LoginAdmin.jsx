@@ -140,7 +140,7 @@ export const LoginAdmin = () => {
                 variant="contained"
                 //color="warning"
               >
-                Login
+                Đăng nhập
               </Button>
               <br />
               <a>Quên mật khẩu</a>

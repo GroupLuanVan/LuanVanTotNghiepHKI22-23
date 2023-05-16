@@ -41,6 +41,8 @@ import { ShowCV } from "./components/Company/ShowCV";
 import ViewCV from "./components/viewCV";
 import { JobForYou } from "./components/JobPost/JobForYou";
 import { CvForYou } from "./components/JobPost/CvForYou";
+import JobDetailSimi from "./components/Job/JobDetailSimi";
+import MyCompany from "./components/Profile/MyCompany";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -237,6 +239,16 @@ function App() {
                 </>
               }
               />
+                             <Route
+              path="JobDetailSimi/:id"
+              element={
+                <>
+                  <CustomAppBar/>
+                  <JobDetailSimi user={user}/>
+                  <Footer/>
+                </>
+              }
+              />
                           <Route
               path="JobDetailHR/:id"
               element={
@@ -298,6 +310,16 @@ function App() {
                 </>
               }
               />
+                                 {/* <Route
+              path="HR/MyCompany"
+              element={
+                <>
+                  <HeaderHR/>
+                  <MyCompany/>
+                  <Footer/>
+                </>
+              }
+              /> */}
 
 <Route
               path="appliedjobs"

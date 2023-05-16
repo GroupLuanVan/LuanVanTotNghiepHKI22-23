@@ -51,6 +51,7 @@ export default function JobDetail({ user }) {
 
   const location = useLocation();
   const id = location.pathname.split("/")[2];
+  const [isApplied, setIsApplied] = useState();
 
   //const [isApplied, setIsApplied] = useState(false);
   const [data, setData] = useState({});
@@ -79,6 +80,11 @@ export default function JobDetail({ user }) {
   if (data.salaryMax == 999999999 && data.salaryMin > 0) {
     salaryChip = `Từ ${data.salaryMin / 1000000} Triệu`;
   }
+  useEffect(() => {
+    if (user.isLogin) {
+      setIsApplied(user.idApplyJob && user.idApplyJob.includes(id));
+    }
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -111,13 +117,13 @@ export default function JobDetail({ user }) {
     fetchData();
   }, [id, user.isLogin]);
 
-  const [isApplied, setIsApplied] = useState(
-    localStorage.getItem("isApplied") === "true" ? true : false
-  );
+  // const [isApplied, setIsApplied] = useState(
+  //   localStorage.getItem("isApplied") === "true" ? true : false
+  // );
 
-  useEffect(() => {
-    localStorage.setItem("isApplied", isApplied);
-  }, [isApplied]);
+  // useEffect(() => {
+  //   localStorage.setItem("isApplied", isApplied);
+  // }, [isApplied]);
 
   const theme = createTheme();
 
@@ -147,11 +153,16 @@ export default function JobDetail({ user }) {
           },
         }
       );
-      console.log(res.data);
+      console.log(res);
 
-      if (res.data.status && res.data.status !== 200) {
+      if (res?.response.status === 400) {
+        toast.warning("Bạn chưa tạo CV");
+        console.log(res);
+      } else if (res.data.status && res.data.status !== 200) {
         toast.warning("Ứng tuyển thất bại");
       } else {
+        const action = setidApplyJob(res?.data?.data?.applyJobs);
+        dispatch(action);
         setIsApplied(true);
         toast.success("Ứng tuyển thành công");
       }
@@ -253,9 +264,9 @@ export default function JobDetail({ user }) {
                 }}
               >
                 <Typography
-                  variant="h4"
+                  variant="h5"
                   color="initial"
-                  fontWeight={600}
+                  fontWeight={500}
                   sx={{
                     // color: theme.palette.success.light,
                     color: "#105aa3",

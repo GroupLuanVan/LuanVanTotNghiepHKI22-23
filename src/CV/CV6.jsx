@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
-import background from "../asset/BK_CV6.png";
+import background from "../asset/BK_CV/BK_CV6.png";
 import RichText, { RichTextDisplay } from "../components/RichText";
 import SchoolIcon from "@mui/icons-material/School";
 import FlagIcon from "@mui/icons-material/Flag";
