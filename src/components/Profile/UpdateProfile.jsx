@@ -39,8 +39,10 @@ import FlagIcon from "@mui/icons-material/Flag";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfied";
 import WorkIcon from "@mui/icons-material/Work";
-
-export default function UpdateProfile({}) {
+import profileSchema from "../../validate/profileValidate";
+import { toast } from "react-toastify";
+import { setCandidateData } from "../../store/userSlice";
+export default function UpdateProfile({ user }) {
   const imageRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -75,6 +77,52 @@ export default function UpdateProfile({}) {
     aboutMe: JSON.stringify(convertToRaw(aboutMe.getCurrentContent())),
     experienceCv: JSON.stringify(convertToRaw(experience.getCurrentContent())),
   });
+  const getTextArrayFromRich = function (rawdata) {
+    if (rawdata.blocks.length > 0) {
+      return rawdata.blocks.map((item) => item.text);
+    }
+  };
+
+  const upDateProfileData = function () {
+    //some field for searching
+    let rs = {
+      ...userData,
+      objective: getTextArrayFromRich(
+        convertToRaw(target.getCurrentContent())
+      ).join(" "),
+      activities: getTextArrayFromRich(
+        convertToRaw(activity.getCurrentContent())
+      ).join(" "),
+      certifications: getTextArrayFromRich(
+        convertToRaw(certificate.getCurrentContent())
+      ).join(" "),
+      experience: getTextArrayFromRich(
+        convertToRaw(experience.getCurrentContent())
+      ).join(" "),
+      education: getTextArrayFromRich(
+        convertToRaw(education.getCurrentContent())
+      ).join(" "),
+      skills: getTextArrayFromRich(
+        convertToRaw(skills.getCurrentContent())
+      ).join(" "),
+    };
+
+    profileSchema.validate(rs).then((validatedData) => {
+      axios
+        .put(`/candidate/${user.user._id}/profile`, validatedData)
+        .then((res) => {
+          console.log(res);
+          if (res.data.status && res.data.status != 200) {
+            toast.error("Cập nhật hồ sơ thất bại");
+          } else {
+            console.log(res.data);
+            const action = setCandidateData(res.data.updatedData, true);
+            dispatch(action);
+            toast.success("Cập nhật hồ sơ thành công");
+          }
+        });
+    });
+  };
   return (
     <>
       <Box mt={10}>
@@ -425,6 +473,10 @@ export default function UpdateProfile({}) {
                 sx={{ mt: 1, minWidth: 200, mr: "auto" }}
                 size="small"
                 variant="contained"
+                onClick={() => {
+                  // console.log(data)
+                  upDateProfileData();
+                }}
               >
                 Cập nhật
               </Button>
