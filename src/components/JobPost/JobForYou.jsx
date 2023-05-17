@@ -92,7 +92,7 @@ export const JobForYou = () => {
           </Typography>
         </Box>
 
-        <Box mb={-10} mr={100} display={"flex"} justifyContent="flex-start">
+        {/* <Box mb={-10} mr={100} display={"flex"} justifyContent="flex-start">
           <Box
             display="flex"
             flexDirection={"column"}
@@ -155,7 +155,7 @@ export const JobForYou = () => {
               </Button>
             </Box>
           </Box>
-        </Box>
+        </Box> */}
       </Box>
 
       <Container maxWidth>
@@ -166,7 +166,7 @@ export const JobForYou = () => {
             gutterBottom
             sx={{ display: "flex", justifyContent: "center", ml: 3, mt: 4 }}
           >
-            Tin tuyển dụng, việc làm mới nhất
+            Tin tuyển dụng, việc phù hợp với bạn
           </Typography>
           {loading ? <Loading /> : <JobListSimilar jobSimilar={jobRecs} />}
         </Box>

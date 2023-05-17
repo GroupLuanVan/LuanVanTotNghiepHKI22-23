@@ -34,9 +34,12 @@ import { PopCV } from "../components/PopCV";
 
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { MdVolunteerActivism } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CV1({ editable, data, setPrint, print, setCVDATA }) {
   const cvTemplate = "CV1";
+  const user = useSelector((state) => state.user);
+  console.log(user);
 
   // Các props của component:
 

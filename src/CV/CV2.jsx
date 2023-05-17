@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
-import background from "../asset/BK_CV/BK_CV2.png";
+import background from "../asset/BK_CV/background.jpg";
 import RichText, { RichTextDisplay } from "../components/RichText";
 import SchoolIcon from "@mui/icons-material/School";
 import FlagIcon from "@mui/icons-material/Flag";
@@ -35,6 +35,7 @@ import { MdVolunteerActivism } from "react-icons/md";
 
 export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
   const cvTemplate = "CV2";
+  console.log(data);
 
   function RichEditor({ item, data, setData, setOpen }) {
     const [editorState, setEditorState] = useState(() =>
@@ -239,7 +240,7 @@ export default function CV2({ editable, data, setPrint, print, setCVDATA }) {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                background: "#212F3F",
+                background: "#2B3743",
                 color: "blakck",
                 minHeight: "1585px",
               }}

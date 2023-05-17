@@ -620,7 +620,7 @@ export const CvListSimilar = (CvRecs) => {
                   <Typography variant="span" color="success">
                     {item?.length}
                   </Typography>{" "}
-                  Ứng viên ứng tuyển
+                  Ứng viên phù hợp nhất
                 </Typography>
               )}
             </Box>

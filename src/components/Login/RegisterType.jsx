@@ -30,7 +30,7 @@ const RegisterOption = () => {
       }}
     >
       <Typography marginTop={"45px"} variant="h4" gutterBottom>
-        Choose Account Type
+        Chọn tài khoản bạn muốn đăng ký
       </Typography>
       <Box container spacing={0}>
         <Button
@@ -49,7 +49,7 @@ const RegisterOption = () => {
           }}
         >
           <Icon component={Person} sx={{ mr: 1 }} />
-          Job Seeker
+          Ứng viên
         </Button>
 
         <Button
@@ -68,7 +68,7 @@ const RegisterOption = () => {
           }}
         >
           <Icon component={Business} sx={{ mr: 1 }} />
-          Employer
+          Nhà tuyển dụng
         </Button>
       </Box>
       {/* {accountType && (

@@ -75,7 +75,7 @@ export default function UpdateProfile({ user }) {
     certificationsCv: JSON.stringify(
       convertToRaw(certificate.getCurrentContent())
     ),
-    aboutMe: JSON.stringify(convertToRaw(aboutMe.getCurrentContent())),
+    aboutMeCv: JSON.stringify(convertToRaw(aboutMe.getCurrentContent())),
     experienceCv: JSON.stringify(convertToRaw(experience.getCurrentContent())),
   });
   const getTextArrayFromRich = function (rawdata) {
@@ -105,6 +105,9 @@ export default function UpdateProfile({ user }) {
       ).join(" "),
       skills: getTextArrayFromRich(
         convertToRaw(skills.getCurrentContent())
+      ).join(" "),
+      aboutMe: getTextArrayFromRich(
+        convertToRaw(aboutMe.getCurrentContent())
       ).join(" "),
     };
 

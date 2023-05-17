@@ -37,7 +37,18 @@ import Loading from "./Loading";
 import { JobListCompany } from "./JobPost/JobListCompany";
 import { JobNoiBat } from "./JobPost/JobNoiBat";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import {
+  setUserLogin,
+  setRole,
+  setToken,
+  setidApplyJob,
+  setidcv,
+  setidCandidate,
+  setSearchJob,
+} from "../store/userSlice";
 export const LandingPage = () => {
+  const dispatch = useDispatch();
   const durationString = "0"; // giá trị chuỗi
   const duration = parseInt(durationString); // chuyển đổi thành giá trị số
   const [displayFilterBox, setDisplayFilterBox] = useState("none");
@@ -74,25 +85,22 @@ export const LandingPage = () => {
     setLocation(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios
-      .get("http://localhost:5000/api/search/jobpost", {
-        params: {
-          title: title,
-          location: location,
-        },
-      })
-      .then((response) => {
-        console.log(response.data);
-        setCompanyList(response.data);
-        // Navigate to job listing page with search results
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const data = await axios.get("http://localhost:5000/api/search/jobpost", {
+      params: {
+        title: title,
+        location: location,
+      },
+    });
+
+    setCompanyList(data.data);
+    dispatch(setSearchJob(data.data.data));
+    // Navigate to job listing page with search results
+    navigate("/ListJob");
   };
+
   const SearchBox = styled(Box)({
     height: "22px",
     background: "#EFF3F2",

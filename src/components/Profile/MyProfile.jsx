@@ -257,7 +257,8 @@ import SchoolIcon from "@mui/icons-material/School";
 import CallIcon from "@mui/icons-material/Call";
 import EmailIcon from "@mui/icons-material/Email";
 import { useReactToPrint } from "react-to-print";
-import { RichTextDisplay } from "../RichText";
+// import { RichTextDisplay } from "../RichText";
+import RichText, { RichTextDisplay } from "../RichText";
 
 import useFetch from "../../hook/useFetch";
 import Loading from "../Loading";
@@ -268,7 +269,7 @@ import careerImg from "../../asset/6671.jpg";
 import activityImage from "../../asset/13095.jpg";
 import certificateImg from "../../asset/8601.jpg";
 import { useSelector } from "react-redux";
-import RichText from "../RichText";
+
 export default function MyProfile({ user }) {
   const idcandidate = useSelector((state) => state.user.idCandidate);
   console.log(idcandidate);
@@ -301,7 +302,7 @@ export default function MyProfile({ user }) {
         >
           <Box>
             <Image
-              src={sampleImg}
+              src={candidateIn4?.data?.avatar}
               width="1000px"
               height="300px"
               duration={0}
@@ -510,9 +511,7 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell style={{ textAlign: "center" }}>
                     <Typography variant="h5" fontWeight={600}>
-                      <RichTextDisplay
-                        data={JSON.parse(candidateIn4?.data?.profile?.aboutMe)}
-                      />
+                      {candidateIn4?.data?.profile?.aboutMe}
                     </Typography>
                   </TableCell>
                 </TableRow>

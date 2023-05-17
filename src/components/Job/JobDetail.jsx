@@ -157,10 +157,7 @@ export default function JobDetail({ user }) {
 
         console.log(res);
 
-        if (res.data.status && res?.data?.status === 400) {
-          toast.warning("Bạn chưa tạo CV");
-          console.log(res);
-        } else if (res.data.status && res.data.status !== 200) {
+        if (res.data.status && res.data.status !== 200) {
           toast.warning("Ứng tuyển thất bại");
         } else {
           const action = setidApplyJob(res?.data?.data?.applyJobs);
@@ -170,7 +167,7 @@ export default function JobDetail({ user }) {
         }
       } catch (error) {
         if (error.response && error.response.status === 400) {
-          toast.warning("Bạn chưa có CV, tạo CV để ứng tuyển");
+          toast.warning("Bạn chưa có CV, hãy tạo CV để ứng tuyển nhé");
           console.log(error.response);
         } else {
           console.log(error);
