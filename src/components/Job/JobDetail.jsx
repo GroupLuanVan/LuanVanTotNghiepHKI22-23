@@ -143,28 +143,38 @@ export default function JobDetail({ user }) {
       };
       console.log(id);
 
-      const res = await axios.post(
-        `http://localhost:5000/api/candidate/applyjob/${id}`,
-        contact,
+      try {
+        const res = await axios.post(
+          `http://localhost:5000/api/candidate/applyjob/${id}`,
+          contact,
 
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(res);
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
-      if (res?.data?.status === 400) {
-        toast.warning("Bạn chưa tạo CV");
         console.log(res);
-      } else if (res.data.status && res.data.status !== 200) {
-        toast.warning("Ứng tuyển thất bại");
-      } else {
-        const action = setidApplyJob(res?.data?.data?.applyJobs);
-        dispatch(action);
-        setIsApplied(true);
-        toast.success("Ứng tuyển thành công");
+
+        if (res.data.status && res?.data?.status === 400) {
+          toast.warning("Bạn chưa tạo CV");
+          console.log(res);
+        } else if (res.data.status && res.data.status !== 200) {
+          toast.warning("Ứng tuyển thất bại");
+        } else {
+          const action = setidApplyJob(res?.data?.data?.applyJobs);
+          dispatch(action);
+          setIsApplied(true);
+          toast.success("Ứng tuyển thành công");
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 400) {
+          toast.warning("Bạn chưa có CV, tạo CV để ứng tuyển");
+          console.log(error.response);
+        } else {
+          console.log(error);
+        }
       }
     }
   };

@@ -67,6 +67,7 @@ export const LoginSeeker = () => {
 
       // Kiểm tra role của user
       if (data.user.role === "candidate") {
+        dispatch(setidApplyJob(data.candidate.applyJobs));
         dispatch(setidcv(data.candidate.activatedCvId));
         dispatch(setidCandidate(data.candidate._id));
         dispatch(setUserLogin(data.candidate.nameCandidate));
