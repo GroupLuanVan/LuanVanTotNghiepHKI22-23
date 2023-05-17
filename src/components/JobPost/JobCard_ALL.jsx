@@ -16,7 +16,8 @@ import { useNavigate, createSearchParams } from "react-router-dom";
 import Image from "mui-image";
 
 const StyledCard = styled(Card)({
-  maxWidth: 780,
+  maxWidth: 400,
+  //maxHeight: 300,
 });
 
 const JobCardALL = (props) => {
@@ -74,8 +75,8 @@ const JobCardALL = (props) => {
         >
           <Image
             src={job?.companyId?.linkToLogo}
-            width="250px"
-            height="250px"
+            width="150px"
+            height="150px"
             duration={0}
           />
         </Box>

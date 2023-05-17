@@ -10,6 +10,7 @@ export const userSlice = createSlice({
     role:'role',
     token:'token',
     idCompany:'idcompany',
+    idCandidate: 'idcandidate',
     idApplyJob: 'idApply',
     cvId: 'cvId',
     initialState: {
@@ -20,6 +21,7 @@ export const userSlice = createSlice({
         role: localStorage.getItem('role') ? localStorage.getItem('role') : "default",
         token: localStorage.getItem('token') === '' ?  localStorage.getItem('token') : localStorage.getItem('token') ,
         idCompany : localStorage.getItem('idcompany') === '' ? "Null" : localStorage.getItem('idcompany'),
+        idCandidate: localStorage.getItem('idcandidate') === ' ' ? "Null" : localStorage.getItem('idcandidate'),
         idApplyJob : localStorage.getItem('idApply') === '' ? "Null" : localStorage.getItem('idApply'),
         cvId: localStorage.getItem('cvId') === '' ? "Null" : localStorage.getItem('cvId')
 
@@ -44,6 +46,10 @@ export const userSlice = createSlice({
             state.idCompany = action.payload
             localStorage.setItem("idcompany", action.payload)
         },
+        setidCandidate: (state, action) => {
+            state.idCandidate = action.payload
+            localStorage.setItem("idcandidate", action.payload)
+        },
         setidcv: (state, action) => {
             console.log("--------------here");
           
@@ -54,14 +60,6 @@ export const userSlice = createSlice({
             state.idApplyJob = action.payload
             localStorage.setItem("idApply", JSON.stringify(action.payload))
 
-
-
-           
-            // let cpState = { ...state.idApplyJob };
-            // cpState.applyJobs = action.payload;
-            // state.idApplyJob = { ...cpState }
-            // //
-            // localStorage.setItem("idApply",(JSON.stringify(state.idApplyJob)));
         },
 
         setUserLogout: (state, action) => {
@@ -100,7 +98,7 @@ export const userSlice = createSlice({
 })
 // Thêm selectIsLoggedIn selector vào userSlice
 export const selectIsLoggedIn = (state) => state.user.isLoggedIn;
-export const { setUserLogin, setRole, setData, setToken, setidCompany,setUserLogout, setActivatedCvId, setidApplyJob, setCandidateData, setidcv } = userSlice.actions
+export const { setUserLogin, setRole, setData, setToken, setidCompany, setidCandidate, setUserLogout, setActivatedCvId, setidApplyJob, setCandidateData, setidcv } = userSlice.actions
 export default userSlice.reducer;
 
 // createSlice được sử dụng để tạo ra một slice, bao gồm tên slice (name), 

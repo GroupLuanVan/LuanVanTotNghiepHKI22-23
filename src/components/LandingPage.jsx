@@ -6,6 +6,7 @@ import {
   InputBase,
   Grid,
   Container,
+  TextField,
 } from "@mui/material";
 import Image1 from "../asset/BK_LandingPage.jpg";
 import Image2 from "../asset/LJ.png";
@@ -34,7 +35,8 @@ import { useSelector } from "react-redux";
 import useFetch from "../hook/useFetch";
 import Loading from "./Loading";
 import { JobListCompany } from "./JobPost/JobListCompany";
-
+import { JobNoiBat } from "./JobPost/JobNoiBat";
+import axios from "axios";
 export const LandingPage = () => {
   const durationString = "0"; // giá trị chuỗi
   const duration = parseInt(durationString); // chuyển đổi thành giá trị số
@@ -42,7 +44,7 @@ export const LandingPage = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const { data, loading, error } = useFetch(
-    "http://localhost:5000/api/jobpost/all/home"
+    "http://localhost:5000/api/jobpost/lastpost"
   );
 
   // Tạo một đối tượng Date hiện tại
@@ -60,18 +62,38 @@ export const LandingPage = () => {
   console.log(vietnamTime); // ví dụ: "3/5/2023, 18:15:30"
 
   const [keyWord, setKeyWord] = useState();
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [companyList, setCompanyList] = useState([]);
+
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleLocationChange = (e) => {
+    setLocation(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .get("http://localhost:5000/api/search/jobpost", {
+        params: {
+          title: title,
+          location: location,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setCompanyList(response.data);
+        // Navigate to job listing page with search results
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const SearchBox = styled(Box)({
-    // display: "flex",
-    // alignItems: "center",
-    // border: "0.5px solid black",
-    // padding: "5px 15px",
-    // transition: "all 0.3s ease",
-    // width: "440px",
-    // position: "relative",
-    // "&:hover": {
-    //   borderColor: "#4CAF50",
-    //   backgroundColor: "rgba(0, 0, 0, 0.2)",
-    // },
     height: "22px",
     background: "#EFF3F2",
     fontFamily: "var(--font-work-sans)",
@@ -88,6 +110,7 @@ export const LandingPage = () => {
     color: "black",
   });
   console.log("-----------", data);
+
   return (
     <>
       <Box
@@ -176,27 +199,76 @@ export const LandingPage = () => {
                     p: 1,
                   }}
                 >
-                  <SearchBox>
-                    <SearchInput
-                      placeholder="Tên công việc"
-                      sx={{ ml: 2, flex: 1 }}
-                    />
-                  </SearchBox>
+                  <TextField
+                    size="small"
+                    sx={{
+                      width: "100%",
+                      height: "25px",
+                      backgroundColor: "#EFF3F2",
+                      fontFamily: "var(--font-work-sans)",
+                      fontWeight: "400",
+                      fontSize: "0.938rem",
+                      lineHeight: "18px",
+                      color: "var(--title-color1)",
+                      padding: "20px 20px 20px 0px",
+                      borderRadius: "10px",
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          border: "none",
+                          borderRadius: "10px",
+                        },
+                        "&:hover fieldset": {
+                          border: "none",
+                        },
+                        "&.Mui-focused fieldset": {
+                          border: "none",
+                          boxShadow: "none",
+                        },
+                      },
+                    }}
+                    color="success"
+                    label="Nhập tên công việc"
+                    variant="outlined"
+                    value={title}
+                    onChange={handleTitleChange}
+                  />
 
-                  <SearchBox>
-                    <SearchInput
-                      placeholder="Địa điểm "
-                      sx={{ ml: 2, flex: 1 }}
-                    />
-                  </SearchBox>
+                  <TextField
+                    size="small"
+                    sx={{
+                      width: "100%",
+                      height: "25px",
+                      backgroundColor: "#EFF3F2",
+                      fontFamily: "var(--font-work-sans)",
+                      fontWeight: "400",
+                      fontSize: "0.938rem",
+                      lineHeight: "18px",
+                      color: "var(--title-color1)",
+                      padding: "20px 20px 20px 0px",
+                      borderRadius: "10px",
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": {
+                          border: "none",
+                          borderRadius: "10px",
+                        },
+                        "&:hover fieldset": {
+                          border: "none",
+                        },
+                        "&.Mui-focused fieldset": {
+                          border: "none",
+                          boxShadow: "none",
+                        },
+                      },
+                    }}
+                    color="success"
+                    label="Địa điểm"
+                    variant="outlined"
+                    value={location}
+                    onChange={handleLocationChange}
+                  />
 
                   <Button
-                    onClick={() => {
-                      navigate({
-                        pathname: "/jobs",
-                        search: keyWord ? `?job=${keyWord}` : "",
-                      });
-                    }}
+                    onClick={handleSubmit}
                     sx={{
                       backgroundColor: "#5490cc",
                       height: "62px",
@@ -551,7 +623,7 @@ export const LandingPage = () => {
           việc làm mới nhất
         </Typography>
       </Box>
-      {loading ? <Loading /> : <JobListCompany jobsPage={data} />}
+      {loading ? <Loading /> : <JobNoiBat jobsnoibat={data} />}
     </>
   );
 };

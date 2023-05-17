@@ -43,6 +43,7 @@ import { JobForYou } from "./components/JobPost/JobForYou";
 import { CvForYou } from "./components/JobPost/CvForYou";
 import JobDetailSimi from "./components/Job/JobDetailSimi";
 import MyCompany from "./components/Profile/MyCompany";
+import JobListingPage from "./components/Profile/JobListingPage";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -205,6 +206,16 @@ function App() {
                 <>
                   <CustomAppBar/>
                   <JobS/>
+                  <Footer/>
+                </>
+              }
+              />
+                                  <Route
+              path="testSearch"
+              element={
+                <>
+                  <CustomAppBar/>
+                  <JobListingPage/>
                   <Footer/>
                 </>
               }

@@ -267,7 +267,15 @@ import schoolImg from "../../asset/5853.jpg";
 import careerImg from "../../asset/6671.jpg";
 import activityImage from "../../asset/13095.jpg";
 import certificateImg from "../../asset/8601.jpg";
+import { useSelector } from "react-redux";
+import RichText from "../RichText";
 export default function MyProfile({ user }) {
+  const idcandidate = useSelector((state) => state.user.idCandidate);
+  console.log(idcandidate);
+  const candidateIn4 = useFetch(
+    `http://localhost:5000/api/candidate/${idcandidate}`
+  );
+  console.log(candidateIn4?.data);
   return (
     <>
       <Grid
@@ -317,10 +325,7 @@ export default function MyProfile({ user }) {
               xs={6}
             >
               <Typography variant="h2" fontWeight={600}>
-                Thái
-              </Typography>
-              <Typography sx={{ whiteSpace: "nowrap", ml: -4 }} variant="h5">
-                Full Stack Developer
+                {candidateIn4?.data?.title}
               </Typography>
             </Grid>
           </Grid>
@@ -358,7 +363,7 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell>
                     <Typography variant="h5" fontWeight={600}>
-                      Nguyễn Hữu Thái
+                      {candidateIn4?.data?.nameCandidate}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -370,7 +375,7 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell>
                     <Typography variant="h5" fontWeight={600}>
-                      24/12/2000
+                      {new Date(candidateIn4?.data?.dob).toLocaleDateString()}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -382,7 +387,7 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell>
                     <Typography variant="h5" fontWeight={600}>
-                      Nam
+                      {candidateIn4?.data?.gender}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -394,7 +399,7 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell>
                     <Typography variant="h5" fontWeight={600}>
-                      thai@gmail.com
+                      {candidateIn4?.data?.email}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -406,7 +411,7 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell>
                     <Typography variant="h5" fontWeight={600}>
-                      0123456789
+                      {candidateIn4?.data?.phone}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -418,7 +423,7 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell>
                     <Typography variant="h5" fontWeight={600}>
-                      Ấp Thạnh Điền Thị Trấn Phú Lộc
+                      {candidateIn4?.data?.fullAddress}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -457,7 +462,7 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell>
                     <Typography variant="h5" fontWeight={600}>
-                      Đại Học Cần Thơ
+                      {candidateIn4?.data?.profile?.education}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -469,7 +474,7 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell>
                     <Typography variant="h5" fontWeight={600}>
-                      Tình nguyện viên
+                      {candidateIn4?.data?.profile?.activities}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -481,7 +486,7 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell>
                     <Typography variant="h5" fontWeight={600}>
-                      Trở thành dev
+                      {candidateIn4?.data?.profile?.objective}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -493,7 +498,21 @@ export default function MyProfile({ user }) {
                   </TableCell>
                   <TableCell>
                     <Typography variant="h5" fontWeight={600}>
-                      Toeic
+                      {candidateIn4?.data?.profile?.certifications}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell component="th" scope="row">
+                    <Typography variant="h5" fontWeight={600}>
+                      Về tôi
+                    </Typography>
+                  </TableCell>
+                  <TableCell style={{ textAlign: "center" }}>
+                    <Typography variant="h5" fontWeight={600}>
+                      <RichTextDisplay
+                        data={JSON.parse(candidateIn4?.data?.profile?.aboutMe)}
+                      />
                     </Typography>
                   </TableCell>
                 </TableRow>

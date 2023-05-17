@@ -34,7 +34,6 @@ export default function Contact(user) {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
-  // có thể lưu status dạng int là 0, 1, 2, mặc định là 0, xuống đây dựa dô cái mảng cvstatus dưới này mà lấy
   const [data, setData] = useState([]);
   const options = [
     { value: 1, label: "Xem xét" },

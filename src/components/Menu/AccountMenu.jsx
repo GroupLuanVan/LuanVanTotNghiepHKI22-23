@@ -34,6 +34,7 @@ export default function AccountMenu() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     localStorage.removeItem("idcompany");
+    localStorage.removeItem("idApply");
     dispatch(setUserLogout());
     navigate("/");
   };
@@ -86,6 +87,7 @@ export default function AccountMenu() {
         >
           <Avatar sx={{ width: 35, height: 35, fontSize: 20 }}>
             {user?.split("")?.[0].toUpperCase()}
+            {/* {user?.user?.[0].toUpperCase()} */}
           </Avatar>
         </IconButton>
         <StyledTypography

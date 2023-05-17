@@ -23,8 +23,12 @@ import JobCard from "../JobPost/JobCard";
 import Loading from "../Loading";
 import { JobListCompany } from "../JobPost/JobListCompany";
 import useFetch from "../../hook/useFetch";
-
+import { useLocation } from "react-router-dom";
+import queryString from "query-string";
 export const JobS = () => {
+  const location = useLocation();
+  const { keyword } = queryString.parse(location.search);
+  const dataSearch = location.state ? location.state.data : null;
   const { data, loading, error } = useFetch(
     "http://localhost:5000/api/jobpost/all/home"
   );

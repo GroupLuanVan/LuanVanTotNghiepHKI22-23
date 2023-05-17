@@ -59,8 +59,18 @@ export const JobListCompany = (jobsPage) => {
   return (
     <>
       <>
-        <Container maxWidth>
-          <Box sx={{ display: "flex", justifyContent: "space-between" }}></Box>
+        <Container
+          sx={{
+            backgroundColor: "#f1f2f7",
+          }}
+          maxWidth
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+            }}
+          ></Box>
           <Grid container sx={{ width: "100%", mt: 1 }} rowGap={2}>
             {jobPost?.length > 0 &&
               jobPost?.map((item) => {
@@ -79,9 +89,21 @@ export const JobListCompany = (jobsPage) => {
                 sx={{
                   mx: 1,
                   color: currentPage === page + 1 ? "primary.main" : "inherit",
+                  backgroundColor:
+                    currentPage === page + 1 ? "primary.light" : "transparent",
+                  fontSize: 16,
+                  width: 40,
+                  height: 40,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "50%",
                   cursor: "pointer",
+                  border: "1px solid grey",
                   "&:hover": {
-                    color: "primary.main",
+                    backgroundColor:
+                      currentPage === page + 1 ? "primary.main" : "grey",
+                    color: "white",
                   },
                 }}
                 onClick={() => setCurrentPage(page + 1)}

@@ -63,6 +63,7 @@ export default function UpdateProfile({ user }) {
     gender: "",
     email: "",
     phone: "",
+
     avatar: "",
     addressId: "",
     fullAddress: "",
@@ -83,7 +84,7 @@ export default function UpdateProfile({ user }) {
     }
   };
 
-  const upDateProfileData = function () {
+  const upDateProfileData = function (token) {
     //some field for searching
     let rs = {
       ...userData,
@@ -108,21 +109,47 @@ export default function UpdateProfile({ user }) {
     };
 
     profileSchema.validate(rs).then((validatedData) => {
+      const token = localStorage.getItem("token"); // Lấy token từ local storage
       axios
-        .put(`/candidate/${user.user._id}/profile`, validatedData)
+        .post(`http://localhost:5000/api/candidate/updateinfo`, validatedData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((res) => {
           console.log(res);
           if (res.data.status && res.data.status != 200) {
             toast.error("Cập nhật hồ sơ thất bại");
           } else {
             console.log(res.data);
-            const action = setCandidateData(res.data.updatedData, true);
-            dispatch(action);
+            // const action = setCandidateData(res.data.updatedData, true);
+            // dispatch(action);
             toast.success("Cập nhật hồ sơ thành công");
           }
         });
     });
   };
+
+  function navigateTo(location) {
+    navigate(location);
+  }
+  useEffect(() => {
+    setUserData({
+      ...userData,
+      educationCv: JSON.stringify(convertToRaw(education.getCurrentContent())),
+      objectiveCv: JSON.stringify(convertToRaw(target.getCurrentContent())),
+      activitiesCv: JSON.stringify(convertToRaw(activity.getCurrentContent())),
+      certificationsCv: JSON.stringify(
+        convertToRaw(certificate.getCurrentContent())
+      ),
+      aboutMe: JSON.stringify(convertToRaw(aboutMe.getCurrentContent())),
+      experienceCv: JSON.stringify(
+        convertToRaw(experience.getCurrentContent())
+      ),
+      skillsCv: JSON.stringify(convertToRaw(skills.getCurrentContent())),
+    });
+  }, [education, target, activity, certificate, experience, aboutMe, skills]);
+  console.log(userData);
   return (
     <>
       <Box mt={10}>

@@ -34,6 +34,7 @@ import { Modal } from "@mui/material";
 import Contact from "./Contact";
 export default function Charts({ user }) {
   const [data, setData] = useState([]);
+  const [selectValue, setSelectValue] = useState({});
   const options = [
     { value: 1, label: "đang tuyển" },
     { value: 2, label: "ngừng tuyển" },
@@ -54,6 +55,8 @@ export default function Charts({ user }) {
     `http://localhost:5000/api/jobpost/showallpost/${user.idCompany}`
   );
 
+  console.log(jobsFetch.data.jobsPage);
+
   function navigateTo(location) {
     navigate(location);
   }
@@ -62,15 +65,18 @@ export default function Charts({ user }) {
       navigateTo("/hrlogin");
     }
   });
+  useEffect(() => {
+    setData(jobsFetch.data.jobsPage);
+  }, [jobsFetch.data.jobsPage]);
 
-  function handleStatusChange(e, cvID) {
+  function handleStatusChange(e, jobID) {
     const status = e.target.value;
-    console.log(status, cvID);
+    console.log(status, jobID);
     async function contactData() {
       try {
         const response = await axios.post(
-          `http://localhost:5000/api/contact/approval/${cvID}`,
-          { process: status }, // pass updated data to the API
+          `http://localhost:5000/api/jobpost/jobstatus/${jobID}`,
+          { status: status }, // pass updated data to the API
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -84,18 +90,19 @@ export default function Charts({ user }) {
       }
     }
     contactData();
-    const updatedData = data.map((item) => {
-      if (item._id === cvID) {
+    setSelectValue({ ...selectValue, [jobID]: status });
+    const updatedData = jobsFetch?.data?.jobsPage?.map((item) => {
+      if (item._id === jobID) {
         return {
           ...item,
-          process: status,
+          status: status,
         };
       }
       return item;
     });
     setData(updatedData);
   }
-
+  console.log(data);
   const axiosInstance = axios.create({
     baseURL: "http://localhost:5000/api/jobpost",
   });
@@ -126,8 +133,6 @@ export default function Charts({ user }) {
         });
     }
   };
-
-  console.log(jobsFetch.data.jobsPage);
 
   return (
     <>
@@ -234,7 +239,17 @@ export default function Charts({ user }) {
                     Gợi ý ứng viên phù hợp
                   </Typography>
                 </TableCell>
-                <TableCell>Trạng thái</TableCell>
+                <TableCell>
+                  {" "}
+                  <Typography
+                    variant="body2"
+                    fontWeight={600}
+                    fontSize={20}
+                    sx={{ color: "Black" }}
+                  >
+                    Trạng thái
+                  </Typography>
+                </TableCell>
                 <TableCell></TableCell>
               </TableHead>
               {jobsFetch &&
@@ -345,9 +360,9 @@ export default function Charts({ user }) {
                         <Box>
                           <Select
                             sx={{
-                              width: 120,
+                              width: 150,
                             }}
-                            value={item.process}
+                            value={selectValue[item._id] || item.status}
                             size="small"
                             onChange={(e) => handleStatusChange(e, item._id)}
                           >

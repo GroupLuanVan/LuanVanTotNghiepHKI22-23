@@ -155,7 +155,7 @@ export default function JobDetail({ user }) {
       );
       console.log(res);
 
-      if (res?.response.status === 400) {
+      if (res?.data?.status === 400) {
         toast.warning("Bạn chưa tạo CV");
         console.log(res);
       } else if (res.data.status && res.data.status !== 200) {
@@ -303,7 +303,7 @@ export default function JobDetail({ user }) {
                 >
                   <AccessTimeIcon fontSize="small" />
                   <Typography variant="body1">
-                    Ngày tạo {data?.createdAt}
+                    Ngày tạo {new Date(data?.createdAt).toLocaleDateString()}
                   </Typography>
                 </Stack>
                 <Stack
@@ -319,34 +319,50 @@ export default function JobDetail({ user }) {
                 </Stack>
               </Box>
               <Box>
-                {user.role === "candidate" &&
-                  (!isApplied ? (
-                    <Button
-                      sx={{
-                        backgroundColor: "#7cb1e6",
-                        color: "black",
-                        border: "1px solid #000000",
-                        fontSize: "15px",
-                      }}
-                      onClick={() => applyJob()}
-                      startIcon={<SendIcon />}
-                    >
-                      Ứng tuyển ngay
-                    </Button>
-                  ) : (
-                    <Typography
-                      sx={{
-                        fontWeight: "700",
-                        fontSize: "20px",
-                      }}
-                      // onClick={() => cancelApplyJob()}
-                      startIcon={<CheckCircleIcon />}
-                      variant="contained"
-                      color="primary"
-                    >
-                      Đã Ứng Tuyển
-                    </Typography>
-                  ))}
+                {data.status === 2 ? (
+                  <Typography
+                    sx={{
+                      fontWeight: "700",
+                      fontSize: "20px",
+                      color: "#FF0000",
+                    }}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Ngừng tuyển dụng
+                  </Typography>
+                ) : (
+                  <>
+                    {user.role === "candidate" &&
+                      (!isApplied ? (
+                        <Button
+                          sx={{
+                            backgroundColor: "#7cb1e6",
+                            color: "black",
+                            border: "1px solid #000000",
+                            fontSize: "15px",
+                          }}
+                          onClick={() => applyJob()}
+                          startIcon={<SendIcon />}
+                        >
+                          Ứng tuyển ngay
+                        </Button>
+                      ) : (
+                        <Typography
+                          sx={{
+                            fontWeight: "700",
+                            fontSize: "20px",
+                          }}
+                          // onClick={() => cancelApplyJob()}
+                          startIcon={<CheckCircleIcon />}
+                          variant="contained"
+                          color="primary"
+                        >
+                          Đã Ứng Tuyển
+                        </Typography>
+                      ))}
+                  </>
+                )}
                 {user.role === "recruiter" && (
                   <Button
                     startIcon={<EditIcon />}
